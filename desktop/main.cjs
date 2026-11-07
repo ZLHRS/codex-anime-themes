@@ -41,6 +41,7 @@ async function init(){
  const updateResult=path.join(app.getPath('userData'),'update-result.txt');
  try{status=await fs.readFile(updateResult,'utf8');await fs.unlink(updateResult);}catch{}
  try{settings=await core.readJson(settingsFile);}catch{}
+ if(Number.isInteger(settings.debugPort)&&settings.debugPort>=9345&&settings.debugPort<=9445)core.setDebugPort(settings.debugPort);
  if(!settings.theme&&process.platform==='win32')try{settings.theme=(await core.readJson(path.join(process.env.LOCALAPPDATA,'ZLHRS/ThemeStudio/.selected-theme.json'))).theme;}catch{}
  catalog=await core.readJson(path.join(root,'catalog.json'));
  catalog=await Promise.all(catalog.map(async t=>({...await core.readJson(path.join(root,'themes',t.id,'theme.json')),preview:pathToFileURL(path.join(root,'previews',t.id+'-chat.jpg')).href})));
@@ -89,13 +90,19 @@ async function apply(id,openWindow=false){
  busy=true;
  try{
   settings.theme=id;await core.saveSettings(settingsFile,settings);
-  cached=await themeSession.select(id);clearInterval(timer);timer=setInterval(()=>tick().catch(report),2500);status="Тема сохранена. Подключаемся к ChatGPT…";notify();
-  let list=[];try{list=await core.targets();}catch{}
+  cached=await themeSession.select(id);clearInterval(timer);status="Тема сохранена. Подключаемся к ChatGPT…";notify();
+  let list=[],reachable=false;try{list=await core.targets();reachable=true;}catch{}
   if(!await core.exists(settings.appPath)){settings.appPath=await core.discover();await core.saveSettings(settingsFile,settings);}
+  if(!reachable){
+   status='Подготавливаем подключение. Если ChatGPT уже открыт, он будет перезапущен…';notify();
+   try{await core.closeRunning(settings.appPath);}catch(error){await core.launch(settings.appPath);throw error;}
+   settings.debugPort=await core.freeDebugPort();core.setDebugPort(settings.debugPort);await core.saveSettings(settingsFile,settings);
+  }
   if(!list.length||openWindow){await core.launch(settings.appPath);}
   if(!list.length){for(let i=0;i<30;i++){await new Promise(r=>setTimeout(r,500));try{list=await core.targets();if(list.length)break;}catch{}}}
   if(!list.length)throw new Error('Тема сохранена. Полностью закройте ChatGPT и откройте его кнопкой здесь. Если не помогает, выбранная сборка приложения несовместима.');
   await themeSession.waitForApplied();
+  timer=setInterval(()=>{if(!busy)tick().catch(report);},2500);
   if(openWindow){const target=list.find(t=>t.url.startsWith('app://-/index.html'))||list[0];await core.foreground(target);}
   status='Тема проверена в окне ChatGPT. Следующий запуск — через ярлык «ChatGPT с темой».';
   notify();

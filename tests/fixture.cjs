@@ -1,5 +1,5 @@
 const {app,BrowserWindow,protocol}=require('electron');
-app.commandLine.appendSwitch('remote-debugging-address','127.0.0.1');app.commandLine.appendSwitch('remote-debugging-port','9345');
+app.commandLine.appendSwitch('remote-debugging-address','127.0.0.1');app.commandLine.appendSwitch('remote-debugging-port',process.env.ZLHRS_TEST_PORT||'9345');
 app.setPath('userData',require('path').join(require('os').tmpdir(),'zlhrs-fixture-'+process.pid));
 protocol.registerSchemesAsPrivileged([{scheme:'app',privileges:{standard:true,secure:true,supportFetchAPI:true}}]);
 app.whenReady().then(()=>{

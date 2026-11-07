@@ -3,7 +3,8 @@ const fs=require('node:fs/promises');const os=require('node:os');
 const core=require('../desktop/core.cjs');const {ThemeSession,PROBE}=require('../desktop/theme-session.cjs');const root=path.resolve(__dirname,'..');
 test('real Chromium: cold startup, all themes, detached windows, reload, restart and saved selection', {timeout:120000},async()=>{
  const temporary=await fs.mkdtemp(path.join(os.tmpdir(),'zlhrs-lifecycle-'));assert.equal(path.dirname(temporary),os.tmpdir());
- let child;const start=()=>{child=spawn(require('electron'),[path.join(__dirname,'fixture.cjs'),...(process.platform==='linux'?['--no-sandbox']:[])],{stdio:'ignore'});};
+ const port=await core.freeDebugPort();core.setDebugPort(port);
+ let child;const start=()=>{child=spawn(require('electron'),[path.join(__dirname,'fixture.cjs'),...(process.platform==='linux'?['--no-sandbox']:[])],{stdio:'ignore',env:{...process.env,ZLHRS_TEST_PORT:String(port)}});};
  const stop=async()=>{if(child&&child.exitCode===null&&child.signalCode===null){const done=new Promise(resolve=>child.once('exit',resolve));child.kill();await done;}};
  const ready=async()=>{for(let i=0;i<100;i++){try{const pages=await core.targets();if(pages.length===2&&(await Promise.all(pages.map(p=>core.evaluate(p.webSocketDebuggerUrl,'window.__STUDIO_TEST_FIXTURE__')))).every(Boolean))return pages;}catch{}await new Promise(r=>setTimeout(r,100));}throw Error('Isolated fixture not ready; refusing to test against any user app');};
  try{

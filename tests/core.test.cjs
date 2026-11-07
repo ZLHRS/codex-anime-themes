@@ -37,3 +37,17 @@ test('IPv6 fallback works when IPv4 is unavailable; never connects to remote end
  const hostile=async()=>({ok:true,json:async()=>[{type:'page',url:'app://-/index.html',webSocketDebuggerUrl:'ws://attacker.test:9345/devtools/page/test'}]});
  assert.equal((await core.targets(hostile)).length,0);
 });
+
+ test('occupied port is skipped and persisted port is used by launch and connections',async()=>{
+  const net=require('node:net');const occupied=await core.freeDebugPort();
+  const server=net.createServer();await new Promise((resolve,reject)=>{server.once('error',reject);server.listen(occupied,'127.0.0.1',resolve);});
+  try{
+   const selected=await core.freeDebugPort();assert.notEqual(selected,occupied);core.setDebugPort(selected);
+   assert(core.launchSpec(path.resolve('ChatGPT.exe')).args.includes('--remote-debugging-port='+selected));
+   const calls=[];const request=async url=>{calls.push(url);return {ok:true,json:async()=>[{type:'page',url:'app://-/index.html',webSocketDebuggerUrl:`ws://localhost:${selected}/devtools/page/test`}]};};
+   assert.equal((await core.targets(request)).length,1);assert(calls.every(url=>new URL(url).port===String(selected)));
+   assert.throws(()=>core.setDebugPort(80));assert.throws(()=>core.command('ws://localhost:80/','Runtime.evaluate',{}));
+  }finally{core.setDebugPort(9345);await new Promise(resolve=>server.close(resolve));}
+ });
+
+test('Windows shutdown helper parses and leaves unrelated apps alone',{skip:process.platform!=='win32'},async()=>{await core.closeRunning(path.join(os.tmpdir(),'zlhrs-nonexistent-test-app.exe'));});

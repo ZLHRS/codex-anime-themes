@@ -43,18 +43,31 @@ function validTarget(target) {
   try{const u=new URL(target.url);return u.protocol==='app:'&&u.hostname==='-'&&['/index.html','/detached-window.html'].includes(u.pathname)&&!decodeURIComponent(u.search).includes('avatar-overlay');}catch{return false;}
 }
 const LOOPBACK=['127.0.0.1','[::1]','localhost'];
+let debugPort=9345;
+function setDebugPort(port){if(!Number.isInteger(port)||port<9345||port>9445)throw new Error('Invalid debugging port');debugPort=port;}
+async function freeDebugPort(){
+ const net=require('node:net');
+ const available=(port,host)=>new Promise(resolve=>{const server=net.createServer();server.once('error',e=>resolve(e.code==='EAFNOSUPPORT'||e.code==='EADDRNOTAVAIL'));server.listen({port,host,ipv6Only:true},()=>server.close(()=>resolve(true)));});
+ for(let port=9345;port<=9445;port++)if(await available(port,'127.0.0.1')&&await available(port,'::1'))return port;
+ throw new Error('Нет свободного локального порта для темы.');
+}
+async function closeRunning(file){
+ if(process.platform!=='win32')return;
+ const directory=await fs.mkdtemp(path.join(require('node:os').tmpdir(),'zlhrs-close-'));
+ try{const helper=path.join(directory,'close-app.ps1');await fs.writeFile(helper,await fs.readFile(path.join(__dirname,'close-app.ps1')));await run('powershell.exe',['-NoProfile','-NonInteractive','-ExecutionPolicy','Bypass','-File',helper,'-AppPath',file],{windowsHide:true,timeout:25000});}catch{throw new Error('Не удалось штатно закрыть ChatGPT. Сохраните незавершённый ввод. В ChatGPT выберите «Файл → Выйти из ChatGPT» (Ctrl+Q), затем снова запустите ярлык «ChatGPT с темой».');}finally{await fs.rm(directory,{recursive:true,force:true});}
+}
 let preferredHost='127.0.0.1';
 async function targets(request=fetch) {
   let connected=false;
   for(const host of [...new Set([preferredHost,...LOOPBACK])]) {
     try{
-      const r=await request(`http://${host}:9345/json/list`,{signal:AbortSignal.timeout(1200)});
+      const r=await request(`http://${host}:${debugPort}/json/list`,{signal:AbortSignal.timeout(1200)});
       if(!r.ok)continue;
       const list=await r.json();if(!Array.isArray(list))continue;
       connected=true;
       const pages=list.filter(validTarget).map(t=>{
         const socket=new URL(t.webSocketDebuggerUrl);
-        if(socket.protocol!=='ws:'||!LOOPBACK.includes(socket.hostname)||socket.port!=='9345')throw new Error('Unexpected debugging endpoint');
+        if(socket.protocol!=='ws:'||!LOOPBACK.includes(socket.hostname)||socket.port!==String(debugPort))throw new Error('Unexpected debugging endpoint');
         socket.hostname=host;return {...t,webSocketDebuggerUrl:socket.href};
       });
       if(pages.length){preferredHost=host;return pages;}
@@ -65,7 +78,7 @@ async function targets(request=fetch) {
 }
 function command(url, method, params) {
   const uri = new URL(url);
-  if (uri.protocol !== 'ws:' || !LOOPBACK.includes(uri.hostname) || uri.port !== '9345') throw new Error('Unexpected debugging endpoint');
+  if (uri.protocol !== 'ws:' || !LOOPBACK.includes(uri.hostname) || uri.port !== String(debugPort)) throw new Error('Unexpected debugging endpoint');
   return new Promise((resolve,reject) => {
     const ws = new WebSocket(url); let done = false;
     const finish = (error,value) => {if(done)return;done=true;clearTimeout(timer);ws.close();error?reject(error):resolve(value);};
@@ -101,7 +114,7 @@ async function discover(platform=process.platform, home=require('node:os').homed
 }
 function launchSpec(file, platform=process.platform) {
   if(!path.isAbsolute(file))throw new Error('Выберите полный путь к приложению.');
-  const flags=['--remote-debugging-address=127.0.0.1','--remote-debugging-port=9345'];
+  const flags=['--remote-debugging-address=127.0.0.1','--remote-debugging-port='+debugPort];
   return platform==='darwin' && file.endsWith('.app') ? {command:'/usr/bin/open',args:['-a',file,'--args',...flags]} : {command:file,args:flags};
 }
 async function launch(file) {
@@ -109,4 +122,4 @@ async function launch(file) {
   const spec=launchSpec(file);
   await new Promise((resolve,reject)=>{const child=spawn(spec.command,spec.args,{detached:true,stdio:'ignore',windowsHide:false});child.once('error',reject);child.once('spawn',()=>{child.unref();resolve();});});
 }
-module.exports={readJson,exists,inside,payload,validTarget,targets,evaluate,command,foreground,saveSettings,discover,launchSpec,launch};
+module.exports={setDebugPort,freeDebugPort,closeRunning,readJson,exists,inside,payload,validTarget,targets,evaluate,command,foreground,saveSettings,discover,launchSpec,launch};
