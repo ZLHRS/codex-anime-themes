@@ -27,7 +27,7 @@ Studio остаётся в трее после закрытия окна. Чер
 
 ## Настройки и обновление
 
-Настройки хранятся отдельно от установленной программы в стандартной пользовательской папке Electron: `%APPDATA%/ZLHRS Theme Studio`, `~/Library/Application Support/ZLHRS Theme Studio` или `~/.config/ZLHRS Theme Studio`. При обновлении выбор сохраняется. Windows-версия импортирует прежний выбор из `%LOCALAPPDATA%/ZLHRS/ThemeStudio`.
+Настройки хранятся отдельно от установленной программы в стандартной пользовательской папке Electron: `%APPDATA%/zlhrs-theme-studio`, `~/Library/Application Support/zlhrs-theme-studio` или `~/.config/zlhrs-theme-studio`. При обновлении выбор сохраняется. Windows-версия импортирует прежний выбор из `%LOCALAPPDATA%/ZLHRS/ThemeStudio`.
 
 Обновляйте программу установщиком из Releases. Старые ярлыки Windows 1.x нужно заменить новым «ChatGPT с темой». Старая версия на PowerShell остаётся в репозитории для совместимости.
 

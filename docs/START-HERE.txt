@@ -1,3 +1,8 @@
+Для Theme Studio 2 (Windows, macOS, Linux): https://github.com/ZLHRS/codex-anime-themes/releases/latest
+Инструкция: docs/CROSS-PLATFORM.md
+
+Ниже — прежний Windows-запуск 1.x для совместимости.
+
 ZLHRS Theme Studio — 1.6.0
 
 1. Склонируйте репозиторий или распакуйте ZIP целиком.
