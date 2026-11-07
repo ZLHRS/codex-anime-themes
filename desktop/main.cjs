@@ -14,7 +14,7 @@ if(smoke){const temp=path.join(app.getPath('temp'),'zlhrs-smoke-'+process.pid);a
 const launchOnly=process.argv.includes('--launch');
 const portable=process.platform==='win32'&&require('node:fs').existsSync(path.join(path.dirname(process.execPath),'PORTABLE'));
 const ownsLock=smoke || app.requestSingleInstanceLock();
-if(!ownsLock)app.quit();
+if(!ownsLock||process.argv.includes('--quit-for-update'))app.quit();
 else {
 app.on('second-instance',(_event,args)=>{if(args.includes('--quit-for-update')){app.quit();return;}if(args.includes('--launch'))apply(settings.theme,true).catch(report);else show();});
 app.on('before-quit',()=>{quitting=true;clearInterval(timer);});

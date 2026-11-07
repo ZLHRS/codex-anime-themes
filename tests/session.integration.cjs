@@ -15,3 +15,17 @@ test('real Chromium: cold startup, all themes, detached windows, reload, restart
   await stop();await assert.rejects(s.reconcile());start();pages=await ready();const restored=new ThemeSession(root);await restored.select((await core.readJson(settings)).theme);await restored.waitForApplied();assert.equal((await core.evaluate(pages[0].webSocketDebuggerUrl,PROBE)).theme,last);
  }finally{await stop();await fs.rm(temporary,{recursive:true});}
 });
+
+test('Windows restart closes a background instance and restores the selected theme', {skip:process.platform!=='win32',timeout:60000},async()=>{
+ const executable=require('electron');let child;let stopped;
+ const start=(file,env={})=>{child=spawn(executable,[path.join(__dirname,file)],{stdio:['ignore','pipe','ignore'],env:{...process.env,...env}});stopped=new Promise(resolve=>child.once('exit',resolve));return child;};
+ try{
+  const background=start('background-app.cjs');
+  await new Promise((resolve,reject)=>{const timer=setTimeout(()=>reject(Error('Background fixture not ready')),15000);background.stdout.on('data',data=>{if(String(data).includes('BACKGROUND_READY')){clearTimeout(timer);resolve();}});});
+  await core.closeRunning(executable);await stopped;assert.notEqual(background.exitCode,null);
+  const port=await core.freeDebugPort();core.setDebugPort(port);start('fixture.cjs',{ZLHRS_TEST_PORT:String(port)});
+  const session=new ThemeSession(root);await session.select('fubuki-velvet');
+  for(let i=0;i<100;i++){let pages=[];try{pages=await core.targets();}catch{}if(pages.length===2&&(await Promise.all(pages.map(p=>core.evaluate(p.webSocketDebuggerUrl,'window.__STUDIO_TEST_FIXTURE__')))).every(Boolean)){await session.waitForApplied();assert.equal((await core.evaluate(pages[0].webSocketDebuggerUrl,PROBE)).theme,'fubuki-velvet');return;}await new Promise(r=>setTimeout(r,100));}
+  throw Error('Restarted fixture not ready');
+ }finally{if(child&&child.exitCode===null){child.kill();await stopped;}}
+});

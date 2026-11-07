@@ -54,7 +54,7 @@ async function freeDebugPort(){
 async function closeRunning(file){
  if(process.platform!=='win32')return;
  const directory=await fs.mkdtemp(path.join(require('node:os').tmpdir(),'zlhrs-close-'));
- try{const helper=path.join(directory,'close-app.ps1');await fs.writeFile(helper,await fs.readFile(path.join(__dirname,'close-app.ps1')));await run('powershell.exe',['-NoProfile','-NonInteractive','-ExecutionPolicy','Bypass','-File',helper,'-AppPath',file],{windowsHide:true,timeout:25000});}catch{throw new Error('Не удалось штатно закрыть ChatGPT. Сохраните незавершённый ввод. В ChatGPT выберите «Файл → Выйти из ChatGPT» (Ctrl+Q), затем снова запустите ярлык «ChatGPT с темой».');}finally{await fs.rm(directory,{recursive:true,force:true});}
+ try{const helper=path.join(directory,'close-app.ps1');await fs.writeFile(helper,await fs.readFile(path.join(__dirname,'close-app.ps1')));await run('powershell.exe',['-NoProfile','-NonInteractive','-ExecutionPolicy','Bypass','-File',helper,'-AppPath',file],{windowsHide:true,timeout:25000});}catch{throw new Error('Не удалось перезапустить выбранное приложение. Убедитесь, что ChatGPT и Studio запущены от одного пользователя и без разных прав администратора.');}finally{await fs.rm(directory,{recursive:true,force:true});}
 }
 let preferredHost='127.0.0.1';
 async function targets(request=fetch) {
