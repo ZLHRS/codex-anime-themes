@@ -4,6 +4,7 @@ const path=require('node:path');
 const {pathToFileURL}=require('node:url');
 const core=require('./core.cjs');
 const updates=require('./updates.cjs');
+const appearance=require('./appearance.cjs');
 const {ThemeSession}=require('./theme-session.cjs');
 const {spawn}=require('node:child_process');
 const root=path.resolve(__dirname,'..');
@@ -23,7 +24,7 @@ app.on('activate',show);
 app.whenReady().then(init).catch(error=>{if(smoke){console.error(error);app.exit(1);}else{dialog.showErrorBox('ZLHRS Theme Studio',error.message);app.quit();}});
 }
 function report(error){status=error.message;notify();}
-function snapshot(){return {themes:catalog,selected:settings.theme,appPath:settings.appPath||'',status,platform:process.platform,version:app.getVersion(),lastShortcut,updating};}
+function snapshot(){return {themes:catalog,selected:settings.theme,appPath:settings.appPath||'',status,platform:process.platform,version:app.getVersion(),lastShortcut,updating,appearance:appearance.normalize(settings.appearance?.[settings.theme]),effect:appearance.designs[settings.theme]?.[0]||''};}
 function notify(){if(window&&!window.isDestroyed())window.webContents.send('studio:state',snapshot());}
 function show(){if(window&&!window.isDestroyed()){window.show();window.focus();}else createWindow();}
 function createWindow(){
@@ -50,6 +51,18 @@ async function init(){
  const {session}=require('electron');session.defaultSession.setPermissionRequestHandler((_wc,_p,callback)=>callback(false));
  ipcMain.handle('studio:state',()=>snapshot());
  ipcMain.handle('studio:apply',async(_e,id)=>{try{await apply(id);return snapshot();}catch(e){report(e);return snapshot();}});
+ ipcMain.handle('studio:appearance',async(_e,id,value)=>{
+  if(busy||updating)throw new Error('Дождитесь завершения текущего действия.');
+  if(id!==settings.theme||!catalog.some(t=>t.id===id))throw new Error('Сначала выберите эту тему.');
+  busy=true;
+  try{
+   settings.appearance={...settings.appearance,[id]:appearance.normalize(value)};
+   await core.saveSettings(settingsFile,settings);
+   cached=await themeSession.select(id,settings.appearance[id]);
+   try{await themeSession.reconcile();status='Настройки темы сохранены и применены.';}catch{status='Настройки сохранены. Они применятся при следующем запуске ChatGPT через Studio.';}
+   notify();return snapshot();
+  }finally{busy=false;}
+ });
  ipcMain.handle('studio:launch',async()=>{try{await apply(settings.theme,true);return snapshot();}catch(e){report(e);return snapshot();}});
  ipcMain.handle('studio:choose',async()=>{
   const result=await dialog.showOpenDialog(window,{title:'Выберите приложение ChatGPT / Codex',properties:['openFile'],filters:process.platform==='win32'?[{name:'Приложение',extensions:['exe']}]:undefined});
@@ -74,6 +87,12 @@ async function init(){
    if(!shortcutState.lastShortcut||!await core.exists(shortcutState.lastShortcut))throw new Error('Shortcut button failed');
    await w.webContents.executeJavaScript('window.studio.launch()');
    if(launches!==1||focuses!==1)throw new Error('Launch must raise already running ChatGPT');
+   const original=settings.theme;
+   await w.webContents.executeJavaScript(`(async()=>{const slider=document.getElementById('brightness');slider.value='137';slider.dispatchEvent(new Event('input'));document.getElementById('animations').checked=false;await document.getElementById('save-appearance').onclick();if((await window.studio.state()).appearance.brightness!==137)throw Error('Appearance controls failed');})()`);
+   if(settings.appearance[original].brightness!==137||settings.appearance[original].animations!==false)throw new Error('Appearance settings were not saved');
+   const other=catalog.find(t=>t.id!==original).id;await apply(other);if(snapshot().appearance.brightness!==100)throw new Error('Settings leaked between themes');await apply(original);if(snapshot().appearance.brightness!==137)throw new Error('Theme settings were lost');
+   if((await core.readJson(settingsFile)).appearance[original].brightness!==137)throw new Error('Appearance settings missing on disk');
+
    if(process.argv.includes('--screenshot')){await w.webContents.executeJavaScript('Promise.all([...document.images].map(i=>i.decode().catch(()=>{})))');await fs.writeFile(path.join(root,'docs/theme-selector-crossplatform.png'),(await w.webContents.capturePage()).toPNG());}
    app.exit(0);return;
   }await new Promise(r=>setTimeout(r,100));}
@@ -90,7 +109,7 @@ async function apply(id,openWindow=false){
  busy=true;
  try{
   settings.theme=id;await core.saveSettings(settingsFile,settings);
-  cached=await themeSession.select(id);clearInterval(timer);status="Тема сохранена. Подключаемся к ChatGPT…";notify();
+  cached=await themeSession.select(id,settings.appearance?.[id]);clearInterval(timer);status="Тема сохранена. Подключаемся к ChatGPT…";notify();
   let list=[],reachable=false;try{list=await core.targets();reachable=true;}catch{}
   if(!await core.exists(settings.appPath)){settings.appPath=await core.discover();await core.saveSettings(settingsFile,settings);}
   if(!reachable){

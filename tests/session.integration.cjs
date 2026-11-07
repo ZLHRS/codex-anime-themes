@@ -10,6 +10,11 @@ test('real Chromium: cold startup, all themes, detached windows, reload, restart
  try{
   start();let pages=await ready();const s=new ThemeSession(root);const catalog=await core.readJson(path.join(root,'catalog.json'));
   for(const item of catalog){await s.select(item.id);assert.equal((await s.reconcile()).applied,2);for(const p of pages){const state=await core.evaluate(p.webSocketDebuggerUrl,PROBE);assert.equal(state.theme,item.id);assert(state.styled);}}
+  await s.select('furina-moonlit-repose',{brightness:130,size:120,x:-10,y:5,animations:false});await s.reconcile();
+  const appearance=await core.evaluate(pages[0].webSocketDebuggerUrl,`(()=>{const n=document.querySelector('main.main-surface'),p=getComputedStyle(n,'::before');return {filter:p.filter,scale:p.scale,transform:p.transform,stages:document.querySelectorAll('#cts-stage').length,animation:getComputedStyle(document.querySelector('.cts-atmosphere')).animationName,pointer:getComputedStyle(document.querySelector('#cts-stage')).pointerEvents}})()`);
+  assert.equal(appearance.filter,'brightness(1.3)');assert.equal(appearance.scale,'1.2');assert.notEqual(appearance.transform,'none');assert.equal(appearance.stages,1);assert.equal(appearance.animation,'none');assert.equal(appearance.pointer,'none');
+  await s.select('furina-moonlit-repose',{effects:false});await s.reconcile();assert.equal(await core.evaluate(pages[0].webSocketDebuggerUrl,"document.querySelectorAll('#cts-stage').length"),0);
+  await s.select(catalog.at(-1).id);await s.reconcile();
   const last=catalog.at(-1).id;const settings=path.join(temporary,'settings.json');await core.saveSettings(settings,{theme:last});
   await core.command(pages[0].webSocketDebuggerUrl,'Page.reload',{});await new Promise(r=>setTimeout(r,150));await s.waitForApplied();assert.equal((await core.evaluate(pages[0].webSocketDebuggerUrl,PROBE)).theme,last);
   await stop();await assert.rejects(s.reconcile());start();pages=await ready();const restored=new ThemeSession(root);await restored.select((await core.readJson(settings)).theme);await restored.waitForApplied();assert.equal((await core.evaluate(pages[0].webSocketDebuggerUrl,PROBE)).theme,last);

@@ -1,6 +1,7 @@
 const {contextBridge,ipcRenderer}=require('electron');
 contextBridge.exposeInMainWorld('studio',{
  state:()=>ipcRenderer.invoke('studio:state'),
+ appearance:(id,value)=>ipcRenderer.invoke('studio:appearance',id,value),
  apply:id=>ipcRenderer.invoke('studio:apply',id),
  launch:()=>ipcRenderer.invoke('studio:launch'),
  choose:()=>ipcRenderer.invoke('studio:choose'),

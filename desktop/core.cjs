@@ -11,7 +11,7 @@ function inside(root, relative) {
   if (!result.startsWith(path.resolve(root) + path.sep)) throw new Error('Invalid theme asset path');
   return result;
 }
-async function payload(root, id) {
+async function payload(root, id, appearance) {
   if (!/^[a-z0-9][a-z0-9-]{0,63}$/.test(id)) throw new Error('Invalid theme ID');
   const dir = path.join(root, 'themes', id);
   const theme = await readJson(path.join(dir, 'theme.json'));
@@ -23,13 +23,14 @@ async function payload(root, id) {
     if (!mime) throw new Error('Invalid image type');
     vars += `--cts-asset-${name}:url("data:${mime};base64,${(await fs.readFile(inside(dir,file))).toString('base64')}");`;
   }
-  const css = `:root.codex-theme-studio{${vars}}` + await fs.readFile(inside(dir, theme.css), 'utf8');
+  const enhancement=require('./appearance.cjs').compose(id,appearance);
+  const css = `:root.codex-theme-studio{${vars}}` + await fs.readFile(inside(dir, theme.css), 'utf8') + enhancement.css;
   const helpers = (await fs.readFile(path.join(root,'runtime/composer-overflow.mjs'),'utf8')).replaceAll('export function ','function ');
   const stamp = 'pack:' + id + ':' + crypto.createHash('sha256').update(css).digest('hex').slice(0,16).toUpperCase();
   const replacements = {
     __CTS_COMPOSER_OVERFLOW_HELPERS__: `(()=>{${helpers};return {clearComposerSurfaceCompat,createComposerOverflowAnnotator,reconcileComposerSurfaces,selectComposerSurfaces};})()`,
     __CTS_CSS_JSON__: JSON.stringify(css), __CTS_THEME_JSON__: JSON.stringify(theme),
-    __CTS_CHROME_JSON__: 'null', __CTS_MOTION_JSON__: '{}',
+    __CTS_CHROME_JSON__: JSON.stringify(enhancement.chrome), __CTS_MOTION_JSON__: '{}',
     __CTS_VERSION_JSON__: '"studio-2.0.0"', __CTS_STAMP_JSON__: JSON.stringify(stamp)
   };
   const template = await fs.readFile(path.join(root,'runtime/theme-runtime.js'),'utf8');

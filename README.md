@@ -8,15 +8,15 @@
 
 **Для обычного использования клонировать репозиторий не нужно.** Скачайте готовую сборку для своей системы. Git, Node.js и Codex App Manager для её запуска не нужны. Совместимый ChatGPT должен быть установлен отдельно.
 
-Прямые ссылки на **версию 2.3.2**:
+Прямые ссылки на **версию 2.4.0**:
 
 | Система | Скачать | Как запустить |
 | --- | --- | --- |
-| **Windows x64** | [Готовая папка ZIP](https://github.com/ZLHRS/codex-anime-themes/releases/download/v2.3.2/ZLHRS-Theme-Studio-2.3.2-win-x64-portable.zip) | Распакуйте всю папку и откройте **ZLHRS Theme Studio.exe**. Установка не нужна. |
-| **Mac — Apple Silicon (M1/M2/M3/M4 и новее)** | [ZIP для Apple Silicon](https://github.com/ZLHRS/codex-anime-themes/releases/download/v2.3.2/ZLHRS-Theme-Studio-2.3.2-mac-arm64.zip) | Распакуйте архив, перенесите **ZLHRS Theme Studio.app** в «Программы» и откройте. |
-| **Mac — Intel** | [ZIP для Intel](https://github.com/ZLHRS/codex-anime-themes/releases/download/v2.3.2/ZLHRS-Theme-Studio-2.3.2-mac-x64.zip) | Распакуйте архив, перенесите **ZLHRS Theme Studio.app** в «Программы» и откройте. |
-| **Linux x64 — без установки** | [AppImage](https://github.com/ZLHRS/codex-anime-themes/releases/download/v2.3.2/ZLHRS-Theme-Studio-2.3.2-linux-x86_64.AppImage) | В свойствах файла разрешите выполнение как программы, затем запустите его. |
-| **Linux x64 — Debian/Ubuntu** | [Пакет DEB](https://github.com/ZLHRS/codex-anime-themes/releases/download/v2.3.2/ZLHRS-Theme-Studio-2.3.2-linux-amd64.deb) | Установите пакет через менеджер приложений и откройте Studio. |
+| **Windows x64** | [Готовая папка ZIP](https://github.com/ZLHRS/codex-anime-themes/releases/download/v2.4.0/ZLHRS-Theme-Studio-2.4.0-win-x64-portable.zip) | Распакуйте всю папку и откройте **ZLHRS Theme Studio.exe**. Установка не нужна. |
+| **Mac — Apple Silicon (M1/M2/M3/M4 и новее)** | [ZIP для Apple Silicon](https://github.com/ZLHRS/codex-anime-themes/releases/download/v2.4.0/ZLHRS-Theme-Studio-2.4.0-mac-arm64.zip) | Распакуйте архив, перенесите **ZLHRS Theme Studio.app** в «Программы» и откройте. |
+| **Mac — Intel** | [ZIP для Intel](https://github.com/ZLHRS/codex-anime-themes/releases/download/v2.4.0/ZLHRS-Theme-Studio-2.4.0-mac-x64.zip) | Распакуйте архив, перенесите **ZLHRS Theme Studio.app** в «Программы» и откройте. |
+| **Linux x64 — без установки** | [AppImage](https://github.com/ZLHRS/codex-anime-themes/releases/download/v2.4.0/ZLHRS-Theme-Studio-2.4.0-linux-x86_64.AppImage) | В свойствах файла разрешите выполнение как программы, затем запустите его. |
+| **Linux x64 — Debian/Ubuntu** | [Пакет DEB](https://github.com/ZLHRS/codex-anime-themes/releases/download/v2.4.0/ZLHRS-Theme-Studio-2.4.0-linux-amd64.deb) | Установите пакет через менеджер приложений и откройте Studio. |
 
 **Windows ZIP предназначен только для Windows.** Для Mac и Linux используйте соответствующие ссылки. Тип процессора Mac можно посмотреть в меню Apple → «Об этом Mac».
 
@@ -52,6 +52,12 @@
 Кнопка скачивает готовые приложения из **GitHub Releases**, а не выполняет `git pull`. Изменения только в исходниках не устанавливаются: для обновления через кнопку должен быть опубликован новый выпуск.
 
 Во вкладке «Инструкция» внутри приложения доступны короткие шаги настройки.
+
+## Настройки оформления (2.4.0)
+
+В разделе «Настроить выбранную тему» доступны яркость, размер и положение картинки по горизонтали и вертикали. Нажмите **«Применить настройки»**: значения сохранятся отдельно для выбранной темы и восстановятся после перезапуска. **«Сбросить настройки этой темы»** вернёт исходное оформление только для неё. В теме с двумя персонажами обе картинки настраиваются вместе.
+
+У каждой темы свой декоративный эффект: лунный свет, бабочки, цветы, водяные блики, кольца энергии или подсветка деталей. Переключатель **«Анимации»** оставляет эффекты неподвижными; **«Декоративные эффекты»** полностью отключает добавленные украшения. Системная настройка уменьшения движения также учитывается. Настройки включены в готовые сборки 2.4.0.
 
 ## Готовая сборка или исходники — в чём разница
 
