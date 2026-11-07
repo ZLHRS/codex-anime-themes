@@ -4,7 +4,16 @@ $source=[IO.Path]::GetFullPath($PSScriptRoot)
 $dest=[IO.Path]::GetFullPath($Destination)
 if($source -ne $dest){
  New-Item -ItemType Directory -Force $dest | Out-Null
- foreach($dir in @('themes','previews','launcher','docs')){Copy-Item -LiteralPath (Join-Path $source $dir) -Destination $dest -Recurse -Force}
+ foreach($dir in @('themes','previews','launcher','docs')){
+  $base=Join-Path $source $dir
+  foreach($file in Get-ChildItem -LiteralPath $base -Recurse -File){
+   $relative=$file.FullName.Substring($source.Length).TrimStart('\')
+   $target=Join-Path $dest $relative
+   if((Test-Path -LiteralPath $target) -and ((Get-FileHash -LiteralPath $file.FullName).Hash -eq (Get-FileHash -LiteralPath $target).Hash)){continue}
+   New-Item -ItemType Directory -Force (Split-Path $target) | Out-Null
+   Copy-Item -LiteralPath $file.FullName -Destination $target -Force
+  }
+ }
  foreach($f in @('Theme-Selector.ps1','Install-Studio.ps1','START.cmd','catalog.json','VERSION')){Copy-Item -LiteralPath (Join-Path $source $f) -Destination (Join-Path $dest $f) -Force}
  if(-not(Test-Path (Join-Path $dest '.selected-theme.json')) -and (Test-Path (Join-Path $source '.selected-theme.json'))){Copy-Item -LiteralPath (Join-Path $source '.selected-theme.json') -Destination $dest}
 }
