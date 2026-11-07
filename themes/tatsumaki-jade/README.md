@@ -1,6 +1,6 @@
 # Татсумаки · Jade Orbit
 
-![Палитра и иллюстрация](../../previews/tatsumaki-jade.jpg)
+![Палитра и иллюстрация](../../previews/tatsumaki-jade-chat.jpg)
 
 ID: `tatsumaki-jade`.
 

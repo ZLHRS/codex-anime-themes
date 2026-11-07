@@ -1,6 +1,6 @@
 # Ху Тао × Фурина · Красный и синий
 
-![Палитра и иллюстрация](../../previews/hu-tao-furina-duality.jpg)
+![Палитра и иллюстрация](../../previews/hu-tao-furina-duality-chat.jpg)
 
 ID: `hu-tao-furina-duality`.
 

@@ -1,6 +1,6 @@
 # Резе · Night Bloom
 
-![Палитра и иллюстрация](../../previews/reze-night-bloom.jpg)
+![Палитра и иллюстрация](../../previews/reze-night-bloom-chat.jpg)
 
 ID: `reze-night-bloom`.
 

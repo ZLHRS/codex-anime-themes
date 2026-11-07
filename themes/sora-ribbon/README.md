@@ -1,6 +1,6 @@
 # Sora · Silver Ribbon
 
-![Палитра и иллюстрация](../../previews/sora-ribbon.jpg)
+![Палитра и иллюстрация](../../previews/sora-ribbon-chat.jpg)
 
 ID: `sora-ribbon`.
 

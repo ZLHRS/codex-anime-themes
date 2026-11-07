@@ -4,7 +4,7 @@
 
 **[Как установить →](docs/INSTALL-RU.md)** · **[Скачать набор ZIP](codex-anime-themes.zip)**
 
-## Запуск в два клика — v1.3.0
+## Запуск в два клика — v1.4.0
 
 Скачайте ZIP, распакуйте и откройте **START.cmd**. Выберите тему в окне с превью и нажмите **«Применить тему»**.
 
@@ -16,39 +16,39 @@
 
 ## Каталог
 
-Превью ниже — иллюстрации и палитры, не снимки интерфейса. Реальное расположение задаёт CSS каждой темы.
+Превью показывают демонстрационный чат с настоящими стилями и изображениями каждой темы: фон, расположение персонажей, сообщения и поле ввода. Личная переписка не используется. Вид в приложении зависит от размера окна и версии интерфейса. В Theme Studio нажмите на превью, чтобы открыть его крупнее.
 
 | [Ай Хосино · Bunny Refrain](themes/ai-bunny-refrain) | [Ай Хосино · Starlit Encore](themes/ai-starlit-encore) |
 | --- | --- |
-| ![preview](previews/ai-bunny-refrain.jpg) | ![preview](previews/ai-starlit-encore.jpg) |
+| ![preview](previews/ai-bunny-refrain-chat.jpg) | ![preview](previews/ai-starlit-encore-chat.jpg) |
 
 | [Azure Morpho](themes/azure-morpho) | [Фурина · Blue Cat Nocturne](themes/blue-cat-nocturne) |
 | --- | --- |
-| ![preview](previews/azure-morpho.jpg) | ![preview](previews/blue-cat-nocturne.jpg) |
+| ![preview](previews/azure-morpho-chat.jpg) | ![preview](previews/blue-cat-nocturne-chat.jpg) |
 
 | [C.C. · Mint Contract](themes/cc-mint-contract) | [Фубуки · Velvet Reflection](themes/fubuki-velvet) |
 | --- | --- |
-| ![preview](previews/cc-mint-contract.jpg) | ![preview](previews/fubuki-velvet.jpg) |
+| ![preview](previews/cc-mint-contract-chat.jpg) | ![preview](previews/fubuki-velvet-chat.jpg) |
 
 | [Фурина · Голубой свет](themes/furina-blue-daylight) | [Фурина · Moonlit Repose](themes/furina-moonlit-repose) |
 | --- | --- |
-| ![preview](previews/furina-blue-daylight.jpg) | ![preview](previews/furina-moonlit-repose.jpg) |
+| ![preview](previews/furina-blue-daylight-chat.jpg) | ![preview](previews/furina-moonlit-repose-chat.jpg) |
 
 | [Ху Тао × Фурина · Красный и синий](themes/hu-tao-furina-duality) | [Резе · Night Bloom](themes/reze-night-bloom) |
 | --- | --- |
-| ![preview](previews/hu-tao-furina-duality.jpg) | ![preview](previews/reze-night-bloom.jpg) |
+| ![preview](previews/hu-tao-furina-duality-chat.jpg) | ![preview](previews/reze-night-bloom-chat.jpg) |
 
 | [Шинобу Кочо · Wisteria Veil](themes/shinobu-wisteria) | [Sora · Silver Ribbon](themes/sora-ribbon) |
 | --- | --- |
-| ![preview](previews/shinobu-wisteria.jpg) | ![preview](previews/sora-ribbon.jpg) |
+| ![preview](previews/shinobu-wisteria-chat.jpg) | ![preview](previews/sora-ribbon-chat.jpg) |
 
 | [Сильфи · Moonstone Atelier](themes/sylphie-moonstone) | [Татсумаки · Jade Orbit](themes/tatsumaki-jade) |
 | --- | --- |
-| ![preview](previews/sylphie-moonstone.jpg) | ![preview](previews/tatsumaki-jade.jpg) |
+| ![preview](previews/sylphie-moonstone-chat.jpg) | ![preview](previews/tatsumaki-jade-chat.jpg) |
 
 | [Тацумаки · Jade Duo](themes/tatsumaki-jade-duo) | [Zero Two · Darling Rose](themes/zero-two-rose) |
 | --- | --- |
-| ![preview](previews/tatsumaki-jade-duo.jpg) | ![preview](previews/zero-two-rose.jpg) |
+| ![preview](previews/tatsumaki-jade-duo-chat.jpg) | ![preview](previews/zero-two-rose-chat.jpg) |
 
 ## Структура
 

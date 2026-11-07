@@ -1,6 +1,6 @@
 # Фубуки · Velvet Reflection
 
-![Палитра и иллюстрация](../../previews/fubuki-velvet.jpg)
+![Палитра и иллюстрация](../../previews/fubuki-velvet-chat.jpg)
 
 ID: `fubuki-velvet`.
 

@@ -1,6 +1,6 @@
 # Ай Хосино · Starlit Encore
 
-![Палитра и иллюстрация](../../previews/ai-starlit-encore.jpg)
+![Палитра и иллюстрация](../../previews/ai-starlit-encore-chat.jpg)
 
 ID: `ai-starlit-encore`.
 

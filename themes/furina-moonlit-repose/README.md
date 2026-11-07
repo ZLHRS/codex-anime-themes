@@ -1,6 +1,6 @@
 # Фурина · Moonlit Repose
 
-![Палитра и иллюстрация](../../previews/furina-moonlit-repose.jpg)
+![Палитра и иллюстрация](../../previews/furina-moonlit-repose-chat.jpg)
 
 ID: `furina-moonlit-repose`.
 

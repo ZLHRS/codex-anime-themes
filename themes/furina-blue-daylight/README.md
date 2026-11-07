@@ -1,6 +1,6 @@
 # Фурина · Голубой свет
 
-![Палитра и иллюстрация](../../previews/furina-blue-daylight.jpg)
+![Палитра и иллюстрация](../../previews/furina-blue-daylight-chat.jpg)
 
 ID: `furina-blue-daylight`.
 

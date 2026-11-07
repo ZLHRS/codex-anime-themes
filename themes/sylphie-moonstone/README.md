@@ -1,6 +1,6 @@
 # Сильфи · Moonstone Atelier
 
-![Палитра и иллюстрация](../../previews/sylphie-moonstone.jpg)
+![Палитра и иллюстрация](../../previews/sylphie-moonstone-chat.jpg)
 
 ID: `sylphie-moonstone`.
 

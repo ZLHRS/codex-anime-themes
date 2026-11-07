@@ -1,6 +1,6 @@
 # Ай Хосино · Bunny Refrain
 
-![Палитра и иллюстрация](../../previews/ai-bunny-refrain.jpg)
+![Палитра и иллюстрация](../../previews/ai-bunny-refrain-chat.jpg)
 
 ID: `ai-bunny-refrain`.
 

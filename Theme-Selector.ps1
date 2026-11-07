@@ -51,8 +51,14 @@ foreach($t in $catalog){
  $meta=Get-Content (Join-Path $root ('themes/'+$t.id+'/theme.json')) -Raw -Encoding UTF8|ConvertFrom-Json
  $card=[Windows.Controls.Border]::new();$card.CornerRadius=12;$card.BorderThickness=1;$card.BorderBrush=Brush '#383d49';$card.Background=Brush '#1b1e27';$card.Margin='0,0,14,16';$card.Tag=$meta
  $stack=[Windows.Controls.StackPanel]::new();$card.Child=$stack
- $banner=[Windows.Controls.Grid]::new();$banner.Height=106;$banner.Background=Brush '#242b38';$banner.ClipToBounds=$true
- $pic=[Windows.Controls.Image]::new();$pic.Source=[Windows.Media.Imaging.BitmapImage]::new([Uri](Join-Path $root ('previews/'+$t.id+'.jpg')));$pic.Stretch='UniformToFill';$pic.VerticalAlignment='Center';$banner.Children.Add($pic)|Out-Null;$stack.Children.Add($banner)|Out-Null
+ $banner=[Windows.Controls.Grid]::new();$banner.Height=250;$banner.Background=Brush '#242b38';$banner.ClipToBounds=$true
+ $bitmapSource=[Windows.Media.Imaging.BitmapImage]::new();$bitmapSource.BeginInit();$bitmapSource.CacheOption='OnLoad';$bitmapSource.UriSource=[Uri](Join-Path $root ('previews/'+$t.id+'-chat.jpg'));$bitmapSource.EndInit();$bitmapSource.Freeze()
+ $pic=[Windows.Controls.Image]::new();$pic.Source=$bitmapSource;$pic.Stretch='Uniform';$pic.VerticalAlignment='Center';$pic.Cursor='Hand';$pic.ToolTip='Открыть крупный просмотр темы';$pic.Tag=$meta.name
+ $pic.Add_MouseLeftButtonUp({param($sender,$e)
+  $preview=[Windows.Window]::new();$preview.Title=$sender.Tag+' — демонстрационный чат';$preview.Owner=$window;$preview.WindowStartupLocation='CenterOwner';$preview.Width=1100;$preview.Height=730;$preview.Background=Brush '#0e1017'
+  $large=[Windows.Controls.Image]::new();$large.Source=$sender.Source;$large.Stretch='Uniform';$preview.Content=$large
+  $preview.Add_KeyDown({param($sender,$e) if($e.Key -eq 'Escape'){$sender.Close()}});[void]$preview.ShowDialog()
+ });$banner.Children.Add($pic)|Out-Null;$stack.Children.Add($banner)|Out-Null
  $body=[Windows.Controls.StackPanel]::new();$body.Margin='15,12,15,14';$stack.Children.Add($body)|Out-Null
  $name=[Windows.Controls.TextBlock]::new();$name.Text=$meta.name;$name.FontSize=15;$name.FontWeight='SemiBold';$name.TextTrimming='CharacterEllipsis';$body.Children.Add($name)|Out-Null
  $version=[Windows.Controls.TextBlock]::new();$version.Text='v'+$meta.version+'   @'+$meta.author;$version.Foreground=Brush '#868c9c';$version.FontSize=11;$version.Margin='0,6,0,0';$body.Children.Add($version)|Out-Null
@@ -68,7 +74,7 @@ foreach($t in $catalog){
 $search.Add_TextChanged({$window.FindName('SearchHint').Visibility=if($search.Text.Length){'Collapsed'}else{'Visible'};Update-Filter})
 $window.FindName('All').Add_Click({$script:onlyActive=$false;Update-Filter})
 $window.FindName('Active').Add_Click({$script:onlyActive=$true;Update-Filter})
-$window.FindName('View').Add_Click({$script:listMode=-not $script:listMode;$cardsPanel.Columns=if($script:listMode){1}else{2};$window.FindName('View').Content=if($script:listMode){'▦ Карточки'}else{'☷ Список'};foreach($c in $script:cards){$c.Child.Children[0].Height=if($script:listMode){65}else{106}}})
+$window.FindName('View').Add_Click({$script:listMode=-not $script:listMode;$cardsPanel.Columns=if($script:listMode){1}else{2};$window.FindName('View').Content=if($script:listMode){'▦ Карточки'}else{'☷ Список'};foreach($c in $script:cards){$c.Child.Children[0].Height=if($script:listMode){420}else{250}}})
 $window.FindName('OpenLast').Add_Click({Apply-Selected $script:selected});$window.FindName('LaunchNav').Add_Click({Apply-Selected $script:selected})
 $setup={try{& (Join-Path $root 'Install-Studio.ps1');$status.Text='Ярлыки ChatGPT и Theme Studio обновлены.'}catch{[void][Windows.MessageBox]::Show($_.Exception.Message,'Настройка запуска')}}
 $window.FindName('SetupNav').Add_Click($setup);$window.FindName('Manage').Add_Click($setup)

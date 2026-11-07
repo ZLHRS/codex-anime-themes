@@ -1,6 +1,6 @@
 # Zero Two · Darling Rose
 
-![Палитра и иллюстрация](../../previews/zero-two-rose.jpg)
+![Палитра и иллюстрация](../../previews/zero-two-rose-chat.jpg)
 
 ID: `zero-two-rose`.
 

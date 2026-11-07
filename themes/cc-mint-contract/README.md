@@ -1,6 +1,6 @@
 # C.C. · Mint Contract
 
-![Палитра и иллюстрация](../../previews/cc-mint-contract.jpg)
+![Палитра и иллюстрация](../../previews/cc-mint-contract-chat.jpg)
 
 ID: `cc-mint-contract`.
 

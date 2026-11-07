@@ -1,6 +1,6 @@
 # Тацумаки · Jade Duo
 
-![Палитра и иллюстрация](../../previews/tatsumaki-jade-duo.jpg)
+![Палитра и иллюстрация](../../previews/tatsumaki-jade-duo-chat.jpg)
 
 ID: `tatsumaki-jade-duo`.
 

@@ -1,6 +1,6 @@
 # Шинобу Кочо · Wisteria Veil
 
-![Палитра и иллюстрация](../../previews/shinobu-wisteria.jpg)
+![Палитра и иллюстрация](../../previews/shinobu-wisteria-chat.jpg)
 
 ID: `shinobu-wisteria`.
 

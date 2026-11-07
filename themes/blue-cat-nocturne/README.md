@@ -1,6 +1,6 @@
 # Фурина · Blue Cat Nocturne
 
-![Палитра и иллюстрация](../../previews/blue-cat-nocturne.jpg)
+![Палитра и иллюстрация](../../previews/blue-cat-nocturne-chat.jpg)
 
 ID: `blue-cat-nocturne`.
 

@@ -1,6 +1,6 @@
 # Azure Morpho
 
-![Палитра и иллюстрация](../../previews/azure-morpho.jpg)
+![Палитра и иллюстрация](../../previews/azure-morpho-chat.jpg)
 
 ID: `azure-morpho`.
 
