@@ -29,6 +29,12 @@
     selectComposerSurfaces,
   } = __CTS_COMPOSER_OVERFLOW_HELPERS__;
   const RUNTIME_CSS = `
+/* The footer fade is a sibling of the composer, inside a sticky spacer.
+   Hide only its decorative paint; retain the spacer and transcript scrolling. */
+html.codex-theme-studio .thread-scroll-container [aria-hidden="true"].pointer-events-none.sticky > .pointer-events-none.absolute {
+  display: none !important;
+}
+
 html.codex-theme-studio .cts-windows-menu-bar {
   position: absolute !important;
   inset: 0 0 auto 0 !important;

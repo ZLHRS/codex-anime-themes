@@ -26,14 +26,14 @@ async function payload(root, id, appearance) {
   const enhancement=require('./appearance.cjs').compose(id,appearance);
   const css = `:root.codex-theme-studio{${vars}}` + await fs.readFile(inside(dir, theme.css), 'utf8') + enhancement.css;
   const helpers = (await fs.readFile(path.join(root,'runtime/composer-overflow.mjs'),'utf8')).replaceAll('export function ','function ');
-  const stamp = 'pack:' + id + ':' + crypto.createHash('sha256').update(css).digest('hex').slice(0,16).toUpperCase();
+  const template = await fs.readFile(path.join(root,'runtime/theme-runtime.js'),'utf8');
+  const stamp = 'pack:' + id + ':' + crypto.createHash('sha256').update(css).update(template).update(helpers).update(enhancement.chrome).digest('hex').slice(0,16).toUpperCase();
   const replacements = {
     __CTS_COMPOSER_OVERFLOW_HELPERS__: `(()=>{${helpers};return {clearComposerSurfaceCompat,createComposerOverflowAnnotator,reconcileComposerSurfaces,selectComposerSurfaces};})()`,
     __CTS_CSS_JSON__: JSON.stringify(css), __CTS_THEME_JSON__: JSON.stringify(theme),
     __CTS_CHROME_JSON__: JSON.stringify(enhancement.chrome), __CTS_MOTION_JSON__: '{}',
     __CTS_VERSION_JSON__: '"studio-2.0.0"', __CTS_STAMP_JSON__: JSON.stringify(stamp)
   };
-  const template = await fs.readFile(path.join(root,'runtime/theme-runtime.js'),'utf8');
   return {stamp, expression: template.replace(/__CTS_[A-Z_]+__/g, key => {
     if (!(key in replacements)) throw new Error('Unknown runtime token');
     return replacements[key];
