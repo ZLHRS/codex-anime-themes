@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 2,
+  "id": "reze-night-bloom",
+  "name": "Резе · Night Bloom",
+  "description": "№ 03 · Цветок на чеке-кольце.",
+  "version": "1.0.0",
+  "author": "Codex",
+  "appearance": "dark",
+  "license": "personal-use",
+  "category": "anime",
+  "tags": [
+    "anime",
+    "dark"
+  ],
+  "colors": {
+    "accent": "#c89cb4",
+    "light": "#98bc99"
+  },
+  "strings": {},
+  "assets": {
+    "portrait": "assets/portrait.webp",
+    "charm": "assets/charm.png"
+  },
+  "css": "theme.css"
+}

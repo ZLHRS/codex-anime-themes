@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 2,
+  "id": "furina-blue-daylight",
+  "name": "Фурина · Голубой свет",
+  "description": "Горизонтальная картинка, головой вправо, мягкая сине-голубая палитра.",
+  "version": "1.0.0",
+  "author": "Codex",
+  "appearance": "dark",
+  "license": "personal-use",
+  "category": "anime",
+  "tags": [
+    "anime",
+    "dark"
+  ],
+  "colors": {
+    "accent": "#8cbde9",
+    "light": "#d2e8ff"
+  },
+  "strings": {},
+  "assets": {
+    "portrait": "assets/portrait.jpg",
+    "charm": "assets/charm.png"
+  },
+  "css": "theme.css"
+}

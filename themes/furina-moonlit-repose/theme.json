@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 2,
+  "id": "furina-moonlit-repose",
+  "name": "Фурина · Moonlit Repose",
+  "description": "Фурина лежит поперёк чата. Ночной бирюзовый фон, серебряный колокольчик и мягкое свечение воды.",
+  "version": "1.0.0",
+  "author": "Codex",
+  "appearance": "dark",
+  "license": "personal-use",
+  "category": "anime",
+  "tags": [
+    "anime",
+    "dark"
+  ],
+  "colors": {
+    "accent": "#79b7c8",
+    "light": "#bbd6ea"
+  },
+  "strings": {},
+  "assets": {
+    "portrait": "assets/portrait-optimized.webp",
+    "charm": "assets/charm.png"
+  },
+  "css": "theme.css"
+}

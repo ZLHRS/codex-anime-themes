@@ -1,0 +1,255 @@
+html.codex-theme-studio {
+  --rose-text: #fff3f7;
+  --rose-accent: #ffb4ce;
+  --rose-line: #76425a;
+  accent-color: var(--rose-accent);
+  caret-color: var(--rose-accent);
+}
+html.codex-theme-studio body { background: #170e15 !important; color: var(--rose-text); }
+html.codex-theme-studio .main-surface { background: transparent !important; }
+html.codex-theme-studio .main-surface:not(.main-surface .main-surface) {
+  background: linear-gradient(90deg,rgba(23,12,21,.94) 0%,rgba(23,12,21,.80) 48%,rgba(23,12,21,.59) 100%),
+              var(--cts-asset-portrait) right bottom / auto 90% no-repeat,
+              linear-gradient(125deg,#160f17,#40182c) !important;
+  color: var(--rose-text);
+}
+html.codex-theme-studio .app-shell-left-panel,
+html.codex-theme-studio header.app-header-tint { background: #23131e !important; }
+html.codex-theme-studio .app-shell-left-panel { border-right: 1px solid #492338; }
+html.codex-theme-studio .app-shell-left-panel :is([aria-current="page"],[aria-selected="true"],[data-active="true"]) {
+  background: #492638 !important; box-shadow: inset 2px 0 var(--rose-accent);
+}
+html.codex-theme-studio .composer-surface-chrome {
+  background: linear-gradient(115deg,#351d2b,#23131e) !important;
+  border: 1px solid var(--rose-line) !important;
+  border-radius: 18px !important;
+}
+html.codex-theme-studio .composer-surface-chrome:focus-within { border-color: var(--rose-accent) !important; }
+html.codex-theme-studio :is([role="menu"],[role="listbox"],[role="dialog"]) { background-color: #2b1924 !important; }
+html.codex-theme-studio [data-markdown-text-style] { color: var(--rose-text); }
+html.codex-theme-studio [data-local-conversation-final-assistant] [data-markdown-text-style] {
+  background: linear-gradient(90deg,#20101be6,#20101bba) top / 100% clamp(0px,calc((100% - 180px)*200),100%) no-repeat;
+  border-radius: 10px;
+}
+html.codex-theme-studio [data-markdown-text-style] a { color: var(--rose-accent) !important; text-underline-offset: 3px; }
+html.codex-theme-studio .main-surface pre { background-color: #20141d !important; border: 1px solid #553044; }
+html.codex-theme-studio ::selection { background: #884264; color: white; }
+
+/* The candy sits on the empty composer; the callsign stays with the pilot. */
+html.codex-theme-studio .composer-surface-chrome {
+  position: relative;
+  --cockpit-light: #8e506b;
+}
+html.codex-theme-studio [data-home-feed-composer] .composer-surface-chrome::before {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  right: 23px;
+  bottom: calc(100% - 2px);
+  width: 62px;
+  height: 64px;
+  transform: rotate(16deg);
+  background:
+    radial-gradient(ellipse at 36% 23%, #fffeeec7 0 5%, transparent 12%) left top / 43px 43px no-repeat,
+    radial-gradient(circle, transparent 54%, #982f51 69%, transparent 71%) left top / 43px 43px no-repeat,
+    conic-gradient(from 20deg, #ff8da9 0 12.5%, #f7dfc9 0 25%, #ca405e 0 37.5%, #ffded5 0 50%, #ff8da9 0 62.5%, #f7dfc9 0 75%, #ca405e 0 87.5%, #ffded5 0) left top / 43px 43px no-repeat,
+    linear-gradient(90deg,#b38c81,#f9ded2,#ba8e85) 19px 39px / 5px 25px no-repeat;
+  mask: radial-gradient(circle at 21.5px 21.5px,black 20px,transparent 21.5px),linear-gradient(black,black) 19px 39px / 5px 25px no-repeat;
+}
+html.codex-theme-studio .composer-surface-chrome::after {
+  content: "002";
+  position: absolute;
+  pointer-events: none;
+  right: 20px;
+  top: -8px;
+  padding: 0 7px 0 20px;
+  border: 1px solid var(--rose-line);
+  border-radius: 3px;
+  font: 700 10px/14px ui-monospace, monospace;
+  letter-spacing: .12em;
+  color: #ffc5d8;
+  background: radial-gradient(circle at 5px 50%,var(--cockpit-light) 1.5px,transparent 2px),
+              radial-gradient(circle at 12px 50%,var(--cockpit-light) 1.5px,transparent 2px),#301927;
+}
+html.codex-theme-studio .composer-surface-chrome:has(button:is([aria-label^="Остановить" i],[aria-label^="Stop" i],[data-cts-composer-action="stop"]):enabled)::after {
+  --cockpit-light: #94f3dc;
+  border-color: #bc738f;
+}
+@media (prefers-reduced-motion: no-preference) {
+  html.codex-theme-studio .composer-surface-chrome:has(button:is([aria-label^="Остановить" i],[aria-label^="Stop" i],[data-cts-composer-action="stop"]):enabled)::after {
+    animation: darling-sync 2.4s ease-in-out infinite;
+  }
+}
+@keyframes darling-sync {
+  0%,100% { box-shadow: 0 0 2px #75dec83b; }
+  50% { box-shadow: 0 0 9px #75dec8a8; }
+}
+html.codex-theme-studio :is(.composer-surface-chrome,.app-shell-left-panel) button:enabled:hover,
+html.codex-theme-studio :is([role="option"],[role="menuitem"])[data-highlighted] {
+  background-color: #53293e !important;
+  color: #fff3f7 !important;
+}
+html.codex-theme-studio .composer-surface-chrome button[data-cts-composer-action="send"]:enabled {
+  background: #ffafc9 !important;
+  color: #311321 !important;
+}
+html.codex-theme-studio [data-markdown-text-style] blockquote {
+  border-inline-start: 2px solid #ff94b8;
+  padding-inline-start: 1em;
+}
+html.codex-theme-studio [data-markdown-text-style] :not(pre) > code {
+  background-color: #442437;
+  color: #ffdae7;
+}
+html.codex-theme-studio :focus-visible { outline-color: #ffd0e2; }
+
+/* Navigation palette, scoped to the sidebar. */
+html.codex-theme-studio .app-shell-left-panel {
+  --side-top: #382d35;
+  --side-bottom: #30272e;
+  --side-edge: #51414b;
+  --side-ink: #ded1d7;
+  --side-muted: #bcaab3;
+  --side-hover: #463841;
+  --side-selected: #53404b;
+  --side-selected-text: #f0e1e8;
+  --side-mark: #a37f90;
+}
+
+html.codex-theme-studio .app-shell-left-panel {
+  background: linear-gradient(155deg,var(--side-top),var(--side-bottom) 82%) !important;
+  color: var(--side-ink) !important;
+  color-scheme: dark;
+  border-right: 1px solid var(--side-edge) !important;
+  scrollbar-color: var(--side-edge) transparent;
+}
+html.codex-theme-studio .app-shell-left-panel nav {
+  color: var(--side-ink) !important;
+  background: transparent !important;
+}
+html.codex-theme-studio .app-shell-left-panel :where(button,a,[role="button"],span,p,h2,h3,svg) {
+  color: inherit !important;
+}
+html.codex-theme-studio .app-shell-left-panel :is(h2,h3,[role="heading"],[class*="text-token-text-secondary"],[class*="text-token-text-tertiary"]) {
+  color: var(--side-muted) !important;
+}
+html.codex-theme-studio .app-shell-left-panel :is(button:enabled,a,[role="button"]):hover {
+  background-color: var(--side-hover) !important;
+  color: var(--side-ink) !important;
+}
+html.codex-theme-studio .app-shell-left-panel :is([aria-current="page"],[aria-selected="true"],[data-active="true"]),
+html.codex-theme-studio .app-shell-left-panel :is([aria-current="page"],[aria-selected="true"],[data-active="true"]):hover {
+  color: var(--side-selected-text) !important;
+  background: var(--side-selected) !important;
+  box-shadow: inset 3px 0 var(--side-mark);
+}
+html.codex-theme-studio .app-shell-left-panel :focus-visible {
+  outline: 2px solid var(--side-mark) !important;
+  outline-offset: -2px;
+}
+html.codex-theme-studio .app-shell-left-panel :is(hr,[role="separator"]) {
+  border-color: var(--side-edge) !important;
+}
+html.codex-theme-studio .app-shell-left-panel ::selection {
+  color: var(--side-selected-text); background: var(--side-selected);
+}
+
+html.codex-theme-studio .app-shell-left-panel .sidebar-navigation {
+  background: transparent !important;
+}
+html.codex-theme-studio .app-shell-left-panel .sidebar-navigation :is(.text-default,.text-primary,.text-secondary,.text-tertiary,.text-muted,.text-token-text-primary,.text-token-text-secondary) {
+  color: inherit !important;
+}
+html.codex-theme-studio .app-shell-left-panel .sidebar-item[data-app-action-sidebar-thread-selected="true"] {
+  background: var(--side-selected) !important;
+  color: var(--side-selected-text) !important;
+  box-shadow: inset 3px 0 var(--side-mark);
+}
+
+/* Short, non-interactive divider and selected-thread details. */
+html.codex-theme-studio .app-shell-left-panel::after {
+  content: ""; position: absolute; pointer-events: none;
+  inset-inline-end: 0; top: 46%; width: 5px; height: 26px;
+  z-index: 2; opacity: .55;
+  background: repeating-linear-gradient(125deg,transparent 0 6px,#bf8d9e 6px 8px,transparent 8px 13px);
+}
+html.codex-theme-studio .app-shell-left-panel .sidebar-item[data-app-action-sidebar-thread-selected="true"]::before {
+  content: ""; position: absolute; pointer-events: none;
+  inset-inline-start: 7px; top: 50%; transform: translateY(-50%);
+  width: 12px; height: 10px; opacity: .78;
+  background: #d891a1; clip-path: polygon(0 0,38% 49%,36% 96%,18% 73%,0 0,100% 0,82% 73%,64% 96%,62% 49%,100% 0);
+}
+
+html.codex-theme-studio  [data-markdown-text-style] blockquote {
+  --frame: #ab788e88;
+  border: 0; padding: .35em 1em;
+  background: linear-gradient(var(--frame),var(--frame)) left top / 11px 1px,
+              linear-gradient(var(--frame),var(--frame)) left top / 1px 8px,
+              linear-gradient(var(--frame),var(--frame)) right bottom / 11px 1px,
+              linear-gradient(var(--frame),var(--frame)) right bottom / 1px 8px;
+  background-repeat: no-repeat;
+}
+
+/* Arm instantly while busy; transition only when the stop control disappears.
+   Both endpoints are neutral, so opening an idle chat produces no flash. */
+@property --darling-release {
+  syntax: "<number>"; inherits: false; initial-value: 0;
+}
+@media (prefers-reduced-motion: no-preference) {
+  html.codex-theme-studio .composer-surface-chrome::after {
+    --darling-release: 0;
+    transition: --darling-release 900ms ease-out;
+    filter: brightness(calc(1 + .22 * sin(calc(var(--darling-release) * 180deg))));
+  }
+  html.codex-theme-studio .composer-surface-chrome:has(button:is([aria-label^="Остановить" i],[aria-label^="Stop" i],[data-cts-composer-action="stop"]):enabled)::after {
+    --darling-release: 1;
+    transition-duration: 0s;
+  }
+}
+
+/* Use the wrapper so the candy and callsign keep their own layers. */
+html.codex-theme-studio div:has(> .composer-surface-chrome)::before,
+html.codex-theme-studio div:has(> .composer-surface-chrome)::after {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  pointer-events: none;
+  width: 13px;
+  height: 17px;
+  top: -11px;
+  background: linear-gradient(118deg,#bc7b89 0%,#a05d71 32%,#784359 36%,#603149 85%);
+  clip-path: polygon(3% 0,42% 33%,76% 48%,98% 82%,88% 96%,57% 100%,30% 75%,14% 42%);
+}
+html.codex-theme-studio div:has(> .composer-surface-chrome)::before { left: 6px; }
+html.codex-theme-studio div:has(> .composer-surface-chrome)::after { right: 6px; transform: scaleX(-1); }
+
+/* Let the portrait continue behind the composer footer outside the input. */
+html.codex-theme-studio [data-thread-scroll-footer] .pointer-events-none.absolute.bg-surface,
+html.codex-theme-studio [data-thread-scroll-footer] .pointer-events-none.absolute.bg-surface-secondary {
+  background: transparent !important;
+}
+/* Soft character colors */
+html.codex-theme-studio {
+  --accent: #e69ab9;
+  --light: #f3bed0;
+  --surface: color-mix(in srgb, var(--accent) 15%, #17171e);
+  --night: color-mix(in srgb, var(--accent) 8%, #0b0c10);
+  --line: color-mix(in srgb, var(--accent) 37%, #282730);
+}
+html.codex-theme-studio .app-shell-left-panel {
+  --side-top: color-mix(in srgb, #e69ab9 23%, #211f25);
+  --side-bottom: color-mix(in srgb, #e69ab9 14%, #201f24);
+  --side-edge: color-mix(in srgb, #e69ab9 35%, #282730);
+  --side-hover: color-mix(in srgb, #e69ab9 25%, #252229);
+  --side-selected: color-mix(in srgb, #e69ab9 33%, #252229);
+  --side-mark: #e69ab9;
+}
+html.codex-theme-studio .composer-surface-chrome {
+  background: linear-gradient(115deg,
+    color-mix(in srgb, #e69ab9 19%, #19171f),
+    color-mix(in srgb, #e69ab9 10%, #14131b)) !important;
+  border-color: color-mix(in srgb, #e69ab9 42%, #302936) !important;
+}
+html.codex-theme-studio .composer-surface-chrome:focus-within {
+  border-color: color-mix(in srgb, #e69ab9 73%, #302936) !important;
+}

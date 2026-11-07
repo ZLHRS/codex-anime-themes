@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 2,
+  "id": "hu-tao-furina-duality",
+  "name": "Ху Тао × Фурина · Красный и синий",
+  "description": "Картинка по центру, красная левая половина и синяя правая.",
+  "version": "1.0.0",
+  "author": "Codex",
+  "appearance": "dark",
+  "license": "personal-use",
+  "category": "anime",
+  "tags": [
+    "anime",
+    "dark"
+  ],
+  "colors": {
+    "accent": "#79b7c8",
+    "light": "#bbd6ea"
+  },
+  "strings": {},
+  "assets": {
+    "portrait": "assets/portrait.jpg",
+    "charm": "assets/charm.png"
+  },
+  "css": "theme.css"
+}

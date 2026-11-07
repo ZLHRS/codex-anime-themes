@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 2,
+  "id": "cc-mint-contract",
+  "name": "C.C. · Mint Contract",
+  "description": "№ 04 · Мятная печать контракта.",
+  "version": "1.0.0",
+  "author": "Codex",
+  "appearance": "dark",
+  "license": "personal-use",
+  "category": "anime",
+  "tags": [
+    "anime",
+    "dark"
+  ],
+  "colors": {
+    "accent": "#a4cfac",
+    "light": "#dfbf82"
+  },
+  "strings": {},
+  "assets": {
+    "portrait": "assets/portrait.webp",
+    "charm": "assets/charm.png"
+  },
+  "css": "theme.css"
+}

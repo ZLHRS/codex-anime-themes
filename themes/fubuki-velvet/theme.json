@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 2,
+  "id": "fubuki-velvet",
+  "name": "Фубуки · Velvet Reflection",
+  "description": "№ 09 · Карманное зеркало с гранатовым бликом.",
+  "version": "1.0.0",
+  "author": "Codex",
+  "appearance": "dark",
+  "license": "personal-use",
+  "category": "anime",
+  "tags": [
+    "anime",
+    "dark"
+  ],
+  "colors": {
+    "accent": "#b9949f",
+    "light": "#d0b799"
+  },
+  "strings": {},
+  "assets": {
+    "portrait": "assets/portrait.webp",
+    "charm": "assets/charm.png"
+  },
+  "css": "theme.css"
+}

@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 2,
+  "id": "ai-starlit-encore",
+  "name": "Ай Хосино · Starlit Encore",
+  "description": "№ 11 · Сценический микрофон и шестилучевая звезда.",
+  "version": "1.0.0",
+  "author": "Codex",
+  "appearance": "dark",
+  "license": "personal-use",
+  "category": "anime",
+  "tags": [
+    "anime",
+    "dark"
+  ],
+  "colors": {
+    "accent": "#be8fc0",
+    "light": "#dc9fbd"
+  },
+  "strings": {},
+  "assets": {
+    "portrait": "assets/portrait.webp",
+    "charm": "assets/charm.png"
+  },
+  "css": "theme.css"
+}

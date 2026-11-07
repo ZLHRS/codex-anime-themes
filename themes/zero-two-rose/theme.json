@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 2,
+  "id": "zero-two-rose",
+  "name": "Zero Two · Darling Rose",
+  "description": "№ 02 · Любимый во Франксе. Леденец Zero Two, позывной 002 и парные огни кабины во время ответа.",
+  "version": "1.3.1",
+  "author": "Codex",
+  "appearance": "dark",
+  "license": "personal-use",
+  "category": "anime",
+  "tags": [
+    "anime",
+    "zero-two",
+    "pink"
+  ],
+  "colors": {
+    "rose": "#ffb4ce",
+    "cherry": "#40182c",
+    "pearl": "#fff3f7",
+    "signal": "#eb739f"
+  },
+  "strings": {},
+  "assets": {
+    "portrait": "assets/portrait.webp"
+  },
+  "css": "theme.css"
+}

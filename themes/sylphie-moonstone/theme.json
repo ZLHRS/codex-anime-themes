@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 2,
+  "id": "sylphie-moonstone",
+  "name": "Сильфи · Moonstone Atelier",
+  "description": "№ 06 · Лунный камень в серебряных листьях.",
+  "version": "1.0.0",
+  "author": "Codex",
+  "appearance": "dark",
+  "license": "personal-use",
+  "category": "anime",
+  "tags": [
+    "anime",
+    "dark"
+  ],
+  "colors": {
+    "accent": "#c8bdcf",
+    "light": "#d6a0b2"
+  },
+  "strings": {},
+  "assets": {
+    "portrait": "assets/portrait.webp",
+    "charm": "assets/charm.png"
+  },
+  "css": "theme.css"
+}

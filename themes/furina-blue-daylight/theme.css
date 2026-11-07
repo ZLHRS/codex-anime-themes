@@ -1,0 +1,315 @@
+html.codex-theme-studio {
+  --ink: color-mix(in srgb, var(--accent) 8%, #f5f2f2);
+  --night: color-mix(in srgb, var(--accent) 7%, #0b0c10);
+  --surface: color-mix(in srgb, var(--accent) 12%, #17171e);
+  --line: color-mix(in srgb, var(--accent) 32%, #282730);
+  accent-color: var(--accent);
+  caret-color: var(--light);
+}
+html.codex-theme-studio body { background: var(--night) !important; color: var(--ink); }
+html.codex-theme-studio .main-surface { background: transparent !important; }
+html.codex-theme-studio .main-surface:not(.main-surface .main-surface) {
+  position: relative; isolation: isolate;
+  background: radial-gradient(ellipse at 100% 60%,var(--surface),var(--night) 72%) !important;
+}
+html.codex-theme-studio .main-surface:not(.main-surface .main-surface)::before {
+  content: ""; position: absolute; z-index: -1; pointer-events: none;
+  inset: auto 0 0 auto; height: 90%; aspect-ratio: var(--ratio); max-width: 100%;
+  background: var(--cts-asset-portrait) right bottom / auto 100% no-repeat;
+  opacity: .44;
+  mask-image: linear-gradient(90deg,transparent,#000 33%),linear-gradient(180deg,transparent,#000 8%);
+  mask-composite: intersect;
+}
+html.codex-theme-studio .app-shell-left-panel {
+  --side-top: color-mix(in srgb,var(--accent) 18%,#211f25);
+  --side-bottom: color-mix(in srgb,var(--accent) 11%,#201f24);
+  --side-edge: var(--line); --side-ink: var(--ink);
+  --side-muted: color-mix(in srgb,var(--accent) 37%,#ccc);
+  --side-hover: color-mix(in srgb,var(--accent) 22%,#252229);
+  --side-selected: color-mix(in srgb,var(--accent) 29%,#252229);
+  --side-selected-text: var(--ink); --side-mark: var(--accent);
+}
+html.codex-theme-studio .app-shell-left-panel {
+  background: linear-gradient(155deg,var(--side-top),var(--side-bottom) 82%) !important;
+  color: var(--side-ink) !important;
+  color-scheme: dark;
+  border-right: 1px solid var(--side-edge) !important;
+  scrollbar-color: var(--side-edge) transparent;
+}
+html.codex-theme-studio .app-shell-left-panel nav {
+  color: var(--side-ink) !important;
+  background: transparent !important;
+}
+html.codex-theme-studio .app-shell-left-panel :where(button,a,[role="button"],span,p,h2,h3,svg) {
+  color: inherit !important;
+}
+html.codex-theme-studio .app-shell-left-panel :is(h2,h3,[role="heading"],[class*="text-token-text-secondary"],[class*="text-token-text-tertiary"]) {
+  color: var(--side-muted) !important;
+}
+html.codex-theme-studio .app-shell-left-panel :is(button:enabled,a,[role="button"]):hover {
+  background-color: var(--side-hover) !important;
+  color: var(--side-ink) !important;
+}
+html.codex-theme-studio .app-shell-left-panel :is([aria-current="page"],[aria-selected="true"],[data-active="true"]),
+html.codex-theme-studio .app-shell-left-panel :is([aria-current="page"],[aria-selected="true"],[data-active="true"]):hover {
+  color: var(--side-selected-text) !important;
+  background: var(--side-selected) !important;
+  box-shadow: inset 3px 0 var(--side-mark);
+}
+html.codex-theme-studio .app-shell-left-panel :focus-visible {
+  outline: 2px solid var(--side-mark) !important;
+  outline-offset: -2px;
+}
+html.codex-theme-studio .app-shell-left-panel :is(hr,[role="separator"]) {
+  border-color: var(--side-edge) !important;
+}
+html.codex-theme-studio .app-shell-left-panel ::selection {
+  color: var(--side-selected-text); background: var(--side-selected);
+}
+
+html.codex-theme-studio .app-shell-left-panel .sidebar-navigation {
+  background: transparent !important;
+}
+html.codex-theme-studio .app-shell-left-panel .sidebar-navigation :is(.text-default,.text-primary,.text-secondary,.text-tertiary,.text-muted,.text-token-text-primary,.text-token-text-secondary) {
+  color: inherit !important;
+}
+html.codex-theme-studio .app-shell-left-panel .sidebar-item[data-app-action-sidebar-thread-selected="true"] {
+  background: var(--side-selected) !important;
+  color: var(--side-selected-text) !important;
+  box-shadow: inset 3px 0 var(--side-mark);
+}
+html.codex-theme-studio .app-shell-left-panel::after,
+html.codex-theme-studio .sidebar-item[data-app-action-sidebar-thread-selected="true"]::before,
+html.codex-theme-studio [data-markdown-text-style] blockquote::before,
+html.codex-theme-studio [data-home-feed-composer] .composer-surface-chrome::before {
+  content: ""; position: absolute; pointer-events: none; z-index: 2;
+  background: var(--cts-asset-charm) center / contain no-repeat;
+}
+html.codex-theme-studio .app-shell-left-panel::after { right: -3px; top: 46%; width: 12px; height: 24px; opacity: .56; }
+html.codex-theme-studio .sidebar-item[data-app-action-sidebar-thread-selected="true"]::before {
+  left: 5px; top: 50%; translate: 0 -50%; width: 15px; height: 15px;
+}
+html.codex-theme-studio [data-markdown-text-style] { color: var(--ink); }
+html.codex-theme-studio [data-local-conversation-final-assistant] [data-markdown-text-style] {
+  background: linear-gradient(90deg,color-mix(in srgb,var(--night) 90%,transparent),color-mix(in srgb,var(--night) 76%,transparent)) top / 100% clamp(0px,calc((100% - 180px)*200),100%) no-repeat; border-radius: 10px;
+}
+html.codex-theme-studio [data-markdown-text-style] blockquote {
+  position: relative; border-inline-start: 1px solid var(--line); padding-inline-start: 1.65em;
+}
+html.codex-theme-studio [data-markdown-text-style] blockquote::before { width: 14px; height: 14px; left: 4px; top: .25em; opacity: .8; }
+html.codex-theme-studio [data-markdown-text-style] a { color: var(--light) !important; text-underline-offset: .2em; }
+html.codex-theme-studio :is(pre,[data-markdown-text-style] :not(pre)>code) { background-color: var(--surface) !important; }
+html.codex-theme-studio :is([role="menu"],[role="dialog"],[role="listbox"],header.app-header-tint) { background-color: var(--surface) !important; }
+html.codex-theme-studio :is([role="menuitem"],[role="option"])[data-highlighted] { background-color: var(--line) !important; }
+html.codex-theme-studio ::selection { background: var(--line); color: white; }
+html.codex-theme-studio :focus-visible { outline-color: var(--accent); }
+html.codex-theme-studio .composer-surface-chrome {
+  position: relative; color: var(--ink); border: 1px solid var(--line) !important;
+  background: linear-gradient(115deg,var(--surface),var(--night)) !important; border-radius: 18px !important;
+}
+html.codex-theme-studio .composer-surface-chrome:focus-within { border-color: var(--accent) !important; }
+html.codex-theme-studio .composer-surface-chrome button[data-cts-composer-action="send"]:enabled { background: var(--accent) !important; color: var(--night) !important; }
+html.codex-theme-studio [data-home-feed-composer] .composer-surface-chrome::before { width: 56px; height: 56px; right: 31px; bottom: calc(100% + 2px); }
+html.codex-theme-studio div:has(> .composer-surface-chrome)::before,
+html.codex-theme-studio div:has(> .composer-surface-chrome)::after {
+  content: ""; pointer-events: none; position: absolute; z-index: 2;
+  width: 13px; height: 15px; top: -9px; clip-path: var(--corner);
+  background: linear-gradient(135deg,var(--light),var(--accent) 45%,var(--line) 49%);
+}
+html.codex-theme-studio div:has(> .composer-surface-chrome)::before { left: 7px; }
+html.codex-theme-studio div:has(> .composer-surface-chrome)::after { right: 7px; transform: scaleX(-1); }
+html.codex-theme-studio .composer-surface-chrome::after {
+  content: var(--sigil) / ""; position: absolute; pointer-events: none; z-index: 3;
+  right: 25px; top: -8px; min-width: 19px; border: 1px solid var(--line); border-radius: 8px;
+  background: var(--surface); color: var(--accent); text-align: center; font: 12px/14px Georgia,serif;
+}
+@property --charm-release { syntax: "<number>"; inherits: false; initial-value: 0; }
+html.codex-theme-studio .composer-surface-chrome:has(button:is([aria-label^="Остановить" i],[aria-label^="Stop" i],[data-cts-composer-action="stop"]):enabled)::after { color: var(--light); border-color: var(--accent); }
+@keyframes charm-breath { 50% { box-shadow: 0 0 7px color-mix(in srgb,var(--light) 50%,transparent); } }
+@media (prefers-reduced-motion: no-preference) {
+  html.codex-theme-studio .composer-surface-chrome::after {
+    --charm-release: 0; transition: --charm-release 850ms ease-out;
+    filter: brightness(calc(1 + .27 * sin(calc(var(--charm-release) * 180deg))));
+  }
+  html.codex-theme-studio .composer-surface-chrome:has(button:is([aria-label^="Остановить" i],[aria-label^="Stop" i],[data-cts-composer-action="stop"]):enabled)::after {
+    --charm-release: 1; transition-duration: 0s; animation: charm-breath var(--tempo) ease-in-out infinite;
+  }
+}
+
+html.codex-theme-studio {
+  --accent: #9daed9;
+  --light: #83c7db;
+  --sigil: "☾";
+  --ratio: 736 / 1075;
+  --corner: polygon(5% 0,82% 55%,100% 97%,9% 83%);
+  --tempo: 2.8s;
+}
+
+/* Let the portrait continue behind the composer footer outside the input. */
+html.codex-theme-studio [data-thread-scroll-footer] .pointer-events-none.absolute.bg-surface,
+html.codex-theme-studio [data-thread-scroll-footer] .pointer-events-none.absolute.bg-surface-secondary {
+  background: transparent !important;
+}
+/* Soft character colors */
+html.codex-theme-studio {
+  --accent: #79b7c8;
+  --light: #bbd6ea;
+  --surface: color-mix(in srgb, var(--accent) 15%, #17171e);
+  --night: color-mix(in srgb, var(--accent) 8%, #0b0c10);
+  --line: color-mix(in srgb, var(--accent) 37%, #282730);
+}
+html.codex-theme-studio .app-shell-left-panel {
+  --side-top: color-mix(in srgb, #79b7c8 23%, #211f25);
+  --side-bottom: color-mix(in srgb, #79b7c8 14%, #201f24);
+  --side-edge: color-mix(in srgb, #79b7c8 35%, #282730);
+  --side-hover: color-mix(in srgb, #79b7c8 25%, #252229);
+  --side-selected: color-mix(in srgb, #79b7c8 33%, #252229);
+  --side-mark: #79b7c8;
+}
+html.codex-theme-studio .composer-surface-chrome {
+  background: linear-gradient(115deg,
+    color-mix(in srgb, #79b7c8 19%, #19171f),
+    color-mix(in srgb, #79b7c8 10%, #14131b)) !important;
+  border-color: color-mix(in srgb, #79b7c8 42%, #302936) !important;
+}
+html.codex-theme-studio .composer-surface-chrome:focus-within {
+  border-color: color-mix(in srgb, #79b7c8 73%, #302936) !important;
+}
+/* Horizontal portrait, clockwise: head on the right. */
+html.codex-theme-studio {
+  --sigil: "◈";
+  --corner: polygon(50% 0,88% 48%,100% 72%,82% 96%,50% 100%,18% 96%,0 72%,12% 48%);
+  --tempo: 3.2s;
+}
+html.codex-theme-studio .main-surface:not(.main-surface .main-surface) {
+  container-type: size;
+  background: #0c171e !important;
+  overflow: clip;
+}
+html.codex-theme-studio .main-surface:not(.main-surface .main-surface)::before {
+  inset: auto;
+  left: 50%;
+  top: 50%;
+  width: 100cqh;
+  height: 100cqw;
+  max-width: none;
+  aspect-ratio: auto;
+  transform: translate(-50%, -50%) rotate(90deg);
+  transform-origin: center;
+  background: var(--cts-asset-portrait) center / cover no-repeat;
+  opacity: .36;
+  mask-image: none;
+}
+html.codex-theme-studio [data-markdown-text-style] {
+  text-shadow: 0 1px 3px rgba(3, 10, 15, .55);
+}/* Centered original portrait and equal red / blue halves. */
+html.codex-theme-studio {
+ --accent:#e9859d; --light:#b9d9ff; --night:#170c18; --surface:#20192d; --line:#785379;
+ --sigil:"✦";
+}
+html.codex-theme-studio body { background:linear-gradient(90deg,#501322 0 50%,#102d59 50% 100%) !important; }
+html.codex-theme-studio .main-surface:not(.main-surface .main-surface) {
+ background:linear-gradient(90deg,#501322 0 50%,#102d59 50% 100%) !important;
+}
+html.codex-theme-studio .main-surface:not(.main-surface .main-surface)::before {
+ inset:0; width:100%; height:100%; max-width:none; transform:none;
+ background:var(--cts-asset-portrait) center / auto 100% no-repeat;
+ opacity:.48; mask-image:none;
+}
+html.codex-theme-studio .app-shell-left-panel {
+ --side-top:#501322; --side-bottom:#310d19; --side-edge:#a64059;
+ --side-hover:#74243b; --side-selected:#8b3049; --side-mark:#ff8ba5;
+ --side-muted:#e3b3c0;
+ background:linear-gradient(180deg,#501322,#310d19) !important;
+}
+html.codex-theme-studio .composer-surface-chrome {
+ background:linear-gradient(90deg,rgba(65,14,29,.94) 0 50%,rgba(13,37,77,.94) 50% 100%) !important;
+ border-color:#956686 !important;
+}
+html.codex-theme-studio .app-shell-left-panel::after,
+html.codex-theme-studio [data-home-feed-composer] .composer-surface-chrome::before { display:none !important; }
+html.codex-theme-studio [data-local-conversation-final-assistant] [data-markdown-text-style] {
+ background:rgba(14,13,27,.68); border-radius:10px;
+}
+/* Muted rose and slate blue with a broad, smooth transition. */
+html.codex-theme-studio {
+ --accent:#c397aa; --light:#c4d2e6; --night:#211e2a; --surface:#2c2937; --line:#63566c;
+}
+html.codex-theme-studio body,
+html.codex-theme-studio .main-surface:not(.main-surface .main-surface) {
+ background:linear-gradient(90deg,#392830 0%,#392830 24%,#34303c 44%,#303341 56%,#273648 76%,#273648 100%) !important;
+}
+html.codex-theme-studio .app-shell-left-panel {
+ --side-top:#392830; --side-bottom:#30252d; --side-edge:#68505d;
+ --side-hover:#4a3540; --side-selected:#57404c; --side-mark:#c397aa; --side-muted:#cab8c1;
+ background:linear-gradient(180deg,#392830,#30252d) !important;
+}
+html.codex-theme-studio .composer-surface-chrome {
+ background:linear-gradient(90deg,rgba(53,38,47,.95),rgba(46,44,58,.95) 50%,rgba(35,49,67,.95)) !important;
+ border-color:#685a70 !important;
+}
+html.codex-theme-studio .composer-surface-chrome:focus-within { border-color:#a18da8 !important; }
+/* More vivid color, preserving the soft transition. */
+html.codex-theme-studio { --accent:#ec91ad; --light:#bddcff; --line:#896383; }
+html.codex-theme-studio body,
+html.codex-theme-studio .main-surface:not(.main-surface .main-surface) {
+ background:linear-gradient(90deg,#722d43 0%,#722d43 22%,#603952 40%,#49466a 55%,#2b5380 78%,#2b5380 100%) !important;
+}
+html.codex-theme-studio .main-surface:not(.main-surface .main-surface)::before {
+ opacity:.76; filter:brightness(1.1) saturate(1.12);
+}
+html.codex-theme-studio .app-shell-left-panel {
+ --side-top:#722d43; --side-bottom:#512638; --side-edge:#a65c77;
+ --side-hover:#873d56; --side-selected:#984a65; --side-mark:#ffabc5; --side-muted:#ecd0dc;
+ background:linear-gradient(180deg,#722d43,#512638) !important;
+}
+html.codex-theme-studio .composer-surface-chrome {
+ background:linear-gradient(90deg,rgba(93,34,56,.95),rgba(68,49,80,.95) 50%,rgba(30,66,107,.95)) !important;
+ border-color:#a6789d !important;
+}
+html.codex-theme-studio .composer-surface-chrome:focus-within { border-color:#df9dc4 !important; }
+/* Slightly brighter portrait and more room inside the text backing. */
+html.codex-theme-studio .main-surface:not(.main-surface .main-surface)::before {
+ opacity:.82; filter:brightness(1.14) saturate(1.12);
+}
+html.codex-theme-studio [data-local-conversation-final-assistant] [data-markdown-text-style] {
+ padding-inline:14px; box-sizing:border-box;
+}
+/* Blue daylight palette and horizontal portrait. */
+html.codex-theme-studio { --accent:#8cbde9; --light:#d2e8ff; --night:#14263b; --surface:#243d59; --line:#6589af; }
+html.codex-theme-studio body,
+html.codex-theme-studio .main-surface:not(.main-surface .main-surface) {
+ background:linear-gradient(110deg,#264764,#345d82 52%,#406b91) !important;
+}
+html.codex-theme-studio .main-surface:not(.main-surface .main-surface)::before {
+ inset:auto; left:50%; top:50%; width:100cqh; height:100cqw;
+ max-width:none; transform:translate(-50%,-50%) rotate(90deg);
+ background:var(--cts-asset-portrait) center / contain no-repeat;
+ opacity:.82; filter:brightness(1.06) saturate(1.08);
+}
+html.codex-theme-studio .app-shell-left-panel {
+ --side-top:#294b6a; --side-bottom:#1c344e; --side-edge:#6386aa;
+ --side-hover:#3b6287; --side-selected:#4b749b; --side-mark:#add8ff; --side-muted:#c4d8ed;
+ background:linear-gradient(180deg,#294b6a,#1c344e) !important;
+}
+html.codex-theme-studio .composer-surface-chrome {
+ background:linear-gradient(110deg,rgba(28,51,77,.95),rgba(43,75,108,.95)) !important;
+ border-color:#789fc6 !important;
+}
+html.codex-theme-studio .composer-surface-chrome:focus-within { border-color:#b3daff !important; }
+/* Anchor the rotated portrait to the bottom: source right becomes bottom. */
+html.codex-theme-studio .main-surface:not(.main-surface .main-surface)::before {
+ background-position:right center;
+ transform:translate(-50%,-50%) rotate(90deg);
+}
+/* Reverse rotation: face on the left, aligned to the lower edge. */
+html.codex-theme-studio .main-surface:not(.main-surface .main-surface)::before {
+ transform:translate(-50%,-50%) rotate(-90deg);
+ background-position:left center;
+}
+/* Slightly smaller portrait, resting at the bottom with face left. */
+html.codex-theme-studio .main-surface:not(.main-surface .main-surface)::before {
+ background-size: auto 88%;
+ background-position:left center;
+ transform:translate(-50%,-50%) rotate(-90deg);
+}

@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 2,
+  "id": "blue-cat-nocturne",
+  "name": "Фурина · Blue Cat Nocturne",
+  "description": "№ 10 · Фурина, Genshin Impact. Серебряный колокольчик, кошачьи ушки и аквамарин.",
+  "version": "1.0.0",
+  "author": "Codex",
+  "appearance": "dark",
+  "license": "personal-use",
+  "category": "anime",
+  "tags": [
+    "anime",
+    "dark"
+  ],
+  "colors": {
+    "accent": "#9daed9",
+    "light": "#83c7db"
+  },
+  "strings": {},
+  "assets": {
+    "portrait": "assets/portrait.webp",
+    "charm": "assets/charm.png"
+  },
+  "css": "theme.css"
+}

@@ -1,0 +1,82 @@
+[
+  {
+    "id": "ai-bunny-refrain",
+    "name": "Ай Хосино · Bunny Refrain",
+    "path": "themes/ai-bunny-refrain"
+  },
+  {
+    "id": "ai-starlit-encore",
+    "name": "Ай Хосино · Starlit Encore",
+    "path": "themes/ai-starlit-encore"
+  },
+  {
+    "id": "azure-morpho",
+    "name": "Azure Morpho",
+    "path": "themes/azure-morpho"
+  },
+  {
+    "id": "blue-cat-nocturne",
+    "name": "Фурина · Blue Cat Nocturne",
+    "path": "themes/blue-cat-nocturne"
+  },
+  {
+    "id": "cc-mint-contract",
+    "name": "C.C. · Mint Contract",
+    "path": "themes/cc-mint-contract"
+  },
+  {
+    "id": "fubuki-velvet",
+    "name": "Фубуки · Velvet Reflection",
+    "path": "themes/fubuki-velvet"
+  },
+  {
+    "id": "furina-blue-daylight",
+    "name": "Фурина · Голубой свет",
+    "path": "themes/furina-blue-daylight"
+  },
+  {
+    "id": "furina-moonlit-repose",
+    "name": "Фурина · Moonlit Repose",
+    "path": "themes/furina-moonlit-repose"
+  },
+  {
+    "id": "hu-tao-furina-duality",
+    "name": "Ху Тао × Фурина · Красный и синий",
+    "path": "themes/hu-tao-furina-duality"
+  },
+  {
+    "id": "reze-night-bloom",
+    "name": "Резе · Night Bloom",
+    "path": "themes/reze-night-bloom"
+  },
+  {
+    "id": "shinobu-wisteria",
+    "name": "Шинобу Кочо · Wisteria Veil",
+    "path": "themes/shinobu-wisteria"
+  },
+  {
+    "id": "sora-ribbon",
+    "name": "Sora · Silver Ribbon",
+    "path": "themes/sora-ribbon"
+  },
+  {
+    "id": "sylphie-moonstone",
+    "name": "Сильфи · Moonstone Atelier",
+    "path": "themes/sylphie-moonstone"
+  },
+  {
+    "id": "tatsumaki-jade",
+    "name": "Татсумаки · Jade Orbit",
+    "path": "themes/tatsumaki-jade"
+  },
+  {
+    "id": "tatsumaki-jade-duo",
+    "name": "Тацумаки · Jade Duo",
+    "path": "themes/tatsumaki-jade-duo"
+  },
+  {
+    "id": "zero-two-rose",
+    "name": "Zero Two · Darling Rose",
+    "path": "themes/zero-two-rose"
+  }
+]

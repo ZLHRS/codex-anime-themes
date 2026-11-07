@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 2,
+  "id": "azure-morpho",
+  "name": "Azure Morpho",
+  "description": "№ 05 · Синяя бабочка и капли света.",
+  "version": "1.0.0",
+  "author": "Codex",
+  "appearance": "dark",
+  "license": "personal-use",
+  "category": "anime",
+  "tags": [
+    "anime",
+    "dark"
+  ],
+  "colors": {
+    "accent": "#91b8e3",
+    "light": "#76d3df"
+  },
+  "strings": {},
+  "assets": {
+    "portrait": "assets/portrait.webp",
+    "charm": "assets/charm.png"
+  },
+  "css": "theme.css"
+}
