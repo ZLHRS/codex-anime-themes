@@ -8,7 +8,7 @@ $source=[IO.Path]::GetFullPath($PSScriptRoot)
 $dest=[IO.Path]::GetFullPath($Destination)
 if($source -ne $dest){
  New-Item -ItemType Directory -Force $dest | Out-Null
- foreach($dir in @('themes','previews','launcher','docs')){
+ foreach($dir in @('themes','previews','launcher','docs','assets')){
   $base=Join-Path $source $dir
   foreach($file in Get-ChildItem -LiteralPath $base -Recurse -File){
    $relative=$file.FullName.Substring($source.Length).TrimStart('\')
@@ -33,7 +33,7 @@ foreach($folder in @($shell.SpecialFolders.Item('Desktop'),$shell.SpecialFolders
   $link=$shell.CreateShortcut($path);$link.TargetPath="$env:SystemRoot\System32\WindowsPowerShell\v1.0\powershell.exe"
   $link.Arguments='-NoProfile -STA -WindowStyle Hidden -ExecutionPolicy Bypass -File "'+(Join-Path $dest 'Theme-Selector.ps1')+'"'
   if($name -eq 'ChatGPT'){$link.Arguments+=' -Launch'}
-  $link.WorkingDirectory=$dest;$link.IconLocation=$icon;$link.Description='ChatGPT с последней выбранной темой — ZLHRS Theme Studio';$link.Save()
+  $link.WorkingDirectory=$dest;$link.IconLocation=if($name -eq 'ZLHRS Theme Studio'){(Join-Path $dest 'assets/studio.ico')+',0'}else{$icon};$link.Description='ChatGPT с последней выбранной темой — ZLHRS Theme Studio';$link.Save()
  }
 }
 Write-Output "Installed: $dest"
