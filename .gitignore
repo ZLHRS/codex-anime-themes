@@ -5,4 +5,8 @@ Thumbs.db
 
 .selected-theme.json
 .theme-error.log
+node_modules/
+.tools/
+dist/
+.electron-cache/
 
