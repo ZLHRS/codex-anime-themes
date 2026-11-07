@@ -48,7 +48,7 @@ async function targets() {
   if (!Array.isArray(list)) throw new Error('Неподдерживаемый ответ приложения.');
   return list.filter(validTarget);
 }
-function evaluate(url, expression) {
+function command(url, method, params) {
   const uri = new URL(url);
   if (uri.protocol !== 'ws:' || uri.hostname !== '127.0.0.1' || uri.port !== '9345') throw new Error('Unexpected debugging endpoint');
   return new Promise((resolve,reject) => {
@@ -56,12 +56,18 @@ function evaluate(url, expression) {
     const finish = (error,value) => {if(done)return;done=true;clearTimeout(timer);ws.close();error?reject(error):resolve(value);};
     const timer = setTimeout(()=>finish(new Error('ChatGPT не отвечает.')),12000);
     ws.addEventListener('error',()=>finish(new Error('Соединение с ChatGPT прервано.')));
-    ws.addEventListener('open',()=>ws.send(JSON.stringify({id:1,method:'Runtime.evaluate',params:{expression,returnByValue:true}})));
+    ws.addEventListener('open',()=>ws.send(JSON.stringify({id:1,method,params})));
     ws.addEventListener('message',event=>{try{const r=JSON.parse(event.data);if(r.id!==1)return;
       if(r.error||r.result?.exceptionDetails)finish(new Error('Не удалось применить тему.'));
-      else finish(null,r.result?.result?.value);
+      else finish(null,r.result);
     }catch(e){finish(e);}});
   });
+}
+function evaluate(url,expression){return command(url,'Runtime.evaluate',{expression,returnByValue:true}).then(r=>r?.result?.value);}
+async function foreground(target){
+  const url=target.webSocketDebuggerUrl;
+  try{const info=await command(url,'Browser.getWindowForTarget',{});if(info.bounds?.windowState==='minimized')await command(url,'Browser.setWindowBounds',{windowId:info.windowId,bounds:{windowState:'normal'}});}catch{}
+  await command(url,'Page.bringToFront',{});
 }
 async function saveSettings(file, value) {
   await fs.mkdir(path.dirname(file),{recursive:true});
@@ -85,6 +91,6 @@ function launchSpec(file, platform=process.platform) {
 async function launch(file) {
   if(!await exists(file))throw new Error('ChatGPT не найден. Нажмите «Выбрать приложение».');
   const spec=launchSpec(file);
-  await new Promise((resolve,reject)=>{const child=spawn(spec.command,spec.args,{detached:true,stdio:'ignore',windowsHide:true});child.once('error',reject);child.once('spawn',()=>{child.unref();resolve();});});
+  await new Promise((resolve,reject)=>{const child=spawn(spec.command,spec.args,{detached:true,stdio:'ignore',windowsHide:false});child.once('error',reject);child.once('spawn',()=>{child.unref();resolve();});});
 }
-module.exports={readJson,exists,inside,payload,validTarget,targets,evaluate,saveSettings,discover,launchSpec,launch};
+module.exports={readJson,exists,inside,payload,validTarget,targets,evaluate,command,foreground,saveSettings,discover,launchSpec,launch};
