@@ -18,7 +18,7 @@ ChatGPT должен быть установлен отдельно. Перед 
 | Windows x64 | `…-win-x64.exe` — установщик |
 | macOS Apple Silicon | `…-mac-arm64.dmg` |
 | macOS Intel | `…-mac-x64.dmg` |
-| Linux x64 | `…-linux-x64.AppImage` или `.deb` |
+| Linux x64 | `…-linux-x86_64.AppImage` или `…-linux-amd64.deb` |
 
 В готовых сборках всё внутри: Node.js, PowerShell и Codex App Manager устанавливать не нужно. Сборки пока без цифровой подписи и нотариализации Apple; macOS может потребовать подтверждения открытия в настройках безопасности. AppImage сначала сделайте исполняемым. [Подробная инструкция](docs/CROSS-PLATFORM.md).
 
