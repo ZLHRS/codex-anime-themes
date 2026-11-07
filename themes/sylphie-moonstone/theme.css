@@ -175,3 +175,17 @@ html.codex-theme-studio .composer-surface-chrome {
 html.codex-theme-studio .composer-surface-chrome:focus-within {
   border-color: color-mix(in srgb, #c6b1dd 73%, #302936) !important;
 }
+/* Keep the editor clear: external badges are clipped by modern composer shells. */
+html.codex-theme-studio .composer-surface-chrome::after {
+  content: none !important;
+  display: none !important;
+}
+html.codex-theme-studio div:has(> .composer-surface-chrome)::before,
+html.codex-theme-studio div:has(> .composer-surface-chrome)::after {
+  content: none !important;
+  display: none !important;
+}
+/* This layer is decorative only; keep the portrait visible behind the footer. */
+html.codex-theme-studio [data-thread-scroll-footer] > .pointer-events-none.absolute.bg-surface {
+  display: none !important;
+}
