@@ -1,4 +1,3 @@
 @echo off
 cd /d "%~dp0"
-powershell.exe -NoProfile -STA -ExecutionPolicy Bypass -File "%~dp0Theme-Selector.ps1"
-if errorlevel 1 pause
+start "" powershell.exe -NoProfile -STA -WindowStyle Hidden -ExecutionPolicy Bypass -File "%~dp0Open-Studio.ps1"

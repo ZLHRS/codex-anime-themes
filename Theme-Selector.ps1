@@ -8,6 +8,10 @@ $catalog=Get-Content (Join-Path $root 'catalog.json') -Raw -Encoding UTF8 | Conv
 $config=Join-Path $root '.selected-theme.json'
 $script:selected=$catalog[0].id
 if(Test-Path $config){try{$saved=(Get-Content $config -Raw -Encoding UTF8|ConvertFrom-Json).theme;if($catalog.id -contains $saved){$script:selected=$saved}}catch{}}
+function Save-Theme([string]$id){
+ if($catalog.id -notcontains $id){throw 'Неизвестная тема.'}
+ $tmp=$config+'.tmp';[IO.File]::WriteAllText($tmp,(@{theme=$id}|ConvertTo-Json),[Text.UTF8Encoding]::new($false));Move-Item -LiteralPath $tmp -Destination $config -Force
+}
 function Open-ThemedApp([string]$id){
  if(Get-Process -Name codex-app-manager -ErrorAction SilentlyContinue){throw 'Закройте Codex App Manager: он может возвращать старое оформление.'}
  $ready=$false;try{$null=Invoke-RestMethod 'http://127.0.0.1:9345/json/list' -TimeoutSec 2;$ready=$true}catch{}
@@ -17,7 +21,7 @@ function Open-ThemedApp([string]$id){
   if(-not $package){throw 'Не найден установленный Codex / ChatGPT для Windows (OpenAI.Codex).'}
   $exe=Join-Path $package.InstallLocation 'app/ChatGPT.exe';if(-not(Test-Path $exe)){throw 'Эта сборка приложения пока не поддерживается.'}
  }
- $tmp=$config+'.tmp';[IO.File]::WriteAllText($tmp,(@{theme=$id}|ConvertTo-Json),[Text.UTF8Encoding]::new($false));Move-Item -LiteralPath $tmp -Destination $config -Force
+ Save-Theme $id
  if(-not $ready){Start-Process $exe -ArgumentList '--remote-debugging-address=127.0.0.1','--remote-debugging-port=9345'}
  Start-Process powershell.exe -ArgumentList ('-NoProfile -ExecutionPolicy Bypass -File "'+(Join-Path $root 'launcher/Theme-Engine.ps1')+'" -Worker') -WindowStyle Hidden
 }
@@ -46,7 +50,7 @@ $script:cards=@();$script:buttons=@();$script:listMode=$false;$script:onlyActive
 function Brush([string]$hex){return [Windows.Media.BrushConverter]::new().ConvertFromString($hex)}
 function Update-Filter {foreach($card in $script:cards){$meta=$card.Tag;$match=($meta.name+' '+$meta.description+' '+$meta.author+' '+$meta.id).IndexOf($search.Text,[StringComparison]::OrdinalIgnoreCase) -ge 0;$card.Visibility=if($match -and (-not $script:onlyActive -or $meta.id -eq $script:selected)){'Visible'}else{'Collapsed'}}}
 function Refresh-Selection {$current.Text='◈  Выбрана: '+($catalog|Where-Object id -eq $script:selected).name;foreach($b in $script:buttons){$b.Content=if($b.Tag -eq $script:selected){'✓  Выбрана'}else{'Применить'}};Update-Filter}
-function Apply-Selected([string]$id){try{Open-ThemedApp $id;$script:selected=$id;Refresh-Selection;$status.Text='Тема сохранена. Применение занимает несколько секунд.'}catch{[void][Windows.MessageBox]::Show($_.Exception.Message,'Применение темы');$status.Text='Не удалось применить тему — см. сообщение.'}}
+function Apply-Selected([string]$id){try{Save-Theme $id;$script:selected=$id;Refresh-Selection;Open-ThemedApp $id;$status.Text='Тема сохранена. Применение занимает несколько секунд.'}catch{[void][Windows.MessageBox]::Show($_.Exception.Message,'Применение темы');$status.Text='Выбор сохранён. Закройте приложение и откройте ярлыком ChatGPT — тема включится.'}}
 foreach($t in $catalog){
  $meta=Get-Content (Join-Path $root ('themes/'+$t.id+'/theme.json')) -Raw -Encoding UTF8|ConvertFrom-Json
  $card=[Windows.Controls.Border]::new();$card.CornerRadius=12;$card.BorderThickness=1;$card.BorderBrush=Brush '#383d49';$card.Background=Brush '#1b1e27';$card.Margin='0,0,14,16';$card.Tag=$meta

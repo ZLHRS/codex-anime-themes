@@ -1,5 +1,9 @@
-﻿param([string]$Destination=(Join-Path $env:LOCALAPPDATA 'ZLHRS/ThemeStudio'))
+﻿param([string]$Destination=(Join-Path $env:LOCALAPPDATA 'ZLHRS/ThemeStudio'),[switch]$NoShortcuts)
 $ErrorActionPreference='Stop'
+function Get-AssetHash([string]$Path){
+ $stream=[IO.File]::OpenRead($Path);$sha=[Security.Cryptography.SHA256]::Create()
+ try{return [BitConverter]::ToString($sha.ComputeHash($stream))}finally{$stream.Dispose();$sha.Dispose()}
+}
 $source=[IO.Path]::GetFullPath($PSScriptRoot)
 $dest=[IO.Path]::GetFullPath($Destination)
 if($source -ne $dest){
@@ -9,14 +13,15 @@ if($source -ne $dest){
   foreach($file in Get-ChildItem -LiteralPath $base -Recurse -File){
    $relative=$file.FullName.Substring($source.Length).TrimStart('\')
    $target=Join-Path $dest $relative
-   if((Test-Path -LiteralPath $target) -and ((Get-FileHash -LiteralPath $file.FullName).Hash -eq (Get-FileHash -LiteralPath $target).Hash)){continue}
+   if((Test-Path -LiteralPath $target) -and ((Get-AssetHash $file.FullName) -eq (Get-AssetHash $target))){continue}
    New-Item -ItemType Directory -Force (Split-Path $target) | Out-Null
    Copy-Item -LiteralPath $file.FullName -Destination $target -Force
   }
  }
- foreach($f in @('Theme-Selector.ps1','Install-Studio.ps1','START.cmd','catalog.json','VERSION')){Copy-Item -LiteralPath (Join-Path $source $f) -Destination (Join-Path $dest $f) -Force}
+ foreach($f in @('Theme-Selector.ps1','Install-Studio.ps1','START.cmd','ZLHRS Theme Studio.cmd','Open-Studio.ps1','catalog.json','VERSION')){Copy-Item -LiteralPath (Join-Path $source $f) -Destination (Join-Path $dest $f) -Force}
  if(-not(Test-Path (Join-Path $dest '.selected-theme.json')) -and (Test-Path (Join-Path $source '.selected-theme.json'))){Copy-Item -LiteralPath (Join-Path $source '.selected-theme.json') -Destination $dest}
 }
+if($NoShortcuts){Write-Output "Installed: $dest";return}
 $shell=New-Object -ComObject WScript.Shell
 $icon="$env:SystemRoot\System32\shell32.dll,14"
 $pkg=Get-AppxPackage -Name OpenAI.Codex | Select-Object -First 1
