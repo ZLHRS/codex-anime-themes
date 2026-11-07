@@ -38,6 +38,9 @@ jobs:
       - run: npm run dist -- ${{ matrix.args }}
         env:
           CSC_IDENTITY_AUTO_DISCOVERY: 'false'
+      - name: Create ready-to-run Windows folder
+        if: runner.os == 'Windows'
+        run: powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Make-Portable.ps1
       - uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.label }}

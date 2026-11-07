@@ -7,9 +7,9 @@ const {pipeline}=require('node:stream/promises');
 const REPO='ZLHRS/codex-anime-themes';
 function version(value){const match=/^v?(\d+)\.(\d+)\.(\d+)$/.exec(value||'');if(!match)throw new Error('Некорректная версия обновления.');return match.slice(1).map(Number);}
 function newer(remote,current){const a=version(remote),b=version(current);for(let i=0;i<3;i++){if(a[i]!==b[i])return a[i]>b[i];}return false;}
-function assetFor(release,platform,arch,appImage){
+function assetFor(release,platform,arch,appImage,portable=false){
  const v=version(release.tag_name).join('.');
- const suffix=platform==='win32'?`win-${arch}.exe`:platform==='darwin'?`mac-${arch}.zip`:appImage?'linux-x86_64.AppImage':'linux-amd64.deb';
+ const suffix=platform==='win32'?`win-${arch}${portable?'-portable.zip':'.exe'}`:platform==='darwin'?`mac-${arch}.zip`:appImage?'linux-x86_64.AppImage':'linux-amd64.deb';
  if(platform==='linux'&&arch!=='x64')throw new Error('Для этой архитектуры Linux пока нет обновления.');
  const name=`ZLHRS-Theme-Studio-${v}-${suffix}`;
  const asset=release.assets?.find(a=>a.name===name);
@@ -18,12 +18,12 @@ function assetFor(release,platform,arch,appImage){
  for(const a of [asset,checksum]){const u=new URL(a.browser_download_url);if(u.protocol!=='https:'||u.hostname!=='github.com'||!u.pathname.startsWith('/'+REPO+'/releases/download/'))throw new Error('Недопустимый источник обновления.');}
  return {asset,checksum,version:v};
 }
-async function check(current,platform,arch,appImage,request=fetch){
+async function check(current,platform,arch,appImage,request=fetch,portable=false){
  const r=await request(`https://api.github.com/repos/${REPO}/releases/latest`,{headers:{Accept:'application/vnd.github+json','User-Agent':'ZLHRS-Theme-Studio'},signal:AbortSignal.timeout(15000)});
  if(!r.ok)throw new Error(r.status===403?'GitHub временно ограничил проверки. Попробуйте позже.':'Не удалось проверить обновления. Проверьте интернет.');
  const release=await r.json();
  if(release.draft||release.prerelease||!newer(release.tag_name,current))return null;
- return assetFor(release,platform,arch,appImage);
+ return assetFor(release,platform,arch,appImage,portable);
 }
 function checksumFor(text,name){
  const line=text.split(/\r?\n/).find(line=>line.slice(66).replace(/^\*/,'')===name);

@@ -10,6 +10,7 @@ let window,tray,settings={},settingsFile,catalog=[],timer,busy=false,cached,stat
 const smoke=process.argv.includes('--smoke-test');
 if(smoke){const temp=path.join(app.getPath('temp'),'zlhrs-smoke-'+process.pid);app.setPath('userData',temp);require('node:fs').mkdirSync(path.join(temp,'Desktop'),{recursive:true});app.setPath('desktop',path.join(temp,'Desktop'));}
 const launchOnly=process.argv.includes('--launch');
+const portable=process.platform==='win32'&&require('node:fs').existsSync(path.join(path.dirname(process.execPath),'PORTABLE'));
 const ownsLock=smoke || app.requestSingleInstanceLock();
 if(!ownsLock)app.quit();
 else {
@@ -135,7 +136,7 @@ async function updateApp(){
  if(updating)return;
  if(!app.isPackaged)throw new Error('В режиме исходников используйте git pull и npm ci. Автообновление доступно в установленном приложении.');
  updating=true;status='Проверяем новые выпуски…';notify();
- const info=await updates.check(app.getVersion(),process.platform,process.arch,!!process.env.APPIMAGE);
+ const info=await updates.check(app.getVersion(),process.platform,process.arch,!!process.env.APPIMAGE,fetch,portable);
  if(!info){updating=false;status='У вас последняя версия '+app.getVersion()+'. Перезапуск не нужен.';notify();return;}
  const directory=path.join(app.getPath('userData'),'updates',info.version);
  const installer=await updates.download(info,directory,percent=>{status='Обновление '+info.version+': загружено '+percent+'%';notify();});
@@ -145,6 +146,7 @@ async function updateApp(){
   const helper=path.join(directory,'update.ps1');await fs.copyFile(path.join(__dirname,'update-windows.ps1'),helper);
   command=path.join(process.env.SystemRoot,'System32/WindowsPowerShell/v1.0/powershell.exe');
   args=['-NoProfile','-NonInteractive','-WindowStyle','Hidden','-ExecutionPolicy','Bypass','-File',helper,'-Installer',installer,'-Target',process.execPath,'-StudioPid',String(process.pid),'-ResultFile',result];
+  if(portable)args.push('-Portable');
  }else{
   let target,kind;
   if(process.platform==='darwin'){

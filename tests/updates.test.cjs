@@ -6,7 +6,7 @@ const path=require('node:path');
 const crypto=require('node:crypto');
 const u=require('../desktop/updates.cjs');
 function release(tag='v2.2.0'){
- const names=['win-x64.exe','mac-arm64.zip','mac-x64.zip','linux-x86_64.AppImage','linux-amd64.deb'].map(s=>'ZLHRS-Theme-Studio-'+tag.slice(1)+'-'+s).concat('SHA256SUMS.txt');
+ const names=['win-x64.exe','win-x64-portable.zip','mac-arm64.zip','mac-x64.zip','linux-x86_64.AppImage','linux-amd64.deb'].map(s=>'ZLHRS-Theme-Studio-'+tag.slice(1)+'-'+s).concat('SHA256SUMS.txt');
  return {tag_name:tag,assets:names.map(name=>({name,size:5,browser_download_url:'https://github.com/ZLHRS/codex-anime-themes/releases/download/'+tag+'/'+name}))};
 }
 test('only newer stable releases trigger an update',async()=>{
@@ -26,3 +26,5 @@ test('downloads and verifies bytes; corrupt updates never become installers',asy
 test('network errors return a recoverable error',async()=>{
  await assert.rejects(u.check('2.1.0','win32','x64',false,async()=>({ok:false,status:403})),/позже/);
 });
+
+test("portable Windows updates select ZIP, never installer",()=>{assert(u.assetFor(release(),"win32","x64",false,true).asset.name.endsWith("-portable.zip"));});
