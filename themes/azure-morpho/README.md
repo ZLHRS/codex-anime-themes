@@ -1,9 +1,9 @@
 # Azure Morpho
 
-![Палитра и иллюстрация](../../previews/azure-morpho-chat.jpg)
+![Превью темы в чате](../../previews/azure-morpho-chat.jpg)
 
 ID: `azure-morpho`.
 
-[Установка](../../docs/INSTALL-RU.md).
+[Установка](../../docs/CROSS-PLATFORM.md).
 
-Файлы: `theme.json`, `theme.css`, `assets/`. Превью показывает иллюстрацию и палитру, а не снимок приложения.
+Файлы: `theme.json`, `theme.css`, `assets/`. Превью показывает демонстрационный чат с настоящими стилями темы.

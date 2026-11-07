@@ -1,9 +1,9 @@
 # Ху Тао × Фурина · Красный и синий
 
-![Палитра и иллюстрация](../../previews/hu-tao-furina-duality-chat.jpg)
+![Превью темы в чате](../../previews/hu-tao-furina-duality-chat.jpg)
 
 ID: `hu-tao-furina-duality`.
 
-[Установка](../../docs/INSTALL-RU.md).
+[Установка](../../docs/CROSS-PLATFORM.md).
 
-Файлы: `theme.json`, `theme.css`, `assets/`. Превью показывает иллюстрацию и палитру, а не снимок приложения.
+Файлы: `theme.json`, `theme.css`, `assets/`. Превью показывает демонстрационный чат с настоящими стилями темы.

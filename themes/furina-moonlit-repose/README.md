@@ -1,9 +1,9 @@
 # Фурина · Moonlit Repose
 
-![Палитра и иллюстрация](../../previews/furina-moonlit-repose-chat.jpg)
+![Превью темы в чате](../../previews/furina-moonlit-repose-chat.jpg)
 
 ID: `furina-moonlit-repose`.
 
-[Установка](../../docs/INSTALL-RU.md).
+[Установка](../../docs/CROSS-PLATFORM.md).
 
-Файлы: `theme.json`, `theme.css`, `assets/`. Превью показывает иллюстрацию и палитру, а не снимок приложения.
+Файлы: `theme.json`, `theme.css`, `assets/`. Превью показывает демонстрационный чат с настоящими стилями темы.

@@ -1,9 +1,9 @@
 # Татсумаки · Jade Orbit
 
-![Палитра и иллюстрация](../../previews/tatsumaki-jade-chat.jpg)
+![Превью темы в чате](../../previews/tatsumaki-jade-chat.jpg)
 
 ID: `tatsumaki-jade`.
 
-[Установка](../../docs/INSTALL-RU.md).
+[Установка](../../docs/CROSS-PLATFORM.md).
 
-Файлы: `theme.json`, `theme.css`, `assets/`. Превью показывает иллюстрацию и палитру, а не снимок приложения.
+Файлы: `theme.json`, `theme.css`, `assets/`. Превью показывает демонстрационный чат с настоящими стилями темы.

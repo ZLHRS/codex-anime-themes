@@ -4,8 +4,10 @@ const path=require('node:path');
 const {pathToFileURL}=require('node:url');
 const core=require('./core.cjs');
 const updates=require('./updates.cjs');
+const {ThemeSession}=require('./theme-session.cjs');
 const {spawn}=require('node:child_process');
 const root=path.resolve(__dirname,'..');
+const themeSession=new ThemeSession(root);
 let window,tray,settings={},settingsFile,catalog=[],timer,busy=false,cached,status='Выберите тему — она сохранится для следующих запусков.',quitting=false,lastShortcut='',updating=false;
 const smoke=process.argv.includes('--smoke-test');
 if(smoke){const temp=path.join(app.getPath('temp'),'zlhrs-smoke-'+process.pid);app.setPath('userData',temp);require('node:fs').mkdirSync(path.join(temp,'Desktop'),{recursive:true});app.setPath('desktop',path.join(temp,'Desktop'));}
@@ -58,7 +60,7 @@ async function init(){
  ipcMain.handle('studio:quit',()=>app.quit());
  if(smoke){
   let launches=0,focuses=0;
-  core.launch=async()=>{launches++;};core.foreground=async()=>{focuses++;};core.targets=async()=>[{type:'page',url:'app://-/index.html',webSocketDebuggerUrl:'ws://127.0.0.1:9345/test'}];core.evaluate=async()=>({stamp:cached?.stamp,ready:true});
+  core.launch=async()=>{launches++;};core.foreground=async()=>{focuses++;};core.targets=async()=>[{type:'page',url:'app://-/index.html',webSocketDebuggerUrl:'ws://127.0.0.1:9345/test'}];core.evaluate=async()=>({stamp:cached?.stamp,theme:cached?.id,ready:true,styled:true,disabled:false});
   const w=createWindow();await new Promise(resolve=>w.webContents.once('did-finish-load',resolve));
   const count=await w.webContents.executeJavaScript('document.querySelectorAll(".card").length');
   // Renderer fetches the catalog asynchronously.
@@ -87,26 +89,23 @@ async function apply(id,openWindow=false){
  busy=true;
  try{
   settings.theme=id;await core.saveSettings(settingsFile,settings);
-  if(process.platform==='win32'&&!smoke){
-   const legacy=path.join(process.env.LOCALAPPDATA,'ZLHRS/ThemeStudio/.selected-theme.json');
-   if(await core.exists(legacy))await core.saveSettings(legacy,{theme:id});
-  }
-  cached=await core.payload(root,id);notify();
+  cached=await themeSession.select(id);clearInterval(timer);timer=setInterval(()=>tick().catch(report),2500);status="Тема сохранена. Подключаемся к ChatGPT…";notify();
   let list=[];try{list=await core.targets();}catch{}
   if(!await core.exists(settings.appPath)){settings.appPath=await core.discover();await core.saveSettings(settingsFile,settings);}
   if(!list.length||openWindow){await core.launch(settings.appPath);}
   if(!list.length){for(let i=0;i<30;i++){await new Promise(r=>setTimeout(r,500));try{list=await core.targets();if(list.length)break;}catch{}}}
   if(!list.length)throw new Error('Тема сохранена. Полностью закройте ChatGPT и откройте его кнопкой здесь. Если не помогает, выбранная сборка приложения несовместима.');
-  await tick();clearInterval(timer);timer=setInterval(()=>tick().catch(report),2500);
+  await themeSession.waitForApplied();
   if(openWindow){const target=list.find(t=>t.url.startsWith('app://-/index.html'))||list[0];await core.foreground(target);}
-  status='Тема применена. Запускайте ChatGPT ярлыком «ChatGPT с темой». После закрытия окна Studio остаётся в трее.';
+  status='Тема проверена в окне ChatGPT. Следующий запуск — через ярлык «ChatGPT с темой».';
   notify();
  }finally{busy=false;}
 }
 let ticking=false;
 async function tick(){
- if(ticking||!cached)return;ticking=true;
- try{const list=await core.targets();for(const target of list){const state=await core.evaluate(target.webSocketDebuggerUrl,'({stamp:window.__CODEX_THEME_STUDIO__?.stamp,ready:!!document.body})');if(state?.ready&&state.stamp!==cached.stamp){const result=await core.evaluate(target.webSocketDebuggerUrl,cached.expression);if(!result?.installed)throw new Error('Приложение не подтвердило применение темы.');}}}finally{ticking=false;}
+ if(ticking)return;
+ ticking=true;
+ try{return await themeSession.reconcile();}finally{ticking=false;}
 }
 function shQuote(value){return "'"+value.replaceAll("'","'\\''")+"'";}
 async function shortcut(){

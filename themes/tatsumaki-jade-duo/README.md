@@ -1,9 +1,9 @@
 # Тацумаки · Jade Duo
 
-![Палитра и иллюстрация](../../previews/tatsumaki-jade-duo-chat.jpg)
+![Превью темы в чате](../../previews/tatsumaki-jade-duo-chat.jpg)
 
 ID: `tatsumaki-jade-duo`.
 
-[Установка](../../docs/INSTALL-RU.md).
+[Установка](../../docs/CROSS-PLATFORM.md).
 
-Файлы: `theme.json`, `theme.css`, `assets/`. Превью показывает иллюстрацию и палитру, а не снимок приложения.
+Файлы: `theme.json`, `theme.css`, `assets/`. Превью показывает демонстрационный чат с настоящими стилями темы.

@@ -1,8 +1,11 @@
 {
   "name": "zlhrs-theme-studio",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "description": "Cross-platform theme gallery for the ChatGPT desktop app",
-  "author": {"name":"ZLHRS","email":"ZLHRS@users.noreply.github.com"},
+  "author": {
+    "name": "ZLHRS",
+    "email": "ZLHRS@users.noreply.github.com"
+  },
   "homepage": "https://github.com/ZLHRS/codex-anime-themes",
   "license": "UNLICENSED",
   "private": true,
@@ -11,18 +14,59 @@
     "start": "electron .",
     "test": "node --test tests/*.test.cjs",
     "pack": "electron-builder --dir",
-    "dist": "electron-builder --publish never"
+    "dist": "electron-builder --publish never",
+    "test:integration": "node --test tests/session.integration.cjs"
   },
-  "devDependencies": {"electron": "45.2.3", "electron-builder": "26.18.0"},
+  "devDependencies": {
+    "electron": "45.2.3",
+    "electron-builder": "26.18.0"
+  },
   "build": {
     "appId": "com.zlhrs.themestudio",
     "productName": "ZLHRS Theme Studio",
     "artifactName": "ZLHRS-Theme-Studio-${version}-${os}-${arch}.${ext}",
-    "directories": {"output": "dist"},
-    "files": ["desktop/**/*", "catalog.json", "themes/**/*", "previews/*-chat.jpg", "assets/**/*", "launcher/theme-runtime.js", "launcher/composer-overflow.mjs", "launcher/LICENSE"],
-    "win": {"target": ["nsis"], "icon": "assets/studio.ico"},
-    "nsis": {"oneClick": false, "perMachine": false, "allowToChangeInstallationDirectory": true, "createDesktopShortcut": true},
-    "mac": {"target": ["dmg", "zip"], "icon": "assets/studio-logo.png", "category": "public.app-category.utilities", "identity": null},
-    "linux": {"target": ["AppImage", "deb"], "icon": "assets/studio-logo.png", "category": "Utility", "executableName": "zlhrs-theme-studio"}
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "desktop/**/*",
+      "catalog.json",
+      "themes/**/*",
+      "previews/*-chat.jpg",
+      "assets/**/*",
+      "runtime/theme-runtime.js",
+      "runtime/composer-overflow.mjs",
+      "runtime/LICENSE"
+    ],
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "icon": "assets/studio.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true
+    },
+    "mac": {
+      "target": [
+        "dmg",
+        "zip"
+      ],
+      "icon": "assets/studio-logo.png",
+      "category": "public.app-category.utilities",
+      "identity": null
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ],
+      "icon": "assets/studio-logo.png",
+      "category": "Utility",
+      "executableName": "zlhrs-theme-studio"
+    }
   }
 }

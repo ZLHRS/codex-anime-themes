@@ -24,7 +24,7 @@ async function payload(root, id) {
     vars += `--cts-asset-${name}:url("data:${mime};base64,${(await fs.readFile(inside(dir,file))).toString('base64')}");`;
   }
   const css = `:root.codex-theme-studio{${vars}}` + await fs.readFile(inside(dir, theme.css), 'utf8');
-  const helpers = (await fs.readFile(path.join(root,'launcher/composer-overflow.mjs'),'utf8')).replaceAll('export function ','function ');
+  const helpers = (await fs.readFile(path.join(root,'runtime/composer-overflow.mjs'),'utf8')).replaceAll('export function ','function ');
   const stamp = 'pack:' + id + ':' + crypto.createHash('sha256').update(css).digest('hex').slice(0,16).toUpperCase();
   const replacements = {
     __CTS_COMPOSER_OVERFLOW_HELPERS__: `(()=>{${helpers};return {clearComposerSurfaceCompat,createComposerOverflowAnnotator,reconcileComposerSurfaces,selectComposerSurfaces};})()`,
@@ -32,30 +32,46 @@ async function payload(root, id) {
     __CTS_CHROME_JSON__: 'null', __CTS_MOTION_JSON__: '{}',
     __CTS_VERSION_JSON__: '"studio-2.0.0"', __CTS_STAMP_JSON__: JSON.stringify(stamp)
   };
-  const template = await fs.readFile(path.join(root,'launcher/theme-runtime.js'),'utf8');
+  const template = await fs.readFile(path.join(root,'runtime/theme-runtime.js'),'utf8');
   return {stamp, expression: template.replace(/__CTS_[A-Z_]+__/g, key => {
     if (!(key in replacements)) throw new Error('Unknown runtime token');
     return replacements[key];
   })};
 }
 function validTarget(target) {
-  return target.type === 'page' && /^app:\/\/-\/(index|detached-window)\.html(?:[?#]|$)/.test(target.url || '');
+  if(target.type !== 'page')return false;
+  try{const u=new URL(target.url);return u.protocol==='app:'&&u.hostname==='-'&&['/index.html','/detached-window.html'].includes(u.pathname)&&!decodeURIComponent(u.search).includes('avatar-overlay');}catch{return false;}
 }
-async function targets() {
-  const r = await fetch('http://127.0.0.1:9345/json/list', {signal: AbortSignal.timeout(2000)});
-  if (!r.ok) throw new Error('Подключение к ChatGPT недоступно.');
-  const list = await r.json();
-  if (!Array.isArray(list)) throw new Error('Неподдерживаемый ответ приложения.');
-  return list.filter(validTarget);
+const LOOPBACK=['127.0.0.1','[::1]','localhost'];
+let preferredHost='127.0.0.1';
+async function targets(request=fetch) {
+  let connected=false;
+  for(const host of [...new Set([preferredHost,...LOOPBACK])]) {
+    try{
+      const r=await request(`http://${host}:9345/json/list`,{signal:AbortSignal.timeout(1200)});
+      if(!r.ok)continue;
+      const list=await r.json();if(!Array.isArray(list))continue;
+      connected=true;
+      const pages=list.filter(validTarget).map(t=>{
+        const socket=new URL(t.webSocketDebuggerUrl);
+        if(socket.protocol!=='ws:'||!LOOPBACK.includes(socket.hostname)||socket.port!=='9345')throw new Error('Unexpected debugging endpoint');
+        socket.hostname=host;return {...t,webSocketDebuggerUrl:socket.href};
+      });
+      if(pages.length){preferredHost=host;return pages;}
+    }catch{}
+  }
+  if(connected)return [];
+  throw new Error('Не удалось подключиться к ChatGPT. Полностью закройте его и откройте через Theme Studio.');
 }
 function command(url, method, params) {
   const uri = new URL(url);
-  if (uri.protocol !== 'ws:' || uri.hostname !== '127.0.0.1' || uri.port !== '9345') throw new Error('Unexpected debugging endpoint');
+  if (uri.protocol !== 'ws:' || !LOOPBACK.includes(uri.hostname) || uri.port !== '9345') throw new Error('Unexpected debugging endpoint');
   return new Promise((resolve,reject) => {
     const ws = new WebSocket(url); let done = false;
     const finish = (error,value) => {if(done)return;done=true;clearTimeout(timer);ws.close();error?reject(error):resolve(value);};
     const timer = setTimeout(()=>finish(new Error('ChatGPT не отвечает.')),12000);
     ws.addEventListener('error',()=>finish(new Error('Соединение с ChatGPT прервано.')));
+    ws.addEventListener('close',()=>finish(new Error('Окно ChatGPT закрылось.')));
     ws.addEventListener('open',()=>ws.send(JSON.stringify({id:1,method,params})));
     ws.addEventListener('message',event=>{try{const r=JSON.parse(event.data);if(r.id!==1)return;
       if(r.error||r.result?.exceptionDetails)finish(new Error('Не удалось применить тему.'));

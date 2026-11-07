@@ -29,6 +29,12 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm test
+      - name: Real Chromium lifecycle tests
+        if: runner.os != 'Linux'
+        run: npm run test:integration
+      - name: Linux real Chromium lifecycle tests
+        if: runner.os == 'Linux'
+        run: xvfb-run -a npm run test:integration
       - name: Gallery smoke test
         if: runner.os != 'Linux'
         run: npx electron . --smoke-test

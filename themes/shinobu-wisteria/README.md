@@ -1,9 +1,9 @@
 # Шинобу Кочо · Wisteria Veil
 
-![Палитра и иллюстрация](../../previews/shinobu-wisteria-chat.jpg)
+![Превью темы в чате](../../previews/shinobu-wisteria-chat.jpg)
 
 ID: `shinobu-wisteria`.
 
-[Установка](../../docs/INSTALL-RU.md).
+[Установка](../../docs/CROSS-PLATFORM.md).
 
-Файлы: `theme.json`, `theme.css`, `assets/`. Превью показывает иллюстрацию и палитру, а не снимок приложения.
+Файлы: `theme.json`, `theme.css`, `assets/`. Превью показывает демонстрационный чат с настоящими стилями темы.

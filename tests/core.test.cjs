@@ -15,7 +15,7 @@ test('reject traversal and malformed theme IDs',async()=>{
 });
 test('only actual application pages receive themes',()=>{
  for(const url of ['app://-/index.html','app://-/detached-window.html?thread=abc'])assert(core.validTarget({type:'page',url}));
- for(const url of ['https://chatgpt.com','app://-/avatar-overlay.html','app://evil/index.html','app://-/index.html.evil'])assert(!core.validTarget({type:'page',url}));
+ for(const url of ['https://chatgpt.com','app://-/avatar-overlay.html','app://evil/index.html','app://-/index.html.evil','app://-/index.html?initialRoute=%2Favatar-overlay'])assert(!core.validTarget({type:'page',url}));
  assert(!core.validTarget({type:'worker',url:'app://-/index.html'}));
  assert.throws(()=>core.evaluate('ws://attacker.test:9345/','1'));
 });
@@ -28,4 +28,12 @@ test('platform launches pass paths as arguments without shell interpolation',()=
  for(const platform of ['win32','linux']){const s=core.launchSpec(file,platform);assert.equal(s.command,file);assert(s.args.includes('--remote-debugging-port=9345'));}
  const mac=core.launchSpec(path.resolve('ChatGPT.app'),'darwin');assert.equal(mac.command,'/usr/bin/open');assert.equal(mac.args[1],path.resolve('ChatGPT.app'));
  assert.throws(()=>core.launchSpec('relative-path','linux'));
+});
+
+test('IPv6 fallback works when IPv4 is unavailable; never connects to remote endpoints',async()=>{
+ const hosts=[];
+ const request=async url=>{hosts.push(url);if(url.includes('127.0.0.1'))throw Error('ECONNREFUSED');return {ok:true,json:async()=>[{type:'page',url:'app://-/index.html',webSocketDebuggerUrl:'ws://localhost:9345/devtools/page/test'}]};};
+ const found=await core.targets(request);assert.equal(found.length,1);assert.equal(new URL(found[0].webSocketDebuggerUrl).hostname,'[::1]');assert(hosts.some(url=>url.includes('[::1]')));
+ const hostile=async()=>({ok:true,json:async()=>[{type:'page',url:'app://-/index.html',webSocketDebuggerUrl:'ws://attacker.test:9345/devtools/page/test'}]});
+ assert.equal((await core.targets(hostile)).length,0);
 });

@@ -1,9 +1,9 @@
 # Резе · Night Bloom
 
-![Палитра и иллюстрация](../../previews/reze-night-bloom-chat.jpg)
+![Превью темы в чате](../../previews/reze-night-bloom-chat.jpg)
 
 ID: `reze-night-bloom`.
 
-[Установка](../../docs/INSTALL-RU.md).
+[Установка](../../docs/CROSS-PLATFORM.md).
 
-Файлы: `theme.json`, `theme.css`, `assets/`. Превью показывает иллюстрацию и палитру, а не снимок приложения.
+Файлы: `theme.json`, `theme.css`, `assets/`. Превью показывает демонстрационный чат с настоящими стилями темы.
