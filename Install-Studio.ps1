@@ -18,7 +18,11 @@ if($source -ne $dest){
    Copy-Item -LiteralPath $file.FullName -Destination $target -Force
   }
  }
- foreach($f in @('Theme-Selector.ps1','Install-Studio.ps1','START.cmd','ZLHRS Theme Studio.cmd','Open-Studio.ps1','catalog.json','VERSION')){Copy-Item -LiteralPath (Join-Path $source $f) -Destination (Join-Path $dest $f) -Force}
+ foreach($f in @('Theme-Selector.ps1','Install-Studio.ps1','START.cmd','ZLHRS Theme Studio.cmd','Open-Studio.ps1','ZLHRS Theme Studio.exe','catalog.json','VERSION')){
+  $from=Join-Path $source $f;$to=Join-Path $dest $f
+  if((Test-Path -LiteralPath $to) -and ((Get-AssetHash $from) -eq (Get-AssetHash $to))){continue}
+  Copy-Item -LiteralPath $from -Destination $to -Force
+ }
  if(-not(Test-Path (Join-Path $dest '.selected-theme.json')) -and (Test-Path (Join-Path $source '.selected-theme.json'))){Copy-Item -LiteralPath (Join-Path $source '.selected-theme.json') -Destination $dest}
 }
 if($NoShortcuts){Write-Output "Installed: $dest";return}
@@ -30,9 +34,8 @@ foreach($folder in @($shell.SpecialFolders.Item('Desktop'),$shell.SpecialFolders
  foreach($name in @('ChatGPT','ZLHRS Theme Studio')){
   $path=Join-Path $folder ($name+'.lnk')
   if((Test-Path -LiteralPath $path) -and -not(Test-Path -LiteralPath ($path+'.before-theme-studio.bak'))){Copy-Item -LiteralPath $path -Destination ($path+'.before-theme-studio.bak')}
-  $link=$shell.CreateShortcut($path);$link.TargetPath="$env:SystemRoot\System32\WindowsPowerShell\v1.0\powershell.exe"
-  $link.Arguments='-NoProfile -STA -WindowStyle Hidden -ExecutionPolicy Bypass -File "'+(Join-Path $dest 'Theme-Selector.ps1')+'"'
-  if($name -eq 'ChatGPT'){$link.Arguments+=' -Launch'}
+  $link=$shell.CreateShortcut($path);$link.TargetPath=Join-Path $dest 'ZLHRS Theme Studio.exe'
+  $link.Arguments=if($name -eq 'ChatGPT'){'--launch'}else{''}
   $link.WorkingDirectory=$dest;$link.IconLocation=if($name -eq 'ZLHRS Theme Studio'){(Join-Path $dest 'assets/studio.ico')+',0'}else{$icon};$link.Description='ChatGPT с последней выбранной темой — ZLHRS Theme Studio';$link.Save()
  }
 }
