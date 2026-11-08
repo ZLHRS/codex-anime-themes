@@ -1,0 +1,14 @@
+const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs/promises');const path=require('node:path');const {chromium}=require('playwright');const core=require('../desktop/core.cjs');
+test('all themes style home body and utility bar without changing editor behavior',async()=>{
+ const browser=await chromium.launch({headless:true,channel:'msedge'});
+ try{const page=await browser.newPage({viewport:{width:1280,height:800}});const root=path.resolve(__dirname,'..');const catalog=await core.readJson(path.join(root,'catalog.json'));
+ for(const theme of catalog){await page.setContent(`<html><head><style>body{margin:0;font:16px Arial;color:white;background:#151820}.main-surface{height:100vh;isolation:isolate;position:relative}h2{margin:0 0 24px;font-weight:500}.home{position:absolute;top:34%;left:24%;width:620px}[data-composer-body]{background:#343434!important;border-radius:20px;padding:20px}[contenteditable]{min-height:65px;outline:none}.tools{display:flex;justify-content:space-between;font-size:13px}.utility{background:#262626;padding:15px;border-radius:0 0 18px 18px}[data-composer-utility-bar-scroll-area]{background:#262626}button{background:transparent;color:inherit;border:0;padding:5px}</style></head><body><main class="main-surface" data-app-shell-main-surface><div class="home" data-home-feed-composer><h2>Над чем поработаем?</h2><div data-codex-composer-root><div data-composer-layout="multiline" data-composer-surface-variant="default" data-composer-utility-bar-variant="home"><div data-composer-body><div data-codex-composer contenteditable="true" role="textbox" aria-label="Сообщение"></div><div class="tools"><button>＋</button><span>GPT　⌄　 ♩</span></div></div><div class="utility"><div data-composer-utility-bar-scroll-area><button>Проект</button>　<button>Файлы</button>　<button>Плагины</button></div></div></div></div></div></main></body></html>`);
+ await page.evaluate((await core.payload(root,theme.id)).expression);
+ await page.waitForSelector('.composer-surface-chrome');
+ const styles=await page.evaluate(()=>{const body=document.querySelector('[data-composer-body]');const utility=document.querySelector('[data-composer-utility-bar-scroll-area]');return {body:getComputedStyle(body).backgroundImage,utility:getComputedStyle(utility).backgroundColor,parent:getComputedStyle(utility.parentElement).backgroundColor,pointer:getComputedStyle(body).pointerEvents};});
+ assert.match(styles.body,/linear-gradient/,theme.id);assert.notEqual(styles.utility,'rgb(38, 38, 38)',theme.id);assert.equal(styles.utility,styles.parent,theme.id);assert.notEqual(styles.pointer,'none');
+ await page.getByRole('textbox').fill('Проверка ввода');assert.equal(await page.getByRole('textbox').innerText(),'Проверка ввода');
+ if(theme.id==='azure-morpho'){await page.getByRole('textbox').fill('');await page.screenshot({path:path.join(root,'docs/home-composer-themed.png')});}
+ }
+ }finally{await browser.close();}
+});

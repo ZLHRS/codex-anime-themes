@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 2,
+  "id": "ivory-midnight-frame",
+  "name": "Ivory · Midnight Frame",
+  "description": "Тёплая слоновая кость, графитовые панели и мягкие лавандовые акценты.",
+  "version": "1.0.0",
+  "author": "ZLHRS",
+  "appearance": "dark",
+  "license": "personal-use",
+  "category": "anime",
+  "tags": [
+    "anime",
+    "dark",
+    "landscape",
+    "ivory"
+  ],
+  "colors": {
+    "accent": "#d5b7a1",
+    "light": "#b7b8e3"
+  },
+  "strings": {},
+  "assets": {
+    "portrait": "assets/wallpaper.webp",
+    "charm": "assets/charm.svg"
+  },
+  "css": "theme.css"
+}

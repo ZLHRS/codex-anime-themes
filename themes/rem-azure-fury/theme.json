@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 2,
+  "id": "rem-azure-fury",
+  "name": "Рем · Azure Fury",
+  "description": "Голубое сияние, стальные цепи и розовый акцент.",
+  "version": "1.0.0",
+  "author": "ZLHRS",
+  "appearance": "dark",
+  "license": "personal-use",
+  "category": "anime",
+  "tags": [
+    "anime",
+    "dark",
+    "landscape",
+    "geometry"
+  ],
+  "colors": {
+    "accent": "#70c9ee",
+    "light": "#f0a5cc"
+  },
+  "strings": {},
+  "assets": {
+    "portrait": "assets/wallpaper.webp",
+    "charm": "assets/charm.svg"
+  },
+  "css": "theme.css"
+}

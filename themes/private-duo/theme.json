@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 2,
+  "id": "private-duo",
+  "name": "Silver Edge",
+  "description": "Изображение справа, мягкие серебристые акценты и тёмные панели.",
+  "version": "1.1.0",
+  "author": "ZLHRS",
+  "appearance": "dark",
+  "license": "personal-use",
+  "category": "anime",
+  "tags": [
+    "dark",
+    "silver",
+    "portrait"
+  ],
+  "colors": {
+    "accent": "#b9b4cf",
+    "light": "#d8e4f5"
+  },
+  "strings": {},
+  "assets": {
+    "portrait": "assets/left.webp",
+    "charm": "assets/charm.svg"
+  },
+  "css": "theme.css"
+}

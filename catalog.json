@@ -83,5 +83,45 @@
     "id": "kana-ruby-spotlight",
     "name": "Кана · Рубиновый свет",
     "path": "themes/kana-ruby-spotlight"
+  },
+  {
+    "id": "ai-prismatic-gaze",
+    "name": "Ай Хосино · Prismatic Gaze",
+    "path": "themes/ai-prismatic-gaze"
+  },
+  {
+    "id": "rem-azure-fury",
+    "name": "Рем · Azure Fury",
+    "path": "themes/rem-azure-fury"
+  },
+  {
+    "id": "rem-butterfly-dream",
+    "name": "Рем · Butterfly Dream",
+    "path": "themes/rem-butterfly-dream"
+  },
+  {
+    "id": "silver-azure-bloom",
+    "name": "Silver · Azure Bloom",
+    "path": "themes/silver-azure-bloom"
+  },
+  {
+    "id": "furina-silver-slumber",
+    "name": "Фурина · Silver Slumber",
+    "path": "themes/furina-silver-slumber"
+  },
+  {
+    "id": "crimson-heart-duo",
+    "name": "Crimson · Heart Duo",
+    "path": "themes/crimson-heart-duo"
+  },
+  {
+    "id": "ivory-midnight-frame",
+    "name": "Ivory · Midnight Frame",
+    "path": "themes/ivory-midnight-frame"
+  },
+  {
+    "id": "private-duo",
+    "name": "Silver Edge",
+    "path": "themes/private-duo"
   }
 ]

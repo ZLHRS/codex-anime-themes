@@ -2,21 +2,21 @@
 
 <img src="assets/studio-logo.png" width="128" alt="Логотип ZLHRS Theme Studio">
 
-Одно приложение для выбора 17 тем ChatGPT на **Windows, macOS и Linux**. Превью чата, поиск, запоминание последней темы и отдельный ярлык запуска ChatGPT.
+Одно приложение для выбора 25 тем ChatGPT на **Windows, macOS и Linux**. Превью чата, поиск, запоминание последней темы и отдельный ярлык запуска ChatGPT.
 
 ## Скачать готовое приложение
 
 **Для обычного использования клонировать репозиторий не нужно.** Скачайте готовую сборку для своей системы. Git, Node.js и Codex App Manager для её запуска не нужны. Совместимый ChatGPT должен быть установлен отдельно.
 
-Прямые ссылки на **версию 2.5.4**:
+Прямые ссылки на **версию 2.5.5**:
 
 | Система | Скачать | Как запустить |
 | --- | --- | --- |
-| **Windows x64** | [Готовая папка ZIP](https://github.com/ZLHRS/codex-anime-themes/releases/download/v2.5.4/ZLHRS-Theme-Studio-2.5.4-win-x64-portable.zip) | Распакуйте всю папку и откройте **ZLHRS Theme Studio.exe**. Установка не нужна. |
-| **Mac — Apple Silicon (M1/M2/M3/M4 и новее)** | [ZIP для Apple Silicon](https://github.com/ZLHRS/codex-anime-themes/releases/download/v2.5.4/ZLHRS-Theme-Studio-2.5.4-mac-arm64.zip) | Распакуйте архив, перенесите **ZLHRS Theme Studio.app** в «Программы» и откройте. |
-| **Mac — Intel** | [ZIP для Intel](https://github.com/ZLHRS/codex-anime-themes/releases/download/v2.5.4/ZLHRS-Theme-Studio-2.5.4-mac-x64.zip) | Распакуйте архив, перенесите **ZLHRS Theme Studio.app** в «Программы» и откройте. |
-| **Linux x64 — без установки** | [AppImage](https://github.com/ZLHRS/codex-anime-themes/releases/download/v2.5.4/ZLHRS-Theme-Studio-2.5.4-linux-x86_64.AppImage) | В свойствах файла разрешите выполнение как программы, затем запустите его. |
-| **Linux x64 — Debian/Ubuntu** | [Пакет DEB](https://github.com/ZLHRS/codex-anime-themes/releases/download/v2.5.4/ZLHRS-Theme-Studio-2.5.4-linux-amd64.deb) | Установите пакет через менеджер приложений и откройте Studio. |
+| **Windows x64** | [Готовая папка ZIP](https://github.com/ZLHRS/codex-anime-themes/releases/download/v2.5.5/ZLHRS-Theme-Studio-2.5.5-win-x64-portable.zip) | Распакуйте всю папку и откройте **ZLHRS Theme Studio.exe**. Установка не нужна. |
+| **Mac — Apple Silicon (M1/M2/M3/M4 и новее)** | [ZIP для Apple Silicon](https://github.com/ZLHRS/codex-anime-themes/releases/download/v2.5.5/ZLHRS-Theme-Studio-2.5.5-mac-arm64.zip) | Распакуйте архив, перенесите **ZLHRS Theme Studio.app** в «Программы» и откройте. |
+| **Mac — Intel** | [ZIP для Intel](https://github.com/ZLHRS/codex-anime-themes/releases/download/v2.5.5/ZLHRS-Theme-Studio-2.5.5-mac-x64.zip) | Распакуйте архив, перенесите **ZLHRS Theme Studio.app** в «Программы» и откройте. |
+| **Linux x64 — без установки** | [AppImage](https://github.com/ZLHRS/codex-anime-themes/releases/download/v2.5.5/ZLHRS-Theme-Studio-2.5.5-linux-x86_64.AppImage) | В свойствах файла разрешите выполнение как программы, затем запустите его. |
+| **Linux x64 — Debian/Ubuntu** | [Пакет DEB](https://github.com/ZLHRS/codex-anime-themes/releases/download/v2.5.5/ZLHRS-Theme-Studio-2.5.5-linux-amd64.deb) | Установите пакет через менеджер приложений и откройте Studio. |
 
 **Windows ZIP предназначен только для Windows.** Для Mac и Linux используйте соответствующие ссылки. Тип процессора Mac можно посмотреть в меню Apple → «Об этом Mac».
 
@@ -53,11 +53,11 @@
 
 Во вкладке «Инструкция» внутри приложения доступны короткие шаги настройки.
 
-## Настройки оформления (2.5.4)
+## Настройки оформления (2.5.5)
 
 В разделе «Настроить выбранную тему» доступны яркость, размер и положение картинки по горизонтали и вертикали. Нажмите **«Применить настройки»**: значения сохранятся отдельно для выбранной темы и восстановятся после перезапуска. **«Сбросить настройки этой темы»** вернёт исходное оформление только для неё. В теме с двумя персонажами обе картинки настраиваются вместе.
 
-У каждой темы свой декоративный эффект: лунный свет, бабочки, цветы, водяные блики, кольца энергии или подсветка деталей. Переключатель **«Анимации»** оставляет эффекты неподвижными; **«Декоративные эффекты»** полностью отключает добавленные украшения. Системная настройка уменьшения движения также учитывается. Настройки включены в готовые сборки 2.5.4.
+У каждой темы свой декоративный эффект: лунный свет, бабочки, цветы, водяные блики, кольца энергии или подсветка деталей. Переключатель **«Анимации»** оставляет эффекты неподвижными; **«Декоративные эффекты»** полностью отключает добавленные украшения. Системная настройка уменьшения движения также учитывается. Настройки включены в готовые сборки 2.5.5.
 
 ## Готовая сборка или исходники — в чём разница
 
@@ -87,49 +87,113 @@ npm run dist             # сборка для текущей системы в 
 
 ## Каталог
 
-Превью показывают демонстрационный чат с настоящими стилями и изображениями каждой темы: фон, расположение персонажей, сообщения и поле ввода. Личная переписка не используется. Вид в приложении зависит от размера окна и версии интерфейса. В Theme Studio нажмите на превью, чтобы открыть его крупнее.
+25 тем включены в готовые сборки. Превью используют демонстрационный чат.
 
-| [Ай Хосино · Bunny Refrain](themes/ai-bunny-refrain) | [Ай Хосино · Starlit Encore](themes/ai-starlit-encore) |
-| --- | --- |
-| ![preview](previews/ai-bunny-refrain-chat.jpg) | ![preview](previews/ai-starlit-encore-chat.jpg) |
+### Ай Хосино · Bunny Refrain
 
-| [Azure Morpho](themes/azure-morpho) | [Фурина · Blue Cat Nocturne](themes/blue-cat-nocturne) |
-| --- | --- |
-| ![preview](previews/azure-morpho-chat.jpg) | ![preview](previews/blue-cat-nocturne-chat.jpg) |
+![Ай Хосино · Bunny Refrain](previews/ai-bunny-refrain-chat.jpg)
 
-| [C.C. · Mint Contract](themes/cc-mint-contract) | [Фубуки · Velvet Reflection](themes/fubuki-velvet) |
-| --- | --- |
-| ![preview](previews/cc-mint-contract-chat.jpg) | ![preview](previews/fubuki-velvet-chat.jpg) |
+### Ай Хосино · Starlit Encore
 
-| [Фурина · Moonlit Repose](themes/furina-moonlit-repose) |
-| --- |
-| ![preview](previews/furina-moonlit-repose-chat.jpg) |
+![Ай Хосино · Starlit Encore](previews/ai-starlit-encore-chat.jpg)
 
-| [Ху Тао × Фурина · Красный и синий](themes/hu-tao-furina-duality) | [Резе · Night Bloom](themes/reze-night-bloom) |
-| --- | --- |
-| ![preview](previews/hu-tao-furina-duality-chat.jpg) | ![preview](previews/reze-night-bloom-chat.jpg) |
+### Azure Morpho
 
-| [Шинобу Кочо · Wisteria Veil](themes/shinobu-wisteria) | [Sora · Silver Ribbon](themes/sora-ribbon) |
-| --- | --- |
-| ![preview](previews/shinobu-wisteria-chat.jpg) | ![preview](previews/sora-ribbon-chat.jpg) |
+![Azure Morpho](previews/azure-morpho-chat.jpg)
 
-| [Сильфи · Moonstone Atelier](themes/sylphie-moonstone) | [Татсумаки · Jade Orbit](themes/tatsumaki-jade) |
-| --- | --- |
-| ![preview](previews/sylphie-moonstone-chat.jpg) | ![preview](previews/tatsumaki-jade-chat.jpg) |
+### Фурина · Blue Cat Nocturne
 
-| [Тацумаки · Jade Duo](themes/tatsumaki-jade-duo) | [Zero Two · Darling Rose](themes/zero-two-rose) |
-| --- | --- |
-| ![preview](previews/tatsumaki-jade-duo-chat.jpg) | ![preview](previews/zero-two-rose-chat.jpg) |
+![Фурина · Blue Cat Nocturne](previews/blue-cat-nocturne-chat.jpg)
 
-| [Кана · Тёплый гранат](themes/kana-soft-garnet) | [Кана · Рубиновый свет](themes/kana-ruby-spotlight) |
-| --- | --- |
-| ![preview](previews/kana-soft-garnet-chat.jpg) | ![preview](previews/kana-ruby-spotlight-chat.jpg) |
+### C.C. · Mint Contract
+
+![C.C. · Mint Contract](previews/cc-mint-contract-chat.jpg)
+
+### Фубуки · Velvet Reflection
+
+![Фубуки · Velvet Reflection](previews/fubuki-velvet-chat.jpg)
+
+### Фурина · Moonlit Repose
+
+![Фурина · Moonlit Repose](previews/furina-moonlit-repose-chat.jpg)
+
+### Ху Тао × Фурина · Красный и синий
+
+![Ху Тао × Фурина · Красный и синий](previews/hu-tao-furina-duality-chat.jpg)
+
+### Резе · Night Bloom
+
+![Резе · Night Bloom](previews/reze-night-bloom-chat.jpg)
+
+### Шинобу Кочо · Wisteria Veil
+
+![Шинобу Кочо · Wisteria Veil](previews/shinobu-wisteria-chat.jpg)
+
+### Sora · Silver Ribbon
+
+![Sora · Silver Ribbon](previews/sora-ribbon-chat.jpg)
+
+### Сильфи · Moonstone Atelier
+
+![Сильфи · Moonstone Atelier](previews/sylphie-moonstone-chat.jpg)
+
+### Татсумаки · Jade Orbit
+
+![Татсумаки · Jade Orbit](previews/tatsumaki-jade-chat.jpg)
+
+### Тацумаки · Jade Duo
+
+![Тацумаки · Jade Duo](previews/tatsumaki-jade-duo-chat.jpg)
+
+### Zero Two · Darling Rose
+
+![Zero Two · Darling Rose](previews/zero-two-rose-chat.jpg)
+
+### Кана · Тёплый гранат
+
+![Кана · Тёплый гранат](previews/kana-soft-garnet-chat.jpg)
+
+### Кана · Рубиновый свет
+
+![Кана · Рубиновый свет](previews/kana-ruby-spotlight-chat.jpg)
+
+### Ай Хосино · Prismatic Gaze
+
+![Ай Хосино · Prismatic Gaze](previews/ai-prismatic-gaze-chat.jpg)
+
+### Рем · Azure Fury
+
+![Рем · Azure Fury](previews/rem-azure-fury-chat.jpg)
+
+### Рем · Butterfly Dream
+
+![Рем · Butterfly Dream](previews/rem-butterfly-dream-chat.jpg)
+
+### Silver · Azure Bloom
+
+![Silver · Azure Bloom](previews/silver-azure-bloom-chat.jpg)
+
+### Фурина · Silver Slumber
+
+![Фурина · Silver Slumber](previews/furina-silver-slumber-chat.jpg)
+
+### Crimson · Heart Duo
+
+![Crimson · Heart Duo](previews/crimson-heart-duo-chat.jpg)
+
+### Ivory · Midnight Frame
+
+![Ivory · Midnight Frame](previews/ivory-midnight-frame-chat.jpg)
+
+### Silver Edge
+
+![Silver Edge](previews/private-duo-chat.jpg)
 
 ## Структура
 
 - `desktop/` — приложение, запуск, применение тем и обновление.
 - `runtime/` — runtime оформления и его лицензия.
-- `themes/` — 17 тем; `previews/` — по одному превью каждой темы.
+- `themes/` — 25 тем; `previews/` — по одному превью каждой темы.
 - `assets/` — логотип и иконка.
 - `tests/` — сценарные и интеграционные проверки.
 - `scripts/` — инструменты сборки и создания превью.
@@ -151,4 +215,8 @@ npm run dist             # сборка для текущей системы в 
 
 Обновляйтесь кнопкой **«Подтянуть изменения»**: приложение обновится в своей текущей папке, прежние ярлыки продолжат работать. При каждом запуске Studio автоматически обновляет ярлыки **ZLHRS Theme Studio** и **ChatGPT с темой**, не создавая копий с номерами версий. Если вы вручную распаковали программу в другую папку, один раз откройте её оттуда — прежние ярлыки на рабочем столе будут исправлены автоматически.
 
-**Переход со старых версий Windows (до 2.5.3 включительно):** если кнопка скачала обновление и Studio закрылась, но не обновилась, скачайте свежий ZIP и распакуйте его с заменой файлов в ту же папку программы. Ярлыки и настройки сохранятся. Начиная с 2.5.4 исправлен независимый запуск помощника обновления.
+**Переход со старых версий Windows (до 2.5.3 включительно):** если кнопка скачала обновление и Studio закрылась, но не обновилась, скачайте свежий ZIP и распакуйте его с заменой файлов в ту же папку программы. Ярлыки и настройки сохранятся. Начиная с 2.5.5 исправлен независимый запуск помощника обновления.
+
+### Обновление списка тем
+
+«Обновить список тем» перечитывает текущий каталог. «Подтянуть изменения» всегда проверяет готовый выпуск на GitHub, включая локальные копии с подключённым проектом.

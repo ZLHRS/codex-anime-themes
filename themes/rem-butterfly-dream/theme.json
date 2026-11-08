@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 2,
+  "id": "rem-butterfly-dream",
+  "name": "Рем · Butterfly Dream",
+  "description": "Тихий сон среди ледяных бабочек и мягкого света.",
+  "version": "1.0.0",
+  "author": "ZLHRS",
+  "appearance": "dark",
+  "license": "personal-use",
+  "category": "anime",
+  "tags": [
+    "anime",
+    "dark",
+    "landscape",
+    "butterfly"
+  ],
+  "colors": {
+    "accent": "#8bcce9",
+    "light": "#b7eefa"
+  },
+  "strings": {},
+  "assets": {
+    "portrait": "assets/wallpaper.webp",
+    "charm": "assets/charm.svg"
+  },
+  "css": "theme.css"
+}

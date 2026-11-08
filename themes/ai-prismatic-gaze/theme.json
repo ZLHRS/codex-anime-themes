@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 2,
+  "id": "ai-prismatic-gaze",
+  "name": "Ай Хосино · Prismatic Gaze",
+  "description": "Звёздный взгляд, индиго и неоновые блики.",
+  "version": "1.0.0",
+  "author": "ZLHRS",
+  "appearance": "dark",
+  "license": "personal-use",
+  "category": "anime",
+  "tags": [
+    "anime",
+    "dark",
+    "landscape",
+    "stars"
+  ],
+  "colors": {
+    "accent": "#b9a0ff",
+    "light": "#88edf2"
+  },
+  "strings": {},
+  "assets": {
+    "portrait": "assets/wallpaper.webp",
+    "charm": "assets/charm.svg"
+  },
+  "css": "theme.css"
+}

@@ -29,6 +29,31 @@
     selectComposerSurfaces,
   } = __CTS_COMPOSER_OVERFLOW_HELPERS__;
   const RUNTIME_CSS = `
+/* Home composers paint their body separately from the shared outer shell.
+   Use semantic attributes; CSS-module class hashes change between releases. */
+html.codex-theme-studio .composer-surface-chrome[data-composer-surface-variant] {
+  --composer-layout-surface-background: var(--surface, #202632) !important;
+  --color-background-composer-surface: var(--surface, #202632);
+  --color-surface-elevated-secondary: var(--surface, #202632);
+  --color-surface-secondary: var(--night, #131923);
+  --color-text-primary: var(--ink, #eef2fa);
+  --color-text-secondary: color-mix(in srgb, var(--ink, #eef2fa) 72%, transparent);
+}
+html.codex-theme-studio .composer-surface-chrome[data-composer-utility-bar-variant="home"] [data-composer-body] {
+  background: linear-gradient(115deg,var(--surface, #202632),var(--night, #131923)) !important;
+  color: var(--ink, #eef2fa);
+  border: 1px solid var(--line, #53657a) !important;
+}
+html.codex-theme-studio .composer-surface-chrome[data-composer-utility-bar-variant="home"]:focus-within [data-composer-body] {
+  border-color: var(--accent, #aabbee) !important;
+}
+html.codex-theme-studio .composer-surface-chrome [data-composer-utility-bar-scroll-area],
+html.codex-theme-studio .composer-surface-chrome :has(> [data-composer-utility-bar-scroll-area]) {
+  background: var(--surface, #202632) !important;
+  color: var(--ink, #eef2fa);
+  border-color: var(--line, #53657a) !important;
+}
+
 /* The footer fade is a sibling of the composer, inside a sticky spacer.
    Hide only its decorative paint; retain the spacer and transcript scrolling. */
 html.codex-theme-studio .thread-scroll-container [aria-hidden="true"].pointer-events-none.sticky > .pointer-events-none.absolute {

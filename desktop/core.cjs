@@ -11,9 +11,9 @@ function inside(root, relative) {
   if (!result.startsWith(path.resolve(root) + path.sep)) throw new Error('Invalid theme asset path');
   return result;
 }
-async function payload(root, id, appearance) {
+async function payload(root, id, appearance, themeRoot=root) {
   if (!/^[a-z0-9][a-z0-9-]{0,63}$/.test(id)) throw new Error('Invalid theme ID');
-  const dir = path.join(root, 'themes', id);
+  const dir = path.join(themeRoot, 'themes', id);
   const theme = await readJson(path.join(dir, 'theme.json'));
   if (theme.id !== id) throw new Error('Theme ID mismatch');
   let vars = '';

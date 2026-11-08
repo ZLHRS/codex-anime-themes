@@ -21,3 +21,5 @@ for(const key of [...appearanceKeys,'animations','effects'])$(key).oninput=()=>{
 async function saveAppearance(value){if(pending)return;await runAction(async()=>{const next=await window.studio.appearance(state.selected,value);appearanceDirty=false;return next;},'Сохраняем настройки темы…');}
 $('save-appearance').onclick=()=>saveAppearance(readAppearance());
 $('reset-appearance').onclick=()=>saveAppearance({brightness:100,size:100,x:0,y:0,animations:true,effects:true});
+
+$('refresh').onclick=()=>runAction(async()=>{const next=await window.studio.refresh();$('search').value='';onlyActive=false;$('all').classList.add('selected');$('active').classList.remove('selected');return next;},'Обновляем список тем…');

@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 2,
+  "id": "silver-azure-bloom",
+  "name": "Silver · Azure Bloom",
+  "description": "Серебряные волосы, белые цветы и сияние сапфирового глаза.",
+  "version": "1.0.2",
+  "author": "ZLHRS",
+  "appearance": "dark",
+  "license": "personal-use",
+  "category": "anime",
+  "tags": [
+    "anime",
+    "dark",
+    "landscape",
+    "flowers"
+  ],
+  "colors": {
+    "accent": "#b9cbe7",
+    "light": "#81b9ff"
+  },
+  "strings": {},
+  "assets": {
+    "portrait": "assets/wallpaper-4k.webp",
+    "charm": "assets/charm.svg"
+  },
+  "css": "theme.css"
+}

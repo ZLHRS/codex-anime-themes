@@ -5,6 +5,13 @@ function normalize(value={}){
  return {brightness:number('brightness',40,180),size:number('size',60,160),x:number('x',-40,40),y:number('y',-40,40),animations:typeof v.animations==='boolean'?v.animations:true,effects:typeof v.effects==='boolean'?v.effects:true};
 }
 const designs={
+ 'ivory-midnight-frame':['Мягкое бежево-лавандовое свечение','geometry','#d5b7a1'],
+ 'crimson-heart-duo':['Розовые сердца и рубиновое свечение','hearts','#df96ae'],
+ 'furina-silver-slumber':['Спокойный сон, серебристые пряди и мягкие бирюзовые блики.','moon-dust','#a8c6ed'],
+ 'silver-azure-bloom':['Серебряные волосы, белые цветы и сияние сапфирового глаза.','flowers','#b9cbe7'],
+ 'rem-butterfly-dream':['Тихий сон среди ледяных бабочек и мягкого света.','butterfly','#8bcce9'],
+ 'rem-azure-fury':['Голубое сияние, стальные цепи и розовый акцент.','geometry','#70c9ee'],
+ 'ai-prismatic-gaze':['Звёздный взгляд, индиго и неоновые блики.','stars','#b9a0ff'],
  'kana-soft-garnet':['Тёплые лепестки','petals','#d6a0a8'],
  'kana-ruby-spotlight':['Рубиновые звёзды','stars','#f69bb9'],
  'ai-bunny-refrain':['Мягкий свет ушек','bunny','#cda2ea'],
@@ -21,20 +28,21 @@ const designs={
  'sylphie-moonstone':['Перламутровые границы','pearl','#d9c6e6'],
  'tatsumaki-jade':['Кольца энергии','rings','#8bdcb1'],
  'tatsumaki-jade-duo':['Общее зелёное свечение','duo','#8bdcb1'],
+ 'private-duo':['Серебристое свечение','moon','#b9b4cf'],
  'zero-two-rose':['Подсветка рожек и лепестки','petals','#e5a3be']
 };
 function ornament(kind,color){
  const star='<path d="M35 14 39 29 54 33 39 37 35 52 31 37 16 33 31 29Z"/>';
  const butterfly='<path d="M42 42C4 1 3 58 40 48C9 82 49 78 42 47C74 79 91 47 47 45C90 12 42 1 44 41Z"/>';
  const flower='<g transform="translate(45 45)">'+[0,72,144,216,288].map(a=>`<ellipse cx="0" cy="-13" rx="8" ry="17" transform="rotate(${a})"/>`).join('')+'<circle r="5" fill="none" stroke="currentColor"/></g>';
- const shapes={stars:star,butterfly,geometry:'<path d="M8 45 45 8 82 45 45 82Z M25 45 45 25 65 45 45 65Z" fill="none" stroke="currentColor"/>',flowers:flower,wisteria:'<path d="M12 0Q65 25 44 90" fill="none" stroke="currentColor"/>'+[15,30,45,60].map(y=>`<ellipse cx="46" cy="${y}" rx="7" ry="12" transform="rotate(25 46 ${y})"/>`).join(''),ribbon:'<path d="M6 14Q55 15 64 45T84 90L66 84Q40 58 47 43T6 28Z"/>',petals:'<path d="M26 19Q65 17 55 60Q23 53 26 19Z"/><path d="M70 70Q90 64 84 88Q64 92 70 70Z"/>','moon-dust':star};
+ const shapes={hearts:'<path d="M45 76 15 46C-4 20 28 4 45 25 62 4 94 20 75 46Z"/>',stars:star,butterfly,geometry:'<path d="M8 45 45 8 82 45 45 82Z M25 45 45 25 65 45 45 65Z" fill="none" stroke="currentColor"/>',flowers:flower,wisteria:'<path d="M12 0Q65 25 44 90" fill="none" stroke="currentColor"/>'+[15,30,45,60].map(y=>`<ellipse cx="46" cy="${y}" rx="7" ry="12" transform="rotate(25 46 ${y})"/>`).join(''),ribbon:'<path d="M6 14Q55 15 64 45T84 90L66 84Q40 58 47 43T6 28Z"/>',petals:'<path d="M26 19Q65 17 55 60Q23 53 26 19Z"/><path d="M70 70Q90 64 84 88Q64 92 70 70Z"/>','moon-dust':star};
  const body=shapes[kind]||'';
  return body?'url("data:image/svg+xml,'+encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="120" height="150" viewBox="0 0 120 150" color="${color}" fill="${color}">${body}</svg>`)+'")':'none';
 }
 function compose(id,value){
  const a=normalize(value);const [label,kind,color]=designs[id]||['Мягкое свечение','moon','#aabbee'];
  const selector='html.codex-theme-studio .main-surface:not(.main-surface .main-surface)';
- const portraits=selector+'::before'+(id==='tatsumaki-jade-duo'?','+selector+'::after':'');
+ const portraits=selector+'::before'+(['tatsumaki-jade-duo','crimson-heart-duo','private-duo'].includes(id)?','+selector+'::after':'');
  const portraitCss=`
 ${portraits}{filter:brightness(${a.brightness/100})!important;scale:${a.size/100}!important;translate:${a.x}vw ${a.y}vh!important;}
 `;

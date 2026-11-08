@@ -1,7 +1,7 @@
 const {app,BrowserWindow,ipcMain,dialog,Tray,Menu,shell,nativeImage} = require('electron');
 const fs=require('node:fs/promises');
 const path=require('node:path');
-const {pathToFileURL}=require('node:url');
+const localThemes=require('./local-themes.cjs');
 const core=require('./core.cjs');
 const updates=require('./updates.cjs');
 const appearance=require('./appearance.cjs');
@@ -9,6 +9,7 @@ const {ThemeSession}=require('./theme-session.cjs');
 const {spawn}=require('node:child_process');
 const root=path.resolve(__dirname,'..');
 const themeSession=new ThemeSession(root);
+let themeRoot=root;
 let window,tray,settings={},settingsFile,catalog=[],timer,busy=false,cached,status='Выберите тему — она сохранится для следующих запусков.',quitting=false,lastShortcut='',updating=false;
 const smoke=process.argv.includes('--smoke-test');
 if(smoke){const temp=path.join(app.getPath('temp'),'zlhrs-smoke-'+process.pid);app.setPath('userData',temp);require('node:fs').mkdirSync(path.join(temp,'Desktop'),{recursive:true});app.setPath('desktop',path.join(temp,'Desktop'));}
@@ -37,15 +38,32 @@ function createWindow(){
  window.loadFile(path.join(__dirname,'index.html'));
  return window;
 }
+async function readCatalog(){return localThemes.readCatalog(themeRoot);}
+async function refreshThemes(){
+ if(busy||updating)throw new Error('Дождитесь завершения текущего действия.');
+ busy=true;
+ try{
+  const next=await readCatalog();
+  const selected=next.some(t=>t.id===settings.theme)?settings.theme:next[0].id;
+  const nextSettings={...settings,theme:selected};
+  const nextPayload=await core.payload(root,selected,settings.appearance?.[selected],themeRoot);
+  await core.saveSettings(settingsFile,nextSettings);
+  catalog=next;settings=nextSettings;
+  if(cached){cached={id:selected,...nextPayload};themeSession.current=cached;}
+  status='Список обновлён: '+catalog.length+' тем.'+(themeRoot!==root?' Темы загружены из локального проекта.':'');
+  notify();return snapshot();
+ }finally{busy=false;}
+}
 async function init(){
+ themeRoot=await localThemes.resolveSource(path.join(app.isPackaged?process.resourcesPath:root,'theme-source.json'),root);
+ themeSession.themeRoot=themeRoot;
  settingsFile=path.join(app.getPath('userData'),'settings.json');
  const updateResult=path.join(app.getPath('userData'),'update-result.txt');
  try{status=await fs.readFile(updateResult,'utf8');await fs.unlink(updateResult);}catch{}
  try{settings=await core.readJson(settingsFile);}catch{}
  if(Number.isInteger(settings.debugPort)&&settings.debugPort>=9345&&settings.debugPort<=9445)core.setDebugPort(settings.debugPort);
  if(!settings.theme&&process.platform==='win32')try{settings.theme=(await core.readJson(path.join(process.env.LOCALAPPDATA,'ZLHRS/ThemeStudio/.selected-theme.json'))).theme;}catch{}
- catalog=await core.readJson(path.join(root,'catalog.json'));
- catalog=await Promise.all(catalog.map(async t=>({...await core.readJson(path.join(root,'themes',t.id,'theme.json')),preview:pathToFileURL(path.join(root,'previews',t.id+'-chat.jpg')).href})));
+ catalog=await readCatalog();
  if(!catalog.some(t=>t.id===settings.theme))settings.theme=catalog[0].id;
  if(!await core.exists(settings.appPath))settings.appPath=await core.discover();
  const {session}=require('electron');session.defaultSession.setPermissionRequestHandler((_wc,_p,callback)=>callback(false));
@@ -71,6 +89,7 @@ async function init(){
  ipcMain.handle('studio:shortcut',async()=>{try{lastShortcut=await shortcut();status='Готово: «ChatGPT с темой» на рабочем столе. Нажмите «Показать ярлык», чтобы его найти.';}catch(e){status='Не удалось создать ярлык: '+e.message;}notify();return snapshot();});
  ipcMain.handle('studio:reveal',()=>{if(lastShortcut)shell.showItemInFolder(lastShortcut);});
  ipcMain.handle('studio:update',async()=>{try{await updateApp();}catch(e){updating=false;report(e);}return snapshot();});
+ ipcMain.handle('studio:refresh',refreshThemes);
  ipcMain.handle('studio:quit',()=>app.quit());
  if(smoke){
   let launches=0,focuses=0;
@@ -92,6 +111,7 @@ async function init(){
    if(process.platform==='win32'&&shell.readShortcutLink(studioShortcut).target!==process.execPath)throw new Error('Stale Studio shortcut not repaired');
    await w.webContents.executeJavaScript('window.studio.launch()');
    if(launches!==1||focuses!==1)throw new Error('Launch must raise already running ChatGPT');
+   await w.webContents.executeJavaScript("(async()=>{const before=await window.studio.state();document.getElementById('search').value='no-match';await document.getElementById('refresh').onclick();const after=await window.studio.state();if(after.selected!==before.selected||document.querySelectorAll('.card').length!==after.themes.length)throw Error('Catalog refresh failed');})()");
    const original=settings.theme;
    await w.webContents.executeJavaScript(`(async()=>{const slider=document.getElementById('brightness');slider.value='137';slider.dispatchEvent(new Event('input'));document.getElementById('animations').checked=false;await document.getElementById('save-appearance').onclick();if((await window.studio.state()).appearance.brightness!==137)throw Error('Appearance controls failed');})()`);
    if(settings.appearance[original].brightness!==137||settings.appearance[original].animations!==false)throw new Error('Appearance settings were not saved');
