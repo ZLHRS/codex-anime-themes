@@ -110,7 +110,7 @@ html.codex-theme-studio .composer-surface-chrome {
 html.codex-theme-studio .composer-surface-chrome:focus-within { border-color: var(--accent) !important; }
 html.codex-theme-studio .composer-surface-chrome button[data-cts-composer-action="send"]:enabled { background: var(--accent) !important; color: var(--night) !important; }
 
-/* Original artwork is retained byte-for-byte; only its display is rotated. */
+/* Enhanced artwork fills the chat; orientation is controlled by CSS. */
 html.codex-theme-studio {
  --accent:#ee6c96; --light:#ffc2d4;
  --night:#1b0c17;
