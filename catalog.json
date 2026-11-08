@@ -123,5 +123,15 @@
     "id": "private-duo",
     "name": "Silver Edge",
     "path": "themes/private-duo"
+  },
+  {
+    "id": "tidal-halo",
+    "name": "Tidal Halo",
+    "path": "themes/tidal-halo"
+  },
+  {
+    "id": "tidal-halo-duo",
+    "name": "Tidal Halo · Twin Current",
+    "path": "themes/tidal-halo-duo"
   }
 ]

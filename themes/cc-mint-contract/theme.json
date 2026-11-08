@@ -3,7 +3,7 @@
   "id": "cc-mint-contract",
   "name": "C.C. · Mint Contract",
   "description": "№ 04 · Мятная печать контракта.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Codex",
   "appearance": "dark",
   "license": "personal-use",
@@ -18,7 +18,7 @@
   },
   "strings": {},
   "assets": {
-    "portrait": "assets/portrait.webp",
+    "portrait": "assets/portrait-restored.webp",
     "charm": "assets/charm.png"
   },
   "css": "theme.css"

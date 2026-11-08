@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 2,
+  "id": "tidal-halo",
+  "name": "Tidal Halo",
+  "description": "Глубокий синий фон, мягкое бирюзовое сияние и плавное растворение изображения по краям.",
+  "version": "1.0.2",
+  "author": "ZLHRS",
+  "appearance": "dark",
+  "license": "personal-use",
+  "category": "anime",
+  "tags": [
+    "dark",
+    "cyan",
+    "ocean",
+    "halo"
+  ],
+  "colors": {
+    "accent": "#80cbd5",
+    "light": "#c5c6ed"
+  },
+  "strings": {},
+  "assets": {
+    "portrait": "assets/original.webp",
+    "charm": "assets/charm.svg"
+  },
+  "css": "theme.css"
+}

@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 2,
+  "id": "tidal-halo-duo",
+  "name": "Tidal Halo · Twin Current",
+  "description": "Два изображения в единой сине-бирюзовой палитре, мягкие края и спокойная область для чтения.",
+  "version": "1.0.3",
+  "author": "ZLHRS",
+  "appearance": "dark",
+  "license": "personal-use",
+  "category": "anime",
+  "tags": [
+    "dark",
+    "cyan",
+    "ocean",
+    "halo",
+    "duo"
+  ],
+  "colors": {
+    "accent": "#80cbd5",
+    "light": "#c5c6ed"
+  },
+  "strings": {},
+  "assets": {
+    "portrait": "assets/original.webp",
+    "charm": "assets/charm.svg",
+    "left": "assets/left-harmonized.webp"
+  },
+  "css": "theme.css"
+}

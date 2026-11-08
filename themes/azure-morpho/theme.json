@@ -3,7 +3,7 @@
   "id": "azure-morpho",
   "name": "Azure Morpho",
   "description": "№ 05 · Синяя бабочка и капли света.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Codex",
   "appearance": "dark",
   "license": "personal-use",
@@ -18,7 +18,7 @@
   },
   "strings": {},
   "assets": {
-    "portrait": "assets/portrait.webp",
+    "portrait": "assets/portrait-restored.webp",
     "charm": "assets/charm.png"
   },
   "css": "theme.css"

@@ -5,6 +5,8 @@ function normalize(value={}){
  return {brightness:number('brightness',40,180),size:number('size',60,160),x:number('x',-40,40),y:number('y',-40,40),animations:typeof v.animations==='boolean'?v.animations:true,effects:typeof v.effects==='boolean'?v.effects:true};
 }
 const designs={
+ 'tidal-halo-duo':['Мягкое бирюзовое сияние','moon','#80cbd5'],
+ 'tidal-halo':['Мягкое бирюзовое сияние','moon','#80cbd5'],
  'ivory-midnight-frame':['Мягкое бежево-лавандовое свечение','geometry','#d5b7a1'],
  'crimson-heart-duo':['Розовые сердца и рубиновое свечение','hearts','#df96ae'],
  'furina-silver-slumber':['Спокойный сон, серебристые пряди и мягкие бирюзовые блики.','moon-dust','#a8c6ed'],
@@ -24,7 +26,7 @@ const designs={
  'hu-tao-furina-duality':['Красно-синие переливы','duality','#bf9ac9'],
  'reze-night-bloom':['Ночные цветы','flowers','#bd91c5'],
  'shinobu-wisteria':['Глициния и бабочки','wisteria','#b7a1e6'],
- 'sora-ribbon':['Ленточные акценты','ribbon','#d4b3e5'],
+ 'sora-ribbon':['Мягкое серебристое свечение','ribbon','#d4b3e5'],
  'sylphie-moonstone':['Перламутровые границы','pearl','#d9c6e6'],
  'tatsumaki-jade':['Кольца энергии','rings','#8bdcb1'],
  'tatsumaki-jade-duo':['Общее зелёное свечение','duo','#8bdcb1'],
@@ -42,7 +44,7 @@ function ornament(kind,color){
 function compose(id,value){
  const a=normalize(value);const [label,kind,color]=designs[id]||['Мягкое свечение','moon','#aabbee'];
  const selector='html.codex-theme-studio .main-surface:not(.main-surface .main-surface)';
- const portraits=selector+'::before'+(['tatsumaki-jade-duo','crimson-heart-duo','private-duo'].includes(id)?','+selector+'::after':'');
+ const portraits=selector+'::before'+(['tatsumaki-jade-duo','crimson-heart-duo','private-duo','tidal-halo-duo'].includes(id)?','+selector+'::after':'');
  const portraitCss=`
 ${portraits}{filter:brightness(${a.brightness/100})!important;scale:${a.size/100}!important;translate:${a.x}vw ${a.y}vh!important;}
 `;
@@ -58,12 +60,12 @@ ${portraits}{filter:brightness(${a.brightness/100})!important;scale:${a.size/100
  if(kind==='duo')css+=`.cts-halo{background:radial-gradient(ellipse at 4% 60%,${color}40,transparent 40%),radial-gradient(ellipse at 96% 60%,${color}40,transparent 40%);}`;
  if(kind==='duality')css+=`.cts-halo{background:linear-gradient(90deg,#ed7e7e22,transparent 40%,transparent 60%,#6cbbff22);}html.codex-theme-studio .sidebar-item[data-app-action-sidebar-thread-selected="true"]{background:linear-gradient(90deg,#c7717144,#719fce44)!important;}`;
  if(kind==='mirror')css+=`.cts-halo{background:linear-gradient(110deg,transparent 78%,${color}28 80%,transparent 82%);}html.codex-theme-studio .app-shell-left-panel{background-image:repeating-linear-gradient(100deg,#ffffff02 0 1px,transparent 1px 4px),linear-gradient(155deg,var(--side-top),var(--side-bottom))!important;}`;
- if(['stars','butterfly','wisteria','ribbon'].includes(kind))css+=`html.codex-theme-studio .sidebar-item[data-app-action-sidebar-thread-selected="true"]::before{background-image:${ornament(kind==='wisteria'?'butterfly':kind,color)};background-size:contain;}`;
+ if(['stars','butterfly','wisteria'].includes(kind))css+=`html.codex-theme-studio .sidebar-item[data-app-action-sidebar-thread-selected="true"]::before{background-image:${ornament(kind==='wisteria'?'butterfly':kind,color)};background-size:contain;}`;
  if(['bunny','petals'].includes(kind))css+=`html.codex-theme-studio div:has(> .composer-surface-chrome:focus-within)::before,html.codex-theme-studio div:has(> .composer-surface-chrome:focus-within)::after{filter:drop-shadow(0 0 5px ${color});}`;
  if(kind==='pearl')css+=`html.codex-theme-studio .composer-surface-chrome,html.codex-theme-studio .app-shell-left-panel{border-color:#d8cadc!important;box-shadow:inset 0 0 0 1px #e5d2fa25;}`;
  if(a.animations&&a.effects)css+=`@media(prefers-reduced-motion:no-preference){.cts-atmosphere{animation:cts-drift 18s ease-in-out infinite}.cts-halo{animation:cts-glow 12s ease-in-out infinite}${kind==='pearl'?'html.codex-theme-studio .composer-surface-chrome{animation:cts-iridescence 12s ease-in-out infinite}':''}}`;
  const noMotion=`html.codex-theme-studio .main-surface::before,html.codex-theme-studio .main-surface::after,html.codex-theme-studio .composer-surface-chrome::before,html.codex-theme-studio .composer-surface-chrome::after,html.codex-theme-studio div:has(> .composer-surface-chrome)::before,html.codex-theme-studio div:has(> .composer-surface-chrome)::after{animation:none!important;transition:none!important;}`;
  if(!a.animations)css+=noMotion;
- return {css:a.effects?css:portraitCss+(!a.animations?noMotion:''),chrome:a.effects?'<div data-cts-layer="stage"><div class="cts-halo" aria-hidden="true"></div><div class="cts-atmosphere" aria-hidden="true"></div></div>':'',label,settings:a};
+ return {css:a.effects?css:portraitCss+(!a.animations?noMotion:''),chrome:a.effects?'<div data-cts-layer="stage"><div class="cts-halo" aria-hidden="true"></div>'+(id==='sora-ribbon'?'':'<div class="cts-atmosphere" aria-hidden="true"></div>')+'</div>':'',label,settings:a};
 }
 module.exports={defaults,normalize,designs,compose};
