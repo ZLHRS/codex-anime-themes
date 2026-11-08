@@ -1,10 +1,13 @@
 param([Parameter(Mandatory=$true)][string]$LegacyRoot,[Parameter(Mandatory=$true)][int]$StudioPid,[string]$MutexName='Local\ZLHRSThemeWorker')
 $ErrorActionPreference='Stop'
 $owner=Get-Process -Id $StudioPid -ErrorAction Stop
-$expected=[IO.Path]::GetFullPath((Join-Path $LegacyRoot 'launcher/Theme-Engine.ps1'))
-$filePattern='(?i)(?:^|\s)-File\s+(?:"'+[regex]::Escape($expected)+'"|'+[regex]::Escape($expected)+')(?=\s|$)'
+$expected=(Resolve-Path -LiteralPath (Join-Path $LegacyRoot 'launcher/Theme-Engine.ps1')).ProviderPath
 $workers=@(Get-CimInstance Win32_Process | Where-Object {
- $_.Name -in @('powershell.exe','pwsh.exe') -and $_.CommandLine -match $filePattern -and $_.CommandLine -match '(?i)(?:^|\s)-Worker(?:\s|$)'
+ if($_.Name -notin @('powershell.exe','pwsh.exe') -or $_.CommandLine -notmatch '(?i)(?:^|\s)-Worker(?:\s|$)'){return $false}
+ if($_.CommandLine -notmatch '(?i)(?:^|\s)-File\s+(?:"([^"]+)"|(\S+))'){return $false}
+ $scriptPath=if($Matches[1]){$Matches[1]}else{$Matches[2]}
+ try{$resolved=(Resolve-Path -LiteralPath $scriptPath -ErrorAction Stop).ProviderPath}catch{return $false}
+ return [string]::Equals($resolved,$expected,[StringComparison]::OrdinalIgnoreCase)
 })
 foreach($worker in $workers){
  $current=Get-CimInstance Win32_Process -Filter ('ProcessId = '+$worker.ProcessId)
