@@ -17,13 +17,15 @@ if(smoke){const temp=path.join(app.getPath('temp'),'zlhrs-smoke-'+process.pid);a
 const launchOnly=process.argv.includes('--launch');
 const portable=process.platform==='win32'&&require('node:fs').existsSync(path.join(path.dirname(process.execPath),'PORTABLE'));
 const ownsLock=smoke || app.requestSingleInstanceLock();
+let startup;
+let startupLaunched=false;
 if(!ownsLock||process.argv.includes('--quit-for-update'))app.quit();
 else {
-app.on('second-instance',(_event,args)=>{if(args.includes('--quit-for-update')){app.quit();return;}if(args.includes('--launch'))apply(settings.theme,true).catch(report);else show();});
+app.on('second-instance',(_event,args)=>{if(args.includes('--quit-for-update')){app.quit();return;}if(args.includes('--launch'))Promise.resolve(startup).then(()=>{if(!busy)return apply(settings.theme,true);}).catch(report);else Promise.resolve(startup).then(show).catch(report);});
 app.on('before-quit',()=>{quitting=true;clearInterval(timer);legacyGuard?.stop();});
 app.on('window-all-closed',()=>{});
 app.on('activate',show);
-app.whenReady().then(init).catch(error=>{if(smoke){console.error(error);app.exit(1);}else{dialog.showErrorBox('ZLHRS Theme Studio',error.message);app.quit();}});
+startup=app.whenReady().then(init).catch(error=>{if(smoke){console.error(error);app.exit(1);}else{dialog.showErrorBox('ZLHRS Theme Studio',error.message);app.quit();}});
 }
 function report(error){status=error.message;notify();}
 function snapshot(){return {themes:catalog,selected:settings.theme,appPath:settings.appPath||'',status,platform:process.platform,version:app.getVersion(),lastShortcut,updating,appearance:appearance.normalize(settings.appearance?.[settings.theme]),effect:appearance.designs[settings.theme]?.[0]||''};}
@@ -59,7 +61,8 @@ async function refreshThemes(){
  }finally{busy=false;}
 }
 async function init(){
- if(!smoke)legacyGuard=await require('./legacy-guard.cjs').startLegacyGuard();
+ const guardStartup=smoke?Promise.resolve():require('./legacy-guard.cjs').startLegacyGuard().then(value=>{legacyGuard=value;});
+ guardStartup.catch(()=>{});
  themeRoot=await localThemes.resolveSource(path.join(app.isPackaged?process.resourcesPath:root,'theme-source.json'),root);
  themeSession.themeRoot=themeRoot;
  settingsFile=path.join(app.getPath('userData'),'settings.json');
@@ -67,6 +70,14 @@ async function init(){
  try{status=await fs.readFile(updateResult,'utf8');await fs.unlink(updateResult);}catch{}
  try{settings=await core.readJson(settingsFile);}catch{}
  if(Number.isInteger(settings.debugPort)&&settings.debugPort>=9345&&settings.debugPort<=9445)core.setDebugPort(settings.debugPort);
+ const earlyLaunch=launchOnly&&!smoke?(async()=>{
+  if(!await core.exists(settings.appPath))return false;
+  try{await core.targets();return false;}catch{}
+  await core.closeRunning(settings.appPath);
+  settings.debugPort=await core.freeDebugPort();core.setDebugPort(settings.debugPort);await core.saveSettings(settingsFile,settings);
+  await core.launch(settings.appPath);return true;
+ })():Promise.resolve(false);
+ earlyLaunch.catch(()=>{});
  if(!settings.theme&&process.platform==='win32')try{settings.theme=(await core.readJson(path.join(process.env.LOCALAPPDATA,'ZLHRS/ThemeStudio/.selected-theme.json'))).theme;}catch{}
  catalog=await readCatalog();
  if(!catalog.some(t=>t.id===settings.theme))settings.theme=catalog[0].id;
@@ -98,7 +109,7 @@ async function init(){
  ipcMain.handle('studio:quit',()=>app.quit());
  if(smoke){
   let launches=0,focuses=0;
-  core.launch=async()=>{launches++;};core.foreground=async()=>{focuses++;};core.targets=async()=>[{type:'page',url:'app://-/index.html',webSocketDebuggerUrl:'ws://127.0.0.1:9345/test'}];core.evaluate=async()=>({stamp:cached?.stamp,theme:cached?.id,ready:true,styled:true,disabled:false});
+  core.launch=async()=>{launches++;};core.foreground=async()=>{focuses++;};core.targets=async()=>[{type:'page',url:'app://-/index.html',webSocketDebuggerUrl:'ws://127.0.0.1:9345/test'}];core.evaluate=async()=>({stamp:cached?.stamp,theme:cached?.id,ready:focuses>0,styled:true,disabled:false});
   const w=createWindow();await new Promise(resolve=>w.webContents.once('did-finish-load',resolve));
   const count=await w.webContents.executeJavaScript('document.querySelectorAll(".card").length');
   // Renderer fetches the catalog asynchronously.
@@ -129,6 +140,8 @@ async function init(){
    await themeSession.reconcile();
    await apply(settings.theme,true);
    if(window!==null)throw new Error('Themed chat launcher opened the gallery');
+   const foreground=core.foreground;core.foreground=async()=>{throw new Error('Window not ready yet');};
+   try{await apply(settings.theme,true);if(!timer)throw new Error('Theme recovery timer missing');}finally{core.foreground=foreground;}
    const reopened=createWindow();await new Promise(resolve=>reopened.webContents.once('did-finish-load',resolve));
    const restored=await reopened.webContents.executeJavaScript('window.studio.state()');
    if(restored.selected!==original||restored.appearance.brightness!==137)throw new Error('Gallery reopen lost settings');
@@ -136,10 +149,11 @@ async function init(){
   }await new Promise(r=>setTimeout(r,100));}
   throw new Error('Gallery smoke test failed: '+count);
  }
+ await guardStartup;startupLaunched=await earlyLaunch;
  const icon=nativeImage.createFromPath(path.join(root,'assets/studio-logo.png')).resize({width:22,height:22});
  tray=new Tray(icon);tray.setToolTip('ZLHRS Theme Studio');tray.setContextMenu(Menu.buildFromTemplate([{label:'Выбрать тему',click:show},{label:'Открыть ChatGPT',click:()=>apply(settings.theme,true).catch(report)},{type:'separator'},{label:'Выйти',click:()=>app.quit()}]));tray.on('click',show);
  if(app.isPackaged){try{await shortcut('studio');await shortcut();settings.shortcutFor=process.execPath;await core.saveSettings(settingsFile,settings);}catch(error){report(error);}}
- if(launchOnly){try{await apply(settings.theme,true);}catch(e){report(e);show();}}else show();
+ if(launchOnly){try{await apply(settings.theme,true);}catch(e){report(e);if(process.platform==='win32')tray.displayBalloon({title:'ChatGPT с темой',content:e.message});}}else show();
 }
 async function apply(id,openWindow=false){
  if(!catalog.some(t=>t.id===id))throw new Error('Неизвестная тема.');
@@ -147,20 +161,22 @@ async function apply(id,openWindow=false){
  busy=true;
  try{
   settings.theme=id;await core.saveSettings(settingsFile,settings);
-  cached=await themeSession.select(id,settings.appearance?.[id]);clearInterval(timer);status="Тема сохранена. Подключаемся к ChatGPT…";notify();
+  cached=await themeSession.select(id,settings.appearance?.[id]);clearInterval(timer);timer=setInterval(()=>{if(!busy)tick().catch(report);},2500);status="Тема сохранена. Подключаемся к ChatGPT…";notify();
+  const alreadyLaunched=startupLaunched;startupLaunched=false;
   let list=[],reachable=false;try{list=await core.targets();reachable=true;}catch{}
   if(!await core.exists(settings.appPath)){settings.appPath=await core.discover();await core.saveSettings(settingsFile,settings);}
-  if(!reachable){
+  if(!reachable&&!alreadyLaunched){
    status='Подготавливаем подключение. Если ChatGPT уже открыт, он будет перезапущен…';notify();
    try{await core.closeRunning(settings.appPath);}catch(error){await core.launch(settings.appPath);throw error;}
    settings.debugPort=await core.freeDebugPort();core.setDebugPort(settings.debugPort);await core.saveSettings(settingsFile,settings);
   }
-  if(!list.length||openWindow){await core.launch(settings.appPath);}
-  if(!list.length){for(let i=0;i<30;i++){await new Promise(r=>setTimeout(r,500));try{list=await core.targets();if(list.length)break;}catch{}}}
-  if(!list.length)throw new Error('Тема сохранена. Полностью закройте ChatGPT и откройте его кнопкой здесь. Если не помогает, выбранная сборка приложения несовместима.');
-  await themeSession.waitForApplied();
-  timer=setInterval(()=>{if(!busy)tick().catch(report);},2500);
-  if(openWindow){const target=list.find(t=>t.url.startsWith('app://-/index.html'))||list[0];await core.foreground(target);}
+  if(!alreadyLaunched&&(!list.length||openWindow)){await core.launch(settings.appPath);}
+  await require('./launch-recovery.cjs').awaitThemedLaunch({session:themeSession,file:settings.appPath,openWindow,restart:async()=>{
+   status='Предыдущий процесс ChatGPT завершает работу. Повторяем запуск…';notify();
+   await core.closeRunning(settings.appPath);
+   settings.debugPort=await core.freeDebugPort();core.setDebugPort(settings.debugPort);await core.saveSettings(settingsFile,settings);
+   await core.launch(settings.appPath);
+  }});
   status='Тема проверена в окне ChatGPT. Следующий запуск — через ярлык «ChatGPT с темой».';
   notify();
  }finally{busy=false;}

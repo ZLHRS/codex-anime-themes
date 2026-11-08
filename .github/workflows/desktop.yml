@@ -74,4 +74,4 @@ jobs:
       - name: Publish installers
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release create "$GITHUB_REF_NAME" release/* --repo "$GITHUB_REPOSITORY" --title "ZLHRS Theme Studio $GITHUB_REF_NAME" --notes-file "docs/RELEASE-2.5.11.md"
+        run: gh release create "$GITHUB_REF_NAME" release/* --repo "$GITHUB_REPOSITORY" --title "ZLHRS Theme Studio $GITHUB_REF_NAME" --notes-file "docs/RELEASE-2.5.12.md"

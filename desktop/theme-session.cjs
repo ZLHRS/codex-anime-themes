@@ -1,5 +1,5 @@
 const core=require('./core.cjs');
-const PROBE=`(()=>{const root=document.documentElement;const style=document.getElementById('cts-style');const state=window.__CODEX_THEME_STUDIO__;return {ready:!!document.querySelector('[data-app-shell-main-surface],main.main-surface'),theme:state?.themeId,stamp:state?.stamp,styled:root.classList.contains('codex-theme-studio')&&!!style?.textContent,disabled:!!window.__CODEX_THEME_STUDIO_DISABLED__};})()`;
+const PROBE=`(()=>{const root=document.documentElement;const style=document.getElementById('cts-style');const state=window.__CODEX_THEME_STUDIO__;return {documentReady:!!document.body,ready:!!document.querySelector('[data-app-shell-main-surface],main.main-surface'),theme:state?.themeId,stamp:state?.stamp,styled:root.classList.contains('codex-theme-studio')&&!!style?.textContent,disabled:!!window.__CODEX_THEME_STUDIO_DISABLED__};})()`;
 class ThemeSession {
  constructor(root,transport=core){this.root=root;this.transport=transport;this.current=null;this.queue=Promise.resolve();}
  select(id,appearance){return this.enqueue(async()=>{this.current={id,...await this.transport.payload(this.root,id,appearance,this.themeRoot||this.root)};return this.current;});}
@@ -14,12 +14,13 @@ class ThemeSession {
   const selected=this.current;const pages=await this.transport.targets();let applied=0;const errors=[];
   for(const page of pages){try{
    let state=await this.transport.evaluate(page.webSocketDebuggerUrl,PROBE);
-   if(!state?.ready)continue;
+   if(!state?.ready&&!state?.documentReady)continue;
    const matches=s=>s?.theme===selected.id&&s.stamp===selected.stamp&&s.styled&&!s.disabled;
    if(!matches(state)){
     await this.transport.evaluate(page.webSocketDebuggerUrl,selected.expression);
     state=await this.transport.evaluate(page.webSocketDebuggerUrl,PROBE);
    }
+   if(!state?.ready)continue;
    if(!matches(state))throw new Error('ChatGPT не подтвердил стили выбранной темы.');
    applied++;
   }catch(error){errors.push(error.message);}}

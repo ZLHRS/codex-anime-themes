@@ -51,3 +51,8 @@ test('IPv6 fallback works when IPv4 is unavailable; never connects to remote end
  });
 
 test('Windows shutdown helper parses and leaves unrelated apps alone',{skip:process.platform!=='win32'},async()=>{await core.closeRunning(path.join(os.tmpdir(),'zlhrs-nonexistent-test-app.exe'));});
+
+test('an unresponsive loopback address does not delay a working one',async()=>{
+ const request=url=>url.includes('[::1]')?Promise.resolve({ok:true,json:async()=>[{type:'page',url:'app://-/index.html',webSocketDebuggerUrl:'ws://localhost:9345/test'}]}):new Promise(()=>{});
+ const found=await core.targets(request);assert.equal(found.length,1);
+});

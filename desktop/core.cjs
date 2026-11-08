@@ -59,24 +59,18 @@ async function closeRunning(file){
 }
 let preferredHost='127.0.0.1';
 async function targets(request=fetch) {
-  let connected=false;
-  for(const host of [...new Set([preferredHost,...LOOPBACK])]) {
-    try{
-      const r=await request(`http://${host}:${debugPort}/json/list`,{signal:AbortSignal.timeout(1200)});
-      if(!r.ok)continue;
-      const list=await r.json();if(!Array.isArray(list))continue;
-      connected=true;
-      const pages=list.filter(validTarget).map(t=>{
-        const socket=new URL(t.webSocketDebuggerUrl);
-        if(socket.protocol!=='ws:'||!LOOPBACK.includes(socket.hostname)||socket.port!==String(debugPort))throw new Error('Unexpected debugging endpoint');
-        socket.hostname=host;return {...t,webSocketDebuggerUrl:socket.href};
-      });
-      if(pages.length){preferredHost=host;return pages;}
-    }catch{}
-  }
-  if(connected)return [];
-  throw new Error('Не удалось подключиться к ChatGPT. Полностью закройте его и откройте через Theme Studio.');
+ let connected=false;
+ try{return await Promise.any([...new Set([preferredHost,...LOOPBACK])].map(async host=>{
+  const r=await request('http://'+host+':'+debugPort+'/json/list',{signal:AbortSignal.timeout(1200)});
+  if(!r.ok)throw Error('Endpoint unavailable');
+  const list=await r.json();if(!Array.isArray(list))throw Error('Invalid endpoint');connected=true;
+  const pages=list.filter(validTarget).map(t=>{const socket=new URL(t.webSocketDebuggerUrl);
+   if(socket.protocol!=='ws:'||!LOOPBACK.includes(socket.hostname)||socket.port!==String(debugPort))throw Error('Unexpected debugging endpoint');
+   socket.hostname=host;return {...t,webSocketDebuggerUrl:socket.href};});
+  if(!pages.length)throw Error('No pages yet');preferredHost=host;return pages;
+ }));}catch{if(connected)return [];throw new Error('Не удалось подключиться к ChatGPT. Полностью закройте его и откройте через Theme Studio.');}
 }
+
 function command(url, method, params) {
   const uri = new URL(url);
   if (uri.protocol !== 'ws:' || !LOOPBACK.includes(uri.hostname) || uri.port !== String(debugPort)) throw new Error('Unexpected debugging endpoint');
@@ -94,10 +88,16 @@ function command(url, method, params) {
   });
 }
 function evaluate(url,expression){return command(url,'Runtime.evaluate',{expression,returnByValue:true}).then(r=>r?.result?.value);}
-async function foreground(target){
+async function foreground(target,file){
   const url=target.webSocketDebuggerUrl;
+  if(process.platform!=='win32'||!file){
   try{const info=await command(url,'Browser.getWindowForTarget',{});if(info.bounds?.windowState==='minimized')await command(url,'Browser.setWindowBounds',{windowId:info.windowId,bounds:{windowState:'normal'}});}catch{}
-  await command(url,'Page.bringToFront',{});
+  try{await command(url,'Page.bringToFront',{});}catch(error){if(process.platform!=='win32'||!file)throw error;}
+  }
+  if(process.platform==='win32'&&file){
+   const dir=await fs.mkdtemp(path.join(require('node:os').tmpdir(),'zlhrs-focus-'));
+   try{const helper=path.join(dir,'focus-app.ps1');await fs.copyFile(path.join(__dirname,'focus-app.ps1'),helper);await run('powershell.exe',['-NoProfile','-NonInteractive','-ExecutionPolicy','Bypass','-File',helper,'-AppPath',file],{windowsHide:true,timeout:15000});}finally{await fs.rm(dir,{recursive:true,force:true});}
+  }
 }
 async function saveSettings(file, value) {
   await fs.mkdir(path.dirname(file),{recursive:true});

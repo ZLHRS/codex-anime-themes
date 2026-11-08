@@ -14,3 +14,9 @@ test('waits for actual shell readiness and verifies after injection',async()=>{
 test('polling and theme selection are serialized',async()=>{
  const f=fixture(),s=new ThemeSession('.',f.transport);await s.select('a');await Promise.all([s.reconcile(),s.select('b'),s.reconcile()]);assert.equal(f.state.theme,'b');
 });
+
+test('prepares theme before shell exists without claiming readiness',async()=>{
+ const f=fixture(),s=new ThemeSession('.',f.transport);await s.select('a');f.state={ready:false,documentReady:true};
+ f.transport.evaluate=async(_url,expression)=>{if(expression.startsWith('(()=>'))return {...f.state};f.state={...f.state,theme:'a',stamp:'a',styled:true};};
+ await assert.rejects(s.reconcile(),/готово/);assert.equal(f.state.styled,true);f.state.ready=true;assert.equal((await s.reconcile()).applied,1);
+});
