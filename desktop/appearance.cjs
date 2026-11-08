@@ -5,6 +5,8 @@ function normalize(value={}){
  return {brightness:number('brightness',40,180),size:number('size',60,160),x:number('x',-40,40),y:number('y',-40,40),animations:typeof v.animations==='boolean'?v.animations:true,effects:typeof v.effects==='boolean'?v.effects:true};
 }
 const designs={
+ 'kana-soft-garnet':['Тёплые лепестки','petals','#d6a0a8'],
+ 'kana-ruby-spotlight':['Рубиновые звёзды','stars','#f69bb9'],
  'ai-bunny-refrain':['Мягкий свет ушек','bunny','#cda2ea'],
  'ai-starlit-encore':['Звёздные блики','stars','#d8abff'],
  'azure-morpho':['Бабочки по краям','butterfly','#76cce9'],

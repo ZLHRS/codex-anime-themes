@@ -73,5 +73,15 @@
     "id": "zero-two-rose",
     "name": "Zero Two · Darling Rose",
     "path": "themes/zero-two-rose"
+  },
+  {
+    "id": "kana-soft-garnet",
+    "name": "Кана · Тёплый гранат",
+    "path": "themes/kana-soft-garnet"
+  },
+  {
+    "id": "kana-ruby-spotlight",
+    "name": "Кана · Рубиновый свет",
+    "path": "themes/kana-ruby-spotlight"
   }
 ]

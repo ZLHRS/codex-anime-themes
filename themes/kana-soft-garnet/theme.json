@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 2,
+  "id": "kana-soft-garnet",
+  "name": "Кана · Тёплый гранат",
+  "description": "Мягкий бордовый фон, тёплый свет и спокойный портрет Каны по центру.",
+  "version": "1.0.0",
+  "author": "ZLHRS",
+  "appearance": "dark",
+  "license": "personal-use",
+  "category": "anime",
+  "tags": [
+    "anime",
+    "kana",
+    "garnet"
+  ],
+  "colors": {
+    "accent": "#c98998",
+    "light": "#f0c4ba"
+  },
+  "strings": {},
+  "assets": {
+    "portrait": "assets/portrait.png",
+    "charm": "assets/charm.svg"
+  },
+  "css": "theme.css"
+}

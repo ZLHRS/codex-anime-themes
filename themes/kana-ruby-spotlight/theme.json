@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 2,
+  "id": "kana-ruby-spotlight",
+  "name": "Кана · Рубиновый свет",
+  "description": "Горизонтальный крупный план Каны, рубиновые акценты и звёздные блики.",
+  "version": "1.0.0",
+  "author": "ZLHRS",
+  "appearance": "dark",
+  "license": "personal-use",
+  "category": "anime",
+  "tags": [
+    "anime",
+    "kana",
+    "ruby"
+  ],
+  "colors": {
+    "accent": "#ee6c96",
+    "light": "#ffc2d4"
+  },
+  "strings": {},
+  "assets": {
+    "portrait": "assets/portrait.png",
+    "charm": "assets/charm.svg"
+  },
+  "css": "theme.css"
+}
