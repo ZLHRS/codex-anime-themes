@@ -11,6 +11,20 @@ test('real Chromium: cold startup, all themes, detached windows, reload, restart
   start();let pages=await ready();const s=new ThemeSession(root);const catalog=await core.readJson(path.join(root,'catalog.json'));
   for(const item of catalog){await s.select(item.id);assert.equal((await s.reconcile()).applied,2);for(const p of pages){const state=await core.evaluate(p.webSocketDebuggerUrl,PROBE);assert.equal(state.theme,item.id);assert(state.styled);const footer=await core.evaluate(p.webSocketDebuggerUrl,`({fade:getComputedStyle(document.getElementById('fixture-footer-fade')).display,spacer:document.getElementById('fixture-footer-spacer').getBoundingClientRect().height,other:getComputedStyle(document.getElementById('fixture-other-layer')).display})`);assert.equal(footer.fade,'none');assert.equal(footer.spacer,120);assert.notEqual(footer.other,'none');const readability=await core.evaluate(p.webSocketDebuggerUrl,`(()=>{const answer=getComputedStyle(document.getElementById('fixture-answer'));const code=document.getElementById('fixture-code');return {padding:answer.paddingLeft,backdrop:answer.backgroundSize,pre:getComputedStyle(code.closest('pre')).backgroundColor,code:getComputedStyle(code).backgroundColor,syntax:getComputedStyle(code.firstElementChild).color};})()`);assert.equal(readability.padding,'24px',item.id);assert.equal(readability.backdrop,'100% 100%',item.id);assert.equal(readability.pre,'rgb(37, 37, 37)',item.id);assert.equal(readability.code,'rgba(0, 0, 0, 0)',item.id);assert.equal(readability.syntax,'rgb(0, 200, 0)',item.id);}}
   await s.select('furina-moonlit-repose',{brightness:130,size:120,x:-10,y:5,animations:false});await s.reconcile();
+  // Route replacement must acquire the theme before its first painted frame.
+  const navigation=await core.command(pages[0].webSocketDebuggerUrl,'Runtime.evaluate',{awaitPromise:true,returnByValue:true,expression:`new Promise(resolve=>{
+    const old=document.querySelector('main.main-surface');
+    const next=old.cloneNode(true);
+    next.classList.remove('main-surface');
+    next.removeAttribute('data-cts-main-surface-compat');
+    next.setAttribute('data-app-shell-main-surface','');
+    next.querySelector('#cts-stage')?.remove();
+    old.replaceWith(next);
+    requestAnimationFrame(()=>resolve({styled:next.classList.contains('main-surface'),stage:!!next.querySelector('#cts-stage'),background:getComputedStyle(next,'::before').backgroundImage}));
+  })`});
+  assert.equal(navigation.result.value.styled,true);
+  assert.equal(navigation.result.value.stage,true);
+  assert.match(navigation.result.value.background,/data:image/);
   const appearance=await core.evaluate(pages[0].webSocketDebuggerUrl,`(()=>{const n=document.querySelector('main.main-surface'),p=getComputedStyle(n,'::before');return {filter:p.filter,scale:p.scale,transform:p.transform,stages:document.querySelectorAll('#cts-stage').length,animation:getComputedStyle(document.querySelector('.cts-atmosphere')).animationName,pointer:getComputedStyle(document.querySelector('#cts-stage')).pointerEvents}})()`);
   assert.equal(appearance.filter,'brightness(1.3)');assert.equal(appearance.scale,'1.2');assert.notEqual(appearance.transform,'none');assert.equal(appearance.stages,1);assert.equal(appearance.animation,'none');assert.equal(appearance.pointer,'none');
   await s.select('furina-moonlit-repose',{effects:false});await s.reconcile();assert.equal(await core.evaluate(pages[0].webSocketDebuggerUrl,"document.querySelectorAll('#cts-stage').length"),0);

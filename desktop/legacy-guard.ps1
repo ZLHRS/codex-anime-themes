@@ -1,4 +1,4 @@
-param([Parameter(Mandatory=$true)][string]$LegacyRoot,[Parameter(Mandatory=$true)][int]$StudioPid,[string]$MutexName='Local\ZLHRSThemeWorker')
+param([Parameter(Mandatory=$true)][string]$LegacyRoot,[Parameter(Mandatory=$true)][int]$StudioPid,[string]$MutexName='Local\ZLHRSThemeWorker',[switch]$StopOnly)
 $ErrorActionPreference='Stop'
 $owner=Get-Process -Id $StudioPid -ErrorAction Stop
 $expected=(Resolve-Path -LiteralPath (Join-Path $LegacyRoot 'launcher/Theme-Engine.ps1')).ProviderPath
@@ -15,6 +15,7 @@ foreach($worker in $workers){
   Stop-Process -Id $worker.ProcessId -Force -ErrorAction Stop
  }
 }
+if($StopOnly){$owner.Dispose();exit 0}
 $mutex=[Threading.Mutex]::new($false,$MutexName)
 $acquired=$false
 try{

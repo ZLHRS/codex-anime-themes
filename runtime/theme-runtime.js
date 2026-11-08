@@ -92,6 +92,7 @@ html.codex-theme-studio .cts-windows-menu-bar [data-cts-menu-region="main"] {
   if (previous?.timer) clearInterval(previous.timer);
   if (previous?.clock) clearInterval(previous.clock);
   if (previous?.scheduler?.timeout) clearTimeout(previous.scheduler.timeout);
+  if (previous?.scheduler) previous.scheduler.pending = null;
   if (previous?.resizeHandler) window.removeEventListener("resize", previous.resizeHandler);
   if (previous?.mediaHandler && previous?.mediaQuery) {
     try { previous.mediaQuery.removeEventListener("change", previous.mediaHandler); } catch {}
@@ -741,6 +742,7 @@ html.codex-theme-studio .cts-windows-menu-bar [data-cts-menu-region="main"] {
     if (state?.timer) clearInterval(state.timer);
     if (state?.clock) clearInterval(state.clock);
     if (state?.scheduler?.timeout) clearTimeout(state.scheduler.timeout);
+    if (state?.scheduler) state.scheduler.pending = null;
     if (state?.resizeHandler) window.removeEventListener("resize", state.resizeHandler);
     if (state?.mediaHandler && state?.mediaQuery) {
       try { state.mediaQuery.removeEventListener("change", state.mediaHandler); } catch {}
@@ -749,13 +751,18 @@ html.codex-theme-studio .cts-windows-menu-bar [data-cts-menu-region="main"] {
     return true;
   };
 
-  const scheduler = { timeout: null };
+  const scheduler = { pending: null };
   const scheduleEnsure = () => {
-    if (scheduler.timeout) clearTimeout(scheduler.timeout);
-    scheduler.timeout = setTimeout(() => {
-      scheduler.timeout = null;
+    // Reconcile in the same rendering turn, before the new route is painted.
+    // A trailing debounce could be postponed indefinitely by streaming DOM updates.
+    if (scheduler.pending) return;
+    const pending = {};
+    scheduler.pending = pending;
+    queueMicrotask(() => {
+      if (scheduler.pending !== pending) return;
+      scheduler.pending = null;
       ensure();
-    }, 180);
+    });
   };
 
   // Ignore mutations we caused ourselves (chrome text/position, clock ticks,

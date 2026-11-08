@@ -34,7 +34,10 @@ function createWindow(){
  window.setMenuBarVisibility(false);
  window.webContents.setWindowOpenHandler(()=>({action:'deny'}));
  window.webContents.on('will-navigate',event=>event.preventDefault());
- window.on('close',event=>{if(!quitting&&!smoke&&tray){event.preventDefault();window.hide();}});
+ // The tray and theme session live in the main process. Release the gallery
+ // renderer and decoded previews when closed; recreate them on demand.
+ const createdWindow=window;
+ window.on('closed',()=>{if(window===createdWindow)window=null;});
  window.once('ready-to-show',()=>window.show());
  window.loadFile(path.join(__dirname,'index.html'));
  return window;
@@ -121,6 +124,14 @@ async function init(){
    if((await core.readJson(settingsFile)).appearance[original].brightness!==137)throw new Error('Appearance settings missing on disk');
 
    if(process.argv.includes('--screenshot')){await w.webContents.executeJavaScript('Promise.all([...document.images].map(i=>i.decode().catch(()=>{})))');await fs.writeFile(path.join(root,'docs/theme-selector-crossplatform.png'),(await w.webContents.capturePage()).toPNG());}
+   await new Promise(resolve=>{w.once('closed',resolve);w.close();});
+   if(!w.isDestroyed()||window!==null)throw new Error('Closed gallery was retained');
+   await themeSession.reconcile();
+   await apply(settings.theme,true);
+   if(window!==null)throw new Error('Themed chat launcher opened the gallery');
+   const reopened=createWindow();await new Promise(resolve=>reopened.webContents.once('did-finish-load',resolve));
+   const restored=await reopened.webContents.executeJavaScript('window.studio.state()');
+   if(restored.selected!==original||restored.appearance.brightness!==137)throw new Error('Gallery reopen lost settings');
    app.exit(0);return;
   }await new Promise(r=>setTimeout(r,100));}
   throw new Error('Gallery smoke test failed: '+count);
