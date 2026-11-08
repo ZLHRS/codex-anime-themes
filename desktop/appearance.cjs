@@ -11,7 +11,6 @@ const designs={
  'blue-cat-nocturne':['Лунный свет','moon','#8fbaff'],
  'cc-mint-contract':['Мятная геометрия','geometry','#9bdcb1'],
  'fubuki-velvet':['Блик зеркала и бархат','mirror','#d6a9c2'],
- 'furina-blue-daylight':['Водяные блики','water','#83c9df'],
  'furina-moonlit-repose':['Лунный ореол и пылинки','moon-dust','#b2c3f5'],
  'hu-tao-furina-duality':['Красно-синие переливы','duality','#bf9ac9'],
  'reze-night-bloom':['Ночные цветы','flowers','#bd91c5'],

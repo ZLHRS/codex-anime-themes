@@ -6,7 +6,7 @@ const os=require('node:os');
 const core=require('../desktop/core.cjs');
 const root=path.resolve(__dirname,'..');
 test('all bundled theme payloads compile and have stable stamps',async()=>{
- const catalog=await core.readJson(path.join(root,'catalog.json'));assert.equal(catalog.length,16);
+ const catalog=await core.readJson(path.join(root,'catalog.json'));assert.equal(catalog.length,15);
  for(const t of catalog){const p=await core.payload(root,t.id);assert.doesNotThrow(()=>new Function(p.expression));assert(!p.expression.includes('__CTS_CSS_JSON__'));assert.equal(p.stamp,(await core.payload(root,t.id)).stamp);}
 });
 test('reject traversal and malformed theme IDs',async()=>{
@@ -21,7 +21,7 @@ test('only actual application pages receive themes',()=>{
 });
 test('selection persists independently of the installation directory',async()=>{
  const dir=await fs.mkdtemp(path.join(os.tmpdir(),'zlhrs-settings-'));
- try{const file=path.join(dir,'data/settings.json');await core.saveSettings(file,{theme:'tatsumaki-jade',appPath:'/opt/My App/chatgpt'});await core.saveSettings(file,{...await core.readJson(file),theme:'furina-blue-daylight'});assert.deepEqual(await core.readJson(file),{theme:'furina-blue-daylight',appPath:'/opt/My App/chatgpt'});assert.equal(await core.exists(file+'.tmp'),false);}finally{await fs.rm(dir,{recursive:true});}
+ try{const file=path.join(dir,'data/settings.json');await core.saveSettings(file,{theme:'tatsumaki-jade',appPath:'/opt/My App/chatgpt'});await core.saveSettings(file,{...await core.readJson(file),theme:'furina-moonlit-repose'});assert.deepEqual(await core.readJson(file),{theme:'furina-moonlit-repose',appPath:'/opt/My App/chatgpt'});assert.equal(await core.exists(file+'.tmp'),false);}finally{await fs.rm(dir,{recursive:true});}
 });
 test('platform launches pass paths as arguments without shell interpolation',()=>{
  const file=path.resolve('ChatGPT test $name');

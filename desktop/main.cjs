@@ -78,7 +78,7 @@ async function init(){
   const w=createWindow();await new Promise(resolve=>w.webContents.once('did-finish-load',resolve));
   const count=await w.webContents.executeJavaScript('document.querySelectorAll(".card").length');
   // Renderer fetches the catalog asynchronously.
-  for(let i=0;i<30;i++){if(await w.webContents.executeJavaScript('document.querySelectorAll(".card").length')===16){
+  for(let i=0;i<30;i++){if(await w.webContents.executeJavaScript('document.querySelectorAll(".card").length')===catalog.length){
    const found=await w.webContents.executeJavaScript(`(()=>{const s=document.getElementById('search');s.value='tatsumaki';s.dispatchEvent(new Event('input'));const count=document.querySelectorAll('.card').length;s.value='';s.dispatchEvent(new Event('input'));document.querySelector('.preview-button').click();const modal=document.getElementById('preview').open;document.getElementById('close-preview').click();return {count,modal};})()`);
    if(found.count!==2||!found.modal)throw new Error('Search or preview failed');
    const help=await w.webContents.executeJavaScript(`(()=>{document.getElementById('help-tab').click();const visible=!document.getElementById('help-page').hidden;document.getElementById('skins-tab').click();return visible;})()`);
