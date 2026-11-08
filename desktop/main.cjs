@@ -85,6 +85,11 @@ async function init(){
    if(!help)throw new Error('Instruction tab failed');
    const shortcutState=await w.webContents.executeJavaScript('window.studio.shortcut()');
    if(!shortcutState.lastShortcut||!await core.exists(shortcutState.lastShortcut))throw new Error('Shortcut button failed');
+   const studioShortcut=await shortcut('studio');
+   if(!await core.exists(studioShortcut))throw new Error('Studio shortcut missing');
+   if(process.platform==='win32'){shell.writeShortcutLink(studioShortcut,'update',{target:path.join(app.getPath('temp'),'old-studio.exe')});}
+   if(await shortcut('studio')!==studioShortcut)throw new Error('Shortcut location changed');
+   if(process.platform==='win32'&&shell.readShortcutLink(studioShortcut).target!==process.execPath)throw new Error('Stale Studio shortcut not repaired');
    await w.webContents.executeJavaScript('window.studio.launch()');
    if(launches!==1||focuses!==1)throw new Error('Launch must raise already running ChatGPT');
    const original=settings.theme;
@@ -100,7 +105,7 @@ async function init(){
  }
  const icon=nativeImage.createFromPath(path.join(root,'assets/studio-logo.png')).resize({width:22,height:22});
  tray=new Tray(icon);tray.setToolTip('ZLHRS Theme Studio');tray.setContextMenu(Menu.buildFromTemplate([{label:'Выбрать тему',click:show},{label:'Открыть ChatGPT',click:()=>apply(settings.theme,true).catch(report)},{type:'separator'},{label:'Выйти',click:()=>app.quit()}]));tray.on('click',show);
- if(app.isPackaged&&settings.shortcutFor!==process.execPath){try{await shortcut();settings.shortcutFor=process.execPath;await core.saveSettings(settingsFile,settings);}catch(error){report(error);}}
+ if(app.isPackaged){try{await shortcut('studio');await shortcut();settings.shortcutFor=process.execPath;await core.saveSettings(settingsFile,settings);}catch(error){report(error);}}
  if(launchOnly){try{await apply(settings.theme,true);}catch(e){report(e);show();}}else show();
 }
 async function apply(id,openWindow=false){
@@ -134,26 +139,28 @@ async function tick(){
  try{return await themeSession.reconcile();}finally{ticking=false;}
 }
 function shQuote(value){return "'"+value.replaceAll("'","'\\''")+"'";}
-async function shortcut(){
+async function shortcut(kind='chat'){
+ const studio=kind==='studio';
+ const name=studio?'ZLHRS Theme Studio':'ChatGPT с темой';
  const exe=process.env.APPIMAGE||process.execPath;
  const desktop=app.getPath('desktop');
  await fs.mkdir(desktop,{recursive:true});
- const launchArgs=app.isPackaged?['--launch']:[root,'--launch'];
+ const launchArgs=[...(app.isPackaged?[]:[root]),...(studio?[]:['--launch'])];
  if(process.platform==='win32'){
-  const file=path.join(desktop,'ChatGPT с темой.lnk');
+  const file=path.join(desktop,name+'.lnk');
   const args=launchArgs.map(a=>'"'+a+'"').join(' ');
-  const ok=shell.writeShortcutLink(file,'create',{target:exe,args,cwd:path.dirname(exe),description:'ChatGPT с последней темой ZLHRS',icon:exe,iconIndex:0});if(!ok)throw new Error('Windows не разрешила запись на рабочий стол.');
+  const ok=shell.writeShortcutLink(file,(await core.exists(file)?'update':'create'),{target:exe,args,cwd:path.dirname(exe),description:studio?'Выбор и настройка тем ZLHRS':'ChatGPT с последней темой ZLHRS',icon:exe,iconIndex:0});if(!ok)throw new Error('Windows не разрешила запись на рабочий стол.');
   const saved=shell.readShortcutLink(file);if(saved.target.toLowerCase()!==exe.toLowerCase()||saved.args!==args)throw new Error('Windows сохранила неверный ярлык.');return file;
  }else if(process.platform==='linux'){
   const icon=path.join(app.getPath('userData'),'studio.png');await fs.copyFile(path.join(root,'assets/studio-logo.png'),icon);
   const quoted='"'+exe.replace(/[\\"`$]/g,'\\$&').replaceAll('%','%%')+'"';
   const argumentsText=launchArgs.map(a=>'"'+a.replace(/[\\"`$]/g,'\\$&').replaceAll('%','%%')+'"').join(' ');
-  const entry='[Desktop Entry]\nType=Application\nName=ChatGPT с темой\nExec='+quoted+' '+argumentsText+'\nIcon='+icon+'\nTerminal=false\nCategories=Utility;\n';
-  await fs.mkdir(desktop,{recursive:true});await fs.writeFile(path.join(desktop,'ChatGPT-with-theme.desktop'),entry,{mode:0o755});
-  const applications=smoke?path.join(app.getPath('userData'),'applications'):path.join(process.env.XDG_DATA_HOME||path.join(app.getPath('home'),'.local/share'),'applications');await fs.mkdir(applications,{recursive:true});await fs.writeFile(path.join(applications,'zlhrs-chatgpt.desktop'),entry,{mode:0o755});return path.join(desktop,'ChatGPT-with-theme.desktop');
+  const entry='[Desktop Entry]\nType=Application\nName='+name+'\nExec='+quoted+' '+argumentsText+'\nIcon='+icon+'\nTerminal=false\nCategories=Utility;\n';
+  await fs.mkdir(desktop,{recursive:true});await fs.writeFile(path.join(desktop,studio?'ZLHRS-Theme-Studio.desktop':'ChatGPT-with-theme.desktop'),entry,{mode:0o755});
+  const applications=smoke?path.join(app.getPath('userData'),'applications'):path.join(process.env.XDG_DATA_HOME||path.join(app.getPath('home'),'.local/share'),'applications');await fs.mkdir(applications,{recursive:true});await fs.writeFile(path.join(applications,studio?'zlhrs-theme-studio.desktop':'zlhrs-chatgpt.desktop'),entry,{mode:0o755});return path.join(desktop,studio?'ZLHRS-Theme-Studio.desktop':'ChatGPT-with-theme.desktop');
  }else{
-  const bundle=path.join(desktop,'ChatGPT с темой.app','Contents');await fs.mkdir(path.join(bundle,'MacOS'),{recursive:true});
-  await fs.writeFile(path.join(bundle,'Info.plist'),'<?xml version="1.0"?><!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"><plist version="1.0"><dict><key>CFBundleExecutable</key><string>launch</string><key>CFBundleIdentifier</key><string>com.zlhrs.chatgpt-launcher</string><key>CFBundleName</key><string>ChatGPT с темой</string><key>CFBundlePackageType</key><string>APPL</string></dict></plist>');
+  const bundle=path.join(desktop,name+'.app','Contents');await fs.mkdir(path.join(bundle,'MacOS'),{recursive:true});
+  await fs.writeFile(path.join(bundle,'Info.plist'),'<?xml version="1.0"?><!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"><plist version="1.0"><dict><key>CFBundleExecutable</key><string>launch</string><key>CFBundleIdentifier</key><string>com.zlhrs.'+(studio?'studio-launcher':'chatgpt-launcher')+'</string><key>CFBundleName</key><string>'+name+'</string><key>CFBundlePackageType</key><string>APPL</string></dict></plist>');
   await fs.writeFile(path.join(bundle,'MacOS/launch'),'#!/bin/sh\nexec '+shQuote(exe)+' '+launchArgs.map(shQuote).join(' ')+'\n',{mode:0o755});return path.dirname(bundle);
  }
 }

@@ -118,13 +118,13 @@ html.codex-theme-studio {
  --line:color-mix(in srgb,var(--accent) 38%,#342631);
 }
 html.codex-theme-studio .main-surface:not(.main-surface .main-surface) {
- container-type:size;overflow:clip;background:var(--night)!important;
+ container-type:size;overflow:clip;--kana-header:var(--app-shell-titlebar-height,64px);background:var(--night)!important;
 }
 html.codex-theme-studio .main-surface:not(.main-surface .main-surface)::before {
- inset:auto;left:50%;top:50%;width:100cqh;height:100cqw;transform:translate(-50%,-50%) rotate(-90deg);
- max-width:none;aspect-ratio:auto;transform-origin:center;
- background:var(--cts-asset-portrait) center / cover no-repeat;
- opacity:.68;mask-image:none;
+ inset:auto;left:50%;top:calc(50% + var(--kana-header)/2);width:min(calc(100cqh - var(--kana-header)),calc(100cqw * .54535));height:auto;transform:translate(-50%,-50%) rotate(-90deg);
+ max-width:none;aspect-ratio:926 / 1698;transform-origin:center;
+ background:var(--cts-asset-portrait) center / contain no-repeat;
+ opacity:.68;mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);
 }
 html.codex-theme-studio .main-surface:not(.main-surface .main-surface)::after {
  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
@@ -145,3 +145,8 @@ html.codex-theme-studio div:has(> .composer-surface-chrome)::after {content:none
 html.codex-theme-studio [data-thread-scroll-footer] .pointer-events-none.absolute.bg-surface,
 html.codex-theme-studio [data-thread-scroll-footer] .pointer-events-none.absolute.bg-surface-secondary {background:transparent!important;}
 html.codex-theme-studio [data-thread-scroll-footer] > .pointer-events-none.absolute.bg-surface {display:none!important;}
+
+/* Keep the title bar opaque even when users enlarge or move the image. */
+html.codex-theme-studio header[class*="ApplicationMenuPageHeader"],
+html.codex-theme-studio .app-header-tint,
+html.codex-theme-studio .topbar {background:var(--night)!important;}
