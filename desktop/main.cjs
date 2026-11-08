@@ -9,6 +9,7 @@ const {ThemeSession}=require('./theme-session.cjs');
 const {spawn}=require('node:child_process');
 const root=path.resolve(__dirname,'..');
 const themeSession=new ThemeSession(root);
+let legacyGuard;
 let themeRoot=root;
 let window,tray,settings={},settingsFile,catalog=[],timer,busy=false,cached,status='Выберите тему — она сохранится для следующих запусков.',quitting=false,lastShortcut='',updating=false;
 const smoke=process.argv.includes('--smoke-test');
@@ -19,7 +20,7 @@ const ownsLock=smoke || app.requestSingleInstanceLock();
 if(!ownsLock||process.argv.includes('--quit-for-update'))app.quit();
 else {
 app.on('second-instance',(_event,args)=>{if(args.includes('--quit-for-update')){app.quit();return;}if(args.includes('--launch'))apply(settings.theme,true).catch(report);else show();});
-app.on('before-quit',()=>{quitting=true;clearInterval(timer);});
+app.on('before-quit',()=>{quitting=true;clearInterval(timer);legacyGuard?.stop();});
 app.on('window-all-closed',()=>{});
 app.on('activate',show);
 app.whenReady().then(init).catch(error=>{if(smoke){console.error(error);app.exit(1);}else{dialog.showErrorBox('ZLHRS Theme Studio',error.message);app.quit();}});
@@ -55,6 +56,7 @@ async function refreshThemes(){
  }finally{busy=false;}
 }
 async function init(){
+ if(!smoke)legacyGuard=await require('./legacy-guard.cjs').startLegacyGuard();
  themeRoot=await localThemes.resolveSource(path.join(app.isPackaged?process.resourcesPath:root,'theme-source.json'),root);
  themeSession.themeRoot=themeRoot;
  settingsFile=path.join(app.getPath('userData'),'settings.json');
