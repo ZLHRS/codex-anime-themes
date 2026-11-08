@@ -45,7 +45,7 @@ function compose(id,value){
  const a=normalize(value);const [label,kind,color]=designs[id]||['Мягкое свечение','moon','#aabbee'];
  const selector='html.codex-theme-studio .main-surface:not(.main-surface .main-surface)';
  const portraits=selector+'::before'+(['tatsumaki-jade-duo','crimson-heart-duo','private-duo','tidal-halo-duo'].includes(id)?','+selector+'::after':'');
- const portraitCss=`
+ const portraitCss=require('./readability.cjs')+`
 ${portraits}{filter:brightness(${a.brightness/100})!important;scale:${a.size/100}!important;translate:${a.x}vw ${a.y}vh!important;}
 `;
  let css=portraitCss+` html.codex-theme-studio #cts-stage{pointer-events:none!important;user-select:none;}
