@@ -1,6 +1,7 @@
-﻿param([string]$Installer,[string]$Target,[int]$StudioPid,[string]$ResultFile,[switch]$Portable)
+﻿param([string]$Installer,[string]$Target,[int]$StudioPid,[string]$ResultFile,[switch]$Portable,[string]$ReadyFile)
 $ErrorActionPreference='Stop'
 try {
+ if($ReadyFile){[IO.File]::WriteAllText($ReadyFile,'ready')}
  for($i=0;$i -lt 60 -and (Get-Process -Id $StudioPid -ErrorAction SilentlyContinue);$i++){Start-Sleep -Milliseconds 500}
  if(Get-Process -Id $StudioPid -ErrorAction SilentlyContinue){throw 'Theme Studio не завершилось. Обновление отменено.'}
  if($Portable){
@@ -27,7 +28,7 @@ try {
     Copy-Item -LiteralPath $to -Destination $saved -Force;$replaced+=@{From=$saved;To=$to}
    }
    New-Item -ItemType Directory -Force (Split-Path -Parent $to)|Out-Null
-   Copy-Item -LiteralPath $file.FullName -Destination $to -Force
+   for($attempt=0;;$attempt++){try{Copy-Item -LiteralPath $file.FullName -Destination $to -Force;break}catch{if($attempt -ge 29){throw};Start-Sleep -Milliseconds 500}}
   }}catch{foreach($item in $replaced){Copy-Item -LiteralPath $item.From -Destination $item.To -Force};throw}
  }else{
   $process=Start-Process -FilePath $Installer -ArgumentList ('/S /D='+(Split-Path -Parent $Target)) -PassThru -Wait -WindowStyle Hidden
@@ -37,4 +38,4 @@ try {
 } catch {
  [IO.File]::WriteAllText($ResultFile,('Не удалось обновить: '+$_.Exception.Message),[Text.UTF8Encoding]::new($false))
 }
-if(Test-Path -LiteralPath $Target){Start-Process -FilePath $Target -WindowStyle Hidden}
+if(Test-Path -LiteralPath $Target){Start-Process -FilePath $Target -WorkingDirectory (Split-Path -Parent $Target) -WindowStyle Normal}

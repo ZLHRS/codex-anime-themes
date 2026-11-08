@@ -149,6 +149,7 @@ async function shortcut(kind='chat'){
  if(process.platform==='win32'){
   const file=path.join(desktop,name+'.lnk');
   const args=launchArgs.map(a=>'"'+a+'"').join(' ');
+  try{const old=shell.readShortcutLink(file);if(old.target.toLowerCase()===exe.toLowerCase()&&old.args===args&&old.cwd.toLowerCase()===path.dirname(exe).toLowerCase())return file;}catch{}
   const ok=shell.writeShortcutLink(file,(await core.exists(file)?'update':'create'),{target:exe,args,cwd:path.dirname(exe),description:studio?'Выбор и настройка тем ZLHRS':'ChatGPT с последней темой ZLHRS',icon:exe,iconIndex:0});if(!ok)throw new Error('Windows не разрешила запись на рабочий стол.');
   const saved=shell.readShortcutLink(file);if(saved.target.toLowerCase()!==exe.toLowerCase()||saved.args!==args)throw new Error('Windows сохранила неверный ярлык.');return file;
  }else if(process.platform==='linux'){
@@ -175,7 +176,7 @@ async function updateApp(){
  const result=path.join(app.getPath('userData'),'update-result.txt');
  let command,args;
  if(process.platform==='win32'){
-  const helper=path.join(directory,'update.ps1');await fs.copyFile(path.join(__dirname,'update-windows.ps1'),helper);
+  const helper=path.join(directory,'update.ps1');await fs.writeFile(helper,'\ufeff'+(await fs.readFile(path.join(__dirname,'update-windows.ps1'),'utf8')).replace(/^\uFEFF/,''),'utf8');
   command=path.join(process.env.SystemRoot,'System32/WindowsPowerShell/v1.0/powershell.exe');
   args=['-NoProfile','-NonInteractive','-WindowStyle','Hidden','-ExecutionPolicy','Bypass','-File',helper,'-Installer',installer,'-Target',process.execPath,'-StudioPid',String(process.pid),'-ResultFile',result];
   if(portable)args.push('-Portable');
@@ -192,6 +193,7 @@ async function updateApp(){
  }
  await core.saveSettings(settingsFile,settings);
  status='Обновление проверено. Устанавливаем и перезапускаем приложение…';notify();
- await new Promise((resolve,reject)=>{const child=spawn(command,args,{detached:true,stdio:'ignore',windowsHide:true});child.once('error',reject);child.once('spawn',()=>{child.unref();resolve();});});
+ if(process.platform==='win32')await require('./update-launcher.cjs').launchWindowsUpdate(command,args,directory);
+ else await new Promise((resolve,reject)=>{const child=spawn(command,args,{detached:true,stdio:'ignore',windowsHide:true});child.once('error',reject);child.once('spawn',()=>{child.unref();resolve();});});
  app.quit();
 }
