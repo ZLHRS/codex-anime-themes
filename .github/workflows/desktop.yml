@@ -73,4 +73,4 @@ jobs:
       - name: Publish installers
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release create "$GITHUB_REF_NAME" release/* --repo "$GITHUB_REPOSITORY" --title "ZLHRS Theme Studio $GITHUB_REF_NAME" --notes "Theme Studio for Windows, macOS (Apple Silicon and Intel), and Linux. Includes all 16 themes. Requires a compatible installed ChatGPT desktop app. Packages are unsigned. OS builds and gallery smoke tests are automated; actual ChatGPT theme integration is verified on Windows only."
+        run: gh release create "$GITHUB_REF_NAME" release/* --repo "$GITHUB_REPOSITORY" --title "ZLHRS Theme Studio $GITHUB_REF_NAME" --notes "Theme Studio for Windows, macOS (Apple Silicon and Intel), and Linux. Includes all bundled themes. Requires a compatible installed ChatGPT desktop app. Packages are unsigned. OS builds and gallery smoke tests are automated; actual ChatGPT theme integration is verified on Windows only."
