@@ -1,4 +1,4 @@
-const {app,BrowserWindow,ipcMain,dialog,Tray,Menu,shell,nativeImage} = require('electron');
+const {app,BrowserWindow,ipcMain,dialog,shell} = require('electron');
 const fs=require('node:fs/promises');
 const path=require('node:path');
 const localThemes=require('./local-themes.cjs');
@@ -11,7 +11,7 @@ const root=path.resolve(__dirname,'..');
 const themeSession=new ThemeSession(root);
 let legacyGuard;
 let themeRoot=root;
-let window,tray,settings={},settingsFile,catalog=[],timer,busy=false,cached,status='Выберите тему — она сохранится для следующих запусков.',quitting=false,lastShortcut='',updating=false;
+let window,settings={},settingsFile,catalog=[],timer,busy=false,cached,status='Выберите тему — она сохранится для следующих запусков.',quitting=false,lastShortcut='',updating=false;
 const smoke=process.argv.includes('--smoke-test');
 if(smoke){const temp=path.join(app.getPath('temp'),'zlhrs-smoke-'+process.pid);app.setPath('userData',temp);require('node:fs').mkdirSync(path.join(temp,'Desktop'),{recursive:true});app.setPath('desktop',path.join(temp,'Desktop'));}
 const launchOnly=process.argv.includes('--launch');
@@ -24,7 +24,7 @@ else {
 app.on('second-instance',(_event,args)=>{if(args.includes('--quit-for-update')){app.quit();return;}if(args.includes('--launch'))Promise.resolve(startup).then(()=>{if(!busy)return apply(settings.theme,true);}).catch(report);else Promise.resolve(startup).then(show).catch(report);});
 app.on('before-quit',()=>{quitting=true;clearInterval(timer);legacyGuard?.stop();});
 app.on('window-all-closed',()=>{});
-app.on('activate',show);
+app.on('activate',()=>{if(!launchOnly)show();});
 startup=app.whenReady().then(init).catch(error=>{if(smoke){console.error(error);app.exit(1);}else{dialog.showErrorBox('ZLHRS Theme Studio',error.message);app.quit();}});
 }
 function report(error){status=error.message;notify();}
@@ -36,7 +36,7 @@ function createWindow(){
  window.setMenuBarVisibility(false);
  window.webContents.setWindowOpenHandler(()=>({action:'deny'}));
  window.webContents.on('will-navigate',event=>event.preventDefault());
- // The tray and theme session live in the main process. Release the gallery
+ // The theme session lives in the main process without a tray icon. Release the gallery
  // renderer and decoded previews when closed; recreate them on demand.
  const createdWindow=window;
  window.on('closed',()=>{if(window===createdWindow)window=null;});
@@ -142,18 +142,19 @@ async function init(){
    if(window!==null)throw new Error('Themed chat launcher opened the gallery');
    const foreground=core.foreground;core.foreground=async()=>{throw new Error('Window not ready yet');};
    try{await apply(settings.theme,true);if(!timer)throw new Error('Theme recovery timer missing');}finally{core.foreground=foreground;}
+   await fs.unlink(shortcutState.lastShortcut);await fs.unlink(studioShortcut);
    const reopened=createWindow();await new Promise(resolve=>reopened.webContents.once('did-finish-load',resolve));
    const restored=await reopened.webContents.executeJavaScript('window.studio.state()');
+   if(await core.exists(shortcutState.lastShortcut)||await core.exists(studioShortcut))throw new Error('Deleted shortcuts were recreated');
    if(restored.selected!==original||restored.appearance.brightness!==137)throw new Error('Gallery reopen lost settings');
    app.exit(0);return;
   }await new Promise(r=>setTimeout(r,100));}
   throw new Error('Gallery smoke test failed: '+count);
  }
  await guardStartup;startupLaunched=await earlyLaunch;
- const icon=nativeImage.createFromPath(path.join(root,'assets/studio-logo.png')).resize({width:22,height:22});
- tray=new Tray(icon);tray.setToolTip('ZLHRS Theme Studio');tray.setContextMenu(Menu.buildFromTemplate([{label:'Выбрать тему',click:show},{label:'Открыть ChatGPT',click:()=>apply(settings.theme,true).catch(report)},{type:'separator'},{label:'Выйти',click:()=>app.quit()}]));tray.on('click',show);
- if(app.isPackaged){try{await shortcut('studio');await shortcut();settings.shortcutFor=process.execPath;await core.saveSettings(settingsFile,settings);}catch(error){report(error);}}
- if(launchOnly){try{await apply(settings.theme,true);}catch(e){report(e);if(process.platform==='win32')tray.displayBalloon({title:'ChatGPT с темой',content:e.message});}}else show();
+ // Desktop shortcuts are created only by the explicit button (or installer).
+ // Launching from Start must respect shortcuts the user has deleted.
+ if(launchOnly){try{await apply(settings.theme,true);}catch(e){report(e);}}else show();
 }
 async function apply(id,openWindow=false){
  if(!catalog.some(t=>t.id===id))throw new Error('Неизвестная тема.');
