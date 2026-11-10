@@ -14,7 +14,7 @@ jobs:
           - os: windows-latest
             args: --win --x64
             label: windows-x64
-          - os: macos-latest
+          - os: macos-15
             args: --mac --arm64 --x64
             label: macos
           - os: ubuntu-latest
@@ -74,4 +74,4 @@ jobs:
       - name: Publish installers
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release create "$GITHUB_REF_NAME" release/* --repo "$GITHUB_REPOSITORY" --title "ZLHRS Theme Studio $GITHUB_REF_NAME" --notes-file "docs/RELEASE-2.5.14.md"
+        run: gh release create "$GITHUB_REF_NAME" release/* --repo "$GITHUB_REPOSITORY" --title "ZLHRS Theme Studio $GITHUB_REF_NAME" --notes-file "docs/RELEASE-2.5.15.md"
