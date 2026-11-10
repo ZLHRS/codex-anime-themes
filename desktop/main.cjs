@@ -142,7 +142,10 @@ async function init(){
    if(window!==null)throw new Error('Themed chat launcher opened the gallery');
    const foreground=core.foreground;core.foreground=async()=>{throw new Error('Window not ready yet');};
    try{await apply(settings.theme,true);if(!timer)throw new Error('Theme recovery timer missing');}finally{core.foreground=foreground;}
-   await fs.unlink(shortcutState.lastShortcut);await fs.unlink(studioShortcut);
+   for(const shortcutPath of [shortcutState.lastShortcut,studioShortcut]){
+    if(path.dirname(path.resolve(shortcutPath))!==path.resolve(app.getPath('desktop')))throw new Error('Test shortcut escaped temporary desktop');
+    await fs.rm(shortcutPath,{recursive:true});
+   }
    const reopened=createWindow();await new Promise(resolve=>reopened.webContents.once('did-finish-load',resolve));
    const restored=await reopened.webContents.executeJavaScript('window.studio.state()');
    if(await core.exists(shortcutState.lastShortcut)||await core.exists(studioShortcut))throw new Error('Deleted shortcuts were recreated');
