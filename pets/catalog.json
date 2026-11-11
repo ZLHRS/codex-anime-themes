@@ -139,6 +139,66 @@
         "zero-two-rose"
       ],
       "sharedPetId": "sharepet_6af4995a0cc0819187ee27006ad958c1"
+    },
+    {
+      "id": "maomao",
+      "name": "Маомао",
+      "themeIds": [
+        "jade-silk",
+        "jade-evening-garden"
+      ],
+      "sharedPetId": "sharepet_6af4ccd107588191825a241c196559e7"
+    },
+    {
+      "id": "jibril",
+      "name": "Джибрил",
+      "themeIds": [
+        "jibril-amber-library"
+      ],
+      "sharedPetId": "sharepet_6af4ccd3ef5881918a1b78d882a00943"
+    },
+    {
+      "id": "mahiru",
+      "name": "Махиру Сиина",
+      "themeIds": [
+        "mayuri-amber"
+      ],
+      "sharedPetId": "sharepet_6af4ccd728548191a5fe3bf07930ec3a"
+    },
+    {
+      "id": "waguri",
+      "name": "Каоруко Вагури",
+      "themeIds": [
+        "waguri-snowfall"
+      ],
+      "sharedPetId": "sharepet_6af4ccd9c8cc8191b47bd4084879b87d"
+    },
+    {
+      "id": "kurisu",
+      "name": "Курису Макисе",
+      "themeIds": [
+        "kurisu-worldline",
+        "kurisu-lab-evening"
+      ],
+      "sharedPetId": "sharepet_6af4cd1827148191b6c2e9e48c0f135f"
+    },
+    {
+      "id": "frieren",
+      "name": "Фрирен",
+      "themeIds": [
+        "frieren-sage-heart",
+        "frieren-fern-lilac"
+      ],
+      "sharedPetId": "sharepet_6af4cd19eb0881919f1fa09fe8c3ea2b"
+    },
+    {
+      "id": "fern",
+      "name": "Ферн",
+      "themeIds": [
+        "fern-plum-hush",
+        "frieren-fern-lilac"
+      ],
+      "sharedPetId": "sharepet_6af4cd23b7708191ad654dbf03a9b3d1"
     }
   ]
 }
