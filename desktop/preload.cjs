@@ -8,6 +8,7 @@ contextBridge.exposeInMainWorld('studio',{
  shortcut:()=>ipcRenderer.invoke('studio:shortcut'),
  reveal:()=>ipcRenderer.invoke('studio:reveal'),
  refresh:()=>ipcRenderer.invoke('studio:refresh'),
+ importPets:()=>ipcRenderer.invoke('studio:import-pets'),
  update:()=>ipcRenderer.invoke('studio:update'),
  quit:()=>ipcRenderer.invoke('studio:quit'),
  subscribe:callback=>ipcRenderer.on('studio:state',(_event,state)=>callback(state))

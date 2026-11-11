@@ -29,6 +29,22 @@
     selectComposerSurfaces,
   } = __CTS_COMPOSER_OVERFLOW_HELPERS__;
   const RUNTIME_CSS = `
+/* Settings uses its own opaque page inside the themed main surface. Scope
+   the override to its named settings group, never to unrelated dialogs. */
+html.codex-theme-studio main [class~="electron:bg-surface"]:has(> div > [class~="group/settings"]) {
+  background: transparent !important;
+}
+html.codex-theme-studio [class~="group/settings"] {
+  --color-surface: var(--night, #18141e);
+  --color-surface-secondary: var(--surface, #292331);
+  --color-surface-elevated: var(--surface, #292331);
+  --color-text-primary: var(--ink, #f2eef7);
+  --color-border: var(--line, #655570);
+}
+html.codex-theme-studio [class~="group/settings"] .rounded-2xl.border {
+  background: color-mix(in srgb, var(--surface, #292331) 94%, transparent) !important;
+  border-color: var(--line, #655570) !important;
+}
 /* Home composers paint their body separately from the shared outer shell.
    Use semantic attributes; CSS-module class hashes change between releases. */
 html.codex-theme-studio .composer-surface-chrome[data-composer-surface-variant] {

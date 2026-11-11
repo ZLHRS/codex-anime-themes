@@ -1,6 +1,6 @@
 {
   "name": "zlhrs-theme-studio",
-  "version": "2.5.15",
+  "version": "2.6.0",
   "description": "Cross-platform theme gallery for the ChatGPT desktop app",
   "author": {
     "name": "ZLHRS",
@@ -31,6 +31,7 @@
     "files": [
       "desktop/**/*",
       "catalog.json",
+      "pets/catalog.json",
       "themes/**/*",
       "previews/*-chat.jpg",
       "assets/**/*",

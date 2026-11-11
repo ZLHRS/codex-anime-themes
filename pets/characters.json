@@ -1,0 +1,22 @@
+{
+ "schemaVersion": 1,
+ "excludedThemes": ["silver-azure-bloom", "crimson-heart-duo"],
+ "characters": [
+  {"id":"reze","name":"Резе","themes":["reze-night-bloom"]},
+  {"id":"furina","name":"Фурина","themes":["blue-cat-nocturne","furina-moonlit-repose","furina-silver-slumber","hu-tao-furina-duality"]},
+  {"id":"ai-hoshino","name":"Ай Хосино","themes":["ai-bunny-refrain","ai-prismatic-gaze","ai-starlit-encore"]},
+  {"id":"rem","name":"Рем","themes":["rem-azure-fury","rem-butterfly-dream"]},
+  {"id":"roxy","name":"Рокси","themes":["azure-morpho"]},
+  {"id":"cc","name":"C.C.","themes":["cc-mint-contract"]},
+  {"id":"fubuki","name":"Фубуки","themes":["fubuki-velvet"]},
+  {"id":"hu-tao","name":"Ху Тао","themes":["hu-tao-furina-duality"]},
+  {"id":"kurumi","name":"Куруми","themes":["ivory-midnight-frame"]},
+  {"id":"kana","name":"Кана","themes":["kana-soft-garnet","kana-ruby-spotlight"]},
+  {"id":"sora","name":"Сора","themes":["sora-ribbon","private-duo"]},
+  {"id":"shinobu","name":"Шинобу Кочо","themes":["shinobu-wisteria"]},
+  {"id":"sylphie","name":"Сильфи","themes":["sylphie-moonstone"]},
+  {"id":"tatsumaki","name":"Татсумаки","themes":["tatsumaki-jade","tatsumaki-jade-duo"]},
+  {"id":"noelle","name":"Ноэль","themes":["tidal-halo","tidal-halo-duo"]},
+  {"id":"zero-two","name":"Zero Two","themes":["zero-two-rose"]}
+ ]
+}

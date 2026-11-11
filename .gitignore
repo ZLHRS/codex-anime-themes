@@ -13,3 +13,5 @@ dist/
 Thumbs.db
 .selected-theme.json
 .theme-error.log
+pets/runs/
+pets/library-pages.json

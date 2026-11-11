@@ -1,10 +1,11 @@
-const {app,BrowserWindow,ipcMain,dialog,shell} = require('electron');
+const {app,BrowserWindow,ipcMain,dialog,shell,clipboard} = require('electron');
 const fs=require('node:fs/promises');
 const path=require('node:path');
 const localThemes=require('./local-themes.cjs');
 const core=require('./core.cjs');
 const updates=require('./updates.cjs');
 const appearance=require('./appearance.cjs');
+const pets=require('./pets.cjs');
 const {ThemeSession}=require('./theme-session.cjs');
 const {spawn}=require('node:child_process');
 const root=path.resolve(__dirname,'..');
@@ -19,6 +20,7 @@ const portable=process.platform==='win32'&&require('node:fs').existsSync(path.jo
 const ownsLock=smoke || app.requestSingleInstanceLock();
 let startup;
 let startupLaunched=false;
+let petCatalog=[];
 if(!ownsLock||process.argv.includes('--quit-for-update'))app.quit();
 else {
 app.on('second-instance',(_event,args)=>{if(args.includes('--quit-for-update')){app.quit();return;}if(args.includes('--launch'))Promise.resolve(startup).then(()=>{if(!busy)return apply(settings.theme,true);}).catch(report);else Promise.resolve(startup).then(show).catch(report);});
@@ -28,7 +30,7 @@ app.on('activate',()=>{if(!launchOnly)show();});
 startup=app.whenReady().then(init).catch(error=>{if(smoke){console.error(error);app.exit(1);}else{dialog.showErrorBox('ZLHRS Theme Studio',error.message);app.quit();}});
 }
 function report(error){status=error.message;notify();}
-function snapshot(){return {themes:catalog,selected:settings.theme,appPath:settings.appPath||'',status,platform:process.platform,version:app.getVersion(),lastShortcut,updating,appearance:appearance.normalize(settings.appearance?.[settings.theme]),effect:appearance.designs[settings.theme]?.[0]||''};}
+function snapshot(){return {themes:catalog,selected:settings.theme,appPath:settings.appPath||'',status,platform:process.platform,version:app.getVersion(),lastShortcut,updating,petCount:petCatalog.length,appearance:appearance.normalize(settings.appearance?.[settings.theme]),effect:appearance.designs[settings.theme]?.[0]||''};}
 function notify(){if(window&&!window.isDestroyed())window.webContents.send('studio:state',snapshot());}
 function show(){if(window&&!window.isDestroyed()){window.show();window.focus();}else createWindow();}
 function createWindow(){
@@ -61,6 +63,7 @@ async function refreshThemes(){
  }finally{busy=false;}
 }
 async function init(){
+ petCatalog=await pets.read(root);
  const guardStartup=smoke?Promise.resolve():require('./legacy-guard.cjs').startLegacyGuard().then(value=>{legacyGuard=value;});
  guardStartup.catch(()=>{});
  themeRoot=await localThemes.resolveSource(path.join(app.isPackaged?process.resourcesPath:root,'theme-source.json'),root);
@@ -102,10 +105,17 @@ async function init(){
   const result=await dialog.showOpenDialog(window,{title:'Выберите приложение ChatGPT / Codex',properties:['openFile'],filters:process.platform==='win32'?[{name:'Приложение',extensions:['exe']}]:undefined});
   if(!result.canceled){settings.appPath=result.filePaths[0];await core.saveSettings(settingsFile,settings);status='Приложение выбрано. Можно применить тему.';notify();}return snapshot();
  });
- ipcMain.handle('studio:shortcut',async()=>{try{lastShortcut=await shortcut();status='Готово: «ChatGPT с темой» на рабочем столе. Нажмите «Показать ярлык», чтобы его найти.';}catch(e){status='Не удалось создать ярлык: '+e.message;}notify();return snapshot();});
+ ipcMain.handle('studio:shortcut',async()=>{try{await shortcut('studio');lastShortcut=await shortcut();status='Ярлыки Studio и ChatGPT с темой обновлены. Старые ссылки заменены.';}catch(e){status='Не удалось создать ярлык: '+e.message;}notify();return snapshot();});
  ipcMain.handle('studio:reveal',()=>{if(lastShortcut)shell.showItemInFolder(lastShortcut);});
  ipcMain.handle('studio:update',async()=>{try{await updateApp();}catch(e){updating=false;report(e);}return snapshot();});
  ipcMain.handle('studio:refresh',refreshThemes);
+ ipcMain.handle('studio:import-pets',async()=>{
+  if(busy||updating)throw new Error('Дождитесь завершения текущего действия.');
+  clipboard.writeText(pets.importPrompt(petCatalog));
+  try{await apply(settings.theme,true);status='Запрос на добавление '+petCatalog.length+' питомцев скопирован. Вставьте его в новый чат ChatGPT и отправьте. Уже добавленные питомцы будут пропущены.';}
+  catch(error){status='Запрос скопирован. Откройте ChatGPT, вставьте и отправьте его. '+error.message;}
+  notify();return snapshot();
+ });
  ipcMain.handle('studio:quit',()=>app.quit());
  if(smoke){
   let launches=0,focuses=0;
@@ -124,7 +134,13 @@ async function init(){
    if(!await core.exists(studioShortcut))throw new Error('Studio shortcut missing');
    if(process.platform==='win32'){shell.writeShortcutLink(studioShortcut,'update',{target:path.join(app.getPath('temp'),'old-studio.exe')});}
    if(await shortcut('studio')!==studioShortcut)throw new Error('Shortcut location changed');
-   if(process.platform==='win32'&&shell.readShortcutLink(studioShortcut).target!==process.execPath)throw new Error('Stale Studio shortcut not repaired');
+   if(process.platform==='win32'){
+    if(shell.readShortcutLink(studioShortcut).target!==process.execPath)throw new Error('Stale Studio shortcut not repaired');
+    const startLink=path.join(app.getPath('userData'),'test-start-menu','ZLHRS Theme Studio.lnk');
+    shell.writeShortcutLink(startLink,'update',{target:path.join(app.getPath('temp'),'old-studio.exe')});
+    await w.webContents.executeJavaScript('window.studio.shortcut()');
+    if(shell.readShortcutLink(startLink).target!==process.execPath||shell.readShortcutLink(startLink).args.includes('--launch'))throw new Error('Start menu Studio shortcut not repaired');
+   }
    await w.webContents.executeJavaScript('window.studio.launch()');
    if(launches!==1||focuses!==1)throw new Error('Launch must raise already running ChatGPT');
    await w.webContents.executeJavaScript("(async()=>{const before=await window.studio.state();document.getElementById('search').value='no-match';await document.getElementById('refresh').onclick();const after=await window.studio.state();if(after.selected!==before.selected||document.querySelectorAll('.card').length!==after.themes.length)throw Error('Catalog refresh failed');})()");
@@ -150,6 +166,13 @@ async function init(){
    const restored=await reopened.webContents.executeJavaScript('window.studio.state()');
    if(await core.exists(shortcutState.lastShortcut)||await core.exists(studioShortcut))throw new Error('Deleted shortcuts were recreated');
    if(restored.selected!==original||restored.appearance.brightness!==137)throw new Error('Gallery reopen lost settings');
+   const writeClipboard=clipboard.writeText;let importText='';
+   clipboard.writeText=text=>{importText=text;};
+   try{
+    await reopened.webContents.executeJavaScript("document.getElementById('import-pets').onclick()");
+    if(!importText.includes('https://chatgpt.com/s/sharepet_')||!status.includes('скопирован'))throw new Error('Pet import request was not prepared');
+    if(settings.theme!==original)throw new Error('Pet import changed theme selection');
+   }finally{clipboard.writeText=writeClipboard;}
    app.exit(0);return;
   }await new Promise(r=>setTimeout(r,100));}
   throw new Error('Gallery smoke test failed: '+count);
@@ -200,11 +223,18 @@ async function shortcut(kind='chat'){
  await fs.mkdir(desktop,{recursive:true});
  const launchArgs=[...(app.isPackaged?[]:[root]),...(studio?[]:['--launch'])];
  if(process.platform==='win32'){
-  const file=path.join(desktop,name+'.lnk');
+  const programs=smoke?path.join(app.getPath('userData'),'test-start-menu'):path.join(app.getPath('appData'),'Microsoft','Windows','Start Menu','Programs');
   const args=launchArgs.map(a=>'"'+a+'"').join(' ');
-  try{const old=shell.readShortcutLink(file);if(old.target.toLowerCase()===exe.toLowerCase()&&old.args===args&&old.cwd.toLowerCase()===path.dirname(exe).toLowerCase())return file;}catch{}
-  const ok=shell.writeShortcutLink(file,(await core.exists(file)?'update':'create'),{target:exe,args,cwd:path.dirname(exe),description:studio?'Выбор и настройка тем ZLHRS':'ChatGPT с последней темой ZLHRS',icon:exe,iconIndex:0});if(!ok)throw new Error('Windows не разрешила запись на рабочий стол.');
-  const saved=shell.readShortcutLink(file);if(saved.target.toLowerCase()!==exe.toLowerCase()||saved.args!==args)throw new Error('Windows сохранила неверный ярлык.');return file;
+  for(const directory of [desktop,programs]){
+   await fs.mkdir(directory,{recursive:true});
+   const file=path.join(directory,name+'.lnk');
+   const details={target:exe,args,cwd:path.dirname(exe),description:studio?'Выбор и настройка тем ZLHRS':'ChatGPT с последней темой ZLHRS',icon:exe,iconIndex:0};
+   const ok=shell.writeShortcutLink(file,await core.exists(file)?'update':'create',details);
+   if(!ok)throw new Error('Windows не разрешила обновление ярлыка.');
+   const saved=shell.readShortcutLink(file);
+   if(saved.target.toLowerCase()!==exe.toLowerCase()||saved.args!==args)throw new Error('Windows сохранила неверный ярлык.');
+  }
+  return path.join(desktop,name+'.lnk');
  }else if(process.platform==='linux'){
   const icon=path.join(app.getPath('userData'),'studio.png');await fs.copyFile(path.join(root,'assets/studio-logo.png'),icon);
   const quoted='"'+exe.replace(/[\\"`$]/g,'\\$&').replaceAll('%','%%')+'"';
