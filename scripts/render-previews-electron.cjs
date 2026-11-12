@@ -18,7 +18,20 @@ Module._load=function(name,...args){
      evaluate:fn=>win.webContents.executeJavaScript('('+fn.toString()+')()'),
      screenshot:async({path,quality})=>{
       await win.webContents.executeJavaScript('new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)))');
-      fs.writeFileSync(path,(await win.webContents.capturePage()).toJPEG(quality));
+      // Offscreen Chromium can return a uniform frame before its first paint.
+      // Never replace a usable gallery preview with that blank frame.
+      for(let attempt=0;attempt<20;attempt++){
+       win.webContents.invalidate();
+       await new Promise(resolve=>setTimeout(resolve,150));
+       const frame=await win.webContents.capturePage();
+       const pixels=frame.toBitmap();
+       let varied=false;
+       for(let i=4;i<pixels.length;i+=4){
+        if(pixels[i]!==pixels[0]||pixels[i+1]!==pixels[1]||pixels[i+2]!==pixels[2]){varied=true;break;}
+       }
+       if(varied){fs.writeFileSync(path,frame.toJPEG(quality));return;}
+      }
+      throw new Error('Preview stayed blank: '+path);
      }
     };
    },
