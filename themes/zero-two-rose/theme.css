@@ -8,8 +8,7 @@ html.codex-theme-studio {
 html.codex-theme-studio body { background: #170e15 !important; color: var(--rose-text); }
 html.codex-theme-studio .main-surface { background: transparent !important; }
 html.codex-theme-studio .main-surface:not(.main-surface .main-surface) {
-  background: linear-gradient(90deg,rgba(23,12,21,.94) 0%,rgba(23,12,21,.80) 48%,rgba(23,12,21,.59) 100%),
-              var(--cts-asset-portrait) right bottom / auto 90% no-repeat,
+  background: var(--cts-asset-portrait) right bottom / auto 90% no-repeat,
               linear-gradient(125deg,#160f17,#40182c) !important;
   color: var(--rose-text);
 }
@@ -270,4 +269,12 @@ html.codex-theme-studio .main-surface div:has(> pre):not([data-markdown-text-sty
   border-color: transparent !important;
   box-shadow: none !important;
   outline: none !important;
+}
+
+/* Keep theme artwork fully visible, including narrow layouts. */
+html.codex-theme-studio .main-surface:not(.main-surface .main-surface)::before,
+html.codex-theme-studio .main-surface:not(.main-surface .main-surface)::after {
+ opacity:1 !important;
+ mask-image:none !important;
+ -webkit-mask-image:none !important;
 }

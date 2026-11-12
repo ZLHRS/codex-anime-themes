@@ -1,4 +1,12 @@
-module.exports = `/* Shared readability rules; remain active when decorative effects are off. */
+module.exports = `
+/* Keep theme artwork fully visible, including narrow layouts. */
+html.codex-theme-studio .main-surface:not(.main-surface .main-surface)::before,
+html.codex-theme-studio .main-surface:not(.main-surface .main-surface)::after {
+ opacity:1 !important;
+ mask-image:none !important;
+ -webkit-mask-image:none !important;
+}
+/* Shared readability rules; remain active when decorative effects are off. */
 html.codex-theme-studio [data-local-conversation-final-assistant] [data-markdown-text-style],
 html.codex-theme-studio :is([data-message-author-role="assistant"],[data-turn="assistant"],[data-testid^="assistant-message"]):not(:has([data-markdown-text-style])) {
   box-sizing: border-box;

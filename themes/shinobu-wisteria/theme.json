@@ -3,7 +3,7 @@
   "id": "shinobu-wisteria",
   "name": "Шинобу Кочо · Wisteria Veil",
   "description": "№ 07 · Заколка-бабочка и кисти глицинии.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Codex",
   "appearance": "dark",
   "license": "personal-use",
@@ -18,7 +18,7 @@
   },
   "strings": {},
   "assets": {
-    "portrait": "assets/portrait.webp",
+    "portrait": "assets/portrait-complete.webp",
     "charm": "assets/charm.png"
   },
   "css": "theme.css"
