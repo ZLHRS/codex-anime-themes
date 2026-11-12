@@ -3,7 +3,7 @@
   "id": "tatsumaki-jade",
   "name": "Татсумаки · Jade Orbit",
   "description": "№ 08 · Орбита из парящих осколков.",
-  "version": "1.0.2",
+  "version": "1.0.1",
   "author": "Codex",
   "appearance": "dark",
   "license": "personal-use",
@@ -18,7 +18,7 @@
   },
   "strings": {},
   "assets": {
-    "portrait": "assets/portrait-orbit-complete.webp",
+    "portrait": "assets/portrait.webp",
     "charm": "assets/charm.png"
   },
   "css": "theme.css"
