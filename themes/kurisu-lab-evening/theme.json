@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 2,
+  "id": "kurisu-lab-evening",
+  "name": "Курису · Lab Evening",
+  "description": "Курису с лапшой на диване. Художественная версия лаборатории с ЭЛТ-монитором, электроникой и микроволновкой с телефоном.",
+  "version": "1.0.0",
+  "author": "ZLHRS",
+  "appearance": "dark",
+  "license": "personal-use",
+  "category": "anime",
+  "tags": [
+    "anime",
+    "kurisu",
+    "steins-gate",
+    "dark",
+    "landscape"
+  ],
+  "colors": {
+    "accent": "#96b6b3",
+    "light": "#c9d2c4"
+  },
+  "strings": {},
+  "assets": {
+    "portrait": "assets/portrait.webp",
+    "charm": "assets/charm.svg"
+  },
+  "css": "theme.css"
+}

@@ -2,8 +2,8 @@
   "schemaVersion": 2,
   "id": "tatsumaki-jade-duo",
   "name": "Тацумаки · Jade Duo",
-  "description": "№ 08 · Орбита из парящих осколков.",
-  "version": "1.0.0",
+  "description": "Два портрета Тацумаки, нефритовый пейзаж, парящие камни и тонкие дуги энергии.",
+  "version": "1.1.0",
   "author": "Codex",
   "appearance": "dark",
   "license": "personal-use",
@@ -20,7 +20,8 @@
   "assets": {
     "portrait": "assets/portrait.webp",
     "charm": "assets/charm.png",
-    "left": "assets/left.webp"
+    "left": "assets/left.webp",
+    "landscape": "assets/center-landscape.webp"
   },
   "css": "theme.css"
 }

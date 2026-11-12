@@ -17,6 +17,13 @@
   {"id":"sylphie","name":"Сильфи","themes":["sylphie-moonstone"]},
   {"id":"tatsumaki","name":"Татсумаки","themes":["tatsumaki-jade","tatsumaki-jade-duo"]},
   {"id":"noelle","name":"Ноэль","themes":["tidal-halo","tidal-halo-duo"]},
-  {"id":"zero-two","name":"Zero Two","themes":["zero-two-rose"]}
+  {"id":"zero-two","name":"Zero Two","themes":["zero-two-rose"]},
+  {"id":"maomao","name":"Маомао","themes":["jade-silk","jade-evening-garden"]},
+  {"id":"jibril","name":"Джибрил","themes":["jibril-amber-library"]},
+  {"id":"mahiru","name":"Махиру Сиина","themes":["mayuri-amber"]},
+  {"id":"waguri","name":"Каоруко Вагури","themes":["waguri-snowfall"]},
+  {"id":"kurisu","name":"Курису Макисе","themes":["kurisu-worldline","kurisu-lab-evening"]},
+  {"id":"frieren","name":"Фрирен","themes":["frieren-sage-heart","frieren-fern-lilac"]},
+  {"id":"fern","name":"Ферн","themes":["fern-plum-hush","frieren-fern-lilac"]}
  ]
 }

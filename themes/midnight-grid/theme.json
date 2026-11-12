@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 2,
+  "id": "midnight-grid",
+  "name": "Midnight Grid · Ночной режим",
+  "description": "Для любителей строгого тёмного интерфейса: графит, холодные голубые акценты и тонкая сетка по краям.",
+  "version": "1.0.0",
+  "author": "ZLHRS",
+  "appearance": "dark",
+  "license": "personal-use",
+  "category": "minimal",
+  "tags": [
+    "minimal",
+    "dark",
+    "technical",
+    "focus"
+  ],
+  "colors": {
+    "accent": "#90accb",
+    "light": "#bfd0e3"
+  },
+  "strings": {},
+  "assets": {},
+  "css": "theme.css"
+}

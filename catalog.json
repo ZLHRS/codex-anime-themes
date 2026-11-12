@@ -133,5 +133,110 @@
     "id": "tidal-halo-duo",
     "name": "Tidal Halo · Twin Current",
     "path": "themes/tidal-halo-duo"
+  },
+  {
+    "id": "jade-silk",
+    "name": "Jade Silk · Нефритовый шёлк",
+    "path": "themes/jade-silk"
+  },
+  {
+    "id": "plum-velvet",
+    "name": "Plum Velvet · Сливовый бархат",
+    "path": "themes/plum-velvet"
+  },
+  {
+    "id": "mayuri-amber",
+    "name": "Маюри · Amber Reverie",
+    "path": "themes/mayuri-amber"
+  },
+  {
+    "id": "sage-reverie",
+    "name": "Sage Reverie · Тихий шалфей",
+    "path": "themes/sage-reverie"
+  },
+  {
+    "id": "silver-aquamarine",
+    "name": "Silver Aquamarine · Серебряная тишина",
+    "path": "themes/silver-aquamarine"
+  },
+  {
+    "id": "waguri-snowfall",
+    "name": "Вагури · Snowfall Reverie",
+    "path": "themes/waguri-snowfall"
+  },
+  {
+    "id": "ai-violet-supernova",
+    "name": "Ай Хосино · Violet Supernova",
+    "path": "themes/ai-violet-supernova"
+  },
+  {
+    "id": "violet-onsen",
+    "name": "Violet Onsen · Тёплый вечер",
+    "path": "themes/violet-onsen"
+  },
+  {
+    "id": "jibril-amber-library",
+    "name": "Джибрил · Amber Library",
+    "path": "themes/jibril-amber-library"
+  },
+  {
+    "id": "kurisu-worldline",
+    "name": "Курису · Worldline Echo",
+    "path": "themes/kurisu-worldline"
+  },
+  {
+    "id": "kurisu-lab-evening",
+    "name": "Курису · Lab Evening",
+    "path": "themes/kurisu-lab-evening"
+  },
+  {
+    "id": "jade-evening-garden",
+    "name": "Jade Evening · Нефритовый вечер",
+    "path": "themes/jade-evening-garden"
+  },
+  {
+    "id": "frieren-sage-heart",
+    "name": "Фрирен · Sage Heart",
+    "path": "themes/frieren-sage-heart"
+  },
+  {
+    "id": "frieren-fern-lilac",
+    "name": "Фрирен и Ферн · Lilac Quiet",
+    "path": "themes/frieren-fern-lilac"
+  },
+  {
+    "id": "violet-silhouette",
+    "name": "Violet Silhouette · Фиолетовая тишина",
+    "path": "themes/violet-silhouette"
+  },
+  {
+    "id": "fern-plum-hush",
+    "name": "Ферн · Plum Hush",
+    "path": "themes/fern-plum-hush"
+  },
+  {
+    "id": "teal-peony",
+    "name": "Teal Peony · Бирюзовый пион",
+    "path": "themes/teal-peony"
+  },
+  {
+    "id": "stone-focus",
+    "name": "Stone Focus · Спокойный минимализм",
+    "path": "themes/stone-focus"
+  },
+  {
+    "id": "amber-study",
+    "name": "Amber Study · Тёплый кабинет",
+    "path": "themes/amber-study"
+  },
+  {
+    "id": "forest-retreat",
+    "name": "Forest Retreat · Лесная тишина",
+    "path": "themes/forest-retreat"
+  },
+  {
+    "id": "midnight-grid",
+    "name": "Midnight Grid · Ночной режим",
+    "path": "themes/midnight-grid"
   }
 ]

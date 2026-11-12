@@ -30,7 +30,7 @@ app.on('activate',()=>{if(!launchOnly)show();});
 startup=app.whenReady().then(init).catch(error=>{if(smoke){console.error(error);app.exit(1);}else{dialog.showErrorBox('ZLHRS Theme Studio',error.message);app.quit();}});
 }
 function report(error){status=error.message;notify();}
-function snapshot(){return {themes:catalog,selected:settings.theme,appPath:settings.appPath||'',status,platform:process.platform,version:app.getVersion(),lastShortcut,updating,petCount:petCatalog.length,appearance:appearance.normalize(settings.appearance?.[settings.theme]),effect:appearance.designs[settings.theme]?.[0]||''};}
+function snapshot(){return {themes:catalog,selected:settings.theme,appPath:settings.appPath||'',status,platform:process.platform,version:app.getVersion(),lastShortcut,updating,petCount:petCatalog.length,pets:petCatalog.map(({id,name})=>({id,name})),appearance:appearance.normalize(settings.appearance?.[settings.theme]),effect:appearance.designs[settings.theme]?.[0]||''};}
 function notify(){if(window&&!window.isDestroyed())window.webContents.send('studio:state',snapshot());}
 function show(){if(window&&!window.isDestroyed()){window.show();window.focus();}else createWindow();}
 function createWindow(){
@@ -66,7 +66,7 @@ async function init(){
  petCatalog=await pets.read(root);
  const guardStartup=smoke?Promise.resolve():require('./legacy-guard.cjs').startLegacyGuard().then(value=>{legacyGuard=value;});
  guardStartup.catch(()=>{});
- themeRoot=await localThemes.resolveSource(path.join(app.isPackaged?process.resourcesPath:root,'theme-source.json'),root);
+ themeRoot=await localThemes.resolveSource(path.join(app.isPackaged?process.resourcesPath:root,'theme-source.json'),root,path.join(app.getPath('userData'),'theme-source.json'));
  themeSession.themeRoot=themeRoot;
  settingsFile=path.join(app.getPath('userData'),'settings.json');
  const updateResult=path.join(app.getPath('userData'),'update-result.txt');
@@ -145,6 +145,11 @@ async function init(){
    if(launches!==1||focuses!==1)throw new Error('Launch must raise already running ChatGPT');
    await w.webContents.executeJavaScript("(async()=>{const before=await window.studio.state();document.getElementById('search').value='no-match';await document.getElementById('refresh').onclick();const after=await window.studio.state();if(after.selected!==before.selected||document.querySelectorAll('.card').length!==after.themes.length)throw Error('Catalog refresh failed');})()");
    const original=settings.theme;
+   const check=updates.check;updates.check=async()=>null;
+   await w.webContents.executeJavaScript("(async()=>{document.getElementById('search').value='no-match';document.getElementById('active').click();await document.getElementById('update').onclick();const s=await window.studio.state();if(document.querySelectorAll('.card').length!==s.themes.length||!s.status.includes('Список обновлён'))throw Error('Update did not refresh themes');})()");
+   updates.check=async()=>{throw Error('Offline test');};
+   await w.webContents.executeJavaScript("(async()=>{await document.getElementById('update').onclick();const s=await window.studio.state();if(!s.status.includes('Список обновлён')||s.updating)throw Error('Offline update lost theme refresh');})()");
+   updates.check=check;
    await w.webContents.executeJavaScript(`(async()=>{const slider=document.getElementById('brightness');slider.value='137';slider.dispatchEvent(new Event('input'));document.getElementById('animations').checked=false;await document.getElementById('save-appearance').onclick();if((await window.studio.state()).appearance.brightness!==137)throw Error('Appearance controls failed');})()`);
    if(settings.appearance[original].brightness!==137||settings.appearance[original].animations!==false)throw new Error('Appearance settings were not saved');
    const other=catalog.find(t=>t.id!==original).id;await apply(other);if(snapshot().appearance.brightness!==100)throw new Error('Settings leaked between themes');await apply(original);if(snapshot().appearance.brightness!==137)throw new Error('Theme settings were lost');
@@ -249,11 +254,15 @@ async function shortcut(kind='chat'){
  }
 }
 async function updateApp(){
- if(updating)return;
- if(!app.isPackaged)throw new Error('В режиме исходников используйте git pull и npm ci. Автообновление доступно в установленном приложении.');
- updating=true;status='Проверяем новые выпуски…';notify();
- const info=await updates.check(app.getVersion(),process.platform,process.arch,!!process.env.APPIMAGE,fetch,portable);
- if(!info){updating=false;status='У вас последняя версия '+app.getVersion()+'. Перезапуск не нужен.';notify();return;}
+ if(updating||busy)return;
+ await refreshThemes();
+ const refreshed=status;
+ if(!app.isPackaged){status=refreshed+' Программа запущена из исходников; установка готового выпуска не требуется.';notify();return;}
+ updating=true;status=refreshed+' Проверяем обновление программы…';notify();
+ let info;
+ try{info=await updates.check(app.getVersion(),process.platform,process.arch,!!process.env.APPIMAGE,fetch,portable);}
+ catch(error){updating=false;status=refreshed+' Обновление программы не проверено: '+error.message;notify();return;}
+ if(!info){updating=false;status=refreshed+' Версия программы '+app.getVersion()+' — последняя опубликованная.';notify();return;}
  const directory=path.join(app.getPath('userData'),'updates',info.version);
  const installer=await updates.download(info,directory,percent=>{status='Обновление '+info.version+': загружено '+percent+'%';notify();});
  const result=path.join(app.getPath('userData'),'update-result.txt');

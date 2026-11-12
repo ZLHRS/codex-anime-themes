@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 2,
+  "id": "teal-peony",
+  "name": "Teal Peony · Бирюзовый пион",
+  "description": "Портрет в цветочном кимоно справа, дорисованная макушка и спокойный однотонный графитово-бирюзовый фон.",
+  "version": "1.0.1",
+  "author": "ZLHRS",
+  "appearance": "dark",
+  "license": "personal-use",
+  "category": "anime",
+  "tags": [
+    "anime",
+    "dark",
+    "teal",
+    "solid"
+  ],
+  "colors": {
+    "accent": "#85adb1",
+    "light": "#bdcdd0"
+  },
+  "strings": {},
+  "assets": {
+    "portrait": "assets/portrait.webp",
+    "charm": "assets/charm.svg"
+  },
+  "css": "theme.css"
+}

@@ -189,3 +189,8 @@ html.codex-theme-studio div:has(> .composer-surface-chrome)::after {
 html.codex-theme-studio [data-thread-scroll-footer] > .pointer-events-none.absolute.bg-surface {
   display: none !important;
 }
+
+/* Extend the source environment across the canvas without scaling the portrait. */
+html.codex-theme-studio .main-surface:not(.main-surface .main-surface) {
+ background:linear-gradient(#10182b88,#10182baa),var(--cts-asset-backdrop) center / cover no-repeat,var(--night)!important;
+}

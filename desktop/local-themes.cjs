@@ -2,7 +2,12 @@ const fs=require('node:fs/promises');
 const path=require('node:path');
 const {pathToFileURL}=require('node:url');
 const core=require('./core.cjs');
-async function resolveSource(configFile,bundledRoot){
+async function resolveSource(configFile,bundledRoot,userConfigFile){
+ if(userConfigFile){
+  let present=true;
+  try{await fs.access(userConfigFile);}catch(error){if(error.code!=='ENOENT')throw error;present=false;}
+  if(present)return resolveSource(userConfigFile,bundledRoot);
+ }
  let config;
  try{config=await core.readJson(configFile);}catch(error){if(error.code==='ENOENT')return bundledRoot;throw error;}
  if(typeof config.directory!=='string'||!path.isAbsolute(config.directory))throw new Error('Укажите полный путь к папке локальных тем в theme-source.json.');

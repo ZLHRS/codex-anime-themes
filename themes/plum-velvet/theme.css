@@ -1,0 +1,158 @@
+html.codex-theme-studio {
+  --ink: color-mix(in srgb, var(--accent) 8%, #f5f2f2);
+  --night: color-mix(in srgb, var(--accent) 7%, #0b0c10);
+  --surface: color-mix(in srgb, var(--accent) 12%, #17171e);
+  --line: color-mix(in srgb, var(--accent) 32%, #282730);
+  accent-color: var(--accent);
+  caret-color: var(--light);
+}
+html.codex-theme-studio body { background: var(--night) !important; color: var(--ink); }
+html.codex-theme-studio .main-surface { background: transparent !important; }
+html.codex-theme-studio .main-surface:not(.main-surface .main-surface) {
+  position: relative; isolation: isolate;
+  background: radial-gradient(ellipse at 100% 60%,var(--surface),var(--night) 72%) !important;
+}
+html.codex-theme-studio .main-surface:not(.main-surface .main-surface)::before {
+  content: ""; position: absolute; z-index: -1; pointer-events: none;
+  inset: auto 0 0 auto; height: 90%; aspect-ratio: var(--ratio); max-width: 100%;
+  background: var(--cts-asset-portrait) right bottom / auto 100% no-repeat;
+  opacity: .44;
+  mask-image: linear-gradient(90deg,transparent,#000 33%),linear-gradient(180deg,transparent,#000 8%);
+  mask-composite: intersect;
+}
+html.codex-theme-studio .app-shell-left-panel {
+  --side-top: color-mix(in srgb,var(--accent) 18%,#211f25);
+  --side-bottom: color-mix(in srgb,var(--accent) 11%,#201f24);
+  --side-edge: var(--line); --side-ink: var(--ink);
+  --side-muted: color-mix(in srgb,var(--accent) 37%,#ccc);
+  --side-hover: color-mix(in srgb,var(--accent) 22%,#252229);
+  --side-selected: color-mix(in srgb,var(--accent) 29%,#252229);
+  --side-selected-text: var(--ink); --side-mark: var(--accent);
+}
+html.codex-theme-studio .app-shell-left-panel {
+  background: linear-gradient(155deg,var(--side-top),var(--side-bottom) 82%) !important;
+  color: var(--side-ink) !important;
+  color-scheme: dark;
+  border-right: 1px solid var(--side-edge) !important;
+  scrollbar-color: var(--side-edge) transparent;
+}
+html.codex-theme-studio .app-shell-left-panel nav {
+  color: var(--side-ink) !important;
+  background: transparent !important;
+}
+html.codex-theme-studio .app-shell-left-panel :where(button,a,[role="button"],span,p,h2,h3,svg) {
+  color: inherit !important;
+}
+html.codex-theme-studio .app-shell-left-panel :is(h2,h3,[role="heading"],[class*="text-token-text-secondary"],[class*="text-token-text-tertiary"]) {
+  color: var(--side-muted) !important;
+}
+html.codex-theme-studio .app-shell-left-panel :is(button:enabled,a,[role="button"]):hover {
+  background-color: var(--side-hover) !important;
+  color: var(--side-ink) !important;
+}
+html.codex-theme-studio .app-shell-left-panel :is([aria-current="page"],[aria-selected="true"],[data-active="true"]),
+html.codex-theme-studio .app-shell-left-panel :is([aria-current="page"],[aria-selected="true"],[data-active="true"]):hover {
+  color: var(--side-selected-text) !important;
+  background: var(--side-selected) !important;
+  box-shadow: inset 3px 0 var(--side-mark);
+}
+html.codex-theme-studio .app-shell-left-panel :focus-visible {
+  outline: 2px solid var(--side-mark) !important;
+  outline-offset: -2px;
+}
+html.codex-theme-studio .app-shell-left-panel :is(hr,[role="separator"]) {
+  border-color: var(--side-edge) !important;
+}
+html.codex-theme-studio .app-shell-left-panel ::selection {
+  color: var(--side-selected-text); background: var(--side-selected);
+}
+
+html.codex-theme-studio .app-shell-left-panel .sidebar-navigation {
+  background: transparent !important;
+}
+html.codex-theme-studio .app-shell-left-panel .sidebar-navigation :is(.text-default,.text-primary,.text-secondary,.text-tertiary,.text-muted,.text-token-text-primary,.text-token-text-secondary) {
+  color: inherit !important;
+}
+html.codex-theme-studio .app-shell-left-panel .sidebar-item[data-app-action-sidebar-thread-selected="true"] {
+  background: var(--side-selected) !important;
+  color: var(--side-selected-text) !important;
+  box-shadow: inset 3px 0 var(--side-mark);
+}
+html.codex-theme-studio .app-shell-left-panel::after,
+html.codex-theme-studio .sidebar-item[data-app-action-sidebar-thread-selected="true"]::before,
+html.codex-theme-studio [data-markdown-text-style] blockquote::before,
+html.codex-theme-studio [data-home-feed-composer] .composer-surface-chrome::before {
+  content: ""; position: absolute; pointer-events: none; z-index: 2;
+  background: var(--cts-asset-charm) center / contain no-repeat;
+}
+html.codex-theme-studio .app-shell-left-panel::after { right: -3px; top: 46%; width: 12px; height: 24px; opacity: .56; }
+html.codex-theme-studio .sidebar-item[data-app-action-sidebar-thread-selected="true"]::before {
+  left: 5px; top: 50%; translate: 0 -50%; width: 15px; height: 15px;
+}
+html.codex-theme-studio [data-markdown-text-style] { color: var(--ink); }
+html.codex-theme-studio [data-local-conversation-final-assistant] [data-markdown-text-style] {
+  background: linear-gradient(90deg,color-mix(in srgb,var(--night) 90%,transparent),color-mix(in srgb,var(--night) 76%,transparent)) top / 100% clamp(0px,calc((100% - 180px)*200),100%) no-repeat; border-radius: 10px;
+}
+html.codex-theme-studio [data-markdown-text-style] blockquote {
+  position: relative; border-inline-start: 1px solid var(--line); padding-inline-start: 1.65em;
+}
+html.codex-theme-studio [data-markdown-text-style] blockquote::before { width: 14px; height: 14px; left: 4px; top: .25em; opacity: .8; }
+html.codex-theme-studio [data-markdown-text-style] a { color: var(--light) !important; text-underline-offset: .2em; }
+html.codex-theme-studio :is(pre,[data-markdown-text-style] :not(pre)>code) { background-color: var(--surface) !important; }
+html.codex-theme-studio :is([role="menu"],[role="dialog"],[role="listbox"],header.app-header-tint) { background-color: var(--surface) !important; }
+html.codex-theme-studio :is([role="menuitem"],[role="option"])[data-highlighted] { background-color: var(--line) !important; }
+html.codex-theme-studio ::selection { background: var(--line); color: white; }
+html.codex-theme-studio :focus-visible { outline-color: var(--accent); }
+html.codex-theme-studio .composer-surface-chrome {
+  position: relative; color: var(--ink); border: 1px solid var(--line) !important;
+  background: linear-gradient(115deg,var(--surface),var(--night)) !important; border-radius: 18px !important;
+}
+html.codex-theme-studio .composer-surface-chrome:focus-within { border-color: var(--accent) !important; }
+html.codex-theme-studio .composer-surface-chrome button[data-cts-composer-action="send"]:enabled { background: var(--accent) !important; color: var(--night) !important; }
+
+
+/* Muted palette and right-aligned, transparent character artwork. */
+html.codex-theme-studio {
+ --accent:#bd91a9; --light:#ddbbcc; --night:#251e29; --surface:#382c3b;
+ --ink:#e4e5df; --ratio:1037 / 1516; --line:color-mix(in srgb,var(--accent) 30%,var(--surface));
+ color-scheme:dark;
+}
+html.codex-theme-studio .main-surface:not(.main-surface .main-surface) {
+ container-type:size; overflow:clip;
+ background:radial-gradient(ellipse at 100% 55%,var(--surface),var(--night) 78%)!important;
+}
+html.codex-theme-studio .main-surface:not(.main-surface .main-surface)::before {
+ inset:64px -4% -7% auto; width:min(70cqw,80cqh); height:auto;
+ max-width:100%; aspect-ratio:auto; transform-origin:right bottom;
+ background:var(--cts-asset-portrait) right bottom / auto 100% no-repeat;
+ opacity:.66;
+ mask-image:linear-gradient(180deg,#000 0%,#000 87%,transparent 100%);
+}
+html.codex-theme-studio [data-local-conversation-final-assistant] [data-markdown-text-style],
+html.codex-theme-studio :is([data-message-author-role="assistant"],[data-turn="assistant"],[data-testid^="assistant-message"]):not(:has([data-markdown-text-style])) {
+ background:color-mix(in srgb,var(--night) 94%,transparent)!important;
+ border:1px solid color-mix(in srgb,var(--accent) 12%,transparent);
+ border-radius:16px; color:var(--ink);
+}
+html.codex-theme-studio :is([data-message-author-role="user"],.user) {
+ background:var(--surface)!important; color:var(--ink);
+}
+html.codex-theme-studio .composer-surface-chrome {
+ background:linear-gradient(115deg,var(--surface),var(--night))!important;
+ box-shadow:0 8px 28px #00000025,inset 0 1px #ffffff06;
+}
+html.codex-theme-studio .composer-surface-chrome::after,
+html.codex-theme-studio div:has(> .composer-surface-chrome)::before,
+html.codex-theme-studio div:has(> .composer-surface-chrome)::after {content:none!important;display:none!important;}
+html.codex-theme-studio [data-thread-scroll-footer] .pointer-events-none.absolute.bg-surface,
+html.codex-theme-studio [data-thread-scroll-footer] .pointer-events-none.absolute.bg-surface-secondary {background:transparent!important;}
+html.codex-theme-studio header[class*="ApplicationMenuPageHeader"],
+html.codex-theme-studio .app-header-tint,
+html.codex-theme-studio .topbar {background:var(--night)!important;}
+html.codex-theme-studio .cts-atmosphere {opacity:.07;}
+@media (max-width:1000px) {
+ html.codex-theme-studio .main-surface:not(.main-surface .main-surface)::before {opacity:.28;width:58cqw;}
+}
+@media (max-width:600px) {
+ html.codex-theme-studio .main-surface:not(.main-surface .main-surface)::before {opacity:.22;}
+}

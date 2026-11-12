@@ -225,3 +225,15 @@ html.codex-theme-studio div:has(> .composer-surface-chrome)::after {
 html.codex-theme-studio [data-thread-scroll-footer] > .pointer-events-none.absolute.bg-surface {
   display: none !important;
 }
+
+/* Scenic bridge between the two existing portraits. */
+html.codex-theme-studio .main-surface:not(.main-surface .main-surface) {
+ background:linear-gradient(#07131a18,#07131a28),var(--cts-asset-landscape) center / cover no-repeat,var(--night)!important;
+}
+html.codex-theme-studio .cts-halo,html.codex-theme-studio .cts-atmosphere {display:none!important;}
+html.codex-theme-studio header[class*="ApplicationMenuPageHeader"],
+html.codex-theme-studio .app-header-tint,html.codex-theme-studio .topbar {background:var(--night)!important;}
+html.codex-theme-studio [data-local-conversation-final-assistant] [data-markdown-text-style],
+html.codex-theme-studio :is([data-message-author-role="assistant"],[data-turn="assistant"],[data-testid^="assistant-message"]):not(:has([data-markdown-text-style])) {
+ background:linear-gradient(110deg,#111f1ced,#14261dd9)!important;border:1px solid #78c5971c;border-radius:16px;
+}

@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 2,
+  "id": "frieren-sage-heart",
+  "name": "Фрирен · Sage Heart",
+  "description": "Фрирен с сердечком справа на однотонном серо-зелёном фоне.",
+  "version": "1.0.0",
+  "author": "ZLHRS",
+  "appearance": "dark",
+  "license": "personal-use",
+  "category": "anime",
+  "tags": [
+    "anime",
+    "dark",
+    "frieren",
+    "solid"
+  ],
+  "colors": {
+    "accent": "#a4b8ab",
+    "light": "#d0d7c9"
+  },
+  "strings": {},
+  "assets": {
+    "portrait": "assets/portrait.webp",
+    "charm": "assets/charm.svg"
+  },
+  "css": "theme.css"
+}

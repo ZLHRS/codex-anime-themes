@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 2,
+  "id": "forest-retreat",
+  "name": "Forest Retreat · Лесная тишина",
+  "description": "Для любителей природных цветов: глубокий хвойный фон, мох и мягкие шалфейные акценты.",
+  "version": "1.0.0",
+  "author": "ZLHRS",
+  "appearance": "dark",
+  "license": "personal-use",
+  "category": "minimal",
+  "tags": [
+    "minimal",
+    "dark",
+    "nature",
+    "focus"
+  ],
+  "colors": {
+    "accent": "#9eb69a",
+    "light": "#c6d4bc"
+  },
+  "strings": {},
+  "assets": {},
+  "css": "theme.css"
+}

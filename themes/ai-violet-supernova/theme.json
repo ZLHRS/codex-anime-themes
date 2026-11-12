@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 2,
+  "id": "ai-violet-supernova",
+  "name": "Ай Хосино · Violet Supernova",
+  "description": "Звёздные глаза на весь фон, фиолетовые волосы и лепестки фуксии. Тёмные сливовые панели для спокойного чтения.",
+  "version": "1.0.0",
+  "author": "ZLHRS",
+  "appearance": "dark",
+  "license": "personal-use",
+  "category": "anime",
+  "tags": [
+    "anime",
+    "ai",
+    "dark",
+    "landscape",
+    "stars"
+  ],
+  "colors": {
+    "accent": "#bb9bcf",
+    "light": "#e4b7d7"
+  },
+  "strings": {},
+  "assets": {
+    "portrait": "assets/portrait.webp",
+    "charm": "assets/charm.svg"
+  },
+  "css": "theme.css"
+}

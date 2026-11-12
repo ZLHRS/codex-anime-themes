@@ -3,7 +3,7 @@
   "id": "kana-soft-garnet",
   "name": "Кана · Тёплый гранат",
   "description": "Мягкий бордовый фон, тёплый свет и спокойный портрет Каны по центру.",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "author": "ZLHRS",
   "appearance": "dark",
   "license": "personal-use",
@@ -20,7 +20,8 @@
   "strings": {},
   "assets": {
     "portrait": "assets/portrait.webp",
-    "charm": "assets/charm.svg"
+    "charm": "assets/charm.svg",
+    "backdrop": "assets/backdrop.jpg"
   },
   "css": "theme.css"
 }

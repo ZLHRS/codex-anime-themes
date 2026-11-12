@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 2,
+  "id": "fern-plum-hush",
+  "name": "Ферн · Plum Hush",
+  "description": "Ферн справа на однотонном тёмно-сливовом фоне с приглушённой яркостью.",
+  "version": "1.0.0",
+  "author": "ZLHRS",
+  "appearance": "dark",
+  "license": "personal-use",
+  "category": "anime",
+  "tags": [
+    "anime",
+    "dark",
+    "fern",
+    "solid"
+  ],
+  "colors": {
+    "accent": "#a18ba5",
+    "light": "#c8bacb"
+  },
+  "strings": {},
+  "assets": {
+    "portrait": "assets/portrait.webp",
+    "charm": "assets/charm.svg"
+  },
+  "css": "theme.css"
+}

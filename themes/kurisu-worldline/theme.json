@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 2,
+  "id": "kurisu-worldline",
+  "name": "Курису · Worldline Echo",
+  "description": "Курису с телефоном справа, сумеречный город и мягкие цифровые следы.",
+  "version": "1.0.0",
+  "author": "ZLHRS",
+  "appearance": "dark",
+  "license": "personal-use",
+  "category": "anime",
+  "tags": [
+    "anime",
+    "kurisu",
+    "steins-gate",
+    "dark",
+    "landscape"
+  ],
+  "colors": {
+    "accent": "#b5aa95",
+    "light": "#d6c7aa"
+  },
+  "strings": {},
+  "assets": {
+    "portrait": "assets/portrait.webp",
+    "charm": "assets/charm.svg"
+  },
+  "css": "theme.css"
+}

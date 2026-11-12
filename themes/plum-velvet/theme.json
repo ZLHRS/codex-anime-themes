@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 2,
+  "id": "plum-velvet",
+  "name": "Plum Velvet · Сливовый бархат",
+  "description": "Дымчатая слива, графитовый трикотаж и приглушённые розовые акценты.",
+  "version": "1.1.0",
+  "author": "ZLHRS",
+  "appearance": "dark",
+  "license": "personal-use",
+  "category": "anime",
+  "tags": [
+    "anime",
+    "dark",
+    "portrait",
+    "right",
+    "petals"
+  ],
+  "colors": {
+    "accent": "#bd91a9",
+    "light": "#ddbbcc"
+  },
+  "strings": {},
+  "assets": {
+    "portrait": "assets/portrait.webp",
+    "charm": "assets/charm.svg"
+  },
+  "css": "theme.css"
+}

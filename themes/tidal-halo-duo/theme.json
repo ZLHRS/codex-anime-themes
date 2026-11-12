@@ -2,8 +2,8 @@
   "schemaVersion": 2,
   "id": "tidal-halo-duo",
   "name": "Tidal Halo · Twin Current",
-  "description": "Два изображения в единой сине-бирюзовой палитре, мягкие края и спокойная область для чтения.",
-  "version": "1.0.3",
+  "description": "Два водных портрета, подводный дворец, кристаллические арки и бирюзовые течения.",
+  "version": "1.1.0",
   "author": "ZLHRS",
   "appearance": "dark",
   "license": "personal-use",
@@ -23,7 +23,8 @@
   "assets": {
     "portrait": "assets/original.webp",
     "charm": "assets/charm.svg",
-    "left": "assets/left-harmonized.webp"
+    "left": "assets/left-harmonized.webp",
+    "landscape": "assets/center-landscape.webp"
   },
   "css": "theme.css"
 }

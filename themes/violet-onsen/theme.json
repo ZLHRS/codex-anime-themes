@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 2,
+  "id": "violet-onsen",
+  "name": "Violet Onsen · Тёплый вечер",
+  "description": "Крупный портрет справа, тёплый свет фонарей, пар над водой и мягкие фиолетовые тени.",
+  "version": "1.0.1",
+  "author": "ZLHRS",
+  "appearance": "dark",
+  "license": "personal-use",
+  "category": "anime",
+  "tags": [
+    "anime",
+    "dark",
+    "onsen",
+    "lantern",
+    "violet"
+  ],
+  "colors": {
+    "accent": "#baa08d",
+    "light": "#d9bfa4"
+  },
+  "strings": {},
+  "assets": {
+    "portrait": "assets/portrait.webp",
+    "charm": "assets/charm.svg"
+  },
+  "css": "theme.css"
+}

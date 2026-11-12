@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 2,
+  "id": "mayuri-amber",
+  "name": "Маюри · Amber Reverie",
+  "description": "Тёплый тёмный фон и мягкий янтарь. Исходная поза сохранена, края портрета плавно растворяются в фоне.",
+  "version": "1.0.0",
+  "author": "ZLHRS",
+  "appearance": "dark",
+  "license": "personal-use",
+  "category": "anime",
+  "tags": [
+    "anime",
+    "dark",
+    "portrait",
+    "right",
+    "moon-dust"
+  ],
+  "colors": {
+    "accent": "#c4a376",
+    "light": "#dfc9a6"
+  },
+  "strings": {},
+  "assets": {
+    "portrait": "assets/portrait.webp",
+    "charm": "assets/charm.svg"
+  },
+  "css": "theme.css"
+}

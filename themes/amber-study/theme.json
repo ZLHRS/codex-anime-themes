@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 2,
+  "id": "amber-study",
+  "name": "Amber Study · Тёплый кабинет",
+  "description": "Для чтения и заметок: тёплые кофейные оттенки, песочные акценты и спокойная атмосфера.",
+  "version": "1.0.0",
+  "author": "ZLHRS",
+  "appearance": "dark",
+  "license": "personal-use",
+  "category": "minimal",
+  "tags": [
+    "minimal",
+    "dark",
+    "warm",
+    "focus"
+  ],
+  "colors": {
+    "accent": "#c5ac86",
+    "light": "#e1cfb2"
+  },
+  "strings": {},
+  "assets": {},
+  "css": "theme.css"
+}

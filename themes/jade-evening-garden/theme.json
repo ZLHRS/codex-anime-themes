@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 2,
+  "id": "jade-evening-garden",
+  "name": "Jade Evening · Нефритовый вечер",
+  "description": "Однотонный тёмный нефритовый фон и крупный персонаж справа с дорисованным локтем.",
+  "version": "1.0.1",
+  "author": "ZLHRS",
+  "appearance": "dark",
+  "license": "personal-use",
+  "category": "anime",
+  "tags": [
+    "anime",
+    "dark",
+    "jade"
+  ],
+  "colors": {
+    "accent": "#8ebdb0",
+    "light": "#c3d6bd"
+  },
+  "strings": {},
+  "assets": {
+    "portrait": "assets/portrait.webp",
+    "charm": "assets/charm.svg"
+  },
+  "css": "theme.css"
+}

@@ -150,3 +150,8 @@ html.codex-theme-studio [data-thread-scroll-footer] > .pointer-events-none.absol
 html.codex-theme-studio header[class*="ApplicationMenuPageHeader"],
 html.codex-theme-studio .app-header-tint,
 html.codex-theme-studio .topbar {background:var(--night)!important;}
+
+/* Extend the source environment across the canvas without scaling the portrait. */
+html.codex-theme-studio .main-surface:not(.main-surface .main-surface) {
+ background:linear-gradient(#1b0c1733,#1b0c1755),var(--cts-asset-backdrop) center / cover no-repeat,var(--night)!important;
+}

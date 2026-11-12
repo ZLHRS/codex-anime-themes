@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 2,
+  "id": "silver-aquamarine",
+  "name": "Silver Aquamarine · Серебряная тишина",
+  "description": "Серебряные волосы и аквамариновые глаза. Мягкий графит, дымчатый бирюзовый и приглушённые коралловые детали.",
+  "version": "1.1.0",
+  "author": "ZLHRS",
+  "appearance": "dark",
+  "license": "personal-use",
+  "category": "anime",
+  "tags": [
+    "anime",
+    "dark",
+    "silver",
+    "aquamarine",
+    "right"
+  ],
+  "colors": {
+    "accent": "#91b8bd",
+    "light": "#c6d8da"
+  },
+  "strings": {},
+  "assets": {
+    "portrait": "assets/portrait.webp",
+    "charm": "assets/charm.svg"
+  },
+  "css": "theme.css"
+}

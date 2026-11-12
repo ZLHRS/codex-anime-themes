@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 2,
+  "id": "violet-silhouette",
+  "name": "Violet Silhouette · Фиолетовая тишина",
+  "description": "Крупный портрет справа и однотонный приглушённый фиолетовый фон в оттенках волос.",
+  "version": "1.0.0",
+  "author": "ZLHRS",
+  "appearance": "dark",
+  "license": "personal-use",
+  "category": "anime",
+  "tags": [
+    "anime",
+    "dark",
+    "violet",
+    "solid"
+  ],
+  "colors": {
+    "accent": "#b394d3",
+    "light": "#ded0ed"
+  },
+  "strings": {},
+  "assets": {
+    "portrait": "assets/portrait.webp",
+    "charm": "assets/charm.svg"
+  },
+  "css": "theme.css"
+}

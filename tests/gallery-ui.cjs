@@ -1,0 +1,71 @@
+// Run with Electron. Uses the real renderer and catalog, without launching ChatGPT.
+const {app,BrowserWindow,ipcMain}=require('electron');
+const fs=require('node:fs/promises'),path=require('node:path'),os=require('node:os'),assert=require('node:assert/strict');
+const root=path.resolve(__dirname,'..');
+app.setPath('userData',path.join(os.tmpdir(),'zlhrs-gallery-test-'+process.pid));
+app.whenReady().then(async()=>{
+ const themes=await require('../desktop/local-themes.cjs').readCatalog(root);
+ const pets=await require('../desktop/pets.cjs').read(root);
+ const defaults={brightness:100,size:100,x:0,y:0,animations:true,effects:true};
+ const state={themes,pets,petCount:pets.length,selected:themes[0].id,status:'Выберите тему — она сохранится для следующих запусков.',platform:process.platform,version:'2.6.1',appPath:'C:/Apps/ChatGPT/ChatGPT.exe',appearance:{...defaults},effect:'Мягкое свечение и детали выбранной темы.'};
+ const saved=new Map();let imports=0;
+ ipcMain.handle('studio:state',()=>state);
+ ipcMain.handle('studio:apply',(_event,id)=>{state.selected=id;state.appearance=saved.get(id)||{...defaults};return state;});
+ ipcMain.handle('studio:appearance',(_event,id,value)=>{saved.set(id,value);state.appearance=value;return state;});
+ for(const action of ['refresh','update','launch','choose','shortcut','reveal'])ipcMain.handle('studio:'+action,()=>state);
+ ipcMain.handle('studio:import-pets',()=>{imports++;return state;});
+ ipcMain.handle('studio:quit',()=>{});
+ const w=new BrowserWindow({show:false,width:1180,height:850,webPreferences:{preload:path.join(root,'desktop/preload.cjs'),contextIsolation:true,nodeIntegration:false,sandbox:true,backgroundThrottling:false}});
+ const errors=[];w.webContents.on('console-message',(_event,...args)=>{const detail=args[0];if(detail&&typeof detail==='object'&&detail.level==='error')errors.push(detail.message);});
+ await w.loadFile(path.join(root,'desktop/index.html'));
+ const evaluate=code=>w.webContents.executeJavaScript(code,true);
+ for(let i=0;i<100;i++){if(await evaluate('document.querySelectorAll(".card").length')===themes.length)break;await new Promise(r=>setTimeout(r,50));}
+ assert.equal(await evaluate('document.querySelectorAll(".card").length'),themes.length);
+ const capture=async name=>{
+  await evaluate('Promise.all([...document.images].map(i=>i.decode().catch(()=>{})))');
+  await evaluate('document.getAnimations().forEach(animation=>animation.finish())');
+  // Wake the hidden compositor before taking the verified frame.
+  await w.webContents.capturePage(undefined,{stayHidden:true,stayAwake:true});
+  await new Promise(r=>setTimeout(r,260));
+  assert.equal(await evaluate('document.documentElement.scrollWidth>window.innerWidth'),false,'Horizontal overflow: '+name);
+  await fs.mkdir(path.join(root,'docs/ui'),{recursive:true});
+  await fs.writeFile(path.join(root,'docs/ui',name+'.png'),(await w.webContents.capturePage(undefined,{stayHidden:true,stayAwake:true})).toPNG());
+ };
+ await capture('themes-desktop');
+ await evaluate('document.getElementById("character-filter").click()');
+ await capture('characters-desktop');
+ await evaluate('document.querySelector("input[value=roxy]").click();document.getElementById("done-characters").click()');
+ assert.equal(await evaluate('document.querySelectorAll(".card").length'),1);
+ assert.equal(await evaluate('document.querySelector(".card h2").textContent'),'Azure Morpho');
+ await evaluate('document.getElementById("character-filter").click();document.querySelector("input[value=rem]").click();document.getElementById("close-characters").click()');
+ assert.equal(await evaluate('document.querySelectorAll(".card").length'),1,'Cancel must not commit draft selections');
+ await evaluate('document.getElementById("all").click();document.getElementById("character-filter").click();document.querySelector("input[value=furina]").click();document.querySelector("input[value=hu-tao]").click();document.getElementById("done-characters").click()');
+ assert.equal(await evaluate('document.querySelectorAll(".card").length'),themes.filter(t=>['blue-cat-nocturne','furina-moonlit-repose','furina-silver-slumber','hu-tao-furina-duality'].includes(t.id)).length);
+ await capture('themes-filtered');
+ await evaluate('document.getElementById("search").value="no-match";document.getElementById("search").dispatchEvent(new Event("input"))');
+ assert.equal(await evaluate('document.getElementById("empty-state").hidden'),false);
+ await evaluate('document.getElementById("empty-reset").click()');
+ assert.equal(await evaluate('document.querySelectorAll(".card").length'),themes.length);
+ await evaluate('document.getElementById("collections-tab").click()');await capture('collections-desktop');
+ await evaluate('document.querySelector("[data-collection-id=quiet]").click()');
+ assert.equal(await evaluate('document.getElementById("skins-page").hidden'),false);
+ assert.ok(await evaluate('document.querySelectorAll(".card").length')<themes.length);
+ await evaluate('document.getElementById("all").click();document.querySelector(".preview-button").click()');
+ assert.equal(await evaluate('document.getElementById("preview").open'),true);
+ await evaluate('document.getElementById("close-preview").click();document.getElementById("settings-tab").click()');
+ await capture('settings-desktop');
+ await evaluate('(async()=>{const input=document.getElementById("brightness");input.value="120";input.dispatchEvent(new Event("input"));await document.getElementById("save-appearance").onclick()})()');
+ assert.equal(state.appearance.brightness,120);
+ await evaluate('document.getElementById("pets-tab").click()');await capture('pets-desktop');
+ assert.equal(await evaluate('document.querySelectorAll(".pet-name").length'),pets.length);
+ await evaluate('document.getElementById("import-pets").onclick()');assert.equal(imports,1);
+ await evaluate('document.getElementById("help-tab").click()');await capture('help-desktop');
+ w.setContentSize(850,680);
+ for(const page of ['skins','collections','settings','pets','help']){await evaluate('document.getElementById('+JSON.stringify(page+'-tab')+').click()');assert.equal(await evaluate('document.querySelector(".nav-item.selected").id'),page+'-tab');await capture(page+'-compact');}
+ await evaluate('document.dispatchEvent(new KeyboardEvent("keydown",{code:"KeyK",ctrlKey:true,bubbles:true}))');
+ assert.equal(await evaluate('document.activeElement.id'),'search');
+ await evaluate('document.getElementById("character-filter").click()');await capture('characters-compact');
+ assert.deepEqual(errors,[]);
+ console.log('Gallery UI passed: filters, cancellation, duo selection, empty state, collections, preview, settings, pets, keyboard search and 850px layout.');
+ app.exit(0);
+}).catch(error=>{console.error(error);app.exit(1);});

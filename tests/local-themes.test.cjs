@@ -11,3 +11,14 @@ test('local source refresh picks up newly added themes and uses bundled runtime'
  const payload=await core.payload(root,'second',{},dir);assert.doesNotThrow(()=>new Function(payload.expression));
  await fs.writeFile(path.join(dir,'catalog.json'),JSON.stringify([{id:'../outside'}]));await assert.rejects(local.readCatalog(dir),/ID/);
 });
+
+test('user theme source survives replacement of the installed bundle',async t=>{
+ const dir=await fs.mkdtemp(path.join(os.tmpdir(),'studio-source-'));t.after(()=>fs.rm(dir,{recursive:true,force:true}));
+ const project=path.join(dir,'project'),bundle=path.join(dir,'bundle'),user=path.join(dir,'user.json'),legacy=path.join(dir,'legacy.json');
+ await fs.mkdir(project);await fs.mkdir(bundle);await fs.writeFile(path.join(project,'catalog.json'),'[]');
+ await fs.writeFile(user,JSON.stringify({directory:project}));
+ assert.equal(await local.resolveSource(legacy,bundle,user),project);
+ await fs.writeFile(legacy,JSON.stringify({directory:bundle}));
+ assert.equal(await local.resolveSource(legacy,bundle,user),project);
+ await fs.writeFile(user,'broken');await assert.rejects(local.resolveSource(legacy,bundle,user));
+});

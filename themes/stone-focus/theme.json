@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 2,
+  "id": "stone-focus",
+  "name": "Stone Focus · Спокойный минимализм",
+  "description": "Для работы и учёбы: мягкий серо-синий фон, нейтральные панели и минимум деталей.",
+  "version": "1.0.0",
+  "author": "ZLHRS",
+  "appearance": "dark",
+  "license": "personal-use",
+  "category": "minimal",
+  "tags": [
+    "minimal",
+    "dark",
+    "minimal",
+    "focus"
+  ],
+  "colors": {
+    "accent": "#b0c3cf",
+    "light": "#d1dce3"
+  },
+  "strings": {},
+  "assets": {},
+  "css": "theme.css"
+}

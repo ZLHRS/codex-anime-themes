@@ -6,7 +6,7 @@ const os=require('node:os');
 const core=require('../desktop/core.cjs');
 const root=path.resolve(__dirname,'..');
 test('all bundled theme payloads compile and have stable stamps',async()=>{
- const catalog=await core.readJson(path.join(root,'catalog.json'));assert.equal(catalog.length,27);
+ const catalog=await core.readJson(path.join(root,'catalog.json'));assert.equal(catalog.length,48);
  for(const t of catalog){const p=await core.payload(root,t.id);assert.doesNotThrow(()=>new Function(p.expression));assert(!p.expression.includes('__CTS_CSS_JSON__'));assert.equal(p.stamp,(await core.payload(root,t.id)).stamp);}
 });
 test('reject traversal and malformed theme IDs',async()=>{

@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 2,
+  "id": "waguri-snowfall",
+  "name": "Вагури · Snowfall Reverie",
+  "description": "Крупный портрет Вагури справа, живописная снежная ночь и дымчатые сине-фиолетовые панели.",
+  "version": "1.0.0",
+  "author": "ZLHRS",
+  "appearance": "dark",
+  "license": "personal-use",
+  "category": "anime",
+  "tags": [
+    "anime",
+    "waguri",
+    "snow",
+    "dark",
+    "landscape"
+  ],
+  "colors": {
+    "accent": "#a2b9d7",
+    "light": "#d0daec"
+  },
+  "strings": {},
+  "assets": {
+    "portrait": "assets/portrait.webp",
+    "charm": "assets/charm.svg"
+  },
+  "css": "theme.css"
+}

@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 2,
+  "id": "frieren-fern-lilac",
+  "name": "Фрирен и Ферн · Lilac Quiet",
+  "description": "Фрирен и Ферн с дорисованными контурами справа на тёмном дымчато-сиреневом фоне.",
+  "version": "1.1.0",
+  "author": "ZLHRS",
+  "appearance": "dark",
+  "license": "personal-use",
+  "category": "anime",
+  "tags": [
+    "anime",
+    "dark",
+    "frieren",
+    "solid"
+  ],
+  "colors": {
+    "accent": "#998aa9",
+    "light": "#bdb4ca"
+  },
+  "strings": {},
+  "assets": {
+    "portrait": "assets/portrait-v2.webp",
+    "charm": "assets/charm.svg"
+  },
+  "css": "theme.css"
+}

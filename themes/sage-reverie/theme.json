@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 2,
+  "id": "sage-reverie",
+  "name": "Sage Reverie · Тихий шалфей",
+  "description": "Серо-зелёный фон, шалфей и спокойные холодные блики.",
+  "version": "1.0.0",
+  "author": "ZLHRS",
+  "appearance": "dark",
+  "license": "personal-use",
+  "category": "anime",
+  "tags": [
+    "anime",
+    "dark",
+    "portrait",
+    "right",
+    "ribbon"
+  ],
+  "colors": {
+    "accent": "#99b8ac",
+    "light": "#c0cbc7"
+  },
+  "strings": {},
+  "assets": {
+    "portrait": "assets/portrait.webp",
+    "charm": "assets/charm.svg"
+  },
+  "css": "theme.css"
+}

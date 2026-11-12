@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 2,
+  "id": "jade-silk",
+  "name": "Jade Silk · Нефритовый шёлк",
+  "description": "Нефритовый фон, пыльная роза и мягкие золотистые детали.",
+  "version": "1.0.0",
+  "author": "ZLHRS",
+  "appearance": "dark",
+  "license": "personal-use",
+  "category": "anime",
+  "tags": [
+    "anime",
+    "dark",
+    "portrait",
+    "right",
+    "flowers"
+  ],
+  "colors": {
+    "accent": "#8ab9ab",
+    "light": "#d2c2a0"
+  },
+  "strings": {},
+  "assets": {
+    "portrait": "assets/portrait.webp",
+    "charm": "assets/charm.svg"
+  },
+  "css": "theme.css"
+}

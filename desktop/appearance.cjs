@@ -5,6 +5,28 @@ function normalize(value={}){
  return {brightness:number('brightness',40,180),size:number('size',60,160),x:number('x',-40,40),y:number('y',-40,40),animations:typeof v.animations==='boolean'?v.animations:true,effects:typeof v.effects==='boolean'?v.effects:true};
 }
 const designs={
+ 'stone-focus':['Stone Focus · Спокойный минимализм','geometry','#b0c3cf'],
+ 'amber-study':['Amber Study · Тёплый кабинет','geometry','#c5ac86'],
+ 'forest-retreat':['Forest Retreat · Лесная тишина','geometry','#9eb69a'],
+ 'midnight-grid':['Midnight Grid · Ночной режим','geometry','#90accb'],
+
+ 'teal-peony':['Графитово-бирюзовая тишина','flowers','#85adb1'],
+ 'fern-plum-hush':['Тёмный сливовый фон','flowers','#a18ba5'],
+ 'violet-silhouette':['Приглушённый фиолетовый фон','flowers','#b394d3'],
+ 'frieren-sage-heart':['Мягкий серо-зелёный фон','flowers','#a4b8ab'],
+ 'frieren-fern-lilac':['Тёмный дымчато-сиреневый фон','flowers','#998aa9'],
+ 'jade-evening-garden':['Спокойный нефритовый фон','flowers','#8ebdb0'],
+ 'kurisu-lab-evening':['Мягкие сумеречные оттенки','geometry','#96b6b3'],
+ 'kurisu-worldline':['Мягкие сумеречные оттенки','geometry','#b5aa95'],
+ 'jibril-amber-library':['Янтарная библиотека и тёплые искры','stars','#c599aa'],
+ 'violet-onsen':['Тёплые фонари и отражения на воде','moon','#baa08d'],
+ 'ai-violet-supernova':['Звёздный портрет на весь фон','stars','#bb9bcf'],
+ 'waguri-snowfall':['Живописная снежная ночь','moon-dust','#a2b9d7'],
+ 'silver-aquamarine':['Тихое аквамариновое сияние','ribbon','#91b8bd'],
+ 'jade-silk':["Нефритовый фон, пыльная роза и мягкие золотистые детали.",'flowers','#8ab9ab'],
+ 'plum-velvet':["Дымчатая слива, графитовый трикотаж и приглушённые розовые акценты.",'petals','#bd91a9'],
+ 'mayuri-amber':["Тёплый янтарный свет",'petals','#c4a376'],
+ 'sage-reverie':["Серо-зелёный фон, шалфей и спокойные холодные блики.",'ribbon','#99b8ac'],
  'tidal-halo-duo':['Мягкое бирюзовое сияние','moon','#80cbd5'],
  'tidal-halo':['Мягкое бирюзовое сияние','moon','#80cbd5'],
  'ivory-midnight-frame':['Мягкое бежево-лавандовое свечение','geometry','#d5b7a1'],
