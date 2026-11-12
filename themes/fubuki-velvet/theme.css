@@ -206,3 +206,6 @@ html.codex-theme-studio .main-surface:not(.main-surface .main-surface)::after {
  mask-image:none !important;
  -webkit-mask-image:none !important;
 }
+
+/* Audited portrait seams: soften only the cropped outer margin. */
+html.codex-theme-studio body .main-surface:not(.main-surface .main-surface)::before {opacity:1 !important;mask-image:linear-gradient(90deg,transparent 0%,#0003 3.2%,#0009 8%,#000e 12.8%,#000 16%),linear-gradient(180deg,transparent 0%,#000 9%,#000 100%,#000 100%) !important;-webkit-mask-image:linear-gradient(90deg,transparent 0%,#0003 3.2%,#0009 8%,#000e 12.8%,#000 16%),linear-gradient(180deg,transparent 0%,#000 9%,#000 100%,#000 100%) !important;mask-composite:intersect;}

@@ -1,0 +1,53 @@
+{
+  "ai-bunny-refrain": {
+    "before": "linear-gradient(90deg,transparent 0%,#0003 3.2%,#0009 8%,#000e 12.8%,#000 16%),linear-gradient(180deg,transparent 0%,#000 9%,#000 100%,#000 100%)"
+  },
+  "ai-starlit-encore": {
+    "before": "linear-gradient(90deg,transparent 0%,#0003 4.4%,#0009 11%,#000e 17.6%,#000 22%),linear-gradient(180deg,transparent 0%,#000 9%,#000 100%,#000 100%)"
+  },
+  "fubuki-velvet": {
+    "before": "linear-gradient(90deg,transparent 0%,#0003 3.2%,#0009 8%,#000e 12.8%,#000 16%),linear-gradient(180deg,transparent 0%,#000 9%,#000 100%,#000 100%)"
+  },
+  "cc-mint-contract": {
+    "before": "linear-gradient(90deg,transparent 0%,#0003 1.6%,#0009 4%,#000e 6.4%,#000 8%),linear-gradient(180deg,transparent 0%,#000 6%,#000 100%,#000 100%)"
+  },
+  "tatsumaki-jade": {
+    "before": "linear-gradient(90deg,transparent 0%,#0003 1.6%,#0009 4%,#000e 6.4%,#000 8%),linear-gradient(180deg,transparent 0%,#000 6%,#000 100%,#000 100%)"
+  },
+  "tatsumaki-jade-duo": {
+    "before": "linear-gradient(90deg,transparent 0%,#0003 1.6%,#0009 4%,#000e 6.4%,#000 8%),linear-gradient(180deg,transparent 0%,#000 6%,#000 100%,#000 100%)"
+  },
+  "private-duo": {
+    "before": "linear-gradient(90deg,transparent 0%,#0003 1.6%,#0009 4%,#000e 6.4%,#000 8%),linear-gradient(180deg,transparent 0%,#000 6%,#000 100%,#000 100%)"
+  },
+  "jade-silk": {
+    "before": "linear-gradient(90deg,transparent 0%,#0003 1.6%,#0009 4%,#000e 6.4%,#000 8%),linear-gradient(180deg,transparent 0%,#000 6%,#000 100%,#000 100%)"
+  },
+  "jade-evening-garden": {
+    "before": "linear-gradient(90deg,transparent 0%,#0003 1.6%,#0009 4%,#000e 6.4%,#000 8%),linear-gradient(180deg,transparent 0%,#000 6%,#000 100%,#000 100%)"
+  },
+  "violet-silhouette": {
+    "before": "linear-gradient(90deg,transparent 0%,#0003 1.6%,#0009 4%,#000e 6.4%,#000 8%),linear-gradient(180deg,transparent 0%,#000 6%,#000 100%,#000 100%)"
+  },
+  "slate-cat-glasses": {
+    "before": "linear-gradient(90deg,transparent 0%,#0003 1.6%,#0009 4%,#000e 6.4%,#000 8%),linear-gradient(180deg,transparent 0%,#000 6%,#000 100%,#000 100%)"
+  },
+  "golden-teal-gaze": {
+    "before": "linear-gradient(90deg,transparent 0%,#0003 1.6%,#0009 4%,#000e 6.4%,#000 8%),linear-gradient(180deg,transparent 0%,#000 6%,#000 100%,#000 100%)"
+  },
+  "sapphire-quiet-sign": {
+    "before": "linear-gradient(90deg,transparent 0%,#0003 1.6%,#0009 4%,#000e 6.4%,#000 8%),linear-gradient(180deg,transparent 0%,#000 6%,#000 100%,#000 100%)"
+  },
+  "kana-soft-garnet": {
+    "before": "linear-gradient(180deg,transparent 0%,#000 10%,#000 90%,transparent 100%)"
+  },
+  "kana-ruby-spotlight": {
+    "before": "linear-gradient(180deg,transparent 0%,#000 10%,#000 90%,transparent 100%)"
+  },
+  "hu-tao-furina-duality": {
+    "before": "linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent),linear-gradient(180deg,transparent 0%,#000 7%,#000 93%,transparent 100%)"
+  },
+  "furina-turquoise-current": {
+    "before": "linear-gradient(180deg,transparent 0%,#000 8%,#000 92%,transparent 100%)"
+  }
+}
