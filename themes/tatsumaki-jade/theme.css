@@ -206,3 +206,6 @@ html.codex-theme-studio .main-surface:not(.main-surface .main-surface)::after {
  mask-image:none !important;
  -webkit-mask-image:none !important;
 }
+
+/* Keep the completed hair, raised hand and rocks inside the portrait. */
+html.codex-theme-studio .main-surface:not(.main-surface .main-surface)::before {inset:auto 1% 0 auto;height:90%;width:48%;aspect-ratio:auto;background-size:contain;background-position:right bottom;}
