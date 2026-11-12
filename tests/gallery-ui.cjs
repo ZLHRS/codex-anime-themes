@@ -7,7 +7,7 @@ app.whenReady().then(async()=>{
  const themes=await require('../desktop/local-themes.cjs').readCatalog(root);
  const pets=await require('../desktop/pets.cjs').read(root);
  const defaults={brightness:100,size:100,x:0,y:0,animations:true,effects:true};
- const state={themes,pets,petCount:pets.length,selected:themes[0].id,status:'Выберите тему — она сохранится для следующих запусков.',platform:process.platform,version:'2.6.1',appPath:'C:/Apps/ChatGPT/ChatGPT.exe',appearance:{...defaults},effect:'Мягкое свечение и детали выбранной темы.'};
+ const state={themes,pets,petCount:pets.length,selected:themes[0].id,status:'Выберите тему — она сохранится для следующих запусков.',platform:process.platform,version:require('../package.json').version,appPath:'C:/Apps/ChatGPT/ChatGPT.exe',appearance:{...defaults},effect:'Мягкое свечение и детали выбранной темы.'};
  const saved=new Map();let imports=0;
  ipcMain.handle('studio:state',()=>state);
  ipcMain.handle('studio:apply',(_event,id)=>{state.selected=id;state.appearance=saved.get(id)||{...defaults};return state;});
