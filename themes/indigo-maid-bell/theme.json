@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 2,
+  "id": "indigo-maid-bell",
+  "name": "Колокольчик · Ночной индиго",
+  "description": "Улучшенный портрет справа, тёмный цветной фон и свободное место для чтения.",
+  "version": "1.0.1",
+  "author": "ZLHRS",
+  "appearance": "dark",
+  "license": "personal-use",
+  "category": "anime",
+  "tags": [
+    "anime",
+    "dark",
+    "portrait",
+    "right"
+  ],
+  "colors": {
+    "accent": "#a1a9d4",
+    "light": "#d2c79b"
+  },
+  "strings": {},
+  "assets": {
+    "portrait": "assets/portrait.webp",
+    "charm": "assets/charm.svg"
+  },
+  "css": "theme.css"
+}

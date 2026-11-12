@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 2,
+  "id": "furina-indigo-peace",
+  "name": "Фурина · Индиго",
+  "description": "Улучшенный портрет справа, тёмный цветной фон и свободное место для чтения.",
+  "version": "1.0.0",
+  "author": "ZLHRS",
+  "appearance": "dark",
+  "license": "personal-use",
+  "category": "anime",
+  "tags": [
+    "anime",
+    "dark",
+    "portrait",
+    "right"
+  ],
+  "colors": {
+    "accent": "#99a9df",
+    "light": "#c9d6ff"
+  },
+  "strings": {},
+  "assets": {
+    "portrait": "assets/portrait.webp",
+    "charm": "assets/charm.svg"
+  },
+  "css": "theme.css"
+}

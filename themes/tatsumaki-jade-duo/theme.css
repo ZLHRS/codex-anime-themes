@@ -237,3 +237,12 @@ html.codex-theme-studio [data-local-conversation-final-assistant] [data-markdown
 html.codex-theme-studio :is([data-message-author-role="assistant"],[data-turn="assistant"],[data-testid^="assistant-message"]):not(:has([data-markdown-text-style])) {
  background:linear-gradient(110deg,#111f1ced,#14261dd9)!important;border:1px solid #78c5971c;border-radius:16px;
 }
+
+/* Code panels must not inherit accent-colored borders, rings or shadows. */
+html.codex-theme-studio .main-surface pre,
+html.codex-theme-studio .main-surface :is([data-code-block], .code-block),
+html.codex-theme-studio .main-surface div:has(> pre):not([data-markdown-text-style]) {
+  border-color: transparent !important;
+  box-shadow: none !important;
+  outline: none !important;
+}

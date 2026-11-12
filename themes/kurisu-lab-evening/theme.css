@@ -176,3 +176,12 @@ html.codex-theme-studio :is([data-message-author-role="assistant"],[data-turn="a
  background:linear-gradient(110deg,#202b2eef,#202b2edc)!important;
 }
 @media(max-width:800px){html.codex-theme-studio .main-surface:not(.main-surface .main-surface)::before {opacity:.48;background-position:50% center;}}
+
+/* Code panels must not inherit accent-colored borders, rings or shadows. */
+html.codex-theme-studio .main-surface pre,
+html.codex-theme-studio .main-surface :is([data-code-block], .code-block),
+html.codex-theme-studio .main-surface div:has(> pre):not([data-markdown-text-style]) {
+  border-color: transparent !important;
+  box-shadow: none !important;
+  outline: none !important;
+}

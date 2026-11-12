@@ -1,5 +1,12 @@
 # Character pets
 
+Current user override: do not create pets until the user explicitly requests them again.
+
+When preparing character artwork, preserve the original pose, clothing and facial
+expression. Only improve quality, remove the background, and complete clipped
+edges as needed. Do not substitute redesigned clothing or a different pose when
+generation fails; retain the original and report the unfinished processing.
+
 When adding a character theme, also prepare a matching chibi companion for the
 built-in ChatGPT Pets feature. Reuse an existing validated pet for the same
 character across themes; do not create duplicates for palette variants.

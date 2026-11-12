@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 2,
+  "id": "cocoa-back-bow",
+  "name": "Бант · Тёмное какао",
+  "description": "Улучшенный портрет справа, тёмный цветной фон и свободное место для чтения.",
+  "version": "1.0.1",
+  "author": "ZLHRS",
+  "appearance": "dark",
+  "license": "personal-use",
+  "category": "anime",
+  "tags": [
+    "anime",
+    "dark",
+    "portrait",
+    "right"
+  ],
+  "colors": {
+    "accent": "#ba9c90",
+    "light": "#ddc3ac"
+  },
+  "strings": {},
+  "assets": {
+    "portrait": "assets/portrait.webp",
+    "charm": "assets/charm.svg"
+  },
+  "css": "theme.css"
+}

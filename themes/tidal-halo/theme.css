@@ -206,3 +206,15 @@ html.codex-theme-studio .composer-surface-chrome {background:linear-gradient(115
 html.codex-theme-studio .composer-surface-chrome:focus-within {border-color:#80cbd580 !important;}
 html.codex-theme-studio .app-shell-left-panel::after {opacity:.25;}
 @media(max-width:760px){html.codex-theme-studio .main-surface:not(.main-surface .main-surface)::before {width:auto;opacity:1;background-position:right center;}html.codex-theme-studio [data-local-conversation-final-assistant] [data-markdown-text-style] {padding:12px 14px;}}
+
+/* Suppress the circular moon overlay, including older Studio builds. */
+html.codex-theme-studio #cts-stage .cts-halo {background:radial-gradient(ellipse at 85% 60%,#80cbd520,transparent 55%);}
+
+/* Code panels must not inherit accent-colored borders, rings or shadows. */
+html.codex-theme-studio .main-surface pre,
+html.codex-theme-studio .main-surface :is([data-code-block], .code-block),
+html.codex-theme-studio .main-surface div:has(> pre):not([data-markdown-text-style]) {
+  border-color: transparent !important;
+  box-shadow: none !important;
+  outline: none !important;
+}

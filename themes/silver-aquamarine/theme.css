@@ -160,3 +160,12 @@ html.codex-theme-studio .cts-atmosphere {opacity:.07;}
 /* Keep the quiet atmosphere identical in older installed runtimes. */
 html.codex-theme-studio .cts-atmosphere {background-image:none!important;}
 html.codex-theme-studio .cts-halo {background:radial-gradient(ellipse at 94% 55%,#91b8bd18,transparent 48%)!important;}
+
+/* Code panels must not inherit accent-colored borders, rings or shadows. */
+html.codex-theme-studio .main-surface pre,
+html.codex-theme-studio .main-surface :is([data-code-block], .code-block),
+html.codex-theme-studio .main-surface div:has(> pre):not([data-markdown-text-style]) {
+  border-color: transparent !important;
+  box-shadow: none !important;
+  outline: none !important;
+}

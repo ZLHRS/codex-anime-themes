@@ -5,6 +5,18 @@ function normalize(value={}){
  return {brightness:number('brightness',40,180),size:number('size',60,160),x:number('x',-40,40),y:number('y',-40,40),animations:typeof v.animations==='boolean'?v.animations:true,effects:typeof v.effects==='boolean'?v.effects:true};
 }
 const designs={
+ 'slate-cat-glasses':["Кошачьи ушки · Дымчатый графит",'soft','#a7afca'],
+ 'indigo-maid-bell':["Колокольчик · Ночной индиго",'soft','#a1a9d4'],
+ 'sapphire-quiet-sign':["Тихий жест · Сапфир",'soft','#8eafcf'],
+ 'emerald-stern-gaze':["Строгий взгляд · Тёмный изумруд",'soft','#89baa6'],
+ 'furina-slate-training':["Фурина · Синий графит",'soft','#8ebbcf'],
+ 'cocoa-back-bow':["Бант · Тёмное какао",'soft','#ba9c90'],
+ 'furina-indigo-peace':["Фурина · Индиго",'soft','#99a9df'],
+ 'ruby-playful-smile':["Улыбка · Тёмный рубин",'soft','#d38f99'],
+ 'garnet-soft-gaze':["Взгляд · Сливовый гранат",'soft','#be97b7'],
+ 'golden-teal-gaze':["Золотые пряди · Дымчатая бирюза",'soft','#8bbab9'],
+ 'furina-turquoise-current':['Солнечные блики на бирюзовой воде','water','#83d5db'],
+ 'quiet-kitchen':['Тёплый свет и мягкий индиго','soft','#b3b4d6'],
  'stone-focus':['Stone Focus · Спокойный минимализм','geometry','#b0c3cf'],
  'amber-study':['Amber Study · Тёплый кабинет','geometry','#c5ac86'],
  'forest-retreat':['Forest Retreat · Лесная тишина','geometry','#9eb69a'],
@@ -64,7 +76,7 @@ function ornament(kind,color){
  return body?'url("data:image/svg+xml,'+encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="120" height="150" viewBox="0 0 120 150" color="${color}" fill="${color}">${body}</svg>`)+'")':'none';
 }
 function compose(id,value){
- const a=normalize(value);const [label,kind,color]=designs[id]||['Мягкое свечение','moon','#aabbee'];
+ const a=normalize(value);const [label,kind,color]=designs[id]||['Мягкое свечение','soft','#aabbee'];
  const selector='html.codex-theme-studio .main-surface:not(.main-surface .main-surface)';
  const portraits=selector+'::before'+(['tatsumaki-jade-duo','crimson-heart-duo','private-duo','tidal-halo-duo'].includes(id)?','+selector+'::after':'');
  const portraitCss=require('./readability.cjs')+`
@@ -77,7 +89,7 @@ ${portraits}{filter:brightness(${a.brightness/100})!important;scale:${a.size/100
  @keyframes cts-glow{50%{opacity:.5}}
  @keyframes cts-iridescence{50%{border-color:${color}}}
  `;
- if(['moon','moon-dust'].includes(kind))css+=`.cts-halo{background:radial-gradient(circle at 87% 24%,transparent 0 72px,${color}35 74px,transparent 110px),radial-gradient(ellipse at 85% 40%,${color}30,transparent 48%);}`;
+ if(['moon','moon-dust'].includes(kind))css+=`.cts-halo{background:radial-gradient(ellipse at 85% 40%,${color}30,transparent 48%);}`;
  if(['rings','duo','water'].includes(kind))css+=`.cts-halo{background:repeating-radial-gradient(ellipse at ${kind==='duo'?'50%':'90%'} 72%,transparent 0 65px,${color}22 67px,transparent 70px,transparent 105px);mask-image:linear-gradient(90deg,#000,transparent 30%,transparent 65%,#000);}`;
  if(kind==='duo')css+=`.cts-halo{background:radial-gradient(ellipse at 4% 60%,${color}40,transparent 40%),radial-gradient(ellipse at 96% 60%,${color}40,transparent 40%);}`;
  if(kind==='duality')css+=`.cts-halo{background:linear-gradient(90deg,#ed7e7e22,transparent 40%,transparent 60%,#6cbbff22);}html.codex-theme-studio .sidebar-item[data-app-action-sidebar-thread-selected="true"]{background:linear-gradient(90deg,#c7717144,#719fce44)!important;}`;

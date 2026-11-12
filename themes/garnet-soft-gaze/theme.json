@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 2,
+  "id": "garnet-soft-gaze",
+  "name": "Взгляд · Сливовый гранат",
+  "description": "Портрет справа без белого фона, исходная поза и одежда сохранены.",
+  "version": "1.0.3",
+  "author": "ZLHRS",
+  "appearance": "dark",
+  "license": "personal-use",
+  "category": "anime",
+  "tags": [
+    "anime",
+    "dark",
+    "portrait",
+    "right"
+  ],
+  "colors": {
+    "accent": "#be97b7",
+    "light": "#e4c4d6"
+  },
+  "strings": {},
+  "assets": {
+    "portrait": "assets/cutout.webp",
+    "charm": "assets/charm.svg"
+  },
+  "css": "theme.css"
+}

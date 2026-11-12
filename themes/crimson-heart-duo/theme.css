@@ -224,3 +224,12 @@ html.codex-theme-studio .main-surface:not(.main-surface .main-surface)::after {w
 html.codex-theme-studio .main-surface:not(.main-surface .main-surface)::before {background-position:right -42vh bottom;}
 html.codex-theme-studio .main-surface:not(.main-surface .main-surface)::after {background-position:left -42vh bottom;}
 @media(max-width:760px){html.codex-theme-studio .main-surface:not(.main-surface .main-surface)::before,html.codex-theme-studio .main-surface:not(.main-surface .main-surface)::after{width:55%;background-size:contain;background-position:center bottom;}}
+
+/* Code panels must not inherit accent-colored borders, rings or shadows. */
+html.codex-theme-studio .main-surface pre,
+html.codex-theme-studio .main-surface :is([data-code-block], .code-block),
+html.codex-theme-studio .main-surface div:has(> pre):not([data-markdown-text-style]) {
+  border-color: transparent !important;
+  box-shadow: none !important;
+  outline: none !important;
+}

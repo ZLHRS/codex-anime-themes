@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 2,
+  "id": "quiet-kitchen",
+  "name": "Тихая кухня · Soft Indigo",
+  "description": "Девушка за готовкой справа, мягкое растворение кухни и спокойные оттенки индиго.",
+  "version": "1.0.0",
+  "author": "ZLHRS",
+  "appearance": "dark",
+  "license": "personal-use",
+  "category": "anime",
+  "tags": [
+    "anime",
+    "dark",
+    "landscape",
+    "contain",
+    "right"
+  ],
+  "colors": {
+    "accent": "#b3b4d6",
+    "light": "#ded1c4"
+  },
+  "strings": {},
+  "assets": {
+    "portrait": "assets/wallpaper.jpg",
+    "charm": "assets/charm.svg"
+  },
+  "css": "theme.css"
+}

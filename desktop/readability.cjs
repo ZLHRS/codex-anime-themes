@@ -9,6 +9,14 @@ html.codex-theme-studio :is([data-message-author-role="assistant"],[data-turn="a
 html.codex-theme-studio .main-surface [data-markdown-text-style] pre {
   background: #252525 !important;
 }
+/* Code panels must not inherit accent-colored borders, rings or shadows. */
+html.codex-theme-studio .main-surface pre,
+html.codex-theme-studio .main-surface :is([data-code-block], .code-block),
+html.codex-theme-studio .main-surface div:has(> pre):not([data-markdown-text-style]) {
+  border-color: transparent !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
 html.codex-theme-studio .main-surface pre code,
 html.codex-theme-studio .main-surface pre code * {
   background: transparent !important;

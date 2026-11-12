@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 2,
+  "id": "ruby-playful-smile",
+  "name": "Улыбка · Тёмный рубин",
+  "description": "Портрет справа без белого фона, исходная поза и одежда сохранены.",
+  "version": "1.0.3",
+  "author": "ZLHRS",
+  "appearance": "dark",
+  "license": "personal-use",
+  "category": "anime",
+  "tags": [
+    "anime",
+    "dark",
+    "portrait",
+    "right"
+  ],
+  "colors": {
+    "accent": "#d38f99",
+    "light": "#efbec0"
+  },
+  "strings": {},
+  "assets": {
+    "portrait": "assets/cutout.webp",
+    "charm": "assets/charm.svg"
+  },
+  "css": "theme.css"
+}

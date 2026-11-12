@@ -187,3 +187,12 @@ html.codex-theme-studio .main-surface:not(.main-surface .main-surface)::before {
 
 /* Soften the original portrait crop along the outer hair. */
 html.codex-theme-studio .main-surface:not(.main-surface .main-surface)::before {mask-image:linear-gradient(90deg,transparent,#000 12%),linear-gradient(180deg,#000 88%,transparent);mask-composite:intersect;}
+
+/* Code panels must not inherit accent-colored borders, rings or shadows. */
+html.codex-theme-studio .main-surface pre,
+html.codex-theme-studio .main-surface :is([data-code-block], .code-block),
+html.codex-theme-studio .main-surface div:has(> pre):not([data-markdown-text-style]) {
+  border-color: transparent !important;
+  box-shadow: none !important;
+  outline: none !important;
+}

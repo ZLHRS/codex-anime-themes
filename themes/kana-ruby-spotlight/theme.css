@@ -155,3 +155,12 @@ html.codex-theme-studio .topbar {background:var(--night)!important;}
 html.codex-theme-studio .main-surface:not(.main-surface .main-surface) {
  background:linear-gradient(#1b0c1733,#1b0c1755),var(--cts-asset-backdrop) center / cover no-repeat,var(--night)!important;
 }
+
+/* Code panels must not inherit accent-colored borders, rings or shadows. */
+html.codex-theme-studio .main-surface pre,
+html.codex-theme-studio .main-surface :is([data-code-block], .code-block),
+html.codex-theme-studio .main-surface div:has(> pre):not([data-markdown-text-style]) {
+  border-color: transparent !important;
+  box-shadow: none !important;
+  outline: none !important;
+}

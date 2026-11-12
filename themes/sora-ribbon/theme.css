@@ -287,3 +287,12 @@ html.codex-theme-studio div:has(> .composer-surface-chrome)::after {
 html.codex-theme-studio [data-thread-scroll-footer] > .pointer-events-none.absolute.bg-surface {
   display: none !important;
 }
+
+/* Code panels must not inherit accent-colored borders, rings or shadows. */
+html.codex-theme-studio .main-surface pre,
+html.codex-theme-studio .main-surface :is([data-code-block], .code-block),
+html.codex-theme-studio .main-surface div:has(> pre):not([data-markdown-text-style]) {
+  border-color: transparent !important;
+  box-shadow: none !important;
+  outline: none !important;
+}

@@ -194,3 +194,15 @@ html.codex-theme-studio [data-thread-scroll-footer] > .pointer-events-none.absol
 html.codex-theme-studio .main-surface:not(.main-surface .main-surface) {
  background:linear-gradient(#10182b88,#10182baa),var(--cts-asset-backdrop) center / cover no-repeat,var(--night)!important;
 }
+
+/* Suppress the circular moon overlay, including older Studio builds. */
+html.codex-theme-studio #cts-stage .cts-halo {background:radial-gradient(ellipse at 85% 60%,#8fbaff20,transparent 55%);}
+
+/* Code panels must not inherit accent-colored borders, rings or shadows. */
+html.codex-theme-studio .main-surface pre,
+html.codex-theme-studio .main-surface :is([data-code-block], .code-block),
+html.codex-theme-studio .main-surface div:has(> pre):not([data-markdown-text-style]) {
+  border-color: transparent !important;
+  box-shadow: none !important;
+  outline: none !important;
+}

@@ -24,18 +24,18 @@
   ['fern','Ферн','Fern',['fern-plum-hush','frieren-fern-lilac','violet-silhouette']],
   ['frieren','Фрирен','Frieren',['frieren-sage-heart','frieren-fern-lilac']],
   ['fubuki','Фубуки','Fubuki',['fubuki-velvet']],
-  ['furina','Фурина','Furina',['blue-cat-nocturne','furina-moonlit-repose','furina-silver-slumber','hu-tao-furina-duality']],
+  ['furina','Фурина','Furina',['blue-cat-nocturne','furina-moonlit-repose','furina-silver-slumber','furina-turquoise-current','furina-slate-training','furina-indigo-peace','hu-tao-furina-duality']],
   ['hu-tao','Ху Тао','Hu Tao',['hu-tao-furina-duality']],
   ['shinobu','Шинобу Кочо','Shinobu Kocho',['shinobu-wisteria']]
  ].map(([id,name,aliases,themeIds])=>({id,name,aliases,themeIds}));
  const collections=[
   {id:'all',name:'Все темы',description:'Вся коллекция в одном месте.',icon:'grid'},
-  {id:'quiet',name:'Спокойные оттенки',description:'Приглушённые цвета для долгих разговоров и чтения.',icon:'moon',tone:'lilac',themeIds:['plum-velvet','sage-reverie','silver-aquamarine','waguri-snowfall','furina-silver-slumber','rem-butterfly-dream','frieren-fern-lilac','fern-plum-hush','violet-silhouette','teal-peony','stone-focus','forest-retreat']},
-  {id:'scenic',name:'Место для мечты',description:'Снежный вечер, библиотека или знакомая лаборатория.',icon:'landscape',tone:'blue',themeIds:['waguri-snowfall','violet-onsen','jibril-amber-library','kurisu-worldline','kurisu-lab-evening','tatsumaki-jade-duo','tidal-halo-duo']},
+  {id:'quiet',name:'Спокойные оттенки',description:'Приглушённые цвета для долгих разговоров и чтения.',icon:'moon',tone:'lilac',themeIds:['slate-cat-glasses','indigo-maid-bell','sapphire-quiet-sign','emerald-stern-gaze','furina-slate-training','cocoa-back-bow','furina-indigo-peace','ruby-playful-smile','garnet-soft-gaze','golden-teal-gaze','plum-velvet','sage-reverie','silver-aquamarine','waguri-snowfall','furina-silver-slumber','rem-butterfly-dream','frieren-fern-lilac','fern-plum-hush','violet-silhouette','teal-peony','stone-focus','forest-retreat']},
+  {id:'scenic',name:'Место для мечты',description:'Снежный вечер, библиотека или знакомая лаборатория.',icon:'landscape',tone:'blue',themeIds:['furina-turquoise-current','quiet-kitchen','waguri-snowfall','violet-onsen','jibril-amber-library','kurisu-worldline','kurisu-lab-evening','tatsumaki-jade-duo','tidal-halo-duo']},
   {id:'minimal',name:'Без персонажей',description:'Четыре спокойных пространства для работы и учёбы.',icon:'focus',tone:'sage',themeIds:['stone-focus','amber-study','forest-retreat','midnight-grid']},
   {id:'vivid',name:'Больше цвета',description:'Звёздные глаза, сияние и выразительные акценты.',icon:'sparkles',tone:'rose',themeIds:['ai-bunny-refrain','ai-starlit-encore','ai-prismatic-gaze','ai-violet-supernova','kana-ruby-spotlight','rem-azure-fury','zero-two-rose','hu-tao-furina-duality']},
   {id:'duo',name:'Вдвоём в кадре',description:'Два портрета в одной композиции.',icon:'users',tone:'amber',themeIds:['hu-tao-furina-duality','tatsumaki-jade-duo','crimson-heart-duo','tidal-halo-duo','frieren-fern-lilac']},
-  {id:'warm',name:'Тёплый вечер',description:'Янтарь, пыльная роза и мягкий свет.',icon:'sun',tone:'peach',themeIds:['amber-study','mayuri-amber','violet-onsen','jibril-amber-library','kana-soft-garnet','jade-silk']}
+  {id:'warm',name:'Тёплый вечер',description:'Янтарь, пыльная роза и мягкий свет.',icon:'sun',tone:'peach',themeIds:['quiet-kitchen','amber-study','mayuri-amber','violet-onsen','jibril-amber-library','kana-soft-garnet','jade-silk']}
  ];
  function normalize(value){return String(value||'').normalize('NFKC').toLocaleLowerCase('ru').replace(/ё/g,'е').trim();}
  function forTheme(id){return characters.filter(c=>c.themeIds.includes(id));}

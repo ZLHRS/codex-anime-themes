@@ -238,5 +238,65 @@
     "id": "midnight-grid",
     "name": "Midnight Grid · Ночной режим",
     "path": "themes/midnight-grid"
+  },
+  {
+    "id": "furina-turquoise-current",
+    "name": "Фурина · Бирюзовое течение",
+    "path": "themes/furina-turquoise-current"
+  },
+  {
+    "id": "quiet-kitchen",
+    "name": "Тихая кухня · Soft Indigo",
+    "path": "themes/quiet-kitchen"
+  },
+  {
+    "id": "furina-slate-training",
+    "name": "Фурина · Синий графит",
+    "path": "themes/furina-slate-training"
+  },
+  {
+    "id": "cocoa-back-bow",
+    "name": "Бант · Тёмное какао",
+    "path": "themes/cocoa-back-bow"
+  },
+  {
+    "id": "furina-indigo-peace",
+    "name": "Фурина · Индиго",
+    "path": "themes/furina-indigo-peace"
+  },
+  {
+    "id": "ruby-playful-smile",
+    "name": "Улыбка · Тёмный рубин",
+    "path": "themes/ruby-playful-smile"
+  },
+  {
+    "id": "garnet-soft-gaze",
+    "name": "Взгляд · Сливовый гранат",
+    "path": "themes/garnet-soft-gaze"
+  },
+  {
+    "id": "golden-teal-gaze",
+    "name": "Золотые пряди · Дымчатая бирюза",
+    "path": "themes/golden-teal-gaze"
+  },
+  {
+    "id": "slate-cat-glasses",
+    "name": "Кошачьи ушки · Дымчатый графит",
+    "path": "themes/slate-cat-glasses"
+  },
+  {
+    "id": "indigo-maid-bell",
+    "name": "Колокольчик · Ночной индиго",
+    "path": "themes/indigo-maid-bell"
+  },
+  {
+    "id": "sapphire-quiet-sign",
+    "name": "Тихий жест · Сапфир",
+    "path": "themes/sapphire-quiet-sign"
+  },
+  {
+    "id": "emerald-stern-gaze",
+    "name": "Строгий взгляд · Тёмный изумруд",
+    "path": "themes/emerald-stern-gaze"
   }
 ]

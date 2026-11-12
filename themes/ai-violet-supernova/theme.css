@@ -172,3 +172,12 @@ html.codex-theme-studio .cts-atmosphere,html.codex-theme-studio .cts-halo {displ
 html.codex-theme-studio [data-local-conversation-final-assistant] [data-markdown-text-style],
 html.codex-theme-studio :is([data-message-author-role="assistant"],[data-turn="assistant"],[data-testid^="assistant-message"]):not(:has([data-markdown-text-style])) {background:linear-gradient(110deg,#231a2bf5,#281c32eb)!important;}
 @media(max-width:760px){html.codex-theme-studio .main-surface:not(.main-surface .main-surface)::before {opacity:.48;}}
+
+/* Code panels must not inherit accent-colored borders, rings or shadows. */
+html.codex-theme-studio .main-surface pre,
+html.codex-theme-studio .main-surface :is([data-code-block], .code-block),
+html.codex-theme-studio .main-surface div:has(> pre):not([data-markdown-text-style]) {
+  border-color: transparent !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
