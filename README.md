@@ -9,20 +9,18 @@
 
 ## Download
 
-**Version 2.6.5 includes 60 themes.** No Git or Node.js required.
+**Version 2.6.6 includes all 61 themes.** No Git or Node.js required.
 
 | Your system | Ready-to-use download |
 | --- | --- |
-| Windows 10/11 · x64 | [Portable ZIP](https://github.com/ZLHRS/codex-anime-themes/releases/download/v2.6.5/ZLHRS-Theme-Studio-2.6.5-win-x64-portable.zip) |
-| Mac · Apple Silicon (M-series) | [Apple Silicon ZIP](https://github.com/ZLHRS/codex-anime-themes/releases/download/v2.6.5/ZLHRS-Theme-Studio-2.6.5-mac-arm64.zip) |
-| Mac · Intel | [Intel ZIP](https://github.com/ZLHRS/codex-anime-themes/releases/download/v2.6.5/ZLHRS-Theme-Studio-2.6.5-mac-x64.zip) |
-| Linux · x64 | [AppImage](https://github.com/ZLHRS/codex-anime-themes/releases/download/v2.6.5/ZLHRS-Theme-Studio-2.6.5-linux-x86_64.AppImage) · [Debian/Ubuntu DEB](https://github.com/ZLHRS/codex-anime-themes/releases/download/v2.6.5/ZLHRS-Theme-Studio-2.6.5-linux-amd64.deb) |
+| Windows 10/11 · x64 | [Portable ZIP](https://github.com/ZLHRS/codex-anime-themes/releases/download/v2.6.6/ZLHRS-Theme-Studio-2.6.6-win-x64-portable.zip) |
+| Mac · Apple Silicon (M-series) | [Apple Silicon ZIP](https://github.com/ZLHRS/codex-anime-themes/releases/download/v2.6.6/ZLHRS-Theme-Studio-2.6.6-mac-arm64.zip) |
+| Mac · Intel | [Intel ZIP](https://github.com/ZLHRS/codex-anime-themes/releases/download/v2.6.6/ZLHRS-Theme-Studio-2.6.6-mac-x64.zip) |
+| Linux · x64 | [AppImage](https://github.com/ZLHRS/codex-anime-themes/releases/download/v2.6.6/ZLHRS-Theme-Studio-2.6.6-linux-x86_64.AppImage) · [Debian/Ubuntu DEB](https://github.com/ZLHRS/codex-anime-themes/releases/download/v2.6.6/ZLHRS-Theme-Studio-2.6.6-linux-amd64.deb) |
 
-[All release files, installers, and checksums →](https://github.com/ZLHRS/codex-anime-themes/releases/tag/v2.6.5)
+[All release files, installers, and checksums →](https://github.com/ZLHRS/codex-anime-themes/releases/tag/v2.6.6)
 
 > A compatible desktop ChatGPT app must be installed separately. Studio changes its appearance; it does not replace ChatGPT or work in the browser. Theme application has been verified on Windows. Mac and Linux builds and galleries have been checked, but connection to the actual ChatGPT app has not yet been confirmed.
-
-**Latest source updates:** the 61st theme, Jade Silhouette, and an English/Russian interface switch are available in the source code. They are not included in the 2.6.5 downloads above yet.
 
 ## Installation
 
@@ -61,7 +59,7 @@ On Mac and Linux, fully close ChatGPT before applying a theme for the first time
 
 **Make it yours:** Settings lets you adjust image brightness, size, and position for each theme. Decorative effects and animations can be turned off.
 
-**Choose a language:** in the latest source version, open **Settings → Interface language** and select **English** or **Russian**. The interface changes immediately and remembers your choice. Theme selection and artwork settings stay intact. The 2.6.5 release still uses the Russian interface; the button names above describe their English equivalents.
+**Choose a language:** open **Settings → Interface language** and select **English** or **Russian**. The interface changes immediately and remembers your choice. Theme selection and artwork settings stay intact.
 
 ## Custom pets
 
@@ -92,7 +90,14 @@ If the update fails, download a fresh build from the table above. Extract the en
 
 > **Code → Download ZIP contains source code.** For everyday use, download the packaged app from the Download section.
 
-## What changed in 2.6.5
+## What changed in 2.6.6
+
+- English and Russian interfaces with instant switching and a saved language preference.
+- All 61 themes included, with the new Jade Silhouette portrait on the right.
+- Completed C.C. crown and smoother Twin Current background.
+- Fully English README, gallery, and preview text.
+
+### Earlier improvements
 
 - Softer transitions where artwork had visibly cropped edges.
 - Updated Furina, Reze, and other portraits; fixed Waguri’s black preview.
@@ -111,7 +116,7 @@ If the update fails, download a fresh build from the table above. Extract the en
 - A ChatGPT update may require a newer Studio version.
 - Still stuck? [Open an issue](https://github.com/ZLHRS/codex-anime-themes/issues) with the error message, operating system, and Studio version.
 
-[Compatibility and setup details](docs/CROSS-PLATFORM.md) (Russian).
+[Compatibility and setup details](docs/CROSS-PLATFORM.md).
 
 </details>
 

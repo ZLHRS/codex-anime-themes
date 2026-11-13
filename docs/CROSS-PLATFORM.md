@@ -1,42 +1,50 @@
-# Theme Studio 2 — Windows, macOS, Linux
+# Theme Studio — Windows, macOS, Linux
 
-## Установка
+## Installation
 
-Короткая пошаговая инструкция, включая разрешение запуска на Mac: [README](../README.md#установка).
+See the [step-by-step README](../README.md#installation), including how to allow the app to open on Mac. Download the build for your system from [Releases](https://github.com/ZLHRS/codex-anime-themes/releases/latest). All 61 themes are included in version 2.6.6.
 
-Скачайте подходящий установщик из [Releases](https://github.com/ZLHRS/codex-anime-themes/releases/latest). Все 60 тем уже внутри.
+- **Windows:** extract the entire portable ZIP and open `ZLHRS Theme Studio.exe`. Keep its companion files together. The update button replaces this folder’s application files without an installer.
+- **macOS:** extract the matching Apple Silicon or Intel ZIP and move the app to Applications. Builds are not signed or notarized by Apple. If blocked, use the normal opening confirmation in Privacy & Security for a trusted download. Do not disable system protection.
+- **Linux:** install the DEB or allow the AppImage to run (`chmod +x ZLHRS-Theme-Studio-*.AppImage`). If FUSE is unavailable, use the DEB on Debian/Ubuntu. Keep the AppImage in a permanent folder so its shortcut continues to work.
 
-- **Windows:** скачайте `…-win-x64-portable.zip`, распакуйте всю папку и откройте `ZLHRS Theme Studio.exe`. Установка не нужна; все темы и зависимости уже рядом. Не переносите EXE отдельно. Кнопка обновления заменяет файлы в этой папке без установщика.
-- **macOS:** распакуйте ZIP и откройте приложение .app. Его можно хранить в своей папке или перенести в Applications. Есть варианты Apple Silicon и Intel. Сборки не подписаны сертификатом Apple и не нотариализованы; при блокировке используйте штатное подтверждение открытия в настройках Privacy & Security. Не отключайте системную защиту.
-- **Linux:** установите DEB или разрешите исполнение AppImage (`chmod +x ZLHRS-Theme-Studio-*.AppImage`) и откройте его. Для AppImage могут понадобиться библиотеки FUSE; если они недоступны, используйте DEB. AppImage храните в постоянной папке, иначе ярлык перестанет работать.
+## Choosing a theme
 
-## Выбор темы
+1. Close ChatGPT and any older theme manager before the first connection.
+2. Choose a theme and click Apply. If ChatGPT is not detected, use Choose application to select its EXE, Mac app, or Linux executable.
+3. Studio saves your selection and opens ChatGPT with the theme. The selection remains saved even if the connection fails.
+4. In Settings, use Create / update shortcuts. Launch through the themed ChatGPT shortcut next time. Linux also gets an application-menu entry; the desktop may ask you to trust its shortcut.
 
-1. Полностью закройте уже открытый ChatGPT и прежний Codex App Manager.
-2. Выберите тему и нажмите «Применить». Если ChatGPT не найден автоматически, выберите EXE, приложение .app или исполняемый файл Linux кнопкой «Выбрать приложение».
-3. Studio сохранит выбор и запустит ChatGPT с темой. Даже при ошибке подключения выбор остаётся сохранённым.
-4. Дальше используйте созданный при первом запуске ярлык **«ChatGPT с темой»**. При необходимости пересоздайте его кнопкой в Studio. В Linux ярлык также появляется в меню приложений; рабочий стол может попросить разрешить запуск ярлыка.
+Studio stays in the background without a tray icon. Open the app to choose a theme; use Quit Studio to stop it completely.
 
-Studio работает в фоне без значка в трее. Для выбора темы откройте приложение; для полного завершения используйте «Выйти из Studio».
+## Language
 
-## Совместимость
+Open Settings → Interface language and select English or Russian. The interface updates immediately and saves your choice. Changing language does not change your selected theme or artwork settings.
 
-Нужен установленный настольный ChatGPT/Codex с интерфейсом `app://-/index.html` и поддержкой `--remote-debugging-port`. Браузерная версия и другие оболочки не поддерживаются. Мы не заменяем и не распространяем приложение OpenAI. Если подключение не появляется, Studio сообщает об этом; на Windows Studio при необходимости перезапускает ChatGPT для подключения темы.
+## Compatibility
 
-Ищем приложения в типовых папках Windows/macOS/Linux; необычную установку укажите вручную. Не выбирайте консольный Codex CLI. Текущая сборка ChatGPT может изменить разметку и потребовать обновления стилей.
+Studio requires an installed desktop ChatGPT/Codex app using `app://-/index.html` and supporting `--remote-debugging-port`. The browser version and other wrappers are not supported. Studio does not replace or distribute OpenAI’s app. On Windows, it restarts ChatGPT when needed to connect the theme.
 
-На Windows проверены установка, меню и существующий механизм оформления. На macOS/Linux автоматические сборки проверяют код и открытие галереи, но не полноценное применение к реальному ChatGPT: это требует установленного приложения и проверки пользователем на устройстве.
+Common installation locations are checked automatically. Select unusual locations manually; do not select the command-line Codex CLI. Changes to ChatGPT’s interface may require updated theme styles.
 
-## Настройки и обновление
+Theme application has been verified on Windows. Automated Mac and Linux builds test the code and gallery, but applying themes to the actual ChatGPT app still requires verification on those devices.
 
-Настройки хранятся отдельно от установленной программы в стандартной пользовательской папке Electron: `%APPDATA%/zlhrs-theme-studio`, `~/Library/Application Support/zlhrs-theme-studio` или `~/.config/zlhrs-theme-studio`. При обновлении выбор сохраняется. Windows-версия импортирует прежний выбор из `%LOCALAPPDATA%/ZLHRS/ThemeStudio`.
+## Settings and updates
 
-Для обновления нажмите «Подтянуть изменения». Программа сравнит версию с последним готовым выпуском, проверит SHA-256 файла и установит его с перезапуском. Если новой версии нет, окно останется открытым. Настройки не удаляются. На Mac нужна запись в папку приложения; Linux DEB может запросить системный пароль. Старую версию 2.0 нужно один раз обновить установщиком из Releases — в ней ещё нет кнопки обновлений. Старые ярлыки Windows 1.x нужно заменить новым «ChatGPT с темой». Устаревшие Windows-запуски и готовые архивы убраны из текущего дерева Git; они остаются в истории и прежних Releases.
+Settings are stored separately from the installed program in Electron’s user-data folder:
 
-## Разработка
+- Windows: `%APPDATA%/zlhrs-theme-studio`
+- macOS: `~/Library/Application Support/zlhrs-theme-studio`
+- Linux: `~/.config/zlhrs-theme-studio`
 
-Node.js 24+, `npm ci`, `npm test`, `npm start`. Сборка: `npm run dist`. Для каждой ОС используйте соответствующую ОС сборки. GitHub Actions выполняет тесты, открывает галерею и собирает установщики; тег `v2.*` публикует Release только после успешных сборок всех систем. Подписи Apple/Windows не настроены.
+Theme selection, artwork preferences, and language survive updates. Windows also imports the legacy selection from `%LOCALAPPDATA%/ZLHRS/ThemeStudio`.
 
-## Подключение и проверка
+Use Check for updates to download the latest release, verify its SHA-256 checksum, and install it with a restart. If already up to date, Studio stays open. Mac updates require write access to the application folder; Linux DEB installation may request your system password. Version 2.0 needs a one-time manual upgrade from Releases because it has no update button. Replace legacy Windows 1.x shortcuts with the current themed shortcut.
 
-Studio поддерживает IPv4 и IPv6 loopback. Успех показывается только после проверки выбранной темы, CSS и класса оформления в готовом окне чата. Служебные окна и аватар не оформляются. Если ChatGPT запущен без поддержки локального подключения, полностью закройте его и нажмите «Открыть ChatGPT» в Studio.
+## Development
+
+Requires Node.js 24+. Run `npm ci`, `npm test`, and `npm start`. Build with `npm run dist` on the target operating system. GitHub Actions runs tests and builds each platform; a `v2.*` tag publishes a release only after all platform builds succeed. Windows and Apple signing are not configured.
+
+## Connection checks
+
+Studio supports IPv4 and IPv6 loopback. It reports success only after checking the selected theme and styles in a ready chat window. Utility windows and the avatar are excluded. If ChatGPT was opened without local connection support, fully close it and use Open ChatGPT in Studio.

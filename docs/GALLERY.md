@@ -1,96 +1,100 @@
-# Галерея тем
+# Theme gallery
 
-[← Установка и скачивание](../README.md)
+[← Installation and downloads](../README.md)
 
-В каталоге 61 тема; в сборке 2.6.5 — 60. Jade Silhouette добавлена в исходники после этого выпуска. На изображениях — демонстрационный чат.
+All 61 themes are included in version 2.6.6. Images show a demo chat using the actual theme styles.
 
-## Ай Хосино · Bunny Refrain
+## Ai Hoshino · Bunny Refrain
 
-![Ай Хосино · Bunny Refrain](../previews/ai-bunny-refrain-chat.jpg)
+![Ai Hoshino · Bunny Refrain](../previews/ai-bunny-refrain-chat.jpg)
 
-## Ай Хосино · Starlit Encore
+## Ai Hoshino · Starlit Encore
 
-![Ай Хосино · Starlit Encore](../previews/ai-starlit-encore-chat.jpg)
+![Ai Hoshino · Starlit Encore](../previews/ai-starlit-encore-chat.jpg)
 
 ## Azure Morpho
 
 ![Azure Morpho](../previews/azure-morpho-chat.jpg)
 
-## Фурина · Blue Cat Nocturne
+## Furina · Blue Cat Nocturne
 
-![Фурина · Blue Cat Nocturne](../previews/blue-cat-nocturne-chat.jpg)
+![Furina · Blue Cat Nocturne](../previews/blue-cat-nocturne-chat.jpg)
 
 ## C.C. · Mint Contract
 
 ![C.C. · Mint Contract](../previews/cc-mint-contract-chat.jpg)
 
-## Фубуки · Velvet Reflection
+## Fubuki · Velvet Reflection
 
-![Фубуки · Velvet Reflection](../previews/fubuki-velvet-chat.jpg)
+![Fubuki · Velvet Reflection](../previews/fubuki-velvet-chat.jpg)
 
-## Фурина · Moonlit Repose
+## Furina · Moonlit Repose
 
-![Фурина · Moonlit Repose](../previews/furina-moonlit-repose-chat.jpg)
+![Furina · Moonlit Repose](../previews/furina-moonlit-repose-chat.jpg)
 
-## Ху Тао × Фурина · Красный и синий
+## Hu Tao × Furina · Red and Blue
 
-![Ху Тао × Фурина · Красный и синий](../previews/hu-tao-furina-duality-chat.jpg)
+![Hu Tao × Furina · Red and Blue](../previews/hu-tao-furina-duality-chat.jpg)
 
-## Резе · Night Bloom
+## Reze · Night Bloom
 
-![Резе · Night Bloom](../previews/reze-night-bloom-chat.jpg)
+![Reze · Night Bloom](../previews/reze-night-bloom-chat.jpg)
 
-## Шинобу Кочо · Wisteria Veil
+## Shinobu Kocho · Wisteria Veil
 
-![Шинобу Кочо · Wisteria Veil](../previews/shinobu-wisteria-chat.jpg)
+![Shinobu Kocho · Wisteria Veil](../previews/shinobu-wisteria-chat.jpg)
 
 ## Sora · Silver Ribbon
 
 ![Sora · Silver Ribbon](../previews/sora-ribbon-chat.jpg)
 
-## Сильфи · Moonstone Atelier
+## Sylphie · Moonstone Atelier
 
-![Сильфи · Moonstone Atelier](../previews/sylphie-moonstone-chat.jpg)
+![Sylphie · Moonstone Atelier](../previews/sylphie-moonstone-chat.jpg)
 
-## Татсумаки · Jade Orbit
+## Tatsumaki · Jade Orbit
 
-![Татсумаки · Jade Orbit](../previews/tatsumaki-jade-chat.jpg)
+![Tatsumaki · Jade Orbit](../previews/tatsumaki-jade-chat.jpg)
 
-## Тацумаки · Jade Duo
+## Tatsumaki · Jade Duo
 
-![Тацумаки · Jade Duo](../previews/tatsumaki-jade-duo-chat.jpg)
+![Tatsumaki · Jade Duo](../previews/tatsumaki-jade-duo-chat.jpg)
+
+## Tatsumaki · Jade Silhouette
+
+![Tatsumaki · Jade Silhouette](../previews/tatsumaki-jade-solo-chat.jpg)
 
 ## Zero Two · Darling Rose
 
 ![Zero Two · Darling Rose](../previews/zero-two-rose-chat.jpg)
 
-## Кана · Тёплый гранат
+## Kana · Warm Garnet
 
-![Кана · Тёплый гранат](../previews/kana-soft-garnet-chat.jpg)
+![Kana · Warm Garnet](../previews/kana-soft-garnet-chat.jpg)
 
-## Кана · Рубиновый свет
+## Kana · Ruby Spotlight
 
-![Кана · Рубиновый свет](../previews/kana-ruby-spotlight-chat.jpg)
+![Kana · Ruby Spotlight](../previews/kana-ruby-spotlight-chat.jpg)
 
-## Ай Хосино · Prismatic Gaze
+## Ai Hoshino · Prismatic Gaze
 
-![Ай Хосино · Prismatic Gaze](../previews/ai-prismatic-gaze-chat.jpg)
+![Ai Hoshino · Prismatic Gaze](../previews/ai-prismatic-gaze-chat.jpg)
 
-## Рем · Azure Fury
+## Rem · Azure Fury
 
-![Рем · Azure Fury](../previews/rem-azure-fury-chat.jpg)
+![Rem · Azure Fury](../previews/rem-azure-fury-chat.jpg)
 
-## Рем · Butterfly Dream
+## Rem · Butterfly Dream
 
-![Рем · Butterfly Dream](../previews/rem-butterfly-dream-chat.jpg)
+![Rem · Butterfly Dream](../previews/rem-butterfly-dream-chat.jpg)
 
 ## Silver · Azure Bloom
 
 ![Silver · Azure Bloom](../previews/silver-azure-bloom-chat.jpg)
 
-## Фурина · Silver Slumber
+## Furina · Silver Slumber
 
-![Фурина · Silver Slumber](../previews/furina-silver-slumber-chat.jpg)
+![Furina · Silver Slumber](../previews/furina-silver-slumber-chat.jpg)
 
 ## Crimson · Heart Duo
 
@@ -112,138 +116,134 @@
 
 ![Tidal Halo · Twin Current](../previews/tidal-halo-duo-chat.jpg)
 
-## Jade Silk · Нефритовый шёлк
+## Jade Silk
 
-![Jade Silk · Нефритовый шёлк](../previews/jade-silk-chat.jpg)
+![Jade Silk](../previews/jade-silk-chat.jpg)
 
-## Plum Velvet · Сливовый бархат
+## Plum Velvet
 
-![Plum Velvet · Сливовый бархат](../previews/plum-velvet-chat.jpg)
+![Plum Velvet](../previews/plum-velvet-chat.jpg)
 
-## Маюри · Amber Reverie
+## Mayuri · Amber Reverie
 
-![Маюри · Amber Reverie](../previews/mayuri-amber-chat.jpg)
+![Mayuri · Amber Reverie](../previews/mayuri-amber-chat.jpg)
 
-## Sage Reverie · Тихий шалфей
+## Sage Reverie · Quiet Sage
 
-![Sage Reverie · Тихий шалфей](../previews/sage-reverie-chat.jpg)
+![Sage Reverie · Quiet Sage](../previews/sage-reverie-chat.jpg)
 
-## Silver Aquamarine · Серебряная тишина
+## Silver Aquamarine · Silver Quiet
 
-![Silver Aquamarine · Серебряная тишина](../previews/silver-aquamarine-chat.jpg)
+![Silver Aquamarine · Silver Quiet](../previews/silver-aquamarine-chat.jpg)
 
-## Вагури · Snowfall Reverie
+## Waguri · Snowfall Reverie
 
-![Вагури · Snowfall Reverie](../previews/waguri-snowfall-chat.jpg)
+![Waguri · Snowfall Reverie](../previews/waguri-snowfall-chat.jpg)
 
-## Ай Хосино · Violet Supernova
+## Ai Hoshino · Violet Supernova
 
-![Ай Хосино · Violet Supernova](../previews/ai-violet-supernova-chat.jpg)
+![Ai Hoshino · Violet Supernova](../previews/ai-violet-supernova-chat.jpg)
 
-## Violet Onsen · Тёплый вечер
+## Violet Onsen · Warm Evening
 
-![Violet Onsen · Тёплый вечер](../previews/violet-onsen-chat.jpg)
+![Violet Onsen · Warm Evening](../previews/violet-onsen-chat.jpg)
 
-## Джибрил · Amber Library
+## Jibril · Amber Library
 
-![Джибрил · Amber Library](../previews/jibril-amber-library-chat.jpg)
+![Jibril · Amber Library](../previews/jibril-amber-library-chat.jpg)
 
-## Курису · Worldline Echo
+## Kurisu · Worldline Echo
 
-![Курису · Worldline Echo](../previews/kurisu-worldline-chat.jpg)
+![Kurisu · Worldline Echo](../previews/kurisu-worldline-chat.jpg)
 
-## Курису · Lab Evening
+## Kurisu · Lab Evening
 
-![Курису · Lab Evening](../previews/kurisu-lab-evening-chat.jpg)
+![Kurisu · Lab Evening](../previews/kurisu-lab-evening-chat.jpg)
 
-## Jade Evening · Нефритовый вечер
+## Jade Evening
 
-![Jade Evening · Нефритовый вечер](../previews/jade-evening-garden-chat.jpg)
+![Jade Evening](../previews/jade-evening-garden-chat.jpg)
 
-## Фрирен · Sage Heart
+## Frieren · Sage Heart
 
-![Фрирен · Sage Heart](../previews/frieren-sage-heart-chat.jpg)
+![Frieren · Sage Heart](../previews/frieren-sage-heart-chat.jpg)
 
-## Фрирен и Ферн · Lilac Quiet
+## Frieren & Fern · Lilac Quiet
 
-![Фрирен и Ферн · Lilac Quiet](../previews/frieren-fern-lilac-chat.jpg)
+![Frieren & Fern · Lilac Quiet](../previews/frieren-fern-lilac-chat.jpg)
 
-## Violet Silhouette · Фиолетовая тишина
+## Violet Silhouette · Violet Quiet
 
-![Violet Silhouette · Фиолетовая тишина](../previews/violet-silhouette-chat.jpg)
+![Violet Silhouette · Violet Quiet](../previews/violet-silhouette-chat.jpg)
 
-## Ферн · Plum Hush
+## Fern · Plum Hush
 
-![Ферн · Plum Hush](../previews/fern-plum-hush-chat.jpg)
+![Fern · Plum Hush](../previews/fern-plum-hush-chat.jpg)
 
-## Teal Peony · Бирюзовый пион
+## Teal Peony
 
-![Teal Peony · Бирюзовый пион](../previews/teal-peony-chat.jpg)
+![Teal Peony](../previews/teal-peony-chat.jpg)
 
-## Stone Focus · Спокойный минимализм
+## Stone Focus · Calm Minimalism
 
-![Stone Focus · Спокойный минимализм](../previews/stone-focus-chat.jpg)
+![Stone Focus · Calm Minimalism](../previews/stone-focus-chat.jpg)
 
-## Amber Study · Тёплый кабинет
+## Amber Study · Warm Study
 
-![Amber Study · Тёплый кабинет](../previews/amber-study-chat.jpg)
+![Amber Study · Warm Study](../previews/amber-study-chat.jpg)
 
-## Forest Retreat · Лесная тишина
+## Forest Retreat · Forest Quiet
 
-![Forest Retreat · Лесная тишина](../previews/forest-retreat-chat.jpg)
+![Forest Retreat · Forest Quiet](../previews/forest-retreat-chat.jpg)
 
-## Midnight Grid · Ночной режим
+## Midnight Grid · Night Mode
 
-![Midnight Grid · Ночной режим](../previews/midnight-grid-chat.jpg)
+![Midnight Grid · Night Mode](../previews/midnight-grid-chat.jpg)
 
-## Фурина · Бирюзовое течение
+## Furina · Turquoise Current
 
-![Фурина · Бирюзовое течение](../previews/furina-turquoise-current-chat.jpg)
+![Furina · Turquoise Current](../previews/furina-turquoise-current-chat.jpg)
 
-## Тихая кухня · Soft Indigo
+## Quiet Kitchen · Soft Indigo
 
-![Тихая кухня · Soft Indigo](../previews/quiet-kitchen-chat.jpg)
+![Quiet Kitchen · Soft Indigo](../previews/quiet-kitchen-chat.jpg)
 
-## Фурина · Синий графит
+## Furina · Blue Graphite
 
-![Фурина · Синий графит](../previews/furina-slate-training-chat.jpg)
+![Furina · Blue Graphite](../previews/furina-slate-training-chat.jpg)
 
-## Бант · Тёмное какао
+## Bow · Dark Cocoa
 
-![Бант · Тёмное какао](../previews/cocoa-back-bow-chat.jpg)
+![Bow · Dark Cocoa](../previews/cocoa-back-bow-chat.jpg)
 
-## Фурина · Индиго
+## Furina · Indigo
 
-![Фурина · Индиго](../previews/furina-indigo-peace-chat.jpg)
+![Furina · Indigo](../previews/furina-indigo-peace-chat.jpg)
 
-## Улыбка · Тёмный рубин
+## Smile · Dark Ruby
 
-![Улыбка · Тёмный рубин](../previews/ruby-playful-smile-chat.jpg)
+![Smile · Dark Ruby](../previews/ruby-playful-smile-chat.jpg)
 
-## Взгляд · Сливовый гранат
+## Gaze · Plum Garnet
 
-![Взгляд · Сливовый гранат](../previews/garnet-soft-gaze-chat.jpg)
+![Gaze · Plum Garnet](../previews/garnet-soft-gaze-chat.jpg)
 
-## Золотые пряди · Дымчатая бирюза
+## Golden Strands · Smoky Turquoise
 
-![Золотые пряди · Дымчатая бирюза](../previews/golden-teal-gaze-chat.jpg)
+![Golden Strands · Smoky Turquoise](../previews/golden-teal-gaze-chat.jpg)
 
-## Кошачьи ушки · Дымчатый графит
+## Cat Ears · Smoky Graphite
 
-![Кошачьи ушки · Дымчатый графит](../previews/slate-cat-glasses-chat.jpg)
+![Cat Ears · Smoky Graphite](../previews/slate-cat-glasses-chat.jpg)
 
-## Колокольчик · Ночной индиго
+## Little Bell · Midnight Indigo
 
-![Колокольчик · Ночной индиго](../previews/indigo-maid-bell-chat.jpg)
+![Little Bell · Midnight Indigo](../previews/indigo-maid-bell-chat.jpg)
 
-## Тихий жест · Сапфир
+## Quiet Gesture · Sapphire
 
-![Тихий жест · Сапфир](../previews/sapphire-quiet-sign-chat.jpg)
+![Quiet Gesture · Sapphire](../previews/sapphire-quiet-sign-chat.jpg)
 
-## Строгий взгляд · Тёмный изумруд
+## Stern Gaze · Dark Emerald
 
-![Строгий взгляд · Тёмный изумруд](../previews/emerald-stern-gaze-chat.jpg)
-
-## Тацумаки · Jade Silhouette
-
-![Тацумаки · Jade Silhouette](../previews/tatsumaki-jade-solo-chat.jpg)
+![Stern Gaze · Dark Emerald](../previews/emerald-stern-gaze-chat.jpg)

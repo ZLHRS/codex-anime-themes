@@ -1,3 +1,13 @@
+# ZLHRS Theme Studio 2.6.6
+
+- English and Russian interfaces. Switch under Settings → Interface language; your choice is saved automatically.
+- All 61 themes included in every Windows, macOS, and Linux build.
+- New Tatsumaki · Jade Silhouette, with the original portrait positioned on the right.
+- Completed the top of C.C.’s hair in Mint Contract and improved the shared water background in Twin Current.
+- Fully English README, setup guide, gallery, and demo preview text.
+- The existing 23 custom pets remain available. No new pets were created.
+
+
 # ZLHRS Theme Studio 2.6.5
 
 - Смягчены резкие края изображений и переходы к фону; размеры и позы сохранены.
