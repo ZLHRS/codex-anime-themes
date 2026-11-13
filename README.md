@@ -5,7 +5,7 @@
   <p><a href="https://github.com/ZLHRS/codex-anime-themes/releases/latest"><b>Скачать приложение</b></a> · <a href="docs/GALLERY.md">Посмотреть темы</a> · <a href="#установка">Установка</a></p>
 </div>
 
-![Пример оформления](previews/blue-cat-nocturne-chat.jpg)
+![Violet Onsen · Тёплый вечер](previews/violet-onsen-chat.jpg)
 
 ## Скачать
 
