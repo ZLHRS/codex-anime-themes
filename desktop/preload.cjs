@@ -1,5 +1,6 @@
 const {contextBridge,ipcRenderer}=require('electron');
 contextBridge.exposeInMainWorld('studio',{
+ language:value=>ipcRenderer.invoke('studio:language',value),
  state:()=>ipcRenderer.invoke('studio:state'),
  appearance:(id,value)=>ipcRenderer.invoke('studio:appearance',id,value),
  apply:id=>ipcRenderer.invoke('studio:apply',id),

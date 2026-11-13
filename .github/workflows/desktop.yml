@@ -41,6 +41,12 @@ jobs:
       - name: Linux gallery smoke test
         if: runner.os == 'Linux'
         run: xvfb-run -a npx electron . --smoke-test --no-sandbox
+      - name: English and Russian interface checks
+        if: runner.os != 'Linux'
+        run: npm run test:i18n-ui
+      - name: Linux English and Russian interface checks
+        if: runner.os == 'Linux'
+        run: xvfb-run -a npm run test:i18n-ui -- --no-sandbox
       - run: npm run dist -- ${{ matrix.args }}
         env:
           CSC_IDENTITY_AUTO_DISCOVERY: 'false'

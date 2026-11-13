@@ -1,6 +1,15 @@
 'use strict';
 const $=id=>document.getElementById(id);
 const Catalog=window.StudioCatalog;
+const I18n=window.StudioI18n, tr=value=>I18n.translate(value);
+// Remember original static text, so changing languages never rebuilds controls.
+const staticText=[],staticAttributes=[];
+const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
+while(walker.nextNode()){const node=walker.currentNode;if(/[А-Яа-яЁё]/.test(node.nodeValue)&&!['SCRIPT','STYLE','OPTION'].includes(node.parentElement?.tagName))staticText.push([node,node.nodeValue]);}
+for(const el of document.querySelectorAll('*'))for(const key of ['placeholder','title','aria-label','alt'])if(/[А-Яа-яЁё]/.test(el.getAttribute(key)||''))staticAttributes.push([el,key,el.getAttribute(key)]);
+for(const el of document.querySelectorAll('#sort option'))staticText.push([el.firstChild,el.textContent]);
+function localizeShell(language){I18n.language=language;document.documentElement.lang=I18n.language;$('language').value=I18n.language;for(const [node,text] of staticText)if(node.isConnected)node.nodeValue=tr(text);for(const [el,key,text] of staticAttributes)el.setAttribute(key,tr(text));}
+
 let state,onlyActive=false,pending=false,appearanceTheme=null,appearanceDirty=false,currentPage='skins';
 let characterIds=[],draftCharacterIds=new Set(),collection='all';
 const appearanceKeys=['brightness','size','x','y'];
@@ -11,42 +20,43 @@ const pageInfo={
  settings:['Настройки','ВСЁ ПО-ТВОЕМУ','Детали имеют значение.','Подстрой картинку и приложение так, как удобно тебе.'],
  help:['Инструкция','НАЧАТЬ ПРОСТО','Устраивайся поудобнее.','Как выбрать тему, добавить питомцев и сохранить всё под рукой.']
 };
-function element(tag,text,className){const el=document.createElement(tag);if(text)el.textContent=text;if(className)el.className=className;return el;}
+function element(tag,text,className){const el=document.createElement(tag);if(text)el.textContent=tr(text);if(className)el.className=className;return el;}
 function icon(name){const el=document.createElementNS('http://www.w3.org/2000/svg','svg');el.classList.add('icon');el.setAttribute('aria-hidden','true');const use=document.createElementNS('http://www.w3.org/2000/svg','use');use.setAttribute('href','#i-'+name);el.append(use);return el;}
-function plural(n,one,few,many){return n%10===1&&n%100!==11?one:n%10>=2&&n%10<=4&&(n%100<12||n%100>14)?few:many;}
-function setStatus(text,kind=''){$('status').textContent=text;const notice=$('status').parentElement;notice.classList.toggle('is-busy',kind==='busy');notice.classList.toggle('is-error',kind==='error');}
+function plural(n,one,few,many){if(I18n.language==='en')return one==='тема'?(n===1?'theme':'themes'):one==='персонаж'?(n===1?'character':'characters'):(n===1?'pet':'pets');return n%10===1&&n%100!==11?one:n%10>=2&&n%10<=4&&(n%100<12||n%100>14)?few:many;}
+function setStatus(text,kind=''){$('status').textContent=tr(text);const notice=$('status').parentElement;notice.classList.toggle('is-busy',kind==='busy');notice.classList.toggle('is-error',kind==='error');}
 function render(next){
- state=next;
+ localizeShell(next.language);
+ state={...next,themes:next.themes.map(theme=>({...theme,searchText:theme.name+" "+theme.description,name:tr(theme.name),description:tr(theme.description)}))};
  const chosen=state.themes.find(t=>t.id===state.selected);
- for(const id of ['current','sidebar-current','settings-current']){$(id).textContent=chosen?.name||'Выбери тему в коллекции';$(id).title=chosen?.name||'';}
- $('themes-nav-count').textContent=state.themes.length;
- $('pets-nav-count').textContent=state.petCount||0;
- $('pet-total').textContent=state.petCount||0;
+ for(const id of ['current','sidebar-current','settings-current']){$(id).textContent=tr(chosen?.name||'Выбери тему в коллекции');$(id).title=chosen?.name||'';}
+ $('themes-nav-count').textContent=tr(state.themes.length);
+ $('pets-nav-count').textContent=tr(state.petCount||0);
+ $('pet-total').textContent=tr(state.petCount||0);
  $('pet-total').nextSibling.nodeValue=' '+plural(state.petCount||0,'персонаж','персонажа','персонажей');
- $('pets-hint').textContent='В наборе '+(state.petCount||0)+' '+plural(state.petCount||0,'питомец','питомца','питомцев')+'. Запрос добавит недостающих и сохранит текущего спутника.';
+ $('pets-hint').textContent=tr(I18n.language==='en'?'The collection contains '+(state.petCount||0)+' pets. The prompt adds missing pets and keeps your current companion.':'В наборе '+(state.petCount||0)+' '+plural(state.petCount||0,'питомец','питомца','питомцев')+'. Запрос добавит недостающих и сохранит текущего спутника.');
  $('import-pets').disabled=!state.petCount||pending;
  renderAppearance();
  setStatus(state.status);
  $('reveal').hidden=!state.lastShortcut;
  $('update').disabled=!!state.updating;
- $('update').textContent=state.updating?'Обновляем…':'Подтянуть изменения';
- $('version').textContent='v'+state.version;
- $('platform').textContent={win32:'Windows',darwin:'macOS',linux:'Linux'}[state.platform]||state.platform;
- $('search-shortcut').textContent=state.platform==='darwin'?'⌘ K':'Ctrl K';
- $('app-path').textContent=state.appPath||'ChatGPT не найден автоматически. Укажи путь к установленному приложению.';
+ $('update').textContent=tr(state.updating?'Обновляем…':'Подтянуть изменения');
+ $('version').textContent=tr('v'+state.version);
+ $('platform').textContent=tr({win32:'Windows',darwin:'macOS',linux:'Linux'}[state.platform]||state.platform);
+ $('search-shortcut').textContent=tr(state.platform==='darwin'?'⌘ K':'Ctrl K');
+ $('app-path').textContent=state.appPath||tr('ChatGPT не найден автоматически. Укажи путь к установленному приложению.');
  const validIds=new Set(Catalog.available(state.themes).map(c=>c.id));characterIds=characterIds.filter(id=>validIds.has(id));
  renderCollections();renderPets();cards();
 }
 function cards(){
  if(!state)return;
- const rows=Catalog.select(state.themes,{query:$('search').value,characterIds,collection,onlyActive,selected:state.selected,sort:$('sort').value});
+ const rows=Catalog.select(state.themes,{query:$('search').value,characterIds,collection,onlyActive,selected:state.selected,sort:$('sort').value,locale:I18n.language});
  $('cards').replaceChildren();
  for(const t of rows){
- const card=element('article',null,'card'+(t.id===state.selected?' active':''));const preview=element('button',null,'preview-button');preview.setAttribute('aria-label','Посмотреть '+t.name);const img=element('img');img.src=t.preview;img.alt=t.name;preview.append(img);preview.onclick=()=>{$('preview').querySelector('img').src=t.preview;$('preview').querySelector('p').textContent=t.name+' · демонстрационный чат с настоящими стилями темы';$('preview').showModal();};
+ const card=element('article',null,'card'+(t.id===state.selected?' active':''));const preview=element('button',null,'preview-button');preview.setAttribute('aria-label',tr('Посмотреть ')+t.name);const img=element('img');img.src=t.preview;img.alt=t.name;preview.append(img);preview.onclick=()=>{$('preview').querySelector('img').src=t.preview;$('preview').querySelector('p').textContent=tr(t.name+' · демонстрационный чат с настоящими стилями темы');$('preview').showModal();};
  const body=element('div',null,'card-body');body.append(element('h2',t.name),element('div','v'+t.version+'　@'+t.author,'meta'),element('p',t.description,'description'));const apply=element('button',t.id===state.selected?'✓ Выбрана':'Применить','primary');apply.disabled=pending;apply.onclick=()=>applyTheme(t.id);body.append(apply);card.append(preview,body);$('cards').append(card);
  }
  $('empty-state').hidden=rows.length!==0;
- $('result-count').textContent=rows.length+' из '+state.themes.length+' тем';
+ $('result-count').textContent=tr(I18n.language==='en'?rows.length+' of '+state.themes.length+' themes':rows.length+' из '+state.themes.length+' тем');
  renderFilterSummary();
 }
 function renderFilterSummary(){
@@ -54,11 +64,11 @@ function renderFilterSummary(){
  $('active').classList.toggle('selected',onlyActive);$('active').setAttribute('aria-pressed',String(onlyActive));
  for(const button of document.querySelectorAll('[data-collection]')){const selected=collection===button.dataset.collection&&!onlyActive;button.classList.toggle('selected',selected);button.setAttribute('aria-pressed',String(selected));}
  $('character-filter').classList.toggle('has-selection',characterIds.length>0);
- $('character-filter-label').textContent=characterIds.length?'Персонажи · '+characterIds.length:'Персонажи';
+ $('character-filter-label').textContent=tr(characterIds.length?'Персонажи · '+characterIds.length:'Персонажи');
  $('clear-search').hidden=!$('search').value;
  $('search-shortcut').hidden=!!$('search').value;
  $('filter-tags').replaceChildren();
- function tag(text,remove){const button=element('button',text,'filter-tag');button.append(icon('close'));button.setAttribute('aria-label','Убрать фильтр: '+text);button.onclick=()=>{remove();cards();};$('filter-tags').append(button);}
+ function tag(text,remove){const button=element('button',text,'filter-tag');button.append(icon('close'));button.setAttribute('aria-label',tr('Убрать фильтр: ')+tr(text));button.onclick=()=>{remove();cards();};$('filter-tags').append(button);}
  for(const id of characterIds){const c=Catalog.characters.find(c=>c.id===id);if(c)tag(c.name,()=>{characterIds=characterIds.filter(x=>x!==id);});}
  if(collection!=='all')tag(Catalog.collections.find(c=>c.id===collection).name,()=>{collection='all';});
  $('reset-filters').hidden=!(characterIds.length||collection!=='all'||onlyActive||$('search').value||$('sort').value!=='catalog');
@@ -88,7 +98,7 @@ function page(name){
   if(key===name)tab.setAttribute('aria-current','page');else tab.removeAttribute('aria-current');
  }
  const [breadcrumb,eyebrow,title,description]=pageInfo[name];
- $('breadcrumb').textContent=breadcrumb;$('page-eyebrow').textContent=eyebrow;$('page-title').textContent=title;$('page-description').textContent=description;
+ $('breadcrumb').textContent=tr(breadcrumb);$('page-eyebrow').textContent=tr(eyebrow);$('page-title').textContent=tr(title);$('page-description').textContent=tr(description);
  $('page-title').tabIndex=-1;$('page-title').focus({preventScroll:true});window.scrollTo(0,0);
 }
 function openCharacters(){
@@ -97,7 +107,7 @@ function openCharacters(){
 }
 function renderCharacters(){
  const query=Catalog.normalize($('character-search').value);
- const people=Catalog.available(state.themes).filter(c=>Catalog.normalize(c.name+' '+c.aliases).includes(query));
+ const people=Catalog.available(state.themes).filter(c=>Catalog.normalize(c.name+' '+tr(c.name)+' '+c.aliases).includes(query));
  $('character-options').replaceChildren();
  for(const c of people){
   const label=element('label',null,'character-option');const input=element('input');input.type='checkbox';input.value=c.id;input.checked=draftCharacterIds.has(c.id);
@@ -106,7 +116,7 @@ function renderCharacters(){
  }
  $('character-empty').hidden=people.length!==0;updateCharacterCount();
 }
-function updateCharacterCount(){$('character-selection-count').textContent=draftCharacterIds.size?'Выбрано: '+draftCharacterIds.size:'Все персонажи';}
+function updateCharacterCount(){$('character-selection-count').textContent=tr(draftCharacterIds.size?'Выбрано: '+draftCharacterIds.size:'Все персонажи');}
 async function applyTheme(id){
  if(pending||state?.updating)return;pending=true;cards();setStatus('Сохраняем тему и подключаемся к ChatGPT…','busy');
  try{render(await window.studio.apply(id));}catch(e){setStatus(e.message,'error');}finally{pending=false;cards();}
@@ -117,14 +127,14 @@ async function runAction(action,message){
  try{render(await action());}catch(e){setStatus(e.message,'error');}finally{pending=false;cards();$('import-pets').disabled=!state?.petCount;}
 }
 function readAppearance(){return Object.fromEntries([...appearanceKeys.map(key=>[key,Number($(key).value)]),['animations',$('animations').checked],['effects',$('effects').checked]]);}
-function updateAppearanceLabels(){for(const key of appearanceKeys)$(key+'-value').textContent=$(key).value+(['size','brightness'].includes(key)?'%':'% экрана');}
+function updateAppearanceLabels(){for(const key of appearanceKeys)$(key+'-value').textContent=tr($(key).value+(['size','brightness'].includes(key)?'%':'% экрана'));}
 function setAppearance(value){for(const key of appearanceKeys)$(key).value=value[key];$('animations').checked=value.animations;$('effects').checked=value.effects;updateAppearanceLabels();}
 function renderAppearance(){
- if(appearanceTheme!==state.selected||!appearanceDirty){setAppearance(state.appearance);appearanceTheme=state.selected;appearanceDirty=false;$('appearance-dirty').textContent='';}
- $('effect-description').textContent=state.effect?'Особенность темы: '+state.effect:'Настрой яркость, размер и положение картинки.';
+ if(appearanceTheme!==state.selected||!appearanceDirty){setAppearance(state.appearance);appearanceTheme=state.selected;appearanceDirty=false;$('appearance-dirty').textContent=tr('');}
+ $('effect-description').textContent=state.effect?tr('Особенность темы: ')+tr(state.effect):tr('Настрой яркость, размер и положение картинки.');
 }
 async function saveAppearance(value){if(pending)return;await runAction(async()=>{const next=await window.studio.appearance(state.selected,value);appearanceDirty=false;return next;},'Сохраняем настройки темы…');}
-for(const key of [...appearanceKeys,'animations','effects'])$(key).oninput=()=>{appearanceDirty=true;updateAppearanceLabels();$('appearance-dirty').textContent='Есть несохранённые изменения';};
+for(const key of [...appearanceKeys,'animations','effects'])$(key).oninput=()=>{appearanceDirty=true;updateAppearanceLabels();$('appearance-dirty').textContent=tr('Есть несохранённые изменения');};
 for(const key of Object.keys(pageInfo))$(key+'-tab').onclick=()=>page(key);
 $('customize').onclick=()=>page('settings');$('back-to-themes').onclick=()=>page('skins');
 $('browse-characters').onclick=()=>{resetFilters();page('skins');openCharacters();};
@@ -153,5 +163,6 @@ $('import-pets').onclick=()=>runAction(()=>window.studio.importPets(),'Копи�
 document.addEventListener('keydown',event=>{
  if((event.ctrlKey||event.metaKey)&&event.code==='KeyK'&&!document.querySelector('dialog[open]')){event.preventDefault();page('skins');$('search').focus();}
 });
+$('language').onchange=async()=>{const select=$('language');select.disabled=true;try{const next=await window.studio.language(select.value);render(next);page(currentPage);updateAppearanceLabels();if(appearanceDirty)$('appearance-dirty').textContent=tr('Есть несохранённые изменения');if($('character-dialog').open)renderCharacters();}catch(e){select.value=I18n.language;setStatus(e.message,'error');}finally{select.disabled=false;}};
 window.studio.subscribe(render);
 window.studio.state().then(render).catch(e=>setStatus('Не удалось загрузить коллекцию: '+e.message,'error'));

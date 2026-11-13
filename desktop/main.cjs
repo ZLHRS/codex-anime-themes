@@ -6,6 +6,8 @@ const core=require('./core.cjs');
 const updates=require('./updates.cjs');
 const appearance=require('./appearance.cjs');
 const pets=require('./pets.cjs');
+const i18n=require('./i18n.js');
+const tr=text=>i18n.translate(text,settings.language);
 const {ThemeSession}=require('./theme-session.cjs');
 const {spawn}=require('node:child_process');
 const root=path.resolve(__dirname,'..');
@@ -27,10 +29,10 @@ app.on('second-instance',(_event,args)=>{if(args.includes('--quit-for-update')){
 app.on('before-quit',()=>{quitting=true;clearInterval(timer);legacyGuard?.stop();});
 app.on('window-all-closed',()=>{});
 app.on('activate',()=>{if(!launchOnly)show();});
-startup=app.whenReady().then(init).catch(error=>{if(smoke){console.error(error);app.exit(1);}else{dialog.showErrorBox('ZLHRS Theme Studio',error.message);app.quit();}});
+startup=app.whenReady().then(init).catch(error=>{if(smoke){console.error(error);app.exit(1);}else{dialog.showErrorBox('ZLHRS Theme Studio',tr(error.message));app.quit();}});
 }
 function report(error){status=error.message;notify();}
-function snapshot(){return {themes:catalog,selected:settings.theme,appPath:settings.appPath||'',status,platform:process.platform,version:app.getVersion(),lastShortcut,updating,petCount:petCatalog.length,pets:petCatalog.map(({id,name})=>({id,name})),appearance:appearance.normalize(settings.appearance?.[settings.theme]),effect:appearance.designs[settings.theme]?.[0]||''};}
+function snapshot(){return {language:i18n.normalize(settings.language),themes:catalog,selected:settings.theme,appPath:settings.appPath||'',status,platform:process.platform,version:app.getVersion(),lastShortcut,updating,petCount:petCatalog.length,pets:petCatalog.map(({id,name})=>({id,name})),appearance:appearance.normalize(settings.appearance?.[settings.theme]),effect:appearance.designs[settings.theme]?.[0]||''};}
 function notify(){if(window&&!window.isDestroyed())window.webContents.send('studio:state',snapshot());}
 function show(){if(window&&!window.isDestroyed()){window.show();window.focus();}else createWindow();}
 function createWindow(){
@@ -87,6 +89,13 @@ async function init(){
  if(!await core.exists(settings.appPath))settings.appPath=await core.discover();
  const {session}=require('electron');session.defaultSession.setPermissionRequestHandler((_wc,_p,callback)=>callback(false));
  ipcMain.handle('studio:state',()=>snapshot());
+ ipcMain.handle('studio:language',async(_event,value)=>{
+  if(!['ru','en'].includes(value))throw new Error('Invalid interface language');
+  if(busy||updating)throw new Error('Дождитесь завершения текущего действия.');
+  busy=true;const previous=settings.language;settings.language=value;
+  try{await core.saveSettings(settingsFile,settings);}catch(error){settings.language=previous;throw error;}finally{busy=false;}
+  return snapshot();
+ });
  ipcMain.handle('studio:apply',async(_e,id)=>{try{await apply(id);return snapshot();}catch(e){report(e);return snapshot();}});
  ipcMain.handle('studio:appearance',async(_e,id,value)=>{
   if(busy||updating)throw new Error('Дождитесь завершения текущего действия.');
@@ -102,7 +111,7 @@ async function init(){
  });
  ipcMain.handle('studio:launch',async()=>{try{await apply(settings.theme,true);return snapshot();}catch(e){report(e);return snapshot();}});
  ipcMain.handle('studio:choose',async()=>{
-  const result=await dialog.showOpenDialog(window,{title:'Выберите приложение ChatGPT / Codex',properties:['openFile'],filters:process.platform==='win32'?[{name:'Приложение',extensions:['exe']}]:undefined});
+  const result=await dialog.showOpenDialog(window,{title:tr('Выберите приложение ChatGPT / Codex'),properties:['openFile'],filters:process.platform==='win32'?[{name:tr('Приложение'),extensions:['exe']}]:undefined});
   if(!result.canceled){settings.appPath=result.filePaths[0];await core.saveSettings(settingsFile,settings);status='Приложение выбрано. Можно применить тему.';notify();}return snapshot();
  });
  ipcMain.handle('studio:shortcut',async()=>{try{await shortcut('studio');lastShortcut=await shortcut();status='Ярлыки Studio и ChatGPT с темой обновлены. Старые ссылки заменены.';}catch(e){status='Не удалось создать ярлык: '+e.message;}notify();return snapshot();});
@@ -111,7 +120,7 @@ async function init(){
  ipcMain.handle('studio:refresh',refreshThemes);
  ipcMain.handle('studio:import-pets',async()=>{
   if(busy||updating)throw new Error('Дождитесь завершения текущего действия.');
-  clipboard.writeText(pets.importPrompt(petCatalog));
+  clipboard.writeText(pets.importPrompt(petCatalog,settings.language));
   try{await apply(settings.theme,true);status='Запрос на добавление '+petCatalog.length+' питомцев скопирован. Вставьте его в новый чат ChatGPT и отправьте. Уже добавленные питомцы будут пропущены.';}
   catch(error){status='Запрос скопирован. Откройте ChatGPT, вставьте и отправьте его. '+error.message;}
   notify();return snapshot();
@@ -125,7 +134,7 @@ async function init(){
   // Renderer fetches the catalog asynchronously.
   for(let i=0;i<30;i++){if(await w.webContents.executeJavaScript('document.querySelectorAll(".card").length')===catalog.length){
    const found=await w.webContents.executeJavaScript(`(()=>{const s=document.getElementById('search');s.value='tatsumaki';s.dispatchEvent(new Event('input'));const count=document.querySelectorAll('.card').length;s.value='';s.dispatchEvent(new Event('input'));document.querySelector('.preview-button').click();const modal=document.getElementById('preview').open;document.getElementById('close-preview').click();return {count,modal};})()`);
-   if(found.count!==2||!found.modal)throw new Error('Search or preview failed');
+   if(found.count!==catalog.filter(t=>t.id.startsWith('tatsumaki-')).length||!found.modal)throw new Error('Search or preview failed');
    const help=await w.webContents.executeJavaScript(`(()=>{document.getElementById('help-tab').click();const visible=!document.getElementById('help-page').hidden;document.getElementById('skins-tab').click();return visible;})()`);
    if(!help)throw new Error('Instruction tab failed');
    const shortcutState=await w.webContents.executeJavaScript('window.studio.shortcut()');
@@ -155,6 +164,8 @@ async function init(){
    const other=catalog.find(t=>t.id!==original).id;await apply(other);if(snapshot().appearance.brightness!==100)throw new Error('Settings leaked between themes');await apply(original);if(snapshot().appearance.brightness!==137)throw new Error('Theme settings were lost');
    if((await core.readJson(settingsFile)).appearance[original].brightness!==137)throw new Error('Appearance settings missing on disk');
 
+   await w.webContents.executeJavaScript("(async()=>{document.getElementById('settings-tab').click();document.getElementById('language').value='en';await document.getElementById('language').onchange();if(document.documentElement.lang!=='en'||document.getElementById('choose').textContent!=='Choose application')throw Error('English switch failed');})()");
+   if((await core.readJson(settingsFile)).language!=='en'||settings.theme!==original||settings.appearance[original].brightness!==137)throw new Error('Language preference did not persist independently');
    if(process.argv.includes('--screenshot')){await w.webContents.executeJavaScript('Promise.all([...document.images].map(i=>i.decode().catch(()=>{})))');await fs.writeFile(path.join(root,'docs/theme-selector-crossplatform.png'),(await w.webContents.capturePage()).toPNG());}
    await new Promise(resolve=>{w.once('closed',resolve);w.close();});
    if(!w.isDestroyed()||window!==null)throw new Error('Closed gallery was retained');
@@ -170,7 +181,7 @@ async function init(){
    const reopened=createWindow();await new Promise(resolve=>reopened.webContents.once('did-finish-load',resolve));
    const restored=await reopened.webContents.executeJavaScript('window.studio.state()');
    if(await core.exists(shortcutState.lastShortcut)||await core.exists(studioShortcut))throw new Error('Deleted shortcuts were recreated');
-   if(restored.selected!==original||restored.appearance.brightness!==137)throw new Error('Gallery reopen lost settings');
+   if(restored.language!=='en'||restored.selected!==original||restored.appearance.brightness!==137)throw new Error('Gallery reopen lost settings');
    const writeClipboard=clipboard.writeText;let importText='';
    clipboard.writeText=text=>{importText=text;};
    try{

@@ -11,8 +11,9 @@ function validate(value){
  });
 }
 async function read(root){return validate(JSON.parse(await fs.readFile(path.join(root,'pets/catalog.json'),'utf8')));}
-function importPrompt(pets){
+function importPrompt(pets,language='ru'){
  if(!pets.length)throw new Error('В этой сборке пока нет опубликованных питомцев.');
+ if(language==='en')return 'Add all missing pets from the public ZLHRS Theme Studio collection to my built-in ChatGPT Pets. Use the Pets adopt tool for each link below. First list all my pets (every page of list_pets). Skip a pet if its shared_pet_id or exact name already exists; do not create duplicates. Do not delete or replace anything, and do not switch my active pet. After importing, verify the list and report which pets were added, skipped, or failed. If Pets is unavailable, do not claim the import succeeded.\n\n'+pets.map(p=>p.name+' — https://chatgpt.com/s/'+p.sharedPetId).join('\n');
  return 'Добавь в мои встроенные ChatGPT Pets всех отсутствующих питомцев из публичного набора ZLHRS Theme Studio. Используй инструмент Pets adopt для каждой ссылки ниже. Сначала получи полный список моих питомцев (все страницы list_pets). Если питомец уже есть по shared_pet_id или точному имени, пропусти его; не создавай повторную копию. Ничего не удаляй, не заменяй и не переключай активного питомца. После импорта проверь список и сообщи, кого добавил, пропустил или не удалось добавить. При недоступности Pets не утверждай, что импорт выполнен.\n\n'+pets.map(p=>p.name+' — https://chatgpt.com/s/'+p.sharedPetId).join('\n');
 }
 module.exports={validate,read,importPrompt};

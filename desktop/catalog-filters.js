@@ -40,7 +40,7 @@
  function normalize(value){return String(value||'').normalize('NFKC').toLocaleLowerCase('ru').replace(/ё/g,'е').trim();}
  function forTheme(id){return characters.filter(c=>c.themeIds.includes(id));}
  function available(themes){const ids=new Set(themes.map(t=>t.id));return characters.map(c=>({...c,count:c.themeIds.filter(id=>ids.has(id)).length})).filter(c=>c.count);}
- function select(themes,{query='',characterIds=[],collection='all',onlyActive=false,selected='',sort='catalog'}={}){
+ function select(themes,{query='',characterIds=[],collection='all',onlyActive=false,selected='',sort='catalog',locale='ru'}={}){
   const group=collections.find(c=>c.id===collection)||collections[0];
   const words=normalize(query).split(/\s+/).filter(Boolean);
   const rows=themes.filter(t=>{
@@ -48,10 +48,10 @@
    if(onlyActive&&t.id!==selected)return false;
    if(group.themeIds&&!group.themeIds.includes(t.id))return false;
    if(characterIds.length&&!people.some(c=>characterIds.includes(c.id)))return false;
-   const haystack=normalize([t.name,t.description,t.author,t.id,...people.flatMap(c=>[c.name,c.aliases])].join(' '));
+   const haystack=normalize([t.name,t.description,t.searchText,t.author,t.id,...people.flatMap(c=>[c.name,c.aliases])].join(' '));
    return words.every(word=>haystack.includes(word));
   });
-  return sort==='name'?rows.sort((a,b)=>a.name.localeCompare(b.name,'ru')):rows;
+  return sort==='name'?rows.sort((a,b)=>a.name.localeCompare(b.name,locale==='en'?'en':'ru')):rows;
  }
  return {characters,collections,normalize,forTheme,available,select};
 });

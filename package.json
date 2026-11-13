@@ -15,7 +15,8 @@
     "test": "node --test tests/*.test.cjs",
     "pack": "electron-builder --dir",
     "dist": "electron-builder --publish never",
-    "test:integration": "node --test tests/session.integration.cjs"
+    "test:integration": "node --test tests/session.integration.cjs",
+    "test:i18n-ui": "electron tests/i18n-ui.cjs"
   },
   "devDependencies": {
     "electron": "45.2.3",
