@@ -15,7 +15,7 @@
   {"id":"sora","name":"Сора","themes":["sora-ribbon","private-duo"]},
   {"id":"shinobu","name":"Шинобу Кочо","themes":["shinobu-wisteria"]},
   {"id":"sylphie","name":"Сильфи","themes":["sylphie-moonstone"]},
-  {"id":"tatsumaki","name":"Татсумаки","themes":["tatsumaki-jade","tatsumaki-jade-duo"]},
+  {"id":"tatsumaki","name":"Татсумаки","themes":["tatsumaki-jade","tatsumaki-jade-duo", "tatsumaki-jade-solo"]},
   {"id":"noelle","name":"Ноэль","themes":["tidal-halo","tidal-halo-duo"]},
   {"id":"zero-two","name":"Zero Two","themes":["zero-two-rose"]},
   {"id":"maomao","name":"Маомао","themes":["jade-silk","jade-evening-garden"]},

@@ -20,7 +20,7 @@
   ['cc','Си Си','C.C. CC',['cc-mint-contract']],
   ['sylphie','Сильфи','Sylphie Sylphiette Сильфиетта',['sylphie-moonstone']],
   ['sora','Сора','Sora Kasugano Касугано',['sora-ribbon','private-duo']],
-  ['tatsumaki','Татсумаки','Tatsumaki Тацумаки',['tatsumaki-jade','tatsumaki-jade-duo']],
+  ['tatsumaki','Татсумаки','Tatsumaki Тацумаки',['tatsumaki-jade','tatsumaki-jade-duo','tatsumaki-jade-solo']],
   ['fern','Ферн','Fern',['fern-plum-hush','frieren-fern-lilac','violet-silhouette']],
   ['frieren','Фрирен','Frieren',['frieren-sage-heart','frieren-fern-lilac']],
   ['fubuki','Фубуки','Fubuki',['fubuki-velvet']],

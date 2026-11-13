@@ -9,7 +9,7 @@
     "before": "linear-gradient(90deg,transparent 0%,#0003 3.2%,#0009 8%,#000e 12.8%,#000 16%),linear-gradient(180deg,transparent 0%,#000 9%,#000 100%,#000 100%)"
   },
   "cc-mint-contract": {
-    "before": "linear-gradient(90deg,transparent 0%,#0003 1.6%,#0009 4%,#000e 6.4%,#000 8%),linear-gradient(180deg,transparent 0%,#000 6%,#000 100%,#000 100%)"
+    "before": "linear-gradient(90deg,transparent 0%,#0003 1.6%,#0009 4%,#000e 6.4%,#000 8%)"
   },
   "tatsumaki-jade": {
     "before": "linear-gradient(90deg,transparent 0%,#0003 1.6%,#0009 4%,#000e 6.4%,#000 8%),linear-gradient(180deg,transparent 0%,#000 6%,#000 100%,#000 100%)"

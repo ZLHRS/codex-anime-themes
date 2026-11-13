@@ -1,7 +1,7 @@
 <div align="center">
   <img src="assets/studio-logo.png" width="104" alt="ZLHRS Theme Studio">
   <h1>ZLHRS Theme Studio</h1>
-  <p>60 тем для настольного ChatGPT.<br>Выберите оформление — Studio запомнит его.<br>А компанию составят 23 кастомных питомца.</p>
+  <p>61 тема для настольного ChatGPT.<br>Выберите оформление — Studio запомнит его.<br>А компанию составят 23 кастомных питомца.</p>
   <p><a href="https://github.com/ZLHRS/codex-anime-themes/releases/latest"><b>Скачать приложение</b></a> · <a href="docs/GALLERY.md">Посмотреть темы</a> · <a href="#установка">Установка</a></p>
 </div>
 
@@ -98,7 +98,7 @@
 - Персонажи больше не приглушаются общей прозрачностью. Плавные переходы используются только на нужных краях.
 - Сохранены нейтральные блоки кода без фиолетовой обводки.
 
-[Все 60 тем с картинками](docs/GALLERY.md) · [История изменений](CHANGELOG.md)
+[61 тема с картинками](docs/GALLERY.md) · [История изменений](CHANGELOG.md)
 
 <details>
 <summary><b>Не получается запустить или применить тему?</b></summary>

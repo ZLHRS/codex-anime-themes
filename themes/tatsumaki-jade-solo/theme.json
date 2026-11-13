@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 2,
+  "id": "tatsumaki-jade-solo",
+  "name": "Тацумаки · Jade Silhouette",
+  "description": "Портрет из Jade Duo справа на спокойном нефритовом фоне.",
+  "version": "1.0.0",
+  "author": "Codex",
+  "appearance": "dark",
+  "license": "personal-use",
+  "category": "anime",
+  "tags": [
+    "anime",
+    "dark"
+  ],
+  "colors": {
+    "accent": "#87bb9b",
+    "light": "#bfd8aa"
+  },
+  "strings": {},
+  "assets": {
+    "portrait": "assets/portrait.webp",
+    "charm": "assets/charm.png",
+    "landscape": "assets/center-landscape.webp"
+  },
+  "css": "theme.css"
+}

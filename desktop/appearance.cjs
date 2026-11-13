@@ -63,6 +63,7 @@ const designs={
  'sora-ribbon':['Мягкое серебристое свечение','ribbon','#d4b3e5'],
  'sylphie-moonstone':['Перламутровые границы','pearl','#d9c6e6'],
  'tatsumaki-jade':['Кольца энергии','rings','#8bdcb1'],
+ 'tatsumaki-jade-solo':['Нефритовый пейзаж','rings','#8bdcb1'],
  'tatsumaki-jade-duo':['Общее зелёное свечение','duo','#8bdcb1'],
  'private-duo':['Серебристое свечение','moon','#b9b4cf'],
  'zero-two-rose':['Подсветка рожек и лепестки','petals','#e5a3be']

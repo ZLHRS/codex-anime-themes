@@ -70,6 +70,11 @@
     "path": "themes/tatsumaki-jade-duo"
   },
   {
+    "id": "tatsumaki-jade-solo",
+    "name": "Тацумаки · Jade Silhouette",
+    "path": "themes/tatsumaki-jade-solo"
+  },
+  {
     "id": "zero-two-rose",
     "name": "Zero Two · Darling Rose",
     "path": "themes/zero-two-rose"
