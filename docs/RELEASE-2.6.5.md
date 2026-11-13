@@ -1,20 +1,20 @@
 # ZLHRS Theme Studio 2.6.5
 
-- Смягчены резкие края изображений и переходы к фону; размеры и позы сохранены.
-- Обновлены портреты Фурины и Резе, восстановлены края некоторых изображений.
-- Исправлен чёрный предпросмотр Вагури и добавлена защита от пустых кадров в галерее.
-- Убрана общая прозрачность портретов; мягкие переходы включены только там, где нужны.
-- Новый короткий README с установкой для каждой системы и разрешением запуска на Mac.
-- Все 60 тем включены в сборки Windows, macOS (Apple Silicon и Intel) и Linux. Новые питомцы не добавлялись.
+- Softened cropped artwork edges and transitions into the background while preserving sizes and poses.
+- Updated Furina and Reze portraits and restored some clipped artwork edges.
+- Fixed Waguri’s black preview and added protection against blank gallery captures.
+- Removed global portrait transparency; soft blending is used only where needed.
+- Added a concise README with installation instructions for each system, including allowing the app to open on Mac.
+- All 60 themes included in Windows, macOS (Apple Silicon and Intel), and Linux builds. No new pets were added.
 
-## Установка
+## Installation
 
-Windows: распакуйте portable ZIP целиком и запустите ZLHRS Theme Studio.exe.
+Windows: extract the entire portable ZIP and open ZLHRS Theme Studio.exe.
 
-Mac: распакуйте ZIP для своего процессора, перенесите приложение в «Программы». Если запуск заблокирован из-за непроверенного разработчика: «Системные настройки» → «Конфиденциальность и безопасность» → «Всё равно открыть». Подтверждайте только запуск файла из этого репозитория, которому доверяете.
+Mac: extract the ZIP for your processor and move the app to Applications. If it is blocked because the developer cannot be verified, open System Settings → Privacy & Security → Open Anyway. Only approve a trusted download from this repository.
 
-Linux: разрешите выполнение AppImage или установите DEB.
+Linux: allow the AppImage to run as a program or install the DEB.
 
-[Простая инструкция](https://github.com/ZLHRS/codex-anime-themes#установка) · [Инструкция Apple](https://support.apple.com/ru-ru/102445)
+[Simple installation guide](https://github.com/ZLHRS/codex-anime-themes#installation) · [Apple’s instructions](https://support.apple.com/102445)
 
-Для обновления нажмите «Подтянуть изменения» в Studio. Контрольные суммы файлов — в SHA256SUMS.txt.
+To update, use Check for updates in Studio. File checksums are in SHA256SUMS.txt.

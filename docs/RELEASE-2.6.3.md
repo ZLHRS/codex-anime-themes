@@ -1,10 +1,10 @@
 # ZLHRS Theme Studio 2.6.3
 
-- Новый выбранный логотип «Искра»: светлое переплетение с фиолетовой звездой на тёмном фоне.
-- Обновлены логотип галереи, иконки приложения и установщиков Windows, macOS и Linux, а также документация и снимки интерфейса.
-- Windows ICO содержит размеры от 16 до 256 пикселей; основной PNG — 1024 × 1024.
-- Все 48 тем и 23 питомца сохранены.
+- Added the selected Spark logo: a light interwoven shape with a purple star on a dark background.
+- Updated the gallery logo, application and installer icons for Windows, macOS, and Linux, documentation, and interface screenshots.
+- The Windows ICO includes sizes from 16 to 256 pixels; the main PNG is 1024 × 1024.
+- All 48 themes and 23 pets are preserved.
 
-Нажмите «Подтянуть изменения» в Studio или скачайте новую сборку. Для ярлыков, перенесённых вручную, используйте «Создать / обновить ярлыки». Windows может некоторое время показывать старую иконку из своего кэша.
+Use Check for updates in Studio or download a new build. For shortcuts moved manually, use Create / update shortcuts. Windows may temporarily show the old icon from its cache.
 
-Контрольные суммы файлов опубликованы в SHA256SUMS.txt.
+File checksums are published in SHA256SUMS.txt.

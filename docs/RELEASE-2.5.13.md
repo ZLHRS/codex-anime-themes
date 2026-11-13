@@ -1,11 +1,11 @@
 # 2.5.13
 
-- Удалён значок Theme Studio из системного трея. Тема продолжает работать в фоне.
-- При обычном запуске больше не создаются и не восстанавливаются ярлыки на рабочем столе. Удалённые пользователем ярлыки не появляются снова при запуске через Пуск.
-- Ярлык «ChatGPT с темой» создаётся по явному нажатию кнопки; существующие ярлыки продолжают работать.
-- Галерею можно открыть отдельно через Пуск или исполняемый файл Studio. Кнопка «Выйти из Studio» полностью завершает фоновую работу.
-- Сохранены исправления запуска, автоматическая повторная попытка и уменьшенное потребление памяти из предыдущих выпусков.
+- Removed the Studio tray icon. Themes continue working in the background.
+- Normal startup no longer creates or restores desktop shortcuts. Shortcuts deleted by the user do not return when launching from Start.
+- The themed ChatGPT shortcut is created only through the explicit button; existing shortcuts keep working.
+- Open the gallery separately from Start or the Studio executable. Quit Studio stops background operation completely.
+- Preserved launch fixes, automatic retry, and reduced memory use from earlier versions.
 
-Обновление: нажмите «Подтянуть изменения» в Theme Studio. Выбранная тема и настройки сохраняются.
+Update using Check for updates in Studio. Your selected theme and settings are preserved.
 
-Сборки для Windows, macOS (Apple Silicon и Intel) и Linux. Требуется совместимое установленное приложение ChatGPT. Сборки не подписаны.
+Builds for Windows, macOS (Apple Silicon and Intel), and Linux. A compatible installed ChatGPT app is required. Builds are unsigned.

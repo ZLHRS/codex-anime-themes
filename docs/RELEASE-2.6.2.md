@@ -1,13 +1,13 @@
 # ZLHRS Theme Studio 2.6.2
 
-- Полный каталог из 48 тем с обновлёнными предпросмотрами.
-- Обновлённая галерея: поиск, фильтры по персонажам и коллекциям, удобная настройка оформления.
-- Фурина · Blue Cat Nocturne: фон с окнами и шторами по исходной иллюстрации.
-- Кана · Тёплый гранат и Рубиновый свет: заполнены верхняя и нижняя области фона.
-- Продолженные пейзажи в Jade Duo и Tidal Halo · Twin Current.
-- Все 23 общих питомца из 2.6.1 сохранены. Выбор остаётся ручным.
-- Источник локальных тем сохраняется между обновлениями. Кнопка «Подтянуть изменения» перечитывает каталог перед проверкой выпуска.
+- Complete catalog of 48 themes with updated previews.
+- Updated gallery with search, character and collection filters, and convenient appearance settings.
+- Furina · Blue Cat Nocturne: windows and curtains based on the original illustration.
+- Kana · Warm Garnet and Ruby Spotlight: filled the upper and lower background areas.
+- Extended landscapes in Jade Duo and Tidal Halo · Twin Current.
+- All 23 shared pets from 2.6.1 are preserved. Selection remains manual.
+- The local theme source persists across updates. Check for updates rereads the catalog before checking the release.
 
-Обновление: нажмите «Подтянуть изменения» в установленной Studio либо скачайте сборку для своей ОС. Windows portable ZIP распаковывайте целиком, не переносите EXE отдельно.
+Update through Check for updates in the installed Studio, or download the build for your system. Extract the entire Windows portable ZIP; do not move the EXE separately.
 
-Сборки для Windows x64, macOS arm64/x64 и Linux x64. Контрольные суммы — в SHA256SUMS.txt. Проверка с настоящим ChatGPT выполнена только на Windows; для остальных систем выпускаются сборки с автоматическими тестами.
+Builds for Windows x64, macOS arm64/x64, and Linux x64. Checksums are in SHA256SUMS.txt. Integration with the actual ChatGPT app has been verified only on Windows; other platforms receive builds with automated tests.

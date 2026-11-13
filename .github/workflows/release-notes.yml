@@ -1,0 +1,24 @@
+name: Sync English release notes
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'docs/RELEASE-*.md'
+      - 'scripts/sync-release-notes.cjs'
+      - '.github/workflows/release-notes.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Update existing release descriptions
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: node scripts/sync-release-notes.cjs

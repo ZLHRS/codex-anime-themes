@@ -1,10 +1,10 @@
 # 2.5.11
 
-- Тема обновляется перед первым кадром нового чата, без задержки 180 мс.
-- Закрытие галереи освобождает окно и превью; повторное открытие сохраняет выбранную тему и настройки.
-- В Windows длительно работающий PowerShell заменён небольшим помощником блокировки старого движка; предусмотрен совместимый запасной вариант.
-- Отдельный ярлык «ChatGPT с темой» со значком Studio запускает чат и тему вместе без открытия галереи. Обычный ярлык ChatGPT не изменяется.
-- На проверенном Windows-компьютере фоновая память снизилась примерно с 365 до 290 МБ. Расход зависит от системы и состояния приложения.
+- Themes update before the first frame of a new chat, without the previous 180 ms delay.
+- Closing the gallery releases its window and previews; reopening preserves the selected theme and settings.
+- On Windows, a small legacy-engine lock helper replaces the long-running PowerShell process, with a compatible fallback.
+- A separate themed ChatGPT shortcut with the Studio icon launches the chat and theme together without opening the gallery. The normal ChatGPT shortcut is unchanged.
+- Background memory on the tested Windows machine fell from approximately 365 MB to 290 MB. Usage varies by system and application state.
 
-
-Сборки для Windows, macOS (Apple Silicon и Intel) и Linux. Требуется установленное совместимое приложение ChatGPT. Сборки не подписаны. Проверки сборок и галереи автоматизированы; интеграция с настоящим ChatGPT проверена на Windows.
+Builds for Windows, macOS (Apple Silicon and Intel), and Linux. A compatible installed ChatGPT app is required. Builds are unsigned.
+Build and gallery checks are automated; integration with the actual ChatGPT app has been verified on Windows.

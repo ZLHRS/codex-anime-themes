@@ -1,9 +1,9 @@
 # 2.5.15
 
-- Исправлено перекрытие левой части экрана невидимым служебным окном ChatGPT в Windows. Помощник запуска теперь пропускает служебные окна и окна, не предназначенные для активации.
-- Сохранён запуск без значка Studio в трее и без автоматического восстановления удалённых ярлыков.
-- Сохранены исправления запуска темы с первого нажатия и ограниченная автоматическая повторная попытка.
+- Fixed an invisible ChatGPT utility window blocking the left side of the screen on Windows. The launch helper now skips utility windows and windows that should not be activated.
+- Preserved background operation without a Studio tray icon or automatic restoration of deleted shortcuts.
+- Preserved first-click theme launch fixes and the bounded automatic retry.
 
-Для обновления нажмите «Подтянуть изменения» в Studio. Существующий ярлык, выбранная тема и настройки сохраняются. Если перекрытие уже появилось в старой версии, один раз полностью закройте ChatGPT и откройте его после обновления.
+Update using Check for updates in Studio. Your selected theme and settings are preserved. Existing shortcuts remain valid. If the invisible overlay is already present in an older version, fully close ChatGPT once and reopen it after updating.
 
-Выпуск содержит установщики и архивы Windows, macOS (Apple Silicon и Intel), Linux. Сборки не подписаны.
+Builds for Windows, macOS (Apple Silicon and Intel), and Linux. A compatible installed ChatGPT app is required. Builds are unsigned.

@@ -1,12 +1,14 @@
 # 2.5.12
 
-- Исправлено применение темы при ошибке вывода окна ChatGPT: оформление и восстановление продолжают работать независимо от активации окна.
-- В Windows окно восстанавливается напрямую; галерея Studio не открывается при запуске через «ChatGPT с темой».
-- Подготовка помощника и запуск ChatGPT выполняются параллельно, подключение проверяется без последовательного ожидания разных локальных адресов.
-- Стили передаются до готовности оболочки; успешный запуск подтверждается только после появления интерфейса с темой.
-- При отсутствии основного окна предусмотрена одна автоматическая повторная попытка с завершением остатка процесса выбранного ChatGPT. Загружающееся основное окно не перезапускается.
-- Сохранены снижение расхода памяти и исправление задержки оформления при переходе между чатами из 2.5.11.
+- Theme application and recovery now continue even if bringing the ChatGPT window to the foreground fails.
+- On Windows, the window is restored directly; launching the themed ChatGPT shortcut does not open the Studio gallery.
+- Helper preparation and ChatGPT launch run in parallel, with connection checks avoiding sequential waits for local addresses.
+- Styles are supplied before the shell is ready; startup is confirmed only after the themed interface appears.
+- If the main window is missing, one automatic retry closes the remaining process of the selected ChatGPT app. A main window that is still loading is not restarted.
+- Preserved the memory reduction and chat-navigation styling fix from 2.5.11.
 
-Обновление: «Подтянуть изменения» в Theme Studio. Ярлык «ChatGPT с темой» сохраняется.
+Update using Check for updates in Theme Studio. The themed ChatGPT shortcut is preserved.
 
-Windows, macOS (Apple Silicon и Intel), Linux. Требуется установленное совместимое приложение ChatGPT. Сборки не подписаны. Скорость полного запуска зависит от загрузки ChatGPT и системы.
+
+Builds for Windows, macOS (Apple Silicon and Intel), and Linux. A compatible installed ChatGPT app is required. Builds are unsigned.
+Full startup speed depends on ChatGPT and system load.
