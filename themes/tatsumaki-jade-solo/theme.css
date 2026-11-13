@@ -210,5 +210,5 @@ html.codex-theme-studio .main-surface:not(.main-surface .main-surface)::after {
 
 /* Original left portrait from Jade Duo, now alone on the right. */
 html.codex-theme-studio .main-surface:not(.main-surface .main-surface) {background:linear-gradient(#07131a18,#07131a28),var(--cts-asset-landscape) center / cover no-repeat,var(--night)!important;}
-html.codex-theme-studio body .main-surface:not(.main-surface .main-surface)::before {inset:auto 0 0 auto;height:90%;width:min(47%,61vh);aspect-ratio:auto;background:var(--cts-asset-portrait) right bottom / auto 100% no-repeat;mask-image:none!important;-webkit-mask-image:none!important;}
+html.codex-theme-studio body .main-surface:not(.main-surface .main-surface)::before {inset:auto -9vw 0 auto;height:90%;width:min(47%,61vh);aspect-ratio:auto;background:var(--cts-asset-portrait) right bottom / auto 100% no-repeat;mask-image:none!important;-webkit-mask-image:none!important;}
 html.codex-theme-studio .cts-halo,html.codex-theme-studio .cts-atmosphere {display:none!important;}
