@@ -1,3 +1,9 @@
+## Codex and Claude Code — separate downloads
+
+[Download the separate 2.6.11 archives](https://github.com/ZLHRS/codex-anime-themes/releases/tag/v2.6.11-dual-preview) · [Which archive to choose](docs/DOWNLOADS-CODEX-CLAUDE.md) · [Claude installation](docs/CLAUDE-CODE.md)
+
+**Codex:** Windows portable app with 99 bundled themes. **Claude Code:** 99 adapted themes for the Code tab in Claude Desktop, using the community themes-for-claude mod. Claude edition is a preview; video themes use static posters.
+
 <div align="center">
   <img src="assets/studio-logo.png" width="104" alt="ZLHRS Theme Studio">
   <h1>ZLHRS Theme Studio</h1>
