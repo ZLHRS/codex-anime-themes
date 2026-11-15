@@ -11,7 +11,9 @@ async function request(endpoint,body){const response=await fetch(base+endpoint,{
   const file='docs/RELEASE-'+release.tag_name.slice(1)+'.md';
   if(!fs.existsSync(file))continue;
   const body=fs.readFileSync(file,'utf8').replace(/^\uFEFF/,'');
-  if(/[А-Яа-яЁё]/.test(body))throw Error('Untranslated release notes: '+file);
+  // A translated Russian appendix is intentional; keep the primary notes English.
+  const primary=body.split(/^## Русский\s*$/m)[0];
+  if(/[А-Яа-яЁё]/.test(primary))throw Error('Untranslated primary release notes: '+file);
   if(body.trim()===(release.body||'').trim())continue;
   const updated=await request('/releases/'+release.id,{body});
   if(updated.body!==body)throw Error('Release description verification failed: '+release.tag_name);
