@@ -4,7 +4,7 @@ const path=require('node:path');
 const crypto=require('node:crypto');
 const {Readable,Transform}=require('node:stream');
 const {pipeline}=require('node:stream/promises');
-const REPO='ZLHRS/codex-anime-themes';
+const REPO='ZLHRS/zlhrs-theme-studio';
 function version(value){const match=/^v?(\d+)\.(\d+)\.(\d+)$/.exec(value||'');if(!match)throw new Error('Некорректная версия обновления.');return match.slice(1).map(Number);}
 function newer(remote,current){const a=version(remote),b=version(current);for(let i=0;i<3;i++){if(a[i]!==b[i])return a[i]>b[i];}return false;}
 function assetFor(release,platform,arch,appImage,portable=false){

@@ -15,6 +15,6 @@ Mac: extract the ZIP for your processor and move the app to Applications. If it 
 
 Linux: allow the AppImage to run as a program or install the DEB.
 
-[Simple installation guide](https://github.com/ZLHRS/codex-anime-themes#installation) · [Apple’s instructions](https://support.apple.com/102445)
+[Simple installation guide](https://github.com/ZLHRS/zlhrs-theme-studio#installation) · [Apple’s instructions](https://support.apple.com/102445)
 
 To update, use Check for updates in Studio. File checksums are in SHA256SUMS.txt.

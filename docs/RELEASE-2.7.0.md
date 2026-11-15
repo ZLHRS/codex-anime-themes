@@ -22,7 +22,7 @@ One Studio for ChatGPT and Claude Desktop, with 99 themes.
 
 ## Claude setup
 
-Install the community Claude Desktop Themes mod and extension once via /themes, then fully restart Claude. Choose themes directly with the Claude button in Studio. See [the setup guide](https://github.com/ZLHRS/codex-anime-themes/blob/v2.7.0/docs/CLAUDE-CODE.md).
+Install the community Claude Desktop Themes mod and extension once via /themes, then fully restart Claude. Choose themes directly with the Claude button in Studio. See [the setup guide](https://github.com/ZLHRS/zlhrs-theme-studio/blob/v2.7.0/docs/CLAUDE-CODE.md).
 
 ## Validation and scope
 

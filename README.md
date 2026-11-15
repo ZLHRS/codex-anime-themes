@@ -2,7 +2,7 @@
   <img src="assets/studio-logo.png" width="104" alt="ZLHRS Theme Studio">
   <h1>ZLHRS Theme Studio</h1>
   <p>99 themes for ChatGPT and Claude Desktop.<br>One Studio. Two apps. Your own atmosphere.<br>23 animated companions for ChatGPT Pets.</p>
-  <p><a href="https://github.com/ZLHRS/codex-anime-themes/releases/latest"><b>Download the app</b></a> · <a href="docs/GALLERY.md">Explore the themes</a> · <a href="#installation">Installation</a></p>
+  <p><a href="https://github.com/ZLHRS/zlhrs-theme-studio/releases/latest"><b>Download the app</b></a> · <a href="docs/GALLERY.md">Explore the themes</a> · <a href="#installation">Installation</a></p>
 </div>
 
 ![Violet Onsen · Warm Evening](previews/violet-onsen-chat.jpg)
@@ -13,14 +13,14 @@
 
 | Your system | Ready-to-use download |
 | --- | --- |
-| Windows 10/11 · x64 | [Portable ZIP](https://github.com/ZLHRS/codex-anime-themes/releases/download/v2.7.0/ZLHRS-Theme-Studio-2.7.0-win-x64-portable.zip) · [Installer](https://github.com/ZLHRS/codex-anime-themes/releases/download/v2.7.0/ZLHRS-Theme-Studio-2.7.0-win-x64.exe) |
-| Mac · Apple Silicon (M-series) | [Apple Silicon ZIP](https://github.com/ZLHRS/codex-anime-themes/releases/download/v2.6.6/ZLHRS-Theme-Studio-2.6.6-mac-arm64.zip) |
-| Mac · Intel | [Intel ZIP](https://github.com/ZLHRS/codex-anime-themes/releases/download/v2.6.6/ZLHRS-Theme-Studio-2.6.6-mac-x64.zip) |
-| Linux · x64 | [AppImage](https://github.com/ZLHRS/codex-anime-themes/releases/download/v2.6.6/ZLHRS-Theme-Studio-2.6.6-linux-x86_64.AppImage) · [Debian/Ubuntu DEB](https://github.com/ZLHRS/codex-anime-themes/releases/download/v2.6.6/ZLHRS-Theme-Studio-2.6.6-linux-amd64.deb) |
+| Windows 10/11 · x64 | [Portable ZIP](https://github.com/ZLHRS/zlhrs-theme-studio/releases/download/v2.7.0/ZLHRS-Theme-Studio-2.7.0-win-x64-portable.zip) · [Installer](https://github.com/ZLHRS/zlhrs-theme-studio/releases/download/v2.7.0/ZLHRS-Theme-Studio-2.7.0-win-x64.exe) |
+| Mac · Apple Silicon (M-series) | [Apple Silicon ZIP](https://github.com/ZLHRS/zlhrs-theme-studio/releases/download/v2.6.6/ZLHRS-Theme-Studio-2.6.6-mac-arm64.zip) |
+| Mac · Intel | [Intel ZIP](https://github.com/ZLHRS/zlhrs-theme-studio/releases/download/v2.6.6/ZLHRS-Theme-Studio-2.6.6-mac-x64.zip) |
+| Linux · x64 | [AppImage](https://github.com/ZLHRS/zlhrs-theme-studio/releases/download/v2.6.6/ZLHRS-Theme-Studio-2.6.6-linux-x86_64.AppImage) · [Debian/Ubuntu DEB](https://github.com/ZLHRS/zlhrs-theme-studio/releases/download/v2.6.6/ZLHRS-Theme-Studio-2.6.6-linux-amd64.deb) |
 
 Mac and Linux links above are older 2.6.6 builds; 2.7.0 is the Windows release.
 
-[All 2.7.0 files and checksums →](https://github.com/ZLHRS/codex-anime-themes/releases/tag/v2.7.0) · [Standalone Claude data-only archive](https://github.com/ZLHRS/codex-anime-themes/releases/download/v2.7.0/ZLHRS-Claude-Themes-2.7.0.zip)
+[All 2.7.0 files and checksums →](https://github.com/ZLHRS/zlhrs-theme-studio/releases/tag/v2.7.0) · [Standalone Claude data-only archive](https://github.com/ZLHRS/zlhrs-theme-studio/releases/download/v2.7.0/ZLHRS-Claude-Themes-2.7.0.zip)
 
 The standalone Claude archive uses compressed pictures and static video posters. For original artwork, authored layouts and live theme controls, use the unified Studio.
 
@@ -140,7 +140,7 @@ If the update fails, download a fresh build from the table above. Extract the en
 - On Mac, allow Studio to open using the instructions above.
 - Locate ChatGPT manually and use the themed shortcut instead of the old icon.
 - A ChatGPT update may require a newer Studio version.
-- Still stuck? [Open an issue](https://github.com/ZLHRS/codex-anime-themes/issues) with the error message, operating system, and Studio version.
+- Still stuck? [Open an issue](https://github.com/ZLHRS/zlhrs-theme-studio/issues) with the error message, operating system, and Studio version.
 
 [Compatibility and setup details](docs/CROSS-PLATFORM.md).
 
@@ -152,8 +152,8 @@ If the update fails, download a fresh build from the table above. Extract the en
 Requires Node.js 24+.
 
 ```sh
-git clone https://github.com/ZLHRS/codex-anime-themes.git
-cd codex-anime-themes
+git clone https://github.com/ZLHRS/zlhrs-theme-studio.git
+cd zlhrs-theme-studio
 npm ci
 npm start
 ```

@@ -2,7 +2,7 @@
 
 ## Installation
 
-See the [step-by-step README](../README.md#installation), including how to allow the app to open on Mac. Download the build for your system from [Releases](https://github.com/ZLHRS/codex-anime-themes/releases/latest). Local build 2.6.7 includes 85 themes. Updated Windows and source archives are in `dist/release-2.6.7/`. The published downloads still refer to 2.6.6 until a new release is uploaded.
+See the [step-by-step README](../README.md#installation), including how to allow the app to open on Mac. Download the build for your system from [Releases](https://github.com/ZLHRS/zlhrs-theme-studio/releases/latest). Local build 2.6.7 includes 85 themes. Updated Windows and source archives are in `dist/release-2.6.7/`. The published downloads still refer to 2.6.6 until a new release is uploaded.
 
 - **Windows:** extract the entire portable ZIP and open `ZLHRS Theme Studio.exe`. Keep its companion files together. The update button replaces this folder’s application files without an installer.
 - **macOS:** extract the matching Apple Silicon or Intel ZIP and move the app to Applications. Builds are not signed or notarized by Apple. If blocked, use the normal opening confirmation in Privacy & Security for a trusted download. Do not disable system protection.

@@ -1,6 +1,6 @@
 # Separate downloads: Codex and Claude Code
 
-[Download the 2.6.11 dual edition](https://github.com/ZLHRS/codex-anime-themes/releases/tag/v2.6.11-dual-preview)
+[Download the 2.6.11 dual edition](https://github.com/ZLHRS/zlhrs-theme-studio/releases/tag/v2.6.11-dual-preview)
 
 | Archive | Application | Contents |
 | --- | --- | --- |

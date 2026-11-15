@@ -15,7 +15,7 @@
 
 **Linux:** allow the AppImage to run as a program, or install the DEB.
 
-[Installation guide](https://github.com/ZLHRS/codex-anime-themes#installation)
+[Installation guide](https://github.com/ZLHRS/zlhrs-theme-studio#installation)
 
 Existing users can choose Check for updates in Studio (the update button is under Settings). The selected theme and its settings are preserved. SHA-256 checksums are provided in SHA256SUMS.txt.
 

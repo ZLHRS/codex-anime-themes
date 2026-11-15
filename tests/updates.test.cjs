@@ -7,7 +7,7 @@ const crypto=require('node:crypto');
 const u=require('../desktop/updates.cjs');
 function release(tag='v2.2.0'){
  const names=['win-x64.exe','win-x64-portable.zip','mac-arm64.zip','mac-x64.zip','linux-x86_64.AppImage','linux-amd64.deb'].map(s=>'ZLHRS-Theme-Studio-'+tag.slice(1)+'-'+s).concat('SHA256SUMS.txt');
- return {tag_name:tag,assets:names.map(name=>({name,size:5,browser_download_url:'https://github.com/ZLHRS/codex-anime-themes/releases/download/'+tag+'/'+name}))};
+ return {tag_name:tag,assets:names.map(name=>({name,size:5,browser_download_url:'https://github.com/ZLHRS/zlhrs-theme-studio/releases/download/'+tag+'/'+name}))};
 }
 test('only newer stable releases trigger an update',async()=>{
  assert(u.newer('v2.10.0','2.9.9'));assert(!u.newer('v2.1.0','2.1.0'));assert(!u.newer('v2.0.0','2.1.0'));assert.throws(()=>u.newer('v2.2.0-beta','2.1.0'));
