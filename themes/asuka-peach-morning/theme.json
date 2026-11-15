@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 2,
+  "id": "asuka-peach-morning",
+  "name": "Аска · Peach Morning",
+  "description": "Аска справа в тёплой светлой комнате с персиковым утренним светом.",
+  "version": "1.0.0",
+  "author": "ZLHRS",
+  "appearance": "dark",
+  "license": "personal-use",
+  "category": "anime",
+  "tags": [
+    "anime",
+    "asuka",
+    "evangelion",
+    "orange",
+    "panorama"
+  ],
+  "colors": {
+    "accent": "#efbb9e",
+    "light": "#fff0cc"
+  },
+  "strings": {},
+  "assets": {
+    "background": "assets/background.webp"
+  },
+  "css": "theme.css"
+}

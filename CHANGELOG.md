@@ -1,3 +1,44 @@
+# 2.7.0 — GPT + Claude
+
+Unified Studio for both apps, original Claude compositions and themed navigation, three independent shortcuts, new project and Claude icons, 99 themes and refreshed setup documentation.
+
+# ZLHRS Theme Studio 2.6.9
+## 2.6.11
+
+- Restored Azure Bounce and Violet Starlight to 3840 × 2160 using Real-ESRGAN animevideov3, preserving original frame timing and composition. These are restored sources, not native 4K masters.
+- Kept high-quality H.264 playback and inactive-window pause behavior. Video allowance is now 64 MiB; GIF and poster limits remain unchanged.
+
+## 2.6.10
+
+- Added Ai Hoshino · Violet Starlight (1080p60) and Zero Two · Azure Bounce (720p59.94), using the matching original animations without re-encoding.
+- Added character filters, full-scene playback, matching posters and gallery previews for both themes.
+- Verified decoding, inactive-window pause/resume and cleanup for both videos.
+
+
+- Always merges the current bundled catalog with a durable personal theme library.
+- Preserves custom artwork and conflicting IDs as separate personal copies.
+- Adds an English/Russian button to open the personal library folder.
+- Verifies bundled catalog completeness and update version on startup.
+- Retains pre-update archive/settings backups and waits for all old Windows processes to exit.
+
+# ZLHRS Theme Studio 2.6.8
+
+- Adds 12 original Live ASCII wallpapers from 0toshigami (MIT), bringing the gallery to 97 themes.
+- Adds per-theme motion, speed, cell size and chat backdrop controls in English and Russian.
+- Pauses rendering when inactive, hidden or reduced motion is requested; cleans up on theme switches.
+- Retains upstream scene artwork, palettes and default settings, with a ChatGPT-specific canvas adapter.
+
+# ZLHRS Theme Studio 2.6.7
+
+- Includes all 85 themes and their current artwork and gallery previews.
+- Adds the recent character themes, full-screen scenes and artwork refinements.
+- Corrects Crimson Stained Glass orientation and increases its contrast and saturation.
+- Supports animated theme media, with playback paused when inactive.
+- Keeps the existing 23 custom pets; no new pets were created.
+- Verifies live English / Russian switching, persistence after reload, translated gallery text and search.
+- Provides English README, gallery, setup instructions and portable start guide.
+
+
 # ZLHRS Theme Studio 2.6.6
 
 - English and Russian interfaces with a saved language preference.

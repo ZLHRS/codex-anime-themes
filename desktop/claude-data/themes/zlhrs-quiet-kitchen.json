@@ -1,0 +1,12 @@
+{
+  "id": "zlhrs-quiet-kitchen",
+  "name": "Тихая кухня · Soft Indigo",
+  "tagline": "ZLHRS · Девушка за готовкой справа, мягкое растворение кухни и спокойные оттенки индиго.",
+  "bg": "#20242f",
+  "text": "#f3f1f5",
+  "accent": "#b3b4d6",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px"
+  }
+}

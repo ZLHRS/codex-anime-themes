@@ -1,0 +1,12 @@
+{
+  "id": "zlhrs-furina-silver-slumber",
+  "name": "Фурина · Silver Slumber",
+  "tagline": "ZLHRS · Спокойный сон, серебристые пряди и мягкие бирюзовые блики.",
+  "bg": "#1f2632",
+  "text": "#f3f1f5",
+  "accent": "#a8c6ed",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px"
+  }
+}

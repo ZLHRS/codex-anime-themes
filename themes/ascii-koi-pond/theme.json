@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 2,
+  "id": "ascii-koi-pond",
+  "name": "ASCII · Koi Pond",
+  "description": "Koi circling a pond between lily pads, rings on the water",
+  "version": "1.0.0",
+  "author": "0toshigami / ZLHRS",
+  "appearance": "dark",
+  "license": "MIT",
+  "category": "landscape",
+  "tags": [
+    "ascii",
+    "animated",
+    "landscape",
+    "koi-pond"
+  ],
+  "colors": {
+    "accent": "#ef8a4a",
+    "light": "#e4f2ea"
+  },
+  "assets": {},
+  "strings": {},
+  "ascii": {
+    "scene": "koi-pond",
+    "bg": "#11332d",
+    "sky": "linear-gradient(90deg, rgba(255, 255, 255, 0) 16%, rgba(255, 255, 255, 0.12) 25%, rgba(255, 255, 255, 0) 35%, rgba(255, 255, 255, 0) 66%, rgba(255, 255, 255, 0.084) 77%, rgba(255, 255, 255, 0) 88%), linear-gradient(175deg, #4aa08c, #2f8070 50%, #1f6156)"
+  },
+  "css": "theme.css",
+  "source": "https://github.com/0toshigami/claude-desktop-themes"
+}

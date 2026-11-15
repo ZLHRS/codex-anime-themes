@@ -1,0 +1,12 @@
+{
+  "id": "zlhrs-violet-onsen",
+  "name": "Violet Onsen · Тёплый вечер",
+  "tagline": "ZLHRS · Крупный портрет справа, тёплый свет фонарей, пар над водой и мягкие фиолетовые тени.",
+  "bg": "#212126",
+  "text": "#f3f1f5",
+  "accent": "#baa08d",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px"
+  }
+}

@@ -39,6 +39,7 @@ app.whenReady().then(async()=>{
    if(layers.length)css+=`html::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:${layers.join(',')};opacity:${light?'.24':'.36'}}\n*{--cds-page-bg:transparent!important;--epitaxy-transcript-surface:transparent!important}.root>.grid.bg-surface-1,main.dframe-content,.tiles-shell{background:transparent!important}\n`;
    css+=`[data-cds=ChatComposer]>.bg-surface-3{background:${bg}ed!important;border:1px solid ${t.colors.accent}66!important;backdrop-filter:blur(12px)}\n.dframe-sidebar,.dframe-sidebar-body{background:${bg}f5!important}\n::selection{background:${t.colors.accent};color:${bg}}`;
   }
+  css+='\n'+"html[data-desktop-theme^=\"zlhrs-\"] *{--df-web-sidebar-bg:var(--desktop-theme-backdrop)!important}";
   if(css.length>185000)throw Error('CSS exceeds upstream limit: '+id);
   fs.writeFileSync(path.join(dest,'themes',id+'.json'),JSON.stringify(theme,null,2)+'\n');
   fs.writeFileSync(path.join(dest,'themes',id+'.css'),css);

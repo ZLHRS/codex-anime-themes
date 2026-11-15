@@ -1,0 +1,18 @@
+{
+  "id": "zlhrs-ascii-fireflies",
+  "name": "ASCII · Fireflies",
+  "tagline": "ZLHRS · Fireflies wandering and blinking over tall grass",
+  "bg": "#0b130e",
+  "text": "#e3eedc",
+  "accent": "#d8e86a",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px",
+    "wall-sky": "linear-gradient(90deg, rgba(255, 255, 255, 0) 16%, rgba(255, 255, 255, 0.03) 25%, rgba(255, 255, 255, 0) 35%, rgba(255, 255, 255, 0) 66%, rgba(255, 255, 255, 0.021) 77%, rgba(255, 255, 255, 0) 88%), radial-gradient(120% 80% at 50% 110%, #1b3522, #0c1710 60%, #070c09)",
+    "wall-halo": "#0b130e",
+    "wall-rim": "#d8e86a55",
+    "wall-glass": "#0b130ee6",
+    "wall-greet": "\"\""
+  },
+  "wallpaper": "zlhrs-ascii-fireflies"
+}

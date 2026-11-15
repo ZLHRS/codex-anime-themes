@@ -1,0 +1,12 @@
+{
+  "id": "zlhrs-rose-ice-frame",
+  "name": "Rose Ice Frame",
+  "tagline": "ZLHRS · Розовые пряди справа на цельном серо-голубом фоне.",
+  "bg": "#26222d",
+  "text": "#f3f1f5",
+  "accent": "#e8a5c7",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px"
+  }
+}

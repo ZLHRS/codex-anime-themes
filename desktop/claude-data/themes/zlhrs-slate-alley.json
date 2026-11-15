@@ -1,0 +1,12 @@
+{
+  "id": "zlhrs-slate-alley",
+  "name": "Slate Alley",
+  "tagline": "ZLHRS · Каменная улица в мягких графитовых оттенках на всём фоне.",
+  "bg": "#20242d",
+  "text": "#f3f1f5",
+  "accent": "#b5b3cb",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px"
+  }
+}

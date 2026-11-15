@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 2,
+  "id": "ascii-honu-lagoon",
+  "name": "ASCII · Honu Lagoon",
+  "description": "A sea turtle swimming across a lagoon, light rays and bubbles",
+  "version": "1.0.0",
+  "author": "0toshigami / ZLHRS",
+  "appearance": "dark",
+  "license": "MIT",
+  "category": "landscape",
+  "tags": [
+    "ascii",
+    "animated",
+    "landscape",
+    "honu-lagoon"
+  ],
+  "colors": {
+    "accent": "#5fd0b8",
+    "light": "#e3f6f2"
+  },
+  "assets": {},
+  "strings": {},
+  "ascii": {
+    "scene": "honu-lagoon",
+    "bg": "#0f3a44",
+    "sky": "linear-gradient(90deg, rgba(255, 255, 255, 0) 16%, rgba(255, 255, 255, 0.14) 25%, rgba(255, 255, 255, 0) 35%, rgba(255, 255, 255, 0) 66%, rgba(255, 255, 255, 0.098) 77%, rgba(255, 255, 255, 0) 88%), linear-gradient(#35a6f0, #1d7ad8 45%, #1650b2)"
+  },
+  "css": "theme.css",
+  "source": "https://github.com/0toshigami/claude-desktop-themes"
+}

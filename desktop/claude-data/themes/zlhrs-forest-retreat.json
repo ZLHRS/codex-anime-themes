@@ -1,0 +1,12 @@
+{
+  "id": "zlhrs-forest-retreat",
+  "name": "Forest Retreat · Лесная тишина",
+  "tagline": "ZLHRS · Для любителей природных цветов: глубокий хвойный фон, мох и мягкие шалфейные акценты.",
+  "bg": "#1e2428",
+  "text": "#f3f1f5",
+  "accent": "#9eb69a",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px"
+  }
+}

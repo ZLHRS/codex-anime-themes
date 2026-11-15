@@ -1,0 +1,12 @@
+{
+  "id": "zlhrs-furina-turquoise-current",
+  "name": "Фурина · Бирюзовое течение",
+  "tagline": "ZLHRS · Солнечная вода, серебристые волосы и бирюзовые блики. Полный кадр без обрезки.",
+  "bg": "#1a282f",
+  "text": "#f3f1f5",
+  "accent": "#83d5db",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px"
+  }
+}

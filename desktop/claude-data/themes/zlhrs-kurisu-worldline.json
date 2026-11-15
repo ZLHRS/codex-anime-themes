@@ -1,0 +1,12 @@
+{
+  "id": "zlhrs-kurisu-worldline",
+  "name": "Курису · Worldline Echo",
+  "tagline": "ZLHRS · Курису с телефоном справа, сумеречный город и мягкие цифровые следы.",
+  "bg": "#202227",
+  "text": "#f3f1f5",
+  "accent": "#b5aa95",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px"
+  }
+}

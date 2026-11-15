@@ -1,0 +1,12 @@
+{
+  "id": "zlhrs-midnight-grid",
+  "name": "Midnight Grid · Ночной режим",
+  "tagline": "ZLHRS · Для любителей строгого тёмного интерфейса: графит, холодные голубые акценты и тонкая сетка по краям.",
+  "bg": "#1c232d",
+  "text": "#f3f1f5",
+  "accent": "#90accb",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px"
+  }
+}

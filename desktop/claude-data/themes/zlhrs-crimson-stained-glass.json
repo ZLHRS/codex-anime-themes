@@ -1,0 +1,12 @@
+{
+  "id": "zlhrs-crimson-stained-glass",
+  "name": "Crimson Stained Glass",
+  "tagline": "ZLHRS · Алые блики и витражный зал на всём фоне.",
+  "bg": "#27212a",
+  "text": "#f3f1f5",
+  "accent": "#e99bac",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px"
+  }
+}

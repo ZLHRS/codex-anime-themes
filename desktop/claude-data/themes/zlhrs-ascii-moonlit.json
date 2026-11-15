@@ -1,0 +1,18 @@
+{
+  "id": "zlhrs-ascii-moonlit",
+  "name": "ASCII · Moonlit",
+  "tagline": "ZLHRS · A crescent moon, drifting clouds, twinkling stars",
+  "bg": "#0d1530",
+  "text": "#dbe2f5",
+  "accent": "#d9c98f",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px",
+    "wall-sky": "radial-gradient(120% 90% at 75% 10%, #1a2a5e, #0d1530 60%, #090f24)",
+    "wall-halo": "#0d1530",
+    "wall-rim": "#d9c98f55",
+    "wall-glass": "#0d1530e6",
+    "wall-greet": "\"\""
+  },
+  "wallpaper": "zlhrs-ascii-moonlit"
+}

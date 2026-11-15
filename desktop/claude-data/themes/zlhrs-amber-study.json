@@ -1,0 +1,12 @@
+{
+  "id": "zlhrs-amber-study",
+  "name": "Amber Study · Тёплый кабинет",
+  "tagline": "ZLHRS · Для чтения и заметок: тёплые кофейные оттенки, песочные акценты и спокойная атмосфера.",
+  "bg": "#222325",
+  "text": "#f3f1f5",
+  "accent": "#c5ac86",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px"
+  }
+}

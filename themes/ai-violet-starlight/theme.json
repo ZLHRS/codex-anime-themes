@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 2,
+  "id": "ai-violet-starlight",
+  "name": "Ай Хосино · Violet Starlight",
+  "description": "Ai Hoshino’s violet starlight animation, restored to 4K at 60 fps.",
+  "version": "1.1.0",
+  "author": "ZLHRS",
+  "appearance": "dark",
+  "license": "personal-use",
+  "category": "anime",
+  "tags": [
+    "anime",
+    "animated",
+    "ai-hoshino"
+  ],
+  "colors": {
+    "accent": "#d5a1fa",
+    "light": "#f3d8ff"
+  },
+  "strings": {},
+  "assets": {
+    "background": "assets/poster.jpg"
+  },
+  "motion": {
+    "file": "assets/scene.mp4",
+    "poster": "assets/poster.jpg"
+  },
+  "css": "theme.css",
+  "source": "https://motionbgs.com/ai-hoshino-from-oshi-no-ko",
+  "videoQuality": {
+    "width": 3840,
+    "height": 2160,
+    "fps": 60,
+    "restoration": "Real-ESRGAN animevideov3",
+    "sourceWidth": 1920,
+    "sourceHeight": 1080
+  }
+}

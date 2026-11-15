@@ -1,0 +1,12 @@
+{
+  "id": "zlhrs-ai-violet-starlight",
+  "name": "Ай Хосино · Violet Starlight",
+  "tagline": "ZLHRS · Ai Hoshino’s violet starlight animation, restored to 4K at 60 fps.",
+  "bg": "#242133",
+  "text": "#f3f1f5",
+  "accent": "#d5a1fa",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px"
+  }
+}

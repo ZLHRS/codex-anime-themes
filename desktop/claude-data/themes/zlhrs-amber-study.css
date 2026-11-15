@@ -1,0 +1,5 @@
+html{background:#222325!important}body{background:transparent!important}
+[data-cds=ChatComposer]>.bg-surface-3{background:#222325ed!important;border:1px solid #c5ac8666!important;backdrop-filter:blur(12px)}
+.dframe-sidebar,.dframe-sidebar-body{background:#222325f5!important}
+::selection{background:#c5ac86;color:#222325}
+html[data-desktop-theme^="zlhrs-"] *{--df-web-sidebar-bg:var(--desktop-theme-backdrop)!important}

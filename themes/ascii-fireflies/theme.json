@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 2,
+  "id": "ascii-fireflies",
+  "name": "ASCII · Fireflies",
+  "description": "Fireflies wandering and blinking over tall grass",
+  "version": "1.0.0",
+  "author": "0toshigami / ZLHRS",
+  "appearance": "dark",
+  "license": "MIT",
+  "category": "landscape",
+  "tags": [
+    "ascii",
+    "animated",
+    "landscape",
+    "fireflies"
+  ],
+  "colors": {
+    "accent": "#d8e86a",
+    "light": "#e3eedc"
+  },
+  "assets": {},
+  "strings": {},
+  "ascii": {
+    "scene": "fireflies",
+    "bg": "#0b130e",
+    "sky": "linear-gradient(90deg, rgba(255, 255, 255, 0) 16%, rgba(255, 255, 255, 0.03) 25%, rgba(255, 255, 255, 0) 35%, rgba(255, 255, 255, 0) 66%, rgba(255, 255, 255, 0.021) 77%, rgba(255, 255, 255, 0) 88%), radial-gradient(120% 80% at 50% 110%, #1b3522, #0c1710 60%, #070c09)"
+  },
+  "css": "theme.css",
+  "source": "https://github.com/0toshigami/claude-desktop-themes"
+}

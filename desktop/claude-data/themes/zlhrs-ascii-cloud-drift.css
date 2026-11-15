@@ -1,0 +1,2 @@
+
+html[data-desktop-theme^="zlhrs-"] *{--df-web-sidebar-bg:var(--desktop-theme-backdrop)!important}

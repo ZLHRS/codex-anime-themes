@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 2,
+  "id": "ascii-clawd",
+  "name": "ASCII · Clawd",
+  "description": "A turning orange spark, drifting embers, Clawd on patrol",
+  "version": "1.0.0",
+  "author": "0toshigami / ZLHRS",
+  "appearance": "dark",
+  "license": "MIT",
+  "category": "landscape",
+  "tags": [
+    "ascii",
+    "animated",
+    "landscape",
+    "clawd"
+  ],
+  "colors": {
+    "accent": "#d97757",
+    "light": "#f2e6df"
+  },
+  "assets": {},
+  "strings": {},
+  "ascii": {
+    "scene": "clawd",
+    "bg": "#1f1714",
+    "sky": "linear-gradient(90deg, rgba(255, 255, 255, 0) 16%, rgba(255, 255, 255, 0.04) 25%, rgba(255, 255, 255, 0) 35%, rgba(255, 255, 255, 0) 66%, rgba(255, 255, 255, 0.028) 77%, rgba(255, 255, 255, 0) 88%), radial-gradient(90% 80% at 70% 30%, #3a2219, #1f1714 55%, #150f0d)"
+  },
+  "css": "theme.css",
+  "source": "https://github.com/0toshigami/claude-desktop-themes"
+}

@@ -1,0 +1,27 @@
+const {app,BrowserWindow,ipcMain}=require('electron');
+const path=require('path'),assert=require('assert/strict');
+const root=path.resolve(__dirname,'..');
+app.whenReady().then(async()=>{
+ const themes=await require('../desktop/local-themes.cjs').readCatalog(root);
+ const state={language:'ru',target:'chatgpt',themes,pets:[],petCount:0,selected:themes[0].id,chatgptSelected:themes[0].id,claudeSelected:themes[1].id,status:'Ready',platform:'win32',version:'test',appearance:require('../desktop/appearance.cjs').normalize()};
+ ipcMain.handle('studio:state',()=>state);
+ ipcMain.handle('studio:target',(_e,t)=>{state.target=t;state.selected=t==='claude'?state.claudeSelected:state.chatgptSelected;return state;});
+ ipcMain.handle('studio:apply-claude',(_e,id)=>{state.claudeSelected=id;state.selected=id;state.target='claude';return state;});
+ let saved;
+ ipcMain.handle('studio:appearance-claude',(_e,id,value)=>{saved={id,value};state.appearance=value;return state;});
+ const w=new BrowserWindow({show:false,width:1180,height:850,webPreferences:{preload:path.join(root,'desktop/preload.cjs'),contextIsolation:true,sandbox:true}});
+ const run=s=>w.webContents.executeJavaScript(s,true);
+ await w.loadFile(path.join(root,'desktop/index.html'));
+ for(let i=0;i<100&&!await run('document.querySelectorAll(".card").length');i++)await new Promise(r=>setTimeout(r,30));
+ assert.equal(await run('document.querySelectorAll(".app-button").length'),themes.length*2);
+ assert.equal(await run('document.querySelector(".card-body").textContent.includes("В Claude")'),false);
+ await run('document.querySelector(".app-claude").click()');await new Promise(r=>setTimeout(r,100));
+ assert.equal(state.chatgptSelected,themes[0].id);assert.equal(state.claudeSelected,themes[0].id);
+ assert.equal(await run('document.getElementById("open").textContent'),'Открыть Claude');
+ await run('document.getElementById("settings-tab").click();document.getElementById("brightness").value=123;document.getElementById("save-appearance").click()');await new Promise(r=>setTimeout(r,100));
+ assert.equal(saved.value.brightness,123);assert.equal(saved.id,state.claudeSelected);
+ w.setContentSize(850,650);assert.equal(await run('document.documentElement.scrollWidth>innerWidth'),false);
+ await run('document.getElementById("skins-tab").click()');
+ require('fs').writeFileSync(path.join(root,'output/dual-app-ui.png'),(await w.webContents.capturePage()).toPNG());
+ console.log('PASS: dual actions, independent selection, Claude settings routing, compact layout.');app.exit(0);
+}).catch(e=>{console.error(e);app.exit(1)});

@@ -1,0 +1,12 @@
+{
+  "id": "zlhrs-frieren-fern-lilac",
+  "name": "Фрирен и Ферн · Lilac Quiet",
+  "tagline": "ZLHRS · Фрирен и Ферн с дорисованными контурами справа на тёмном дымчато-сиреневом фоне.",
+  "bg": "#1d1f29",
+  "text": "#f3f1f5",
+  "accent": "#998aa9",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px"
+  }
+}

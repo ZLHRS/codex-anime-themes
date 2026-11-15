@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 2,
+  "id": "ascii-neon-rain",
+  "name": "ASCII · Neon Rain",
+  "description": "Rain over a city at night, neon signs buzzing, umbrellas passing by",
+  "version": "1.0.0",
+  "author": "0toshigami / ZLHRS",
+  "appearance": "dark",
+  "license": "MIT",
+  "category": "landscape",
+  "tags": [
+    "ascii",
+    "animated",
+    "landscape",
+    "neon-rain"
+  ],
+  "colors": {
+    "accent": "#ff5fa2",
+    "light": "#e3e8f6"
+  },
+  "assets": {},
+  "strings": {},
+  "ascii": {
+    "scene": "neon-rain",
+    "bg": "#0c1020",
+    "sky": "linear-gradient(#05070f, #0b1024 40%, #1e1838 75%, #34203f)"
+  },
+  "css": "theme.css",
+  "source": "https://github.com/0toshigami/claude-desktop-themes"
+}

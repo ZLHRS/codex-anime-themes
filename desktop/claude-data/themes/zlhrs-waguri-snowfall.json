@@ -1,0 +1,12 @@
+{
+  "id": "zlhrs-waguri-snowfall",
+  "name": "Вагури · Snowfall Reverie",
+  "tagline": "ZLHRS · Крупный портрет Вагури справа, живописная снежная ночь и дымчатые сине-фиолетовые панели.",
+  "bg": "#1e242f",
+  "text": "#f3f1f5",
+  "accent": "#a2b9d7",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "id": "zlhrs-kana-soft-garnet",
+  "name": "Кана · Тёплый гранат",
+  "tagline": "ZLHRS · Мягкий бордовый фон, тёплый свет и спокойный портрет Каны по центру.",
+  "bg": "#231f27",
+  "text": "#f3f1f5",
+  "accent": "#c98998",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px"
+  }
+}

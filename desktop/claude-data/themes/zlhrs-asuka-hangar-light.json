@@ -1,0 +1,12 @@
+{
+  "id": "zlhrs-asuka-hangar-light",
+  "name": "Аска · Hangar Light",
+  "tagline": "ZLHRS · Аска справа в светлом ангаре с металлическими конструкциями и красными акцентами.",
+  "bg": "#282226",
+  "text": "#f3f1f5",
+  "accent": "#f4a58d",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px"
+  }
+}

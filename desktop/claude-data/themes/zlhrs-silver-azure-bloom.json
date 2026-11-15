@@ -1,0 +1,12 @@
+{
+  "id": "zlhrs-silver-azure-bloom",
+  "name": "Silver · Azure Bloom",
+  "tagline": "ZLHRS · Серебряные волосы, белые цветы и сияние сапфирового глаза.",
+  "bg": "#212631",
+  "text": "#f3f1f5",
+  "accent": "#b9cbe7",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px"
+  }
+}

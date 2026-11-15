@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 2,
+  "id": "violet-royal-duo",
+  "name": "Violet Royal Duo",
+  "description": "Пара на троне справа, бордовые и золотые акценты.",
+  "version": "1.0.1",
+  "author": "ZLHRS",
+  "appearance": "dark",
+  "license": "personal-use",
+  "category": "anime",
+  "tags": [
+    "anime",
+    "duo",
+    "portrait"
+  ],
+  "colors": {
+    "accent": "#cfb17d",
+    "light": "#f0dfc3"
+  },
+  "strings": {},
+  "assets": {
+    "background": "assets/background.webp"
+  },
+  "css": "theme.css"
+}

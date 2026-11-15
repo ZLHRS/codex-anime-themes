@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 2,
+  "id": "mitsuri-dango-bloom",
+  "name": "Мицури · Dango Bloom",
+  "description": "Мицури с данго справа, пыльная роза и фисташковые акценты.",
+  "version": "1.0.0",
+  "author": "ZLHRS",
+  "appearance": "dark",
+  "license": "personal-use",
+  "category": "anime",
+  "tags": [
+    "anime",
+    "mitsuri",
+    "pink",
+    "sage",
+    "portrait"
+  ],
+  "colors": {
+    "accent": "#c8d99e",
+    "light": "#ffe4ed"
+  },
+  "strings": {},
+  "assets": {
+    "portrait": "assets/portrait.webp"
+  },
+  "css": "theme.css"
+}

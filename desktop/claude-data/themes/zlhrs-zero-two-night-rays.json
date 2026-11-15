@@ -1,0 +1,12 @@
+{
+  "id": "zlhrs-zero-two-night-rays",
+  "name": "Zero Two · Night Rays",
+  "tagline": "ZLHRS · One continuous animated night scene with soft blue rays and no portrait/background seam.",
+  "bg": "#1a2231",
+  "text": "#f3f1f5",
+  "accent": "#7da9e8",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px"
+  }
+}

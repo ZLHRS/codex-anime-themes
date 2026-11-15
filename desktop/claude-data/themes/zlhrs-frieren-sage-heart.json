@@ -1,0 +1,12 @@
+{
+  "id": "zlhrs-frieren-sage-heart",
+  "name": "Фрирен · Sage Heart",
+  "tagline": "ZLHRS · Фрирен с сердечком справа на однотонном серо-зелёном фоне.",
+  "bg": "#1e242a",
+  "text": "#f3f1f5",
+  "accent": "#a4b8ab",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 2,
+  "id": "jade-tempest",
+  "name": "Татсумаки · Jade Tempest",
+  "description": "Нефритовый ветер и манга-портрет справа.",
+  "version": "1.0.1",
+  "author": "ZLHRS",
+  "appearance": "dark",
+  "license": "personal-use",
+  "category": "anime",
+  "tags": [
+    "anime",
+    "tatsumaki",
+    "one-punch-man",
+    "panorama"
+  ],
+  "colors": {
+    "accent": "#90d5c2",
+    "light": "#def2e9"
+  },
+  "strings": {},
+  "assets": {
+    "background": "assets/background.webp"
+  },
+  "css": "theme.css"
+}

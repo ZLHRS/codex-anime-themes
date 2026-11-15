@@ -1,0 +1,12 @@
+{
+  "id": "zlhrs-kurisu-lab-evening",
+  "name": "Курису · Lab Evening",
+  "tagline": "ZLHRS · Курису с лапшой на диване. Художественная версия лаборатории с ЭЛТ-монитором, электроникой и микроволновкой с телефоном.",
+  "bg": "#1d242b",
+  "text": "#f3f1f5",
+  "accent": "#96b6b3",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px"
+  }
+}

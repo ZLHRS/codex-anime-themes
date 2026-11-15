@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 2,
+  "id": "scarlet-rain",
+  "name": "Scarlet Rain",
+  "description": "Алый портрет справа, дождливая улица и тёплый свет фонарей на всём фоне.",
+  "version": "1.0.1",
+  "author": "ZLHRS",
+  "appearance": "dark",
+  "license": "personal-use",
+  "category": "anime",
+  "tags": [
+    "anime",
+    "rain",
+    "red",
+    "blue",
+    "street"
+  ],
+  "colors": {
+    "accent": "#d9989d",
+    "light": "#ffdab0"
+  },
+  "strings": {},
+  "assets": {
+    "background": "assets/background-clean-hq.webp"
+  },
+  "css": "theme.css"
+}

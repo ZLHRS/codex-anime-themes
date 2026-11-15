@@ -1,0 +1,12 @@
+{
+  "id": "zlhrs-zero-two-rose",
+  "name": "Zero Two · Darling Rose",
+  "tagline": "ZLHRS · № 02 · Любимый во Франксе. Леденец Zero Two, позывной 002 и парные огни кабины во время ответа.",
+  "bg": "#29242e",
+  "text": "#f3f1f5",
+  "accent": "#ffb4ce",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px"
+  }
+}

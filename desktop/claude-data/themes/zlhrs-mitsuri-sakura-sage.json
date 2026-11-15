@@ -1,0 +1,12 @@
+{
+  "id": "zlhrs-mitsuri-sakura-sage",
+  "name": "Мицури · Sakura Sage",
+  "tagline": "ZLHRS · Улыбающаяся Мицури справа на мягком шалфейном фоне.",
+  "bg": "#27242e",
+  "text": "#f3f1f5",
+  "accent": "#eeb4cc",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px"
+  }
+}

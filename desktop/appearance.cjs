@@ -2,9 +2,35 @@ const defaults=Object.freeze({brightness:100,size:100,x:0,y:0,animations:true,ef
 function normalize(value={}){
  const v=value&&typeof value==='object'?value:{};
  const number=(key,min,max)=>Number.isFinite(v[key])?Math.min(max,Math.max(min,v[key])):defaults[key];
- return {brightness:number('brightness',40,180),size:number('size',60,160),x:number('x',-40,40),y:number('y',-40,40),animations:typeof v.animations==='boolean'?v.animations:true,effects:typeof v.effects==='boolean'?v.effects:true};
+ return {...(v.ascii?{ascii:require('./ascii-settings.cjs').normalize(v.ascii)}:{}),brightness:number('brightness',40,180),size:number('size',60,160),x:number('x',-40,40),y:number('y',-40,40),animations:typeof v.animations==='boolean'?v.animations:true,effects:typeof v.effects==='boolean'?v.effects:true};
 }
 const designs={
+ 'ai-violet-starlight':['Violet Starlight','soft','#d5a1fa'],
+ 'zero-two-azure-bounce':['Azure Bounce','soft','#f4a8be'],
+ 'copper-reverie':['Copper Reverie','soft','#dca68d'],
+ 'turquoise-mountain-springs':['Turquoise Mountain Springs','soft','#8ed9df'],
+ 'violet-royal-duo':['Violet Royal Duo','soft','#cfb17d'],
+ "ivory-deduction":["L · Ivory Deduction",'soft','#bdc3ce'],
+ "graphite-silence":["L · Graphite Silence",'soft','#bdc3ce'],
+ 'crimson-laughter':['Crimson Laughter','soft','#e8a1a1'],
+ 'sage-morning-cup':['Sage Morning Cup','soft','#b9b0d3'],
+ 'jade-tempest':['Jade Tempest','soft','#90d5c2'],
+ 'emerald-focus':['Emerald Focus','soft','#8ed8ae'],
+ 'emerald-psychic':['Emerald Psychic','soft','#8ed8ae'],
+ 'rose-ice-frame':['Rose Ice Frame','soft','#e8a5c7'],
+ 'stone-soft-smile':['Stone Soft Smile','soft','#b5b3cb'],
+ "slate-alley":["Slate Alley",'soft',"#b5b3cb"],
+ "crimson-stained-glass":["Crimson Stained Glass",'soft',"#e99bac"],
+ "garnet-portrait":["Garnet Portrait",'soft',"#ce9ca9"],
+ 'asuka-peach-morning':['Персиковое утро','soft','#efbb9e'],
+ 'asuka-hangar-light':['Свет ангара','soft','#f4a58d'],
+ 'mitsuri-sakura-sage':['Сакура и шалфей','soft','#eeb4cc'],
+ 'mitsuri-dango-bloom':['Роза и фисташка','soft','#c8d99e'],
+ 'scarlet-rain':['Дождь и янтарные фонари','soft','#d9989d'],
+ 'coral-thunder':['Коралловая энергия','soft','#ffb49e'],
+ 'makima-amber-blush':['Тёплая терракота','soft','#efb194'],
+ 'crimson-gaze':['Малиновое сияние','soft','#f597ad'],
+ 'zero-two-night-rays':['Синие ночные лучи','soft','#7da9e8'],
  'slate-cat-glasses':["Кошачьи ушки · Дымчатый графит",'soft','#a7afca'],
  'indigo-maid-bell':["Колокольчик · Ночной индиго",'soft','#a1a9d4'],
  'sapphire-quiet-sign':["Тихий жест · Сапфир",'soft','#8eafcf'],
@@ -78,6 +104,7 @@ function ornament(kind,color){
 }
 function compose(id,value){
  const a=normalize(value);const [label,kind,color]=designs[id]||['Мягкое свечение','soft','#aabbee'];
+ if(id.startsWith('ascii-'))return {css:require('./readability.cjs')+`html.codex-theme-studio #cts-stage{filter:brightness(${a.brightness/100});pointer-events:none!important}`,chrome:'',settings:a};
  const selector='html.codex-theme-studio .main-surface:not(.main-surface .main-surface)';
  const portraits=selector+'::before'+(['tatsumaki-jade-duo','crimson-heart-duo','private-duo','tidal-halo-duo'].includes(id)?','+selector+'::after':'');
  const portraitCss=require('./readability.cjs')+`

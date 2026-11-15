@@ -24,17 +24,50 @@ async function payload(root, id, appearance, themeRoot=root) {
     vars += `--cts-asset-${name}:url("data:${mime};base64,${(await fs.readFile(inside(dir,file))).toString('base64')}");`;
   }
   const enhancement=require('./appearance.cjs').compose(id,appearance);
+  const motion = {};
+  let asciiHelpers = '';
+  if (theme.ascii) {
+    const scene = theme.ascii.scene;
+    if (!/^[a-z][a-z-]{0,40}$/.test(scene)) throw new Error('Invalid ASCII scene');
+    const kit = path.join(root,'runtime/ascii');
+    const source = (await fs.readFile(path.join(kit,'helpers.js'),'utf8')) + '\n{\n' +
+      (await fs.readFile(path.join(kit,'scenes',scene+'.js'),'utf8')) + '\n}\n' +
+      (await fs.readFile(path.join(kit,'draw.js'),'utf8'));
+    asciiHelpers = (await fs.readFile(path.join(root,'runtime/ascii-media.mjs'),'utf8'))
+      .replace('export function ','function ').replace('/*__ASCII_SCENE_CODE__*/',source);
+    motion.ambient = {kind:'ascii',scene,bg:theme.ascii.bg,enabled:enhancement.settings.animations,
+      ...require('./ascii-settings.cjs').normalize(appearance?.ascii)};
+  }
+  if (theme.motion) {
+    const mime = {'.gif':'image/gif','.mp4':'video/mp4','.webm':'video/webm'}[path.extname(theme.motion.file || '').toLowerCase()];
+    if (!mime || !theme.motion.poster) throw new Error('Animation needs GIF, MP4 or WebM and a static poster.');
+    const posterMime = {'.webp':'image/webp','.png':'image/png','.jpg':'image/jpeg'}[path.extname(theme.motion.poster).toLowerCase()];
+    if (!posterMime) throw new Error('Invalid animation poster.');
+    const file = inside(dir,theme.motion.file),poster = inside(dir,theme.motion.poster);
+    // High-quality 4K video needs more room than a GIF. The player still creates
+    // only one native decoder and releases it when the theme changes.
+    const maxMotionBytes=(mime.startsWith('video/')?64:12)*1024*1024;
+    if ((await fs.stat(file)).size > maxMotionBytes || (await fs.stat(poster)).size > 4*1024*1024) throw new Error('Theme animation exceeds the size limit.');
+    motion.ambient = {kind:mime.startsWith('video/')?'video':'gif',enabled:enhancement.settings.animations,
+      src:`data:${mime};base64,${(await fs.readFile(file)).toString('base64')}`,
+      poster:`data:${posterMime};base64,${(await fs.readFile(poster)).toString('base64')}`};
+  }
   const css = `:root.codex-theme-studio{${vars}}` + await fs.readFile(inside(dir, theme.css), 'utf8') + enhancement.css;
   const helpers = (await fs.readFile(path.join(root,'runtime/composer-overflow.mjs'),'utf8')).replaceAll('export function ','function ');
+  const petHelpers = (await fs.readFile(path.join(root,'runtime/pet-hover.mjs'),'utf8')).replaceAll('export function ','function ');
+  const ambientHelpers = asciiHelpers || (await fs.readFile(path.join(root,'runtime/ambient-media.mjs'),'utf8')).replaceAll('export function ','function ');
   const template = await fs.readFile(path.join(root,'runtime/theme-runtime.js'),'utf8');
-  const stamp = 'pack:' + id + ':' + crypto.createHash('sha256').update(css).update(template).update(helpers).update(enhancement.chrome).digest('hex').slice(0,16).toUpperCase();
+  const stamp = 'pack:' + id + ':' + crypto.createHash('sha256').update(css).update(template).update(helpers).update(petHelpers).update(ambientHelpers).update(JSON.stringify(motion)).update(enhancement.chrome).digest('hex').slice(0,16).toUpperCase();
   const replacements = {
+    __CTS_AMBIENT_HELPERS__: `(()=>{${ambientHelpers};return ${asciiHelpers?'createAsciiMedia':'createAmbientMedia'}(document,window,MOTION.ambient);})()`,
+    __CTS_PET_HOVER_HELPERS__: `(()=>{${petHelpers};return ${enhancement.settings.animations ? 'installPetHover(document,window)' : '()=>{}'};})()`,
     __CTS_COMPOSER_OVERFLOW_HELPERS__: `(()=>{${helpers};return {clearComposerSurfaceCompat,createComposerOverflowAnnotator,reconcileComposerSurfaces,selectComposerSurfaces};})()`,
     __CTS_CSS_JSON__: JSON.stringify(css), __CTS_THEME_JSON__: JSON.stringify(theme),
-    __CTS_CHROME_JSON__: JSON.stringify(enhancement.chrome), __CTS_MOTION_JSON__: '{}',
+    __CTS_CHROME_JSON__: JSON.stringify(enhancement.chrome), __CTS_MOTION_JSON__: JSON.stringify(motion),
     __CTS_VERSION_JSON__: '"studio-2.0.0"', __CTS_STAMP_JSON__: JSON.stringify(stamp)
   };
-  return {stamp, expression: template.replace(/__CTS_[A-Z_]+__/g, key => {
+  const petExpression = `(()=>{const key='__CTS_NATIVE_PET_HOVER__';if(window[key]?.stamp===${JSON.stringify(stamp)})return;window[key]?.cleanup();window[key]={stamp:${JSON.stringify(stamp)},cleanup:${replacements.__CTS_PET_HOVER_HELPERS__}};})()`;
+  return {stamp, petExpression, expression: template.replace(/__CTS_[A-Z_]+__/g, key => {
     if (!(key in replacements)) throw new Error('Unknown runtime token');
     return replacements[key];
   })};
@@ -42,6 +75,10 @@ async function payload(root, id, appearance, themeRoot=root) {
 function validTarget(target) {
   if(target.type !== 'page')return false;
   try{const u=new URL(target.url);return u.protocol==='app:'&&u.hostname==='-'&&['/index.html','/detached-window.html'].includes(u.pathname)&&!decodeURIComponent(u.search).includes('avatar-overlay');}catch{return false;}
+}
+function validPetTarget(target) {
+  if(target.type!=='page')return false;
+  try{const u=new URL(target.url);return u.protocol==='app:'&&u.hostname==='-'&&u.pathname==='/index.html'&&u.searchParams.get('initialRoute')==='/avatar-overlay';}catch{return false;}
 }
 const LOOPBACK=['127.0.0.1','[::1]','localhost'];
 let debugPort=9345;
@@ -58,13 +95,13 @@ async function closeRunning(file){
  try{const helper=path.join(directory,'close-app.ps1');await fs.writeFile(helper,await fs.readFile(path.join(__dirname,'close-app.ps1')));await run('powershell.exe',['-NoProfile','-NonInteractive','-ExecutionPolicy','Bypass','-File',helper,'-AppPath',file],{windowsHide:true,timeout:25000});}catch{throw new Error('Не удалось перезапустить выбранное приложение. Убедитесь, что ChatGPT и Studio запущены от одного пользователя и без разных прав администратора.');}finally{await fs.rm(directory,{recursive:true,force:true});}
 }
 let preferredHost='127.0.0.1';
-async function targets(request=fetch) {
+async function targets(request=fetch,includePets=false) {
  let connected=false;
  try{return await Promise.any([...new Set([preferredHost,...LOOPBACK])].map(async host=>{
   const r=await request('http://'+host+':'+debugPort+'/json/list',{signal:AbortSignal.timeout(1200)});
   if(!r.ok)throw Error('Endpoint unavailable');
   const list=await r.json();if(!Array.isArray(list))throw Error('Invalid endpoint');connected=true;
-  const pages=list.filter(validTarget).map(t=>{const socket=new URL(t.webSocketDebuggerUrl);
+  const pages=list.filter(t=>validTarget(t)||(includePets&&validPetTarget(t))).map(t=>{const socket=new URL(t.webSocketDebuggerUrl);
    if(socket.protocol!=='ws:'||!LOOPBACK.includes(socket.hostname)||socket.port!==String(debugPort))throw Error('Unexpected debugging endpoint');
    socket.hostname=host;return {...t,webSocketDebuggerUrl:socket.href};});
   if(!pages.length)throw Error('No pages yet');preferredHost=host;return pages;
@@ -123,4 +160,4 @@ async function launch(file) {
   const spec=launchSpec(file);
   await new Promise((resolve,reject)=>{const child=spawn(spec.command,spec.args,{detached:true,stdio:'ignore',windowsHide:false});child.once('error',reject);child.once('spawn',()=>{child.unref();resolve();});});
 }
-module.exports={setDebugPort,freeDebugPort,closeRunning,readJson,exists,inside,payload,validTarget,targets,evaluate,command,foreground,saveSettings,discover,launchSpec,launch};
+module.exports={setDebugPort,freeDebugPort,closeRunning,readJson,exists,inside,payload,validTarget,validPetTarget,targets,evaluate,command,foreground,saveSettings,discover,launchSpec,launch};

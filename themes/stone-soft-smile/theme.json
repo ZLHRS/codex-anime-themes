@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 2,
+  "id": "stone-soft-smile",
+  "name": "Stone Soft Smile",
+  "description": "Мягкая улыбка на каменном фоне во всю тему.",
+  "version": "1.0.0",
+  "author": "ZLHRS",
+  "appearance": "dark",
+  "license": "personal-use",
+  "category": "anime",
+  "tags": [
+    "anime",
+    "panorama"
+  ],
+  "colors": {
+    "accent": "#b5b3cb",
+    "light": "#e0dbe8"
+  },
+  "strings": {},
+  "assets": {
+    "background": "assets/background.webp"
+  },
+  "css": "theme.css"
+}

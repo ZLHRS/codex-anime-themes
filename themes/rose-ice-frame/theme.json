@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 2,
+  "id": "rose-ice-frame",
+  "name": "Rose Ice Frame",
+  "description": "Розовые пряди справа на цельном серо-голубом фоне.",
+  "version": "1.0.1",
+  "author": "ZLHRS",
+  "appearance": "dark",
+  "license": "personal-use",
+  "category": "anime",
+  "tags": [
+    "anime",
+    "panorama"
+  ],
+  "colors": {
+    "accent": "#e8a5c7",
+    "light": "#f5e2ef"
+  },
+  "strings": {},
+  "assets": {
+    "background": "assets/background.webp"
+  },
+  "css": "theme.css"
+}

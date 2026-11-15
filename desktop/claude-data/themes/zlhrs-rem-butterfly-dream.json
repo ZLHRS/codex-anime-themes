@@ -1,0 +1,12 @@
+{
+  "id": "zlhrs-rem-butterfly-dream",
+  "name": "Рем · Butterfly Dream",
+  "tagline": "ZLHRS · Тихий сон среди ледяных бабочек и мягкого света.",
+  "bg": "#1b2731",
+  "text": "#f3f1f5",
+  "accent": "#8bcce9",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px"
+  }
+}

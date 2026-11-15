@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 2,
+  "id": "copper-reverie",
+  "name": "Copper Reverie",
+  "description": "Рыжий портрет слева, графитовый фон и мягкий медный свет.",
+  "version": "1.0.0",
+  "author": "ZLHRS",
+  "appearance": "dark",
+  "license": "personal-use",
+  "category": "anime",
+  "tags": [
+    "anime",
+    "panorama"
+  ],
+  "colors": {
+    "accent": "#dca68d",
+    "light": "#efdfd4"
+  },
+  "strings": {},
+  "assets": {
+    "background": "assets/background.webp"
+  },
+  "css": "theme.css"
+}

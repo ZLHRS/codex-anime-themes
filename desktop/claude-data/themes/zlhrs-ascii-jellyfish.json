@@ -1,0 +1,18 @@
+{
+  "id": "zlhrs-ascii-jellyfish",
+  "name": "ASCII · Jellyfish",
+  "tagline": "ZLHRS · Jellyfish rising through deep water, bells pulsing",
+  "bg": "#0a1830",
+  "text": "#dfe7fb",
+  "accent": "#a58cf0",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px",
+    "wall-sky": "linear-gradient(90deg, rgba(255, 255, 255, 0) 16%, rgba(255, 255, 255, 0.07) 25%, rgba(255, 255, 255, 0) 35%, rgba(255, 255, 255, 0) 66%, rgba(255, 255, 255, 0.049) 77%, rgba(255, 255, 255, 0) 88%), linear-gradient(#174784, #0c2b58 50%, #071a3a)",
+    "wall-halo": "#0a1830",
+    "wall-rim": "#a58cf055",
+    "wall-glass": "#0a1830e6",
+    "wall-greet": "\"\""
+  },
+  "wallpaper": "zlhrs-ascii-jellyfish"
+}

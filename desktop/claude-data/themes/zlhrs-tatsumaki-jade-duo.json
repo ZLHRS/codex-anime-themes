@@ -1,0 +1,12 @@
+{
+  "id": "zlhrs-tatsumaki-jade-duo",
+  "name": "Тацумаки · Jade Duo",
+  "tagline": "ZLHRS · Два портрета Тацумаки, нефритовый пейзаж, парящие камни и тонкие дуги энергии.",
+  "bg": "#1b2528",
+  "text": "#f3f1f5",
+  "accent": "#87bb9b",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 2,
+  "id": "ascii-star-voyage",
+  "name": "ASCII · Star Voyage",
+  "description": "A little rocket passing a ringed planet, shooting stars overhead",
+  "version": "1.0.0",
+  "author": "0toshigami / ZLHRS",
+  "appearance": "dark",
+  "license": "MIT",
+  "category": "landscape",
+  "tags": [
+    "ascii",
+    "animated",
+    "landscape",
+    "star-voyage"
+  ],
+  "colors": {
+    "accent": "#ff6fb5",
+    "light": "#e6ecff"
+  },
+  "assets": {},
+  "strings": {},
+  "ascii": {
+    "scene": "star-voyage",
+    "bg": "#0d0a1f",
+    "sky": "radial-gradient(110% 90% at 85% 20%, #2a1a52, #120d2e 50%, #08061a)"
+  },
+  "css": "theme.css",
+  "source": "https://github.com/0toshigami/claude-desktop-themes"
+}

@@ -1,0 +1,12 @@
+{
+  "id": "zlhrs-blue-cat-nocturne",
+  "name": "Фурина · Blue Cat Nocturne",
+  "tagline": "ZLHRS · № 10 · Фурина, Genshin Impact. Серебряный колокольчик, кошачьи ушки и аквамарин.",
+  "bg": "#1d232f",
+  "text": "#f3f1f5",
+  "accent": "#9daed9",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px"
+  }
+}

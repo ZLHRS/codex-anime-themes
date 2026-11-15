@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 2,
+  "id": "graphite-silence",
+  "name": "L · Graphite Silence",
+  "description": "Портрет L справа на графитовом фоне.",
+  "version": "1.0.0",
+  "author": "ZLHRS",
+  "appearance": "dark",
+  "license": "personal-use",
+  "category": "anime",
+  "tags": [
+    "anime",
+    "death-note",
+    "L",
+    "panorama"
+  ],
+  "colors": {
+    "accent": "#bdc3ce",
+    "light": "#eceef1"
+  },
+  "strings": {},
+  "assets": {
+    "background": "assets/background.webp"
+  },
+  "css": "theme.css"
+}

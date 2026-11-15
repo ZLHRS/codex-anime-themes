@@ -3,7 +3,7 @@
   "id": "sapphire-quiet-sign",
   "name": "Тихий жест · Сапфир",
   "description": "Улучшенный портрет справа, тёмный цветной фон и свободное место для чтения.",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "author": "ZLHRS",
   "appearance": "dark",
   "license": "personal-use",
@@ -20,7 +20,7 @@
   },
   "strings": {},
   "assets": {
-    "portrait": "assets/portrait.webp",
+    "portrait": "assets/portrait-clean.webp",
     "charm": "assets/charm.svg"
   },
   "css": "theme.css"

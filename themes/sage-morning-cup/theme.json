@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 2,
+  "id": "sage-morning-cup",
+  "name": "Sage Morning Cup",
+  "description": "Портрет слева, шалфейный интерьер и мягкий утренний свет.",
+  "version": "1.0.0",
+  "author": "ZLHRS",
+  "appearance": "dark",
+  "license": "personal-use",
+  "category": "anime",
+  "tags": [
+    "anime",
+    "panorama"
+  ],
+  "colors": {
+    "accent": "#b9b0d3",
+    "light": "#e6e9df"
+  },
+  "strings": {},
+  "assets": {
+    "background": "assets/background.webp"
+  },
+  "css": "theme.css"
+}

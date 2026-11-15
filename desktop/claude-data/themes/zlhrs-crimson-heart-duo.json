@@ -1,0 +1,12 @@
+{
+  "id": "zlhrs-crimson-heart-duo",
+  "name": "Crimson · Heart Duo",
+  "tagline": "ZLHRS · Два портрета по краям чата: рубиновые акценты, розовые сердца и тёмный бархат.",
+  "bg": "#25202a",
+  "text": "#f3f1f5",
+  "accent": "#df96ae",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px"
+  }
+}

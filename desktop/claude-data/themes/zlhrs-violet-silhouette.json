@@ -1,0 +1,12 @@
+{
+  "id": "zlhrs-violet-silhouette",
+  "name": "Violet Silhouette · Фиолетовая тишина",
+  "tagline": "ZLHRS · Крупный портрет справа и однотонный приглушённый фиолетовый фон в оттенках волос.",
+  "bg": "#20202e",
+  "text": "#f3f1f5",
+  "accent": "#b394d3",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px"
+  }
+}

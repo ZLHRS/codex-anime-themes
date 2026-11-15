@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 2,
+  "id": "ascii-cloud-drift",
+  "name": "ASCII · Cloud Drift",
+  "description": "White clouds over a bright sky, birds gliding by",
+  "version": "1.0.0",
+  "author": "0toshigami / ZLHRS",
+  "appearance": "light",
+  "license": "MIT",
+  "category": "landscape",
+  "tags": [
+    "ascii",
+    "animated",
+    "landscape",
+    "cloud-drift"
+  ],
+  "colors": {
+    "accent": "#2f78bd",
+    "light": "#1d3447"
+  },
+  "assets": {},
+  "strings": {},
+  "ascii": {
+    "scene": "cloud-drift",
+    "bg": "#d8ecfa",
+    "sky": "linear-gradient(90deg, rgba(255, 255, 255, 0) 16%, rgba(255, 255, 255, 0.22) 25%, rgba(255, 255, 255, 0) 35%, rgba(255, 255, 255, 0) 66%, rgba(255, 255, 255, 0.154) 77%, rgba(255, 255, 255, 0) 88%), linear-gradient(#4fa3e8, #86c3f0 55%, #b6dbf6)"
+  },
+  "css": "theme.css",
+  "source": "https://github.com/0toshigami/claude-desktop-themes"
+}

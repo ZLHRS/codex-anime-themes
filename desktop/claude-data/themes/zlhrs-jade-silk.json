@@ -1,0 +1,12 @@
+{
+  "id": "zlhrs-jade-silk",
+  "name": "Jade Silk · Нефритовый шёлк",
+  "tagline": "ZLHRS · Нефритовый фон, пыльная роза и мягкие золотистые детали.",
+  "bg": "#1b242a",
+  "text": "#f3f1f5",
+  "accent": "#8ab9ab",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px"
+  }
+}

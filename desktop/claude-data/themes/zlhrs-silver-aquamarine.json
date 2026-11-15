@@ -1,0 +1,12 @@
+{
+  "id": "zlhrs-silver-aquamarine",
+  "name": "Silver Aquamarine · Серебряная тишина",
+  "tagline": "ZLHRS · Серебряные волосы и аквамариновые глаза. Мягкий графит, дымчатый бирюзовый и приглушённые коралловые детали.",
+  "bg": "#1c242c",
+  "text": "#f3f1f5",
+  "accent": "#91b8bd",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px"
+  }
+}

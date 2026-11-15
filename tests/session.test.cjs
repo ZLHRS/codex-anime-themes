@@ -1,5 +1,18 @@
 const test=require('node:test');const assert=require('node:assert/strict');const {ThemeSession}=require('../desktop/theme-session.cjs');
 function fixture(){let state={ready:true};let injections=0;const transport={payload:async(_root,id)=>({stamp:id,expression:id}),targets:async()=>[{webSocketDebuggerUrl:'fake'}],evaluate:async(_url,expression)=>{if(expression.startsWith('(()=>'))return {...state};injections++;state={ready:true,theme:expression,stamp:expression,styled:true,disabled:false};return {installed:true};}};return {transport,get state(){return state},set state(value){state=value},get injections(){return injections}};}
+
+test('native pet window gets only pet behavior, never theme layout',async()=>{
+ const f=fixture(),evaluate=f.transport.evaluate,calls=[];
+ f.transport.payload=async()=>({stamp:'a',expression:'a',petExpression:'pet-only'});
+ f.transport.targets=async(_request,includePets)=>{assert.equal(includePets,true);return [
+  {webSocketDebuggerUrl:'fake'},
+  {type:'page',url:'app://-/index.html?initialRoute=%2Favatar-overlay',webSocketDebuggerUrl:'pet'}
+ ];};
+ f.transport.evaluate=async(url,expression)=>{if(url==='pet'){calls.push(expression);return;}return evaluate(url,expression);};
+ const s=new ThemeSession('.',f.transport);await s.select('a');
+ assert.equal((await s.reconcile()).applied,1);
+ assert.deepEqual(calls,['pet-only']);
+});
 test('apply, switch, same theme, missing CSS and reloaded window',async()=>{
  const f=fixture(),s=new ThemeSession('.',f.transport);await s.select('a');await s.reconcile();assert.equal(f.state.theme,'a');await s.reconcile();assert.equal(f.injections,1);
  await s.select('b');await s.reconcile();assert.equal(f.state.theme,'b');f.state.styled=false;await s.reconcile();assert.equal(f.injections,3);f.state={ready:true};await s.reconcile();assert.equal(f.state.theme,'b');

@@ -1,0 +1,12 @@
+{
+  "id": "zlhrs-scarlet-rain",
+  "name": "Scarlet Rain",
+  "tagline": "ZLHRS · Алый портрет справа, дождливая улица и тёплый свет фонарей на всём фоне.",
+  "bg": "#252028",
+  "text": "#f3f1f5",
+  "accent": "#d9989d",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px"
+  }
+}

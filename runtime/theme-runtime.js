@@ -72,6 +72,11 @@ html.codex-theme-studio .composer-surface-chrome :has(> [data-composer-utility-b
 
 /* The footer fade is a sibling of the composer, inside a sticky spacer.
    Hide only its decorative paint; retain the spacer and transcript scrolling. */
+html.codex-theme-studio .main-surface .pointer-events-none.absolute:has(> [data-thread-scroll-footer])::before,
+html.codex-theme-studio .main-surface .pointer-events-none.absolute:has(> [data-thread-scroll-footer])::after {
+  background: none !important;
+  box-shadow: none !important;
+}
 html.codex-theme-studio .thread-scroll-container [aria-hidden="true"].pointer-events-none.sticky > .pointer-events-none.absolute {
   display: none !important;
 }
@@ -104,6 +109,10 @@ html.codex-theme-studio .cts-windows-menu-bar [data-cts-menu-region="main"] {
 
   // Tear down any previous install (idempotent re-entry, incl. theme switch).
   const previous = window[STATE_KEY];
+  previous?.ambientMedia?.cleanup();
+  const ambientMedia = __CTS_AMBIENT_HELPERS__;
+  previous?.petHoverCleanup?.();
+  const petHoverCleanup = __CTS_PET_HOVER_HELPERS__;
   if (previous?.observer) previous.observer.disconnect();
   if (previous?.timer) clearInterval(previous.timer);
   if (previous?.clock) clearInterval(previous.clock);
@@ -656,7 +665,7 @@ html.codex-theme-studio .cts-windows-menu-bar [data-cts-menu-region="main"] {
     // Stage layer: theme scenery INSIDE main, painted UNDER the app content
     // (main > * are lifted to z-index 1 by the theme CSS). Never overlays
     // dialogs, popovers or panels.
-    if (layers.stageHtml && shellMain) {
+    if ((layers.stageHtml || MOTION.ambient) && shellMain) {
       let stage = document.getElementById(STAGE_ID);
       if (!stage || stage.parentElement !== shellMain) {
         stage?.remove();
@@ -671,12 +680,14 @@ html.codex-theme-studio .cts-windows-menu-bar [data-cts-menu-region="main"] {
         shellMain.prepend(stage);
       }
       if (stage.dataset.ctsStamp !== STAMP) {
-        stage.innerHTML = layers.stageHtml;
+        stage.innerHTML = layers.stageHtml || '';
         stage.dataset.ctsStamp = STAMP;
       }
       fillTexts(stage);
+      ambientMedia.ensure(stage);
       setClass(stage, "cts-home-shell", Boolean(home));
     } else {
+      ambientMedia.ensure(null);
       document.getElementById(STAGE_ID)?.remove();
     }
 
@@ -728,6 +739,8 @@ html.codex-theme-studio .cts-windows-menu-bar [data-cts-menu-region="main"] {
   };
 
   const cleanup = () => {
+    ambientMedia.cleanup();
+    petHoverCleanup();
     window[DISABLED_KEY] = true;
     const root = document.documentElement;
     root?.classList.remove(ROOT_CLASS);
@@ -864,7 +877,7 @@ html.codex-theme-studio .cts-windows-menu-bar [data-cts-menu-region="main"] {
   } catch {}
 
   window[STATE_KEY] = {
-    ensure, cleanup, observer, timer, clock, scheduler, resizeHandler,
+    ensure, cleanup, observer, timer, clock, scheduler, resizeHandler, petHoverCleanup, ambientMedia,
     mediaQuery, mediaHandler, appliedVars,
     homeSticky: null,
     stamp: STAMP,

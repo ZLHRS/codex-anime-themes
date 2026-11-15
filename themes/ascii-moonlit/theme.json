@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 2,
+  "id": "ascii-moonlit",
+  "name": "ASCII · Moonlit",
+  "description": "A crescent moon, drifting clouds, twinkling stars",
+  "version": "1.0.0",
+  "author": "0toshigami / ZLHRS",
+  "appearance": "dark",
+  "license": "MIT",
+  "category": "landscape",
+  "tags": [
+    "ascii",
+    "animated",
+    "landscape",
+    "moonlit"
+  ],
+  "colors": {
+    "accent": "#d9c98f",
+    "light": "#dbe2f5"
+  },
+  "assets": {},
+  "strings": {},
+  "ascii": {
+    "scene": "moonlit",
+    "bg": "#0d1530",
+    "sky": "radial-gradient(120% 90% at 75% 10%, #1a2a5e, #0d1530 60%, #090f24)"
+  },
+  "css": "theme.css",
+  "source": "https://github.com/0toshigami/claude-desktop-themes"
+}

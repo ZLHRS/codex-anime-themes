@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 2,
+  "id": "zero-two-azure-bounce",
+  "name": "Zero Two · Azure Bounce",
+  "description": "Zero Two’s azure jumping loop, restored to 4K at 59.94 fps.",
+  "version": "1.1.0",
+  "author": "ZLHRS",
+  "appearance": "dark",
+  "license": "personal-use",
+  "category": "anime",
+  "tags": [
+    "anime",
+    "animated",
+    "zero-two"
+  ],
+  "colors": {
+    "accent": "#f4a8be",
+    "light": "#ffe2ed"
+  },
+  "strings": {},
+  "assets": {
+    "background": "assets/poster.jpg"
+  },
+  "motion": {
+    "file": "assets/scene.mp4",
+    "poster": "assets/poster.jpg"
+  },
+  "css": "theme.css",
+  "source": "https://www.pinterest.com/pin/965740713813806083/",
+  "videoQuality": {
+    "width": 3840,
+    "height": 2160,
+    "fps": 59.94,
+    "restoration": "Real-ESRGAN animevideov3",
+    "sourceWidth": 1280,
+    "sourceHeight": 720
+  }
+}

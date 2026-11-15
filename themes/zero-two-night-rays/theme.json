@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 2,
+  "id": "zero-two-night-rays",
+  "name": "Zero Two · Night Rays",
+  "description": "One continuous animated night scene with soft blue rays and no portrait/background seam.",
+  "version": "1.1.1",
+  "author": "ZLHRS",
+  "appearance": "dark",
+  "license": "personal-use",
+  "category": "anime",
+  "tags": [
+    "anime",
+    "dark",
+    "zero-two",
+    "animated",
+    "blue"
+  ],
+  "colors": {
+    "accent": "#7da9e8",
+    "light": "#c3d9ff"
+  },
+  "strings": {},
+  "assets": {
+    "background": "assets/night-rays-qhd.webp"
+  },
+  "motion": {
+    "file": "assets/night-rays-qhd.mp4",
+    "poster": "assets/night-rays-qhd.webp"
+  },
+  "css": "theme.css",
+  "source": "https://wallpaperwaifu.com/anime/zero-two-moonlight-rays-live-wallpaper-2636/"
+}

@@ -1,0 +1,12 @@
+{
+  "id": "zlhrs-violet-royal-duo",
+  "name": "Violet Royal Duo",
+  "tagline": "ZLHRS · Пара на троне справа, бордовые и золотые акценты.",
+  "bg": "#232324",
+  "text": "#f3f1f5",
+  "accent": "#cfb17d",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px"
+  }
+}

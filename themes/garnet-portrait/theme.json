@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 2,
+  "id": "garnet-portrait",
+  "name": "Garnet Portrait",
+  "description": "Портрет справа на мягком гранатово-графитовом фоне.",
+  "version": "1.0.2",
+  "author": "ZLHRS",
+  "appearance": "dark",
+  "license": "personal-use",
+  "category": "anime",
+  "tags": [
+    "anime",
+    "portrait"
+  ],
+  "colors": {
+    "accent": "#ce9ca9",
+    "light": "#ecd6cf"
+  },
+  "strings": {},
+  "assets": {
+    "portrait": "assets/portrait.webp"
+  },
+  "css": "theme.css"
+}

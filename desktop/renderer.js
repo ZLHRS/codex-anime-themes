@@ -7,7 +7,7 @@ const staticText=[],staticAttributes=[];
 const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
 while(walker.nextNode()){const node=walker.currentNode;if(/[А-Яа-яЁё]/.test(node.nodeValue)&&!['SCRIPT','STYLE','OPTION'].includes(node.parentElement?.tagName))staticText.push([node,node.nodeValue]);}
 for(const el of document.querySelectorAll('*'))for(const key of ['placeholder','title','aria-label','alt'])if(/[А-Яа-яЁё]/.test(el.getAttribute(key)||''))staticAttributes.push([el,key,el.getAttribute(key)]);
-for(const el of document.querySelectorAll('#sort option'))staticText.push([el.firstChild,el.textContent]);
+for(const el of document.querySelectorAll('#sort option, #ascii-motion option'))staticText.push([el.firstChild,el.textContent]);
 function localizeShell(language){I18n.language=language;document.documentElement.lang=I18n.language;$('language').value=I18n.language;for(const [node,text] of staticText)if(node.isConnected)node.nodeValue=tr(text);for(const [el,key,text] of staticAttributes)el.setAttribute(key,tr(text));}
 
 let state,onlyActive=false,pending=false,appearanceTheme=null,appearanceDirty=false,currentPage='skins';
@@ -27,6 +27,11 @@ function setStatus(text,kind=''){$('status').textContent=tr(text);const notice=$
 function render(next){
  localizeShell(next.language);
  state={...next,themes:next.themes.map(theme=>({...theme,searchText:theme.name+" "+theme.description,name:tr(theme.name),description:tr(theme.description)}))};
+ $('target-chatgpt').classList.toggle('selected',state.target!=='claude');$('target-claude').classList.toggle('selected',state.target==='claude');
+ for(const app of ['chatgpt','claude'])$('target-'+app).setAttribute('aria-pressed',String(state.target===app));
+ const appName=state.target==='claude'?'Claude':'ChatGPT';
+ for(const id of ['open','launch']){$(id).replaceChildren(document.createTextNode(tr('Открыть '+appName)),icon('arrow'));}
+ $('claude-app-path').textContent=state.claudePath||tr(state.claudeReady?'Claude подключён · темы готовы к применению':'Для тем установи Claude Desktop Themes через /themes.');
  const chosen=state.themes.find(t=>t.id===state.selected);
  for(const id of ['current','sidebar-current','settings-current']){$(id).textContent=tr(chosen?.name||'Выбери тему в коллекции');$(id).title=chosen?.name||'';}
  $('themes-nav-count').textContent=tr(state.themes.length);
@@ -53,7 +58,10 @@ function cards(){
  $('cards').replaceChildren();
  for(const t of rows){
  const card=element('article',null,'card'+(t.id===state.selected?' active':''));const preview=element('button',null,'preview-button');preview.setAttribute('aria-label',tr('Посмотреть ')+t.name);const img=element('img');img.src=t.preview;img.alt=t.name;preview.append(img);preview.onclick=()=>{$('preview').querySelector('img').src=t.preview;$('preview').querySelector('p').textContent=tr(t.name+' · демонстрационный чат с настоящими стилями темы');$('preview').showModal();};
- const body=element('div',null,'card-body');body.append(element('h2',t.name),element('div','v'+t.version+'　@'+t.author,'meta'),element('p',t.description,'description'));const apply=element('button',t.id===state.selected?'✓ Выбрана':'Применить','primary');apply.disabled=pending;apply.onclick=()=>applyTheme(t.id);body.append(apply);card.append(preview,body);$('cards').append(card);
+ const body=element('div',null,'card-body');body.append(element('h2',t.name),element('div','v'+t.version+'　@'+t.author,'meta'),element('p',t.description,'description'));
+ const actions=element('div',null,'theme-app-actions');
+ for(const [app,label] of [['chatgpt','ChatGPT'],['claude','Claude']]){const selected=t.id===(app==='claude'?state.claudeSelected:state.chatgptSelected);const button=element('button',null,'app-button app-'+app+(selected?' is-selected':''));button.append(icon(app==='claude'?'sun':'chat'),element('span',label),element('span',selected?'✓':'↗','app-action-mark'));button.disabled=pending||state.updating;button.setAttribute('aria-label',tr('Применить для ')+label+': '+t.name);button.setAttribute('aria-pressed',String(selected));button.onclick=()=>app==='claude'?runAction(()=>window.studio.applyClaude(t.id),'Применяем тему в Claude…'):applyTheme(t.id);actions.append(button);}body.append(actions);
+ card.append(preview,body);$('cards').append(card);
  }
  $('empty-state').hidden=rows.length!==0;
  $('result-count').textContent=tr(I18n.language==='en'?rows.length+' of '+state.themes.length+' themes':rows.length+' из '+state.themes.length+' тем');
@@ -126,15 +134,15 @@ async function runAction(action,message){
  pending=true;cards();$('import-pets').disabled=true;setStatus(message,'busy');
  try{render(await action());}catch(e){setStatus(e.message,'error');}finally{pending=false;cards();$('import-pets').disabled=!state?.petCount;}
 }
-function readAppearance(){return Object.fromEntries([...appearanceKeys.map(key=>[key,Number($(key).value)]),['animations',$('animations').checked],['effects',$('effects').checked]]);}
-function updateAppearanceLabels(){for(const key of appearanceKeys)$(key+'-value').textContent=tr($(key).value+(['size','brightness'].includes(key)?'%':'% экрана'));}
-function setAppearance(value){for(const key of appearanceKeys)$(key).value=value[key];$('animations').checked=value.animations;$('effects').checked=value.effects;updateAppearanceLabels();}
-function renderAppearance(){
- if(appearanceTheme!==state.selected||!appearanceDirty){setAppearance(state.appearance);appearanceTheme=state.selected;appearanceDirty=false;$('appearance-dirty').textContent=tr('');}
- $('effect-description').textContent=state.effect?tr('Особенность темы: ')+tr(state.effect):tr('Настрой яркость, размер и положение картинки.');
+function readAppearance(){const value=Object.fromEntries([...appearanceKeys.map(key=>[key,Number($(key).value)]),['animations',$('animations').checked],['effects',$('effects').checked]]);if(state.selected.startsWith('ascii-'))value.ascii={motion:$('ascii-motion').value,speed:Number($('ascii-speed').value),cell:Number($('ascii-cell').value),veil:Number($('ascii-veil').value)};return value;}
+function updateAppearanceLabels(){$('ascii-speed-value').textContent=$('ascii-speed').value+'×';$('ascii-veil-value').textContent=Math.round(Number($('ascii-veil').value)*100)+'%';for(const key of appearanceKeys)$(key+'-value').textContent=tr($(key).value+(['size','brightness'].includes(key)?'%':'% экрана'));}
+function setAppearance(value){const a=value.ascii||{motion:'grid',speed:4,cell:14,veil:.4};for(const k of ['motion','speed','cell','veil'])$('ascii-'+k).value=a[k];for(const key of appearanceKeys)$(key).value=value[key];$('animations').checked=value.animations;$('effects').checked=value.effects;updateAppearanceLabels();}
+function renderAppearance(){$('animations').closest('label').hidden=state.target==='claude'&&!state.selected.startsWith('ascii-');$('effects').closest('label').hidden=state.target==='claude';for(const k of ['size','x','y','effects'])$(k).closest('label').hidden=state.selected.startsWith('ascii-')||(k==='effects'&&state.target==='claude');$('ascii-controls').hidden=!state.selected.startsWith('ascii-');
+ if(appearanceTheme!==state.target+state.selected||!appearanceDirty){setAppearance(state.appearance);appearanceTheme=state.target+state.selected;appearanceDirty=false;$('appearance-dirty').textContent=tr('');}
+ $('effect-description').textContent=state.selected.startsWith('ascii-')?tr('Двенадцать анимированных сцен из символов.'):(state.effect?tr('Особенность темы: ')+tr(state.effect):tr('Настрой яркость, размер и положение картинки.'));
 }
-async function saveAppearance(value){if(pending)return;await runAction(async()=>{const next=await window.studio.appearance(state.selected,value);appearanceDirty=false;return next;},'Сохраняем настройки темы…');}
-for(const key of [...appearanceKeys,'animations','effects'])$(key).oninput=()=>{appearanceDirty=true;updateAppearanceLabels();$('appearance-dirty').textContent=tr('Есть несохранённые изменения');};
+async function saveAppearance(value){if(pending)return;await runAction(async()=>{const next=await (state.target==='claude'?window.studio.appearanceClaude:window.studio.appearance)(state.selected,value);appearanceDirty=false;return next;},'Сохраняем настройки темы…');}
+for(const key of [...appearanceKeys,'animations','effects','ascii-motion','ascii-speed','ascii-cell','ascii-veil'])$(key).oninput=()=>{appearanceDirty=true;updateAppearanceLabels();$('appearance-dirty').textContent=tr('Есть несохранённые изменения');};
 for(const key of Object.keys(pageInfo))$(key+'-tab').onclick=()=>page(key);
 $('customize').onclick=()=>page('settings');$('back-to-themes').onclick=()=>page('skins');
 $('browse-characters').onclick=()=>{resetFilters();page('skins');openCharacters();};
@@ -149,9 +157,11 @@ $('clear-characters').onclick=()=>{draftCharacterIds.clear();renderCharacters();
 $('close-characters').onclick=()=>$('character-dialog').close();
 $('done-characters').onclick=()=>{characterIds=[...draftCharacterIds];$('character-dialog').close();cards();};
 $('character-dialog').addEventListener('close',()=>$('character-filter').focus());
-$('open').onclick=$('launch').onclick=()=>runAction(()=>window.studio.launch(),'Открываем окно ChatGPT…');
+$('open').onclick=$('launch').onclick=()=>runAction(()=>state.target==='claude'?window.studio.launchClaude():window.studio.launch(),state.target==='claude'?'Открываем Claude…':'Открываем окно ChatGPT…');
+for(const target of ['chatgpt','claude'])$('target-'+target).onclick=()=>runAction(async()=>{appearanceDirty=false;return window.studio.target(target);},'Переключаем приложение…');
+$('choose-claude').onclick=()=>runAction(()=>window.studio.chooseClaude(),'Выберите приложение…');
 $('choose').onclick=()=>runAction(()=>window.studio.choose(),'Выберите приложение…');
-$('shortcut').onclick=()=>runAction(()=>window.studio.shortcut(),'Создаём ярлыки…');
+for(const kind of ['studio','claude','chat'])$('shortcut-'+kind).onclick=()=>runAction(()=>window.studio.shortcut(kind),'Создаём ярлык…');
 $('quit').onclick=()=>window.studio.quit();
 $('close-preview').onclick=()=>$('preview').close();
 $('update').onclick=()=>runAction(async()=>{const next=await window.studio.update();clearThemeFilters();return next;},'Обновляем темы и проверяем программу…');
@@ -166,3 +176,5 @@ document.addEventListener('keydown',event=>{
 $('language').onchange=async()=>{const select=$('language');select.disabled=true;try{const next=await window.studio.language(select.value);render(next);page(currentPage);updateAppearanceLabels();if(appearanceDirty)$('appearance-dirty').textContent=tr('Есть несохранённые изменения');if($('character-dialog').open)renderCharacters();}catch(e){select.value=I18n.language;setStatus(e.message,'error');}finally{select.disabled=false;}};
 window.studio.subscribe(render);
 window.studio.state().then(render).catch(e=>setStatus('Не удалось загрузить коллекцию: '+e.message,'error'));
+
+$('personal-folder').onclick=()=>runAction(()=>window.studio.personalFolder().then(()=>window.studio.state()),'Открываем папку личных тем…');

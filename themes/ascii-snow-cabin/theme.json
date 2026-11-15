@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 2,
+  "id": "ascii-snow-cabin",
+  "name": "ASCII · Snow Cabin",
+  "description": "A log cabin under snowy peaks, a warm window, smoke curling into falling snow",
+  "version": "1.0.0",
+  "author": "0toshigami / ZLHRS",
+  "appearance": "dark",
+  "license": "MIT",
+  "category": "landscape",
+  "tags": [
+    "ascii",
+    "animated",
+    "landscape",
+    "snow-cabin"
+  ],
+  "colors": {
+    "accent": "#ffb85c",
+    "light": "#e6edf8"
+  },
+  "assets": {},
+  "strings": {},
+  "ascii": {
+    "scene": "snow-cabin",
+    "bg": "#0e1628",
+    "sky": "linear-gradient(#060b18, #101c38 55%, #1c2a4a)"
+  },
+  "css": "theme.css",
+  "source": "https://github.com/0toshigami/claude-desktop-themes"
+}

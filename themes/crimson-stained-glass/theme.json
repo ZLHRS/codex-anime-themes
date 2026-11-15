@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 2,
+  "id": "crimson-stained-glass",
+  "name": "Crimson Stained Glass",
+  "description": "Алые блики и витражный зал на всём фоне.",
+  "version": "1.0.3",
+  "author": "ZLHRS",
+  "appearance": "dark",
+  "license": "personal-use",
+  "category": "anime",
+  "tags": [
+    "anime",
+    "panorama"
+  ],
+  "colors": {
+    "accent": "#e99bac",
+    "light": "#f1d1dc"
+  },
+  "strings": {},
+  "assets": {
+    "background": "assets/background.webp"
+  },
+  "css": "theme.css"
+}

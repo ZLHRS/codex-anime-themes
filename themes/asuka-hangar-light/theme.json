@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 2,
+  "id": "asuka-hangar-light",
+  "name": "Аска · Hangar Light",
+  "description": "Аска справа в светлом ангаре с металлическими конструкциями и красными акцентами.",
+  "version": "1.0.0",
+  "author": "ZLHRS",
+  "appearance": "dark",
+  "license": "personal-use",
+  "category": "anime",
+  "tags": [
+    "anime",
+    "asuka",
+    "evangelion",
+    "orange",
+    "panorama"
+  ],
+  "colors": {
+    "accent": "#f4a58d",
+    "light": "#ffe0ba"
+  },
+  "strings": {},
+  "assets": {
+    "background": "assets/background.webp"
+  },
+  "css": "theme.css"
+}

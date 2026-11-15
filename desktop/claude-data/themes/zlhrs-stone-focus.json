@@ -1,0 +1,12 @@
+{
+  "id": "zlhrs-stone-focus",
+  "name": "Stone Focus · Спокойный минимализм",
+  "tagline": "ZLHRS · Для работы и учёбы: мягкий серо-синий фон, нейтральные панели и минимум деталей.",
+  "bg": "#20252e",
+  "text": "#f3f1f5",
+  "accent": "#b0c3cf",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "id": "zlhrs-cocoa-back-bow",
+  "name": "Бант · Тёмное какао",
+  "tagline": "ZLHRS · Улучшенный портрет справа, тёмный цветной фон и свободное место для чтения.",
+  "bg": "#212126",
+  "text": "#f3f1f5",
+  "accent": "#ba9c90",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px"
+  }
+}

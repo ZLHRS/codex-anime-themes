@@ -1,0 +1,12 @@
+{
+  "id": "zlhrs-garnet-portrait",
+  "name": "Garnet Portrait",
+  "tagline": "ZLHRS · Портрет справа на мягком гранатово-графитовом фоне.",
+  "bg": "#232129",
+  "text": "#f3f1f5",
+  "accent": "#ce9ca9",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px"
+  }
+}

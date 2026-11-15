@@ -1,0 +1,12 @@
+{
+  "id": "zlhrs-sylphie-moonstone",
+  "name": "Сильфи · Moonstone Atelier",
+  "tagline": "ZLHRS · № 06 · Лунный камень в серебряных листьях.",
+  "bg": "#23252e",
+  "text": "#f3f1f5",
+  "accent": "#c8bdcf",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px"
+  }
+}

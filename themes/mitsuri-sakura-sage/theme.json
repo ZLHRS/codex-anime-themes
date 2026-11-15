@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 2,
+  "id": "mitsuri-sakura-sage",
+  "name": "Мицури · Sakura Sage",
+  "description": "Улыбающаяся Мицури справа на мягком шалфейном фоне.",
+  "version": "1.0.0",
+  "author": "ZLHRS",
+  "appearance": "dark",
+  "license": "personal-use",
+  "category": "anime",
+  "tags": [
+    "anime",
+    "mitsuri",
+    "pink",
+    "sage",
+    "portrait"
+  ],
+  "colors": {
+    "accent": "#eeb4cc",
+    "light": "#f4efd4"
+  },
+  "strings": {},
+  "assets": {
+    "portrait": "assets/portrait.webp"
+  },
+  "css": "theme.css"
+}

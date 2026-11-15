@@ -1,0 +1,12 @@
+{
+  "id": "zlhrs-sora-ribbon",
+  "name": "Sora · Silver Ribbon",
+  "tagline": "ZLHRS · Чёрный шёлк, серебряные ленты и прохладный лунный свет. Полная тема с Сорой Касугано.",
+  "bg": "#22252f",
+  "text": "#f3f1f5",
+  "accent": "#c4c1d4",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "id": "zlhrs-ascii-sakura-dusk",
+  "name": "ASCII · Sakura Dusk",
+  "tagline": "ZLHRS · Cherry branches at the corners, petals drifting through a violet evening",
+  "bg": "#231a2e",
+  "text": "#f6e9f0",
+  "accent": "#f29bb8",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px",
+    "wall-sky": "linear-gradient(#17112b, #2a1c44 40%, #523058 72%, #8c4a5e)",
+    "wall-halo": "#231a2e",
+    "wall-rim": "#f29bb855",
+    "wall-glass": "#231a2ee6",
+    "wall-greet": "\"\""
+  },
+  "wallpaper": "zlhrs-ascii-sakura-dusk"
+}

@@ -1,0 +1,12 @@
+{
+  "id": "zlhrs-sapphire-quiet-sign",
+  "name": "Тихий жест · Сапфир",
+  "tagline": "ZLHRS · Улучшенный портрет справа, тёмный цветной фон и свободное место для чтения.",
+  "bg": "#1c232e",
+  "text": "#f3f1f5",
+  "accent": "#8eafcf",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px"
+  }
+}

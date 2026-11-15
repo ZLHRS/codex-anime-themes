@@ -1,0 +1,12 @@
+{
+  "id": "zlhrs-kana-ruby-spotlight",
+  "name": "Кана · Рубиновый свет",
+  "tagline": "ZLHRS · Горизонтальный крупный план Каны, рубиновые акценты и звёздные блики.",
+  "bg": "#271b27",
+  "text": "#f3f1f5",
+  "accent": "#ee6c96",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px"
+  }
+}

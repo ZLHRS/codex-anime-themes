@@ -1,0 +1,12 @@
+{
+  "id": "zlhrs-ai-prismatic-gaze",
+  "name": "Ай Хосино · Prismatic Gaze",
+  "tagline": "ZLHRS · Звёздный взгляд, индиго и неоновые блики.",
+  "bg": "#212134",
+  "text": "#f3f1f5",
+  "accent": "#b9a0ff",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px"
+  }
+}

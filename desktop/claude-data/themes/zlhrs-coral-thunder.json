@@ -1,0 +1,12 @@
+{
+  "id": "zlhrs-coral-thunder",
+  "name": "Coral Thunder",
+  "tagline": "ZLHRS · Коралловая энергия справа и свободный бирюзовый фон для переписки.",
+  "bg": "#292428",
+  "text": "#f3f1f5",
+  "accent": "#ffb49e",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px"
+  }
+}

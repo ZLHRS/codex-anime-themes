@@ -1,0 +1,12 @@
+{
+  "id": "zlhrs-shinobu-wisteria",
+  "name": "Шинобу Кочо · Wisteria Veil",
+  "tagline": "ZLHRS · № 07 · Заколка-бабочка и кисти глицинии.",
+  "bg": "#20202d",
+  "text": "#f3f1f5",
+  "accent": "#b697ca",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "id": "zlhrs-ascii-cloud-drift",
+  "name": "ASCII · Cloud Drift",
+  "tagline": "ZLHRS · White clouds over a bright sky, birds gliding by",
+  "bg": "#d8ecfa",
+  "text": "#1d3447",
+  "accent": "#2f78bd",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px",
+    "wall-sky": "linear-gradient(90deg, rgba(255, 255, 255, 0) 16%, rgba(255, 255, 255, 0.22) 25%, rgba(255, 255, 255, 0) 35%, rgba(255, 255, 255, 0) 66%, rgba(255, 255, 255, 0.154) 77%, rgba(255, 255, 255, 0) 88%), linear-gradient(#4fa3e8, #86c3f0 55%, #b6dbf6)",
+    "wall-halo": "#d8ecfa",
+    "wall-rim": "#2f78bd55",
+    "wall-glass": "#d8ecfae6",
+    "wall-greet": "\"\""
+  },
+  "wallpaper": "zlhrs-ascii-cloud-drift"
+}

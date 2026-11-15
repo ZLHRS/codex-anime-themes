@@ -1,0 +1,18 @@
+{
+  "id": "zlhrs-ascii-clawd",
+  "name": "ASCII · Clawd",
+  "tagline": "ZLHRS · A turning orange spark, drifting embers, Clawd on patrol",
+  "bg": "#1f1714",
+  "text": "#f2e6df",
+  "accent": "#d97757",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px",
+    "wall-sky": "linear-gradient(90deg, rgba(255, 255, 255, 0) 16%, rgba(255, 255, 255, 0.04) 25%, rgba(255, 255, 255, 0) 35%, rgba(255, 255, 255, 0) 66%, rgba(255, 255, 255, 0.028) 77%, rgba(255, 255, 255, 0) 88%), radial-gradient(90% 80% at 70% 30%, #3a2219, #1f1714 55%, #150f0d)",
+    "wall-halo": "#1f1714",
+    "wall-rim": "#d9775755",
+    "wall-glass": "#1f1714e6",
+    "wall-greet": "\"\""
+  },
+  "wallpaper": "zlhrs-ascii-clawd"
+}

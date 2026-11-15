@@ -2,7 +2,7 @@
 
 [← Installation and downloads](../README.md)
 
-All 61 themes are included in version 2.6.6. Images show a demo chat using the actual theme styles.
+All 97 themes are included in local build 2.6.8. Images show a demo chat using the actual theme styles.
 
 ## Ai Hoshino · Bunny Refrain
 
@@ -247,3 +247,151 @@ All 61 themes are included in version 2.6.6. Images show a demo chat using the a
 ## Stern Gaze · Dark Emerald
 
 ![Stern Gaze · Dark Emerald](../previews/emerald-stern-gaze-chat.jpg)
+
+## Zero Two · Night Rays
+
+![Zero Two · Night Rays](../previews/zero-two-night-rays-chat.jpg)
+
+## Crimson Gaze
+
+![Crimson Gaze](../previews/crimson-gaze-chat.jpg)
+
+## Makima · Amber Blush
+
+![Makima · Amber Blush](../previews/makima-amber-blush-chat.jpg)
+
+## Coral Thunder
+
+![Coral Thunder](../previews/coral-thunder-chat.jpg)
+
+## Scarlet Rain
+
+![Scarlet Rain](../previews/scarlet-rain-chat.jpg)
+
+## Mitsuri · Dango Bloom
+
+![Mitsuri · Dango Bloom](../previews/mitsuri-dango-bloom-chat.jpg)
+
+## Mitsuri · Sakura Sage
+
+![Mitsuri · Sakura Sage](../previews/mitsuri-sakura-sage-chat.jpg)
+
+## Asuka · Hangar Light
+
+![Asuka · Hangar Light](../previews/asuka-hangar-light-chat.jpg)
+
+## Asuka · Peach Morning
+
+![Asuka · Peach Morning](../previews/asuka-peach-morning-chat.jpg)
+
+## Garnet Portrait
+
+![Garnet Portrait](../previews/garnet-portrait-chat.jpg)
+
+## Crimson Stained Glass
+
+![Crimson Stained Glass](../previews/crimson-stained-glass-chat.jpg)
+
+## Slate Alley
+
+![Slate Alley](../previews/slate-alley-chat.jpg)
+
+## Stone Soft Smile
+
+![Stone Soft Smile](../previews/stone-soft-smile-chat.jpg)
+
+## Rose Ice Frame
+
+![Rose Ice Frame](../previews/rose-ice-frame-chat.jpg)
+
+## Tatsumaki · Emerald Psychic
+
+![Tatsumaki · Emerald Psychic](../previews/emerald-psychic-chat.jpg)
+
+## Tatsumaki · Emerald Focus
+
+![Tatsumaki · Emerald Focus](../previews/emerald-focus-chat.jpg)
+
+## Tatsumaki · Jade Tempest
+
+![Tatsumaki · Jade Tempest](../previews/jade-tempest-chat.jpg)
+
+## Sage Morning Cup
+
+![Sage Morning Cup](../previews/sage-morning-cup-chat.jpg)
+
+## Crimson Laughter
+
+![Crimson Laughter](../previews/crimson-laughter-chat.jpg)
+
+## L · Graphite Silence
+
+![L · Graphite Silence](../previews/graphite-silence-chat.jpg)
+
+## L · Ivory Deduction
+
+![L · Ivory Deduction](../previews/ivory-deduction-chat.jpg)
+
+## Violet Royal Duo
+
+![Violet Royal Duo](../previews/violet-royal-duo-chat.jpg)
+
+## Turquoise Mountain Springs
+
+![Turquoise Mountain Springs](../previews/turquoise-mountain-springs-chat.jpg)
+
+## Copper Reverie
+
+![Copper Reverie](../previews/copper-reverie-chat.jpg)
+
+## Live ASCII wallpapers
+
+Original scenes by 0toshigami, MIT license. [Settings and attribution](ASCII-WALLPAPERS.md).
+
+### ASCII · Clawd
+
+![ascii-clawd](../previews/ascii-clawd-chat.jpg)
+
+### ASCII · Cloud Drift
+
+![ascii-cloud-drift](../previews/ascii-cloud-drift-chat.jpg)
+
+### ASCII · Fireflies
+
+![ascii-fireflies](../previews/ascii-fireflies-chat.jpg)
+
+### ASCII · Honu Lagoon
+
+![ascii-honu-lagoon](../previews/ascii-honu-lagoon-chat.jpg)
+
+### ASCII · Jellyfish
+
+![ascii-jellyfish](../previews/ascii-jellyfish-chat.jpg)
+
+### ASCII · Koi Pond
+
+![ascii-koi-pond](../previews/ascii-koi-pond-chat.jpg)
+
+### ASCII · Lantern Night
+
+![ascii-lantern-night](../previews/ascii-lantern-night-chat.jpg)
+
+### ASCII · Moonlit
+
+![ascii-moonlit](../previews/ascii-moonlit-chat.jpg)
+
+### ASCII · Neon Rain
+
+![ascii-neon-rain](../previews/ascii-neon-rain-chat.jpg)
+
+### ASCII · Sakura Dusk
+
+![ascii-sakura-dusk](../previews/ascii-sakura-dusk-chat.jpg)
+
+### ASCII · Snow Cabin
+
+![ascii-snow-cabin](../previews/ascii-snow-cabin-chat.jpg)
+
+### ASCII · Star Voyage
+
+![ascii-star-voyage](../previews/ascii-star-voyage-chat.jpg)

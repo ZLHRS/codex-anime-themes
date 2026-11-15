@@ -1,0 +1,12 @@
+{
+  "id": "zlhrs-ivory-deduction",
+  "name": "L · Ivory Deduction",
+  "tagline": "ZLHRS · Чёрно-белый портрет L на весь фон.",
+  "bg": "#21252e",
+  "text": "#f3f1f5",
+  "accent": "#bdc3ce",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px"
+  }
+}

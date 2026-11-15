@@ -1,0 +1,12 @@
+{
+  "id": "zlhrs-rem-azure-fury",
+  "name": "Рем · Azure Fury",
+  "tagline": "ZLHRS · Голубое сияние, стальные цепи и розовый акцент.",
+  "bg": "#182632",
+  "text": "#f3f1f5",
+  "accent": "#70c9ee",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "id": "zlhrs-ascii-honu-lagoon",
+  "name": "ASCII · Honu Lagoon",
+  "tagline": "ZLHRS · A sea turtle swimming across a lagoon, light rays and bubbles",
+  "bg": "#0f3a44",
+  "text": "#e3f6f2",
+  "accent": "#5fd0b8",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px",
+    "wall-sky": "linear-gradient(90deg, rgba(255, 255, 255, 0) 16%, rgba(255, 255, 255, 0.14) 25%, rgba(255, 255, 255, 0) 35%, rgba(255, 255, 255, 0) 66%, rgba(255, 255, 255, 0.098) 77%, rgba(255, 255, 255, 0) 88%), linear-gradient(#35a6f0, #1d7ad8 45%, #1650b2)",
+    "wall-halo": "#0f3a44",
+    "wall-rim": "#5fd0b855",
+    "wall-glass": "#0f3a44e6",
+    "wall-greet": "\"\""
+  },
+  "wallpaper": "zlhrs-ascii-honu-lagoon"
+}

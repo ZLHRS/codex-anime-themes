@@ -1,0 +1,12 @@
+{
+  "id": "zlhrs-tatsumaki-jade-solo",
+  "name": "Тацумаки · Jade Silhouette",
+  "tagline": "ZLHRS · Портрет из Jade Duo справа на спокойном нефритовом фоне.",
+  "bg": "#1b2528",
+  "text": "#f3f1f5",
+  "accent": "#87bb9b",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px"
+  }
+}

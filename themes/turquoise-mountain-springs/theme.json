@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 2,
+  "id": "turquoise-mountain-springs",
+  "name": "Turquoise Mountain Springs",
+  "description": "Горячие источники, горы и бирюзовая вода на всём фоне.",
+  "version": "1.0.0",
+  "author": "ZLHRS",
+  "appearance": "dark",
+  "license": "personal-use",
+  "category": "anime",
+  "tags": [
+    "anime",
+    "panorama"
+  ],
+  "colors": {
+    "accent": "#8ed9df",
+    "light": "#def3ed"
+  },
+  "strings": {},
+  "assets": {
+    "background": "assets/background.webp"
+  },
+  "css": "theme.css"
+}

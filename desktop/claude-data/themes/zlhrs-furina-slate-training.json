@@ -1,0 +1,12 @@
+{
+  "id": "zlhrs-furina-slate-training",
+  "name": "Фурина · Синий графит",
+  "tagline": "ZLHRS · Улучшенный портрет справа, тёмный цветной фон и свободное место для чтения.",
+  "bg": "#1c252e",
+  "text": "#f3f1f5",
+  "accent": "#8ebbcf",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "id": "zlhrs-jibril-amber-library",
+  "name": "Джибрил · Amber Library",
+  "tagline": "ZLHRS · Улыбающаяся Джибрил справа, закрытые глаза и рука у губ. Волшебная библиотека, янтарные фонари и тёмная пыльная роза.",
+  "bg": "#22202a",
+  "text": "#f3f1f5",
+  "accent": "#c599aa",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px"
+  }
+}

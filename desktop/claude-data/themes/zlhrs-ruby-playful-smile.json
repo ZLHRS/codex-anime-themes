@@ -1,0 +1,12 @@
+{
+  "id": "zlhrs-ruby-playful-smile",
+  "name": "Улыбка · Тёмный рубин",
+  "tagline": "ZLHRS · Портрет справа без белого фона, исходная поза и одежда сохранены.",
+  "bg": "#241f27",
+  "text": "#f3f1f5",
+  "accent": "#d38f99",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px"
+  }
+}

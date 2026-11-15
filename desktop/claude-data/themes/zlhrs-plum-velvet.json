@@ -1,0 +1,12 @@
+{
+  "id": "zlhrs-plum-velvet",
+  "name": "Plum Velvet · Сливовый бархат",
+  "tagline": "ZLHRS · Дымчатая слива, графитовый трикотаж и приглушённые розовые акценты.",
+  "bg": "#211f29",
+  "text": "#f3f1f5",
+  "accent": "#bd91a9",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px"
+  }
+}

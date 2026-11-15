@@ -1,0 +1,12 @@
+{
+  "id": "zlhrs-ai-bunny-refrain",
+  "name": "Ай Хосино · Bunny Refrain",
+  "tagline": "ZLHRS · № 12 · Заячья заколка с золотой звездой.",
+  "bg": "#22222f",
+  "text": "#f3f1f5",
+  "accent": "#c1a2d8",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "id": "zlhrs-emerald-focus",
+  "name": "Татсумаки · Emerald Focus",
+  "tagline": "ZLHRS · Изумрудный взгляд крупным планом на всём фоне.",
+  "bg": "#1c282a",
+  "text": "#f3f1f5",
+  "accent": "#8ed8ae",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "id": "zlhrs-cc-mint-contract",
+  "name": "C.C. · Mint Contract",
+  "tagline": "ZLHRS · № 04 · Мятная печать контракта.",
+  "bg": "#1e272a",
+  "text": "#f3f1f5",
+  "accent": "#a4cfac",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px"
+  }
+}

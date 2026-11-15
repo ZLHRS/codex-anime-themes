@@ -4,10 +4,15 @@
 })(typeof globalThis!=='undefined'?globalThis:this,function(){
  'use strict';
  const characters=[
-  ['ai-hoshino','Ай Хосино','Ai Hoshino',['ai-bunny-refrain','ai-starlit-encore','ai-prismatic-gaze','ai-violet-supernova']],
+ ['l-lawliet','L','Эл Lawliet Death Note',['graphite-silence','ivory-deduction']],
+ ['tatsumaki','Татсумаки','Tatsumaki One Punch Man',['emerald-psychic','emerald-focus','jade-tempest']],
+  ['asuka','Аска','Asuka Langley Асука',['asuka-hangar-light','asuka-peach-morning']],
+  ['mitsuri','Мицури','Mitsuri Kanroji Канроджи',['mitsuri-dango-bloom','mitsuri-sakura-sage']],
+  ['makima','Макима','Makima',['makima-amber-blush','crimson-gaze']],
+  ['ai-hoshino','Ай Хосино','Ai Hoshino',['ai-violet-starlight','ai-bunny-refrain','ai-starlit-encore','ai-prismatic-gaze','ai-violet-supernova']],
   ['waguri','Вагури','Kaoruko Waguri Каоруко',['waguri-snowfall']],
   ['jibril','Джибрил','Jibril',['jibril-amber-library']],
-  ['zero-two','Зеро Ту','Zero Two 002',['zero-two-rose']],
+  ['zero-two','Зеро Ту','Zero Two 002',['zero-two-azure-bounce','zero-two-rose','zero-two-night-rays']],
   ['kana','Кана','Kana Arima Арима',['kana-soft-garnet','kana-ruby-spotlight']],
   ['kurumi','Куруми','Kurumi Tokisaki Токисаки',['ivory-midnight-frame']],
   ['kurisu','Курису Макисе','Kurisu Makise Кристина',['kurisu-worldline','kurisu-lab-evening']],
@@ -30,6 +35,7 @@
  ].map(([id,name,aliases,themeIds])=>({id,name,aliases,themeIds}));
  const collections=[
   {id:'all',name:'Все темы',description:'Вся коллекция в одном месте.',icon:'grid'},
+  {id:'ascii',name:'Живые ASCII-обои',description:'Двенадцать анимированных сцен из символов.',icon:'sparkles',tone:'blue',themeIds:["ascii-clawd","ascii-cloud-drift","ascii-fireflies","ascii-honu-lagoon","ascii-jellyfish","ascii-koi-pond","ascii-lantern-night","ascii-moonlit","ascii-neon-rain","ascii-sakura-dusk","ascii-snow-cabin","ascii-star-voyage"]},
   {id:'quiet',name:'Спокойные оттенки',description:'Приглушённые цвета для долгих разговоров и чтения.',icon:'moon',tone:'lilac',themeIds:['slate-cat-glasses','indigo-maid-bell','sapphire-quiet-sign','emerald-stern-gaze','furina-slate-training','cocoa-back-bow','furina-indigo-peace','ruby-playful-smile','garnet-soft-gaze','golden-teal-gaze','plum-velvet','sage-reverie','silver-aquamarine','waguri-snowfall','furina-silver-slumber','rem-butterfly-dream','frieren-fern-lilac','fern-plum-hush','violet-silhouette','teal-peony','stone-focus','forest-retreat']},
   {id:'scenic',name:'Место для мечты',description:'Снежный вечер, библиотека или знакомая лаборатория.',icon:'landscape',tone:'blue',themeIds:['furina-turquoise-current','quiet-kitchen','waguri-snowfall','violet-onsen','jibril-amber-library','kurisu-worldline','kurisu-lab-evening','tatsumaki-jade-duo','tidal-halo-duo']},
   {id:'minimal',name:'Без персонажей',description:'Четыре спокойных пространства для работы и учёбы.',icon:'focus',tone:'sage',themeIds:['stone-focus','amber-study','forest-retreat','midnight-grid']},

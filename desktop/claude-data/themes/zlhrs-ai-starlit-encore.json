@@ -1,0 +1,12 @@
+{
+  "id": "zlhrs-ai-starlit-encore",
+  "name": "Ай Хосино · Starlit Encore",
+  "tagline": "ZLHRS · № 11 · Сценический микрофон и шестилучевая звезда.",
+  "bg": "#211f2c",
+  "text": "#f3f1f5",
+  "accent": "#be8fc0",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px"
+  }
+}

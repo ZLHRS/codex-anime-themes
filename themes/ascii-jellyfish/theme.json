@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 2,
+  "id": "ascii-jellyfish",
+  "name": "ASCII · Jellyfish",
+  "description": "Jellyfish rising through deep water, bells pulsing",
+  "version": "1.0.0",
+  "author": "0toshigami / ZLHRS",
+  "appearance": "dark",
+  "license": "MIT",
+  "category": "landscape",
+  "tags": [
+    "ascii",
+    "animated",
+    "landscape",
+    "jellyfish"
+  ],
+  "colors": {
+    "accent": "#a58cf0",
+    "light": "#dfe7fb"
+  },
+  "assets": {},
+  "strings": {},
+  "ascii": {
+    "scene": "jellyfish",
+    "bg": "#0a1830",
+    "sky": "linear-gradient(90deg, rgba(255, 255, 255, 0) 16%, rgba(255, 255, 255, 0.07) 25%, rgba(255, 255, 255, 0) 35%, rgba(255, 255, 255, 0) 66%, rgba(255, 255, 255, 0.049) 77%, rgba(255, 255, 255, 0) 88%), linear-gradient(#174784, #0c2b58 50%, #071a3a)"
+  },
+  "css": "theme.css",
+  "source": "https://github.com/0toshigami/claude-desktop-themes"
+}

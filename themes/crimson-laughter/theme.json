@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 2,
+  "id": "crimson-laughter",
+  "name": "Crimson Laughter",
+  "description": "Алый смех справа на цельном красно-чёрном фоне.",
+  "version": "1.0.0",
+  "author": "ZLHRS",
+  "appearance": "dark",
+  "license": "personal-use",
+  "category": "anime",
+  "tags": [
+    "anime",
+    "panorama"
+  ],
+  "colors": {
+    "accent": "#e8a1a1",
+    "light": "#f3d9d3"
+  },
+  "strings": {},
+  "assets": {
+    "background": "assets/background.webp"
+  },
+  "css": "theme.css"
+}

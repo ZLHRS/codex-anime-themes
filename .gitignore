@@ -15,3 +15,6 @@ Thumbs.db
 .theme-error.log
 pets/runs/
 pets/library-pages.json
+
+# Local builds, backups and verification artifacts
+output/

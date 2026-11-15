@@ -1,7 +1,7 @@
 {
   "name": "zlhrs-theme-studio",
-  "version": "2.6.6",
-  "description": "Cross-platform theme gallery for the ChatGPT desktop app",
+  "version": "2.7.0",
+  "description": "Theme Studio for ChatGPT and Claude Desktop",
   "author": {
     "name": "ZLHRS",
     "email": "ZLHRS@users.noreply.github.com"
@@ -38,7 +38,12 @@
       "assets/**/*",
       "runtime/theme-runtime.js",
       "runtime/composer-overflow.mjs",
-      "runtime/LICENSE"
+      "runtime/pet-hover.mjs",
+      "runtime/ambient-media.mjs",
+      "runtime/LICENSE",
+      "runtime/ascii-media.mjs",
+      "runtime/ascii/**/*",
+      "theme-inventory.json"
     ],
     "win": {
       "target": [
@@ -69,6 +74,7 @@
       "icon": "assets/studio-logo.png",
       "category": "Utility",
       "executableName": "zlhrs-theme-studio"
-    }
+    },
+    "beforePack": "./scripts/theme-inventory.cjs"
   }
 }

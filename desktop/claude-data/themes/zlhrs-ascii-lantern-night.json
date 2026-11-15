@@ -1,0 +1,18 @@
+{
+  "id": "zlhrs-ascii-lantern-night",
+  "name": "ASCII · Lantern Night",
+  "tagline": "ZLHRS · Paper lanterns drifting down a river at night",
+  "bg": "#0b1424",
+  "text": "#efe6d2",
+  "accent": "#f2a541",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px",
+    "wall-sky": "linear-gradient(#070c1c, #24305e 29%, #0e1a30 30%, #08111f 60%, #050a14)",
+    "wall-halo": "#0b1424",
+    "wall-rim": "#f2a54155",
+    "wall-glass": "#0b1424e6",
+    "wall-greet": "\"\""
+  },
+  "wallpaper": "zlhrs-ascii-lantern-night"
+}

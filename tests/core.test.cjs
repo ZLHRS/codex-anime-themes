@@ -5,8 +5,25 @@ const path=require('node:path');
 const os=require('node:os');
 const core=require('../desktop/core.cjs');
 const root=path.resolve(__dirname,'..');
+test('4K video size allowance does not relax GIF or poster limits',async()=>{
+ const temp=await fs.mkdtemp(path.join(os.tmpdir(),'zlhrs-motion-limit-'));
+ const dir=path.join(temp,'themes','test-motion');await fs.mkdir(dir,{recursive:true});
+ const theme={id:'test-motion',assets:{},css:'theme.css',motion:{file:'scene.mp4',poster:'poster.jpg'}};
+ const writeTheme=()=>fs.writeFile(path.join(dir,'theme.json'),JSON.stringify(theme));
+ const sparse=async(name,size)=>{const handle=await fs.open(path.join(dir,name),'w');try{await handle.truncate(size);}finally{await handle.close();}};
+ try{
+  await fs.writeFile(path.join(dir,'theme.css'),'');await fs.writeFile(path.join(dir,'poster.jpg'),'poster');await writeTheme();
+  await sparse('scene.mp4',13*1024*1024);
+  assert.ok((await core.payload(root,'test-motion',{},temp)).expression.includes('video/mp4'));
+  await sparse('scene.mp4',65*1024*1024);await assert.rejects(core.payload(root,'test-motion',{},temp),/size limit/);
+  theme.motion.file='scene.gif';await writeTheme();await sparse('scene.gif',13*1024*1024);
+  await assert.rejects(core.payload(root,'test-motion',{},temp),/size limit/);
+  await sparse('scene.gif',1);await sparse('poster.jpg',5*1024*1024);
+  await assert.rejects(core.payload(root,'test-motion',{},temp),/size limit/);
+ }finally{await fs.rm(temp,{recursive:true,force:true});}
+});
 test('all bundled theme payloads compile and have stable stamps',async()=>{
- const catalog=await core.readJson(path.join(root,'catalog.json'));assert.equal(catalog.length,61);
+ const catalog=await core.readJson(path.join(root,'catalog.json'));assert.equal(catalog.length,99);
  for(const t of catalog){const p=await core.payload(root,t.id);assert.doesNotThrow(()=>new Function(p.expression));assert(!p.expression.includes('__CTS_CSS_JSON__'));assert.equal(p.stamp,(await core.payload(root,t.id)).stamp);}
 });
 test('reject traversal and malformed theme IDs',async()=>{

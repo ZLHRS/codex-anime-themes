@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 2,
+  "id": "makima-amber-blush",
+  "name": "Макима · Amber Blush",
+  "description": "Отзеркаленный портрет Макимы справа на тёплом терракотовом фоне.",
+  "version": "1.0.0",
+  "author": "ZLHRS",
+  "appearance": "dark",
+  "license": "personal-use",
+  "category": "anime",
+  "tags": [
+    "anime",
+    "makima",
+    "warm",
+    "portrait"
+  ],
+  "colors": {
+    "accent": "#efb194",
+    "light": "#ffe0ad"
+  },
+  "strings": {},
+  "assets": {
+    "portrait": "assets/portrait.webp"
+  },
+  "css": "theme.css"
+}

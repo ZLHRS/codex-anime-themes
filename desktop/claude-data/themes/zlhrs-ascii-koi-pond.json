@@ -1,0 +1,18 @@
+{
+  "id": "zlhrs-ascii-koi-pond",
+  "name": "ASCII · Koi Pond",
+  "tagline": "ZLHRS · Koi circling a pond between lily pads, rings on the water",
+  "bg": "#11332d",
+  "text": "#e4f2ea",
+  "accent": "#ef8a4a",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px",
+    "wall-sky": "linear-gradient(90deg, rgba(255, 255, 255, 0) 16%, rgba(255, 255, 255, 0.12) 25%, rgba(255, 255, 255, 0) 35%, rgba(255, 255, 255, 0) 66%, rgba(255, 255, 255, 0.084) 77%, rgba(255, 255, 255, 0) 88%), linear-gradient(175deg, #4aa08c, #2f8070 50%, #1f6156)",
+    "wall-halo": "#11332d",
+    "wall-rim": "#ef8a4a55",
+    "wall-glass": "#11332de6",
+    "wall-greet": "\"\""
+  },
+  "wallpaper": "zlhrs-ascii-koi-pond"
+}

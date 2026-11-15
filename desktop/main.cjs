@@ -14,10 +14,12 @@ const root=path.resolve(__dirname,'..');
 const themeSession=new ThemeSession(root);
 let legacyGuard;
 let themeRoot=root;
+let personalRoot,libraryWarnings=[],migratedThemes={};
 let window,settings={},settingsFile,catalog=[],timer,busy=false,cached,status='Выберите тему — она сохранится для следующих запусков.',quitting=false,lastShortcut='',updating=false;
 const smoke=process.argv.includes('--smoke-test');
 if(smoke){const temp=path.join(app.getPath('temp'),'zlhrs-smoke-'+process.pid);app.setPath('userData',temp);require('node:fs').mkdirSync(path.join(temp,'Desktop'),{recursive:true});app.setPath('desktop',path.join(temp,'Desktop'));}
-const launchOnly=process.argv.includes('--launch');
+const claudeLaunch=process.argv.includes('--launch-claude');
+const launchOnly=process.argv.includes('--launch')||claudeLaunch;
 const portable=process.platform==='win32'&&require('node:fs').existsSync(path.join(path.dirname(process.execPath),'PORTABLE'));
 const ownsLock=smoke || app.requestSingleInstanceLock();
 let startup;
@@ -25,14 +27,14 @@ let startupLaunched=false;
 let petCatalog=[];
 if(!ownsLock||process.argv.includes('--quit-for-update'))app.quit();
 else {
-app.on('second-instance',(_event,args)=>{if(args.includes('--quit-for-update')){app.quit();return;}if(args.includes('--launch'))Promise.resolve(startup).then(()=>{if(!busy)return apply(settings.theme,true);}).catch(report);else Promise.resolve(startup).then(show).catch(report);});
+app.on('second-instance',(_event,args)=>{if(args.includes('--quit-for-update')){app.quit();return;}if(args.includes('--launch-claude'))Promise.resolve(startup).then(launchClaude).catch(report);else if(args.includes('--launch'))Promise.resolve(startup).then(()=>{if(!busy)return apply(settings.theme,true);}).catch(report);else Promise.resolve(startup).then(show).catch(report);});
 app.on('before-quit',()=>{quitting=true;clearInterval(timer);legacyGuard?.stop();});
 app.on('window-all-closed',()=>{});
 app.on('activate',()=>{if(!launchOnly)show();});
 startup=app.whenReady().then(init).catch(error=>{if(smoke){console.error(error);app.exit(1);}else{dialog.showErrorBox('ZLHRS Theme Studio',tr(error.message));app.quit();}});
 }
 function report(error){status=error.message;notify();}
-function snapshot(){return {language:i18n.normalize(settings.language),themes:catalog,selected:settings.theme,appPath:settings.appPath||'',status,platform:process.platform,version:app.getVersion(),lastShortcut,updating,petCount:petCatalog.length,pets:petCatalog.map(({id,name})=>({id,name})),appearance:appearance.normalize(settings.appearance?.[settings.theme]),effect:appearance.designs[settings.theme]?.[0]||''};}
+function snapshot(){return {language:i18n.normalize(settings.language),themes:catalog,target:settings.target||'chatgpt',selected:settings.target==='claude'?settings.claudeTheme:settings.theme,chatgptSelected:settings.theme,claudeSelected:settings.claudeTheme,claudePath:settings.claudePath||'',claudeReady:!!settings.claudeSlot,appPath:settings.appPath||'',status,platform:process.platform,version:app.getVersion(),lastShortcut,updating,petCount:petCatalog.length,pets:petCatalog.map(({id,name})=>({id,name})),appearance:appearance.normalize(settings.target==='claude'?settings.claudeAppearance?.[settings.claudeTheme]:settings.appearance?.[settings.theme]),effect:settings.target==='claude'?'':appearance.designs[settings.theme]?.[0]||''};}
 function notify(){if(window&&!window.isDestroyed())window.webContents.send('studio:state',snapshot());}
 function show(){if(window&&!window.isDestroyed()){window.show();window.focus();}else createWindow();}
 function createWindow(){
@@ -48,7 +50,12 @@ function createWindow(){
  window.loadFile(path.join(__dirname,'index.html'));
  return window;
 }
-async function readCatalog(){return localThemes.readCatalog(themeRoot);}
+async function readCatalog(){
+ const library=await require('./theme-library.cjs').load({bundledRoot:root,personalRoot,externalRoots:[themeRoot,...(app.isPackaged?[path.dirname(process.execPath),process.resourcesPath]:[])]});
+ libraryWarnings=library.warnings;migratedThemes=library.migrated;
+ themeSession.themeRoots=new Map(library.themes.map(t=>[t.id,t.sourceRoot]));
+ return library.themes;
+}
 async function refreshThemes(){
  if(busy||updating)throw new Error('Дождитесь завершения текущего действия.');
  busy=true;
@@ -56,26 +63,28 @@ async function refreshThemes(){
   const next=await readCatalog();
   const selected=next.some(t=>t.id===settings.theme)?settings.theme:next[0].id;
   const nextSettings={...settings,theme:selected};
-  const nextPayload=await core.payload(root,selected,settings.appearance?.[selected],themeRoot);
+  const nextPayload=await core.payload(root,selected,settings.appearance?.[selected],themeSession.themeRoots.get(selected)||root);
   await core.saveSettings(settingsFile,nextSettings);
   catalog=next;settings=nextSettings;
   if(cached){cached={id:selected,...nextPayload};themeSession.current=cached;}
-  status='Список обновлён: '+catalog.length+' тем.'+(themeRoot!==root?' Темы загружены из локального проекта.':'');
+  status='Список обновлён: '+catalog.length+' тем.'+(libraryWarnings.length?' Personal themes: '+libraryWarnings.join('; '):'');
   notify();return snapshot();
  }finally{busy=false;}
 }
 async function init(){
+ if(app.isPackaged)await require('./theme-inventory.cjs').verify(root,app.getVersion());
  petCatalog=await pets.read(root);
  const guardStartup=smoke?Promise.resolve():require('./legacy-guard.cjs').startLegacyGuard().then(value=>{legacyGuard=value;});
  guardStartup.catch(()=>{});
- themeRoot=await localThemes.resolveSource(path.join(app.isPackaged?process.resourcesPath:root,'theme-source.json'),root,path.join(app.getPath('userData'),'theme-source.json'));
- themeSession.themeRoot=themeRoot;
+ personalRoot=path.join(app.getPath('userData'),'personal-themes');
+ try{themeRoot=await localThemes.resolveSource(path.join(app.isPackaged?process.resourcesPath:root,'theme-source.json'),root,path.join(app.getPath('userData'),'theme-source.json'));}
+ catch(error){status='Personal theme source unavailable: '+error.message;themeRoot=root;}
  settingsFile=path.join(app.getPath('userData'),'settings.json');
  const updateResult=path.join(app.getPath('userData'),'update-result.txt');
  try{status=await fs.readFile(updateResult,'utf8');await fs.unlink(updateResult);}catch{}
  try{settings=await core.readJson(settingsFile);}catch{}
  if(Number.isInteger(settings.debugPort)&&settings.debugPort>=9345&&settings.debugPort<=9445)core.setDebugPort(settings.debugPort);
- const earlyLaunch=launchOnly&&!smoke?(async()=>{
+ const earlyLaunch=launchOnly&&!claudeLaunch&&!smoke?(async()=>{
   if(!await core.exists(settings.appPath))return false;
   try{await core.targets();return false;}catch{}
   await core.closeRunning(settings.appPath);
@@ -85,9 +94,27 @@ async function init(){
  earlyLaunch.catch(()=>{});
  if(!settings.theme&&process.platform==='win32')try{settings.theme=(await core.readJson(path.join(process.env.LOCALAPPDATA,'ZLHRS/ThemeStudio/.selected-theme.json'))).theme;}catch{}
  catalog=await readCatalog();
+ const pendingFile=path.join(app.getPath('userData'),'pending-update.json');
+ if(await core.exists(pendingFile)){
+  const pending=await core.readJson(pendingFile);
+  if(app.getVersion()===pending.version||updates.newer(app.getVersion(),pending.version)){
+   status='Update verified: '+app.getVersion()+'. Themes: '+catalog.length+'. Personal themes preserved.';
+   await fs.unlink(pendingFile);
+  }else status='Update not completed: expected '+pending.version+', running '+app.getVersion()+'. Personal themes preserved.';
+ }
+ if(!settings.personalLibraryMigrated){
+  if(migratedThemes[settings.theme]){const old=settings.theme;settings.theme=migratedThemes[old];if(settings.appearance?.[old])settings.appearance[settings.theme]=settings.appearance[old];}
+  settings.personalLibraryMigrated=true;await core.saveSettings(settingsFile,settings);
+ }
  if(!catalog.some(t=>t.id===settings.theme))settings.theme=catalog[0].id;
  if(!await core.exists(settings.appPath))settings.appPath=await core.discover();
  const {session}=require('electron');session.defaultSession.setPermissionRequestHandler((_wc,_p,callback)=>callback(false));
+ try{settings.claudeSlot=await require('./claude-themes.cjs').locate();const active=await core.readJson(path.join(settings.claudeSlot,'theme.json'));if(active.id?.startsWith('zlhrs-'))settings.claudeTheme=active.id.slice(6);}catch{settings.claudeSlot='';}
+ if(!catalog.some(t=>t.id===settings.claudeTheme))settings.claudeTheme=catalog[0].id;
+ ipcMain.handle('studio:target',async(_e,target)=>{if(!['chatgpt','claude'].includes(target))throw Error('Invalid app');settings.target=target;await core.saveSettings(settingsFile,settings);return snapshot();});
+ ipcMain.handle('studio:launch-claude',async()=>{await launchClaude();return snapshot();});
+ ipcMain.handle('studio:choose-claude',async()=>{const r=await dialog.showOpenDialog(window,{title:'Claude',properties:['openFile'],filters:process.platform==='win32'?[{name:'Claude',extensions:['exe']}]:undefined});if(!r.canceled){settings.claudePath=r.filePaths[0];await core.saveSettings(settingsFile,settings);}return snapshot();});
+ ipcMain.handle('studio:appearance-claude',async(_e,id,value)=>{if(busy||updating)throw Error('Дождитесь завершения текущего действия.');if(id!==settings.claudeTheme)throw Error('Сначала выберите эту тему.');busy=true;try{const normalized=appearance.normalize(value);const result=await require('./claude-themes.cjs').apply(root,catalog.find(t=>t.id===id),{appearance:normalized});settings.claudeAppearance={...settings.claudeAppearance,[id]:normalized};await core.saveSettings(settingsFile,settings);status=result.restart?'Тема для Claude сохранена. Один раз перезапустите Claude через меню Файл → Выйти.':'Настройки темы сохранены и применены.';return snapshot();}finally{busy=false;}});
  ipcMain.handle('studio:state',()=>snapshot());
  ipcMain.handle('studio:language',async(_event,value)=>{
   if(!['ru','en'].includes(value))throw new Error('Invalid interface language');
@@ -96,7 +123,14 @@ async function init(){
   try{await core.saveSettings(settingsFile,settings);}catch(error){settings.language=previous;throw error;}finally{busy=false;}
   return snapshot();
  });
- ipcMain.handle('studio:apply',async(_e,id)=>{try{await apply(id);return snapshot();}catch(e){report(e);return snapshot();}});
+ ipcMain.handle('studio:apply',async(_e,id)=>{try{await apply(id);settings.target='chatgpt';await core.saveSettings(settingsFile,settings);return snapshot();}catch(e){report(e);return snapshot();}});
+ ipcMain.handle('studio:apply-claude',async(_e,id)=>{
+  if(busy||updating)throw Error('Дождитесь завершения текущего действия.');
+  const entry=catalog.find(t=>t.id===id);if(!entry)throw Error('Тема не найдена.');
+  busy=true;
+  try{const result=await require('./claude-themes.cjs').apply(root,entry,{appearance:settings.claudeAppearance?.[id]});settings.target='claude';settings.claudeTheme=id;settings.claudeSlot=await require('./claude-themes.cjs').locate();await core.saveSettings(settingsFile,settings);status=result.restart?'Тема для Claude сохранена. Один раз перезапустите Claude через меню Файл → Выйти.':'Тема применена в Claude: '+entry.name;notify();return snapshot();}
+  finally{busy=false;}
+ });
  ipcMain.handle('studio:appearance',async(_e,id,value)=>{
   if(busy||updating)throw new Error('Дождитесь завершения текущего действия.');
   if(id!==settings.theme||!catalog.some(t=>t.id===id))throw new Error('Сначала выберите эту тему.');
@@ -114,10 +148,11 @@ async function init(){
   const result=await dialog.showOpenDialog(window,{title:tr('Выберите приложение ChatGPT / Codex'),properties:['openFile'],filters:process.platform==='win32'?[{name:tr('Приложение'),extensions:['exe']}]:undefined});
   if(!result.canceled){settings.appPath=result.filePaths[0];await core.saveSettings(settingsFile,settings);status='Приложение выбрано. Можно применить тему.';notify();}return snapshot();
  });
- ipcMain.handle('studio:shortcut',async()=>{try{await shortcut('studio');lastShortcut=await shortcut();status='Ярлыки Studio и ChatGPT с темой обновлены. Старые ссылки заменены.';}catch(e){status='Не удалось создать ярлык: '+e.message;}notify();return snapshot();});
+ ipcMain.handle('studio:shortcut',async(_event,kind='chat')=>{try{if(!['studio','claude','chat'].includes(kind))throw new Error('Неизвестный ярлык.');lastShortcut=await shortcut(kind);status='Ярлык создан: '+(kind==='studio'?'ZLHRS Theme Studio':kind==='claude'?'Claude Theme':'ChatGPT Theme');}catch(e){status='Не удалось создать ярлык: '+e.message;}notify();return snapshot();});
  ipcMain.handle('studio:reveal',()=>{if(lastShortcut)shell.showItemInFolder(lastShortcut);});
  ipcMain.handle('studio:update',async()=>{try{await updateApp();}catch(e){updating=false;report(e);}return snapshot();});
  ipcMain.handle('studio:refresh',refreshThemes);
+ ipcMain.handle('studio:personal-folder',async()=>{await fs.mkdir(path.join(personalRoot,'themes'),{recursive:true});const error=await shell.openPath(personalRoot);if(error)throw new Error(error);});
  ipcMain.handle('studio:import-pets',async()=>{
   if(busy||updating)throw new Error('Дождитесь завершения текущего действия.');
   clipboard.writeText(pets.importPrompt(petCatalog,settings.language));
@@ -134,7 +169,7 @@ async function init(){
   // Renderer fetches the catalog asynchronously.
   for(let i=0;i<30;i++){if(await w.webContents.executeJavaScript('document.querySelectorAll(".card").length')===catalog.length){
    const found=await w.webContents.executeJavaScript(`(()=>{const s=document.getElementById('search');s.value='tatsumaki';s.dispatchEvent(new Event('input'));const count=document.querySelectorAll('.card').length;s.value='';s.dispatchEvent(new Event('input'));document.querySelector('.preview-button').click();const modal=document.getElementById('preview').open;document.getElementById('close-preview').click();return {count,modal};})()`);
-   if(found.count!==catalog.filter(t=>t.id.startsWith('tatsumaki-')).length||!found.modal)throw new Error('Search or preview failed');
+   if(found.count!==require('./catalog-filters.js').select(catalog,{query:'tatsumaki',locale:settings.language}).length||!found.modal)throw new Error('Search or preview failed');
    const help=await w.webContents.executeJavaScript(`(()=>{document.getElementById('help-tab').click();const visible=!document.getElementById('help-page').hidden;document.getElementById('skins-tab').click();return visible;})()`);
    if(!help)throw new Error('Instruction tab failed');
    const shortcutState=await w.webContents.executeJavaScript('window.studio.shortcut()');
@@ -147,7 +182,7 @@ async function init(){
     if(shell.readShortcutLink(studioShortcut).target!==process.execPath)throw new Error('Stale Studio shortcut not repaired');
     const startLink=path.join(app.getPath('userData'),'test-start-menu','ZLHRS Theme Studio.lnk');
     shell.writeShortcutLink(startLink,'update',{target:path.join(app.getPath('temp'),'old-studio.exe')});
-    await w.webContents.executeJavaScript('window.studio.shortcut()');
+    await w.webContents.executeJavaScript("window.studio.shortcut('studio')");
     if(shell.readShortcutLink(startLink).target!==process.execPath||shell.readShortcutLink(startLink).args.includes('--launch'))throw new Error('Start menu Studio shortcut not repaired');
    }
    await w.webContents.executeJavaScript('window.studio.launch()');
@@ -196,7 +231,7 @@ async function init(){
  await guardStartup;startupLaunched=await earlyLaunch;
  // Desktop shortcuts are created only by the explicit button (or installer).
  // Launching from Start must respect shortcuts the user has deleted.
- if(launchOnly){try{await apply(settings.theme,true);}catch(e){report(e);}}else show();
+ if(launchOnly){try{if(claudeLaunch)await launchClaude();else await apply(settings.theme,true);}catch(e){report(e);}}else show();
 }
 async function apply(id,openWindow=false){
  if(!catalog.some(t=>t.id===id))throw new Error('Неизвестная тема.');
@@ -232,19 +267,21 @@ async function tick(){
 }
 function shQuote(value){return "'"+value.replaceAll("'","'\\''")+"'";}
 async function shortcut(kind='chat'){
- const studio=kind==='studio';
- const name=studio?'ZLHRS Theme Studio':'ChatGPT с темой';
+ const studio=kind==='studio',claude=kind==='claude';
+ const name=studio?'ZLHRS Theme Studio':claude?'Claude Theme':'ChatGPT Theme';
+ const iconName=studio?'studio':claude?'claude-theme':'chatgpt-theme';
  const exe=process.env.APPIMAGE||process.execPath;
  const desktop=app.getPath('desktop');
  await fs.mkdir(desktop,{recursive:true});
- const launchArgs=[...(app.isPackaged?[]:[root]),...(studio?[]:['--launch'])];
+ const launchArgs=[...(app.isPackaged?[]:[root]),...(studio?[]:[claude?'--launch-claude':'--launch'])];
  if(process.platform==='win32'){
+  const icon=path.join(app.getPath('userData'),iconName+'.ico');await fs.copyFile(path.join(root,'assets',iconName+'.ico'),icon);
   const programs=smoke?path.join(app.getPath('userData'),'test-start-menu'):path.join(app.getPath('appData'),'Microsoft','Windows','Start Menu','Programs');
   const args=launchArgs.map(a=>'"'+a+'"').join(' ');
   for(const directory of [desktop,programs]){
    await fs.mkdir(directory,{recursive:true});
    const file=path.join(directory,name+'.lnk');
-   const details={target:exe,args,cwd:path.dirname(exe),description:studio?'Выбор и настройка тем ZLHRS':'ChatGPT с последней темой ZLHRS',icon:exe,iconIndex:0};
+   const details={target:exe,args,cwd:path.dirname(exe),description:studio?'Выбор и настройка тем ZLHRS':name+' · сохранённая тема ZLHRS',icon,iconIndex:0};
    const ok=shell.writeShortcutLink(file,await core.exists(file)?'update':'create',details);
    if(!ok)throw new Error('Windows не разрешила обновление ярлыка.');
    const saved=shell.readShortcutLink(file);
@@ -252,15 +289,15 @@ async function shortcut(kind='chat'){
   }
   return path.join(desktop,name+'.lnk');
  }else if(process.platform==='linux'){
-  const icon=path.join(app.getPath('userData'),'studio.png');await fs.copyFile(path.join(root,'assets/studio-logo.png'),icon);
+  const icon=path.join(app.getPath('userData'),iconName+'.png');await fs.copyFile(path.join(root,'assets',studio?'studio-logo.png':iconName+'.png'),icon);
   const quoted='"'+exe.replace(/[\\"`$]/g,'\\$&').replaceAll('%','%%')+'"';
   const argumentsText=launchArgs.map(a=>'"'+a.replace(/[\\"`$]/g,'\\$&').replaceAll('%','%%')+'"').join(' ');
   const entry='[Desktop Entry]\nType=Application\nName='+name+'\nExec='+quoted+' '+argumentsText+'\nIcon='+icon+'\nTerminal=false\nCategories=Utility;\n';
-  await fs.mkdir(desktop,{recursive:true});await fs.writeFile(path.join(desktop,studio?'ZLHRS-Theme-Studio.desktop':'ChatGPT-with-theme.desktop'),entry,{mode:0o755});
-  const applications=smoke?path.join(app.getPath('userData'),'applications'):path.join(process.env.XDG_DATA_HOME||path.join(app.getPath('home'),'.local/share'),'applications');await fs.mkdir(applications,{recursive:true});await fs.writeFile(path.join(applications,studio?'zlhrs-theme-studio.desktop':'zlhrs-chatgpt.desktop'),entry,{mode:0o755});return path.join(desktop,studio?'ZLHRS-Theme-Studio.desktop':'ChatGPT-with-theme.desktop');
+  await fs.mkdir(desktop,{recursive:true});await fs.writeFile(path.join(desktop,studio?'ZLHRS-Theme-Studio.desktop':claude?'Claude-with-theme.desktop':'ChatGPT-with-theme.desktop'),entry,{mode:0o755});
+  const applications=smoke?path.join(app.getPath('userData'),'applications'):path.join(process.env.XDG_DATA_HOME||path.join(app.getPath('home'),'.local/share'),'applications');await fs.mkdir(applications,{recursive:true});await fs.writeFile(path.join(applications,studio?'zlhrs-theme-studio.desktop':claude?'zlhrs-claude.desktop':'zlhrs-chatgpt.desktop'),entry,{mode:0o755});return path.join(desktop,studio?'ZLHRS-Theme-Studio.desktop':claude?'Claude-with-theme.desktop':'ChatGPT-with-theme.desktop');
  }else{
   const bundle=path.join(desktop,name+'.app','Contents');await fs.mkdir(path.join(bundle,'MacOS'),{recursive:true});
-  await fs.writeFile(path.join(bundle,'Info.plist'),'<?xml version="1.0"?><!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"><plist version="1.0"><dict><key>CFBundleExecutable</key><string>launch</string><key>CFBundleIdentifier</key><string>com.zlhrs.'+(studio?'studio-launcher':'chatgpt-launcher')+'</string><key>CFBundleName</key><string>'+name+'</string><key>CFBundlePackageType</key><string>APPL</string></dict></plist>');
+  await fs.writeFile(path.join(bundle,'Info.plist'),'<?xml version="1.0"?><!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"><plist version="1.0"><dict><key>CFBundleExecutable</key><string>launch</string><key>CFBundleIdentifier</key><string>com.zlhrs.'+(studio?'studio-launcher':claude?'claude-launcher':'chatgpt-launcher')+'</string><key>CFBundleName</key><string>'+name+'</string><key>CFBundlePackageType</key><string>APPL</string></dict></plist>');
   await fs.writeFile(path.join(bundle,'MacOS/launch'),'#!/bin/sh\nexec '+shQuote(exe)+' '+launchArgs.map(shQuote).join(' ')+'\n',{mode:0o755});return path.dirname(bundle);
  }
 }
@@ -276,6 +313,14 @@ async function updateApp(){
  if(!info){updating=false;status=refreshed+' Версия программы '+app.getVersion()+' — последняя опубликованная.';notify();return;}
  const directory=path.join(app.getPath('userData'),'updates',info.version);
  const installer=await updates.download(info,directory,percent=>{status='Обновление '+info.version+': загружено '+percent+'%';notify();});
+ // Migrate editable external packs before an installer can replace their directory.
+ await readCatalog();
+ if(libraryWarnings.length)throw new Error('Personal themes could not be preserved: '+libraryWarnings.join('; '));
+ const backup=path.join(directory,'before-update');await fs.mkdir(backup,{recursive:true});
+ // Also retain the old archive: this covers manually modified built-in artwork
+ // from releases that predate the personal library.
+ if(app.isPackaged&&root.endsWith('.asar'))await require('original-fs').promises.copyFile(root,path.join(backup,'app.asar'));
+ await fs.copyFile(settingsFile,path.join(backup,'settings.json'));
  const result=path.join(app.getPath('userData'),'update-result.txt');
  let command,args;
  if(process.platform==='win32'){
@@ -295,8 +340,16 @@ async function updateApp(){
   command='/bin/sh';args=[helper,kind,installer,target,String(process.pid),result];
  }
  await core.saveSettings(settingsFile,settings);
+ await core.saveSettings(path.join(app.getPath('userData'),'pending-update.json'),{version:info.version});
  status='Обновление проверено. Устанавливаем и перезапускаем приложение…';notify();
  if(process.platform==='win32')await require('./update-launcher.cjs').launchWindowsUpdate(command,args,directory);
  else await new Promise((resolve,reject)=>{const child=spawn(command,args,{detached:true,stdio:'ignore',windowsHide:true});child.once('error',reject);child.once('spawn',()=>{child.unref();resolve();});});
  app.quit();
+}
+
+async function launchClaude(){
+ if(settings.claudePath){const error=await shell.openPath(settings.claudePath);if(error)throw Error(error);}
+ else if(process.platform==='win32'){await new Promise((resolve,reject)=>{const p=spawn('explorer.exe',['shell:AppsFolder\\AnthropicPBC.Claude_fnn82j28hfe8t!Claude'],{windowsHide:true});p.once('error',reject);p.once('spawn',resolve);});}
+ else {const error=await shell.openPath(process.platform==='darwin'?'/Applications/Claude.app':'claude');if(error)throw Error('Укажите путь к Claude в настройках.');}
+ status='Claude открыт. Сохранённая тема включается автоматически.';notify();
 }

@@ -1,0 +1,12 @@
+{
+  "id": "zlhrs-zero-two-azure-bounce",
+  "name": "Zero Two · Azure Bounce",
+  "tagline": "ZLHRS · Zero Two’s azure jumping loop, restored to 4K at 59.94 fps.",
+  "bg": "#28222c",
+  "text": "#f3f1f5",
+  "accent": "#f4a8be",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px"
+  }
+}

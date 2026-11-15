@@ -1,0 +1,12 @@
+{
+  "id": "zlhrs-private-duo",
+  "name": "Silver Edge",
+  "tagline": "ZLHRS · Изображение справа, мягкие серебристые акценты и тёмные панели.",
+  "bg": "#21242e",
+  "text": "#f3f1f5",
+  "accent": "#b9b4cf",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px"
+  }
+}

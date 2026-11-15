@@ -1,0 +1,12 @@
+{
+  "id": "zlhrs-tidal-halo-duo",
+  "name": "Tidal Halo · Twin Current",
+  "tagline": "ZLHRS · Два водных портрета, подводный дворец, кристаллические арки и бирюзовые течения.",
+  "bg": "#1a262f",
+  "text": "#f3f1f5",
+  "accent": "#80cbd5",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px"
+  }
+}

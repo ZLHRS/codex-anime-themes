@@ -1,0 +1,152 @@
+html.codex-theme-studio {
+  --ink: color-mix(in srgb, var(--accent) 8%, #f5f2f2);
+  --night: color-mix(in srgb, var(--accent) 7%, #0b0c10);
+  --surface: color-mix(in srgb, var(--accent) 12%, #17171e);
+  --line: color-mix(in srgb, var(--accent) 32%, #282730);
+  accent-color: var(--accent);
+  caret-color: var(--light);
+}
+html.codex-theme-studio body { background: var(--night) !important; color: var(--ink); }
+html.codex-theme-studio .main-surface { background: transparent !important; }
+html.codex-theme-studio .main-surface:not(.main-surface .main-surface) {
+  position: relative; isolation: isolate;
+  background: radial-gradient(ellipse at 100% 60%,var(--surface),var(--night) 72%) !important;
+}
+html.codex-theme-studio .main-surface:not(.main-surface .main-surface)::before {
+  content: ""; position: absolute; z-index: -1; pointer-events: none;
+  inset: auto 0 0 auto; height: 90%; aspect-ratio: var(--ratio); max-width: 100%;
+  background: var(--cts-asset-portrait) right bottom / auto 100% no-repeat;
+  opacity: .44;
+  mask-image: linear-gradient(90deg,transparent,#000 33%),linear-gradient(180deg,transparent,#000 8%);
+  mask-composite: intersect;
+}
+html.codex-theme-studio .app-shell-left-panel {
+  --side-top: color-mix(in srgb,var(--accent) 18%,#211f25);
+  --side-bottom: color-mix(in srgb,var(--accent) 11%,#201f24);
+  --side-edge: var(--line); --side-ink: var(--ink);
+  --side-muted: color-mix(in srgb,var(--accent) 37%,#ccc);
+  --side-hover: color-mix(in srgb,var(--accent) 22%,#252229);
+  --side-selected: color-mix(in srgb,var(--accent) 29%,#252229);
+  --side-selected-text: var(--ink); --side-mark: var(--accent);
+}
+html.codex-theme-studio .app-shell-left-panel {
+  background: linear-gradient(155deg,var(--side-top),var(--side-bottom) 82%) !important;
+  color: var(--side-ink) !important;
+  color-scheme: dark;
+  border-right: 1px solid var(--side-edge) !important;
+  scrollbar-color: var(--side-edge) transparent;
+}
+html.codex-theme-studio .app-shell-left-panel nav {
+  color: var(--side-ink) !important;
+  background: transparent !important;
+}
+html.codex-theme-studio .app-shell-left-panel :where(button,a,[role="button"],span,p,h2,h3,svg) {
+  color: inherit !important;
+}
+html.codex-theme-studio .app-shell-left-panel :is(h2,h3,[role="heading"],[class*="text-token-text-secondary"],[class*="text-token-text-tertiary"]) {
+  color: var(--side-muted) !important;
+}
+html.codex-theme-studio .app-shell-left-panel :is(button:enabled,a,[role="button"]):hover {
+  background-color: var(--side-hover) !important;
+  color: var(--side-ink) !important;
+}
+html.codex-theme-studio .app-shell-left-panel :is([aria-current="page"],[aria-selected="true"],[data-active="true"]),
+html.codex-theme-studio .app-shell-left-panel :is([aria-current="page"],[aria-selected="true"],[data-active="true"]):hover {
+  color: var(--side-selected-text) !important;
+  background: var(--side-selected) !important;
+  box-shadow: inset 3px 0 var(--side-mark);
+}
+html.codex-theme-studio .app-shell-left-panel :focus-visible {
+  outline: 2px solid var(--side-mark) !important;
+  outline-offset: -2px;
+}
+html.codex-theme-studio .app-shell-left-panel :is(hr,[role="separator"]) {
+  border-color: var(--side-edge) !important;
+}
+html.codex-theme-studio .app-shell-left-panel ::selection {
+  color: var(--side-selected-text); background: var(--side-selected);
+}
+
+html.codex-theme-studio .app-shell-left-panel .sidebar-navigation {
+  background: transparent !important;
+}
+html.codex-theme-studio .app-shell-left-panel .sidebar-navigation :is(.text-default,.text-primary,.text-secondary,.text-tertiary,.text-muted,.text-token-text-primary,.text-token-text-secondary) {
+  color: inherit !important;
+}
+html.codex-theme-studio .app-shell-left-panel .sidebar-item[data-app-action-sidebar-thread-selected="true"] {
+  background: var(--side-selected) !important;
+  color: var(--side-selected-text) !important;
+  box-shadow: inset 3px 0 var(--side-mark);
+}
+html.codex-theme-studio .app-shell-left-panel::after,
+html.codex-theme-studio .sidebar-item[data-app-action-sidebar-thread-selected="true"]::before,
+html.codex-theme-studio [data-markdown-text-style] blockquote::before,
+html.codex-theme-studio [data-home-feed-composer] .composer-surface-chrome::before {
+  content: ""; position: absolute; pointer-events: none; z-index: 2;
+  background: var(--cts-asset-charm) center / contain no-repeat;
+}
+html.codex-theme-studio .app-shell-left-panel::after { right: -3px; top: 46%; width: 12px; height: 24px; opacity: .56; }
+html.codex-theme-studio .sidebar-item[data-app-action-sidebar-thread-selected="true"]::before {
+  left: 5px; top: 50%; translate: 0 -50%; width: 15px; height: 15px;
+}
+html.codex-theme-studio [data-markdown-text-style] { color: var(--ink); }
+html.codex-theme-studio [data-local-conversation-final-assistant] [data-markdown-text-style] {
+  background: linear-gradient(90deg,color-mix(in srgb,var(--night) 90%,transparent),color-mix(in srgb,var(--night) 76%,transparent)) top / 100% clamp(0px,calc((100% - 180px)*200),100%) no-repeat; border-radius: 10px;
+}
+html.codex-theme-studio [data-markdown-text-style] blockquote {
+  position: relative; border-inline-start: 1px solid var(--line); padding-inline-start: 1.65em;
+}
+html.codex-theme-studio [data-markdown-text-style] blockquote::before { width: 14px; height: 14px; left: 4px; top: .25em; opacity: .8; }
+html.codex-theme-studio [data-markdown-text-style] a { color: var(--light) !important; text-underline-offset: .2em; }
+html.codex-theme-studio :is(pre,[data-markdown-text-style] :not(pre)>code) { background-color: var(--surface) !important; }
+html.codex-theme-studio :is([role="menu"],[role="dialog"],[role="listbox"],header.app-header-tint) { background-color: var(--surface) !important; }
+html.codex-theme-studio :is([role="menuitem"],[role="option"])[data-highlighted] { background-color: var(--line) !important; }
+html.codex-theme-studio ::selection { background: var(--line); color: white; }
+html.codex-theme-studio :focus-visible { outline-color: var(--accent); }
+html.codex-theme-studio .composer-surface-chrome {
+  position: relative; color: var(--ink); border: 1px solid var(--line) !important;
+  background: linear-gradient(115deg,var(--surface),var(--night)) !important; border-radius: 18px !important;
+}
+html.codex-theme-studio .composer-surface-chrome:focus-within { border-color: var(--accent) !important; }
+html.codex-theme-studio .composer-surface-chrome button[data-cts-composer-action="send"]:enabled { background: var(--accent) !important; color: var(--night) !important; }
+
+
+/* Night Rays: one continuous animated scene, without a portrait/background seam. */
+html.codex-theme-studio{--accent:#7da9e8;--light:#c3d9ff;--night:#050e24;--surface:#111e37;--ink:#edf3ff;--line:#33496e;}
+html.codex-theme-studio .main-surface:not(.main-surface .main-surface){background:#096bce!important;overflow:hidden;}
+html.codex-theme-studio .main-surface:not(.main-surface .main-surface)::before,
+html.codex-theme-studio .main-surface:not(.main-surface .main-surface)::after{display:none!important;}
+html.codex-theme-studio #cts-stage{container-type:size;background:#060e25;overflow:hidden;}
+/* A single native video covers the scene. The poster uses the exact same crop.
+   Preserve the full composition without an extra zoom or independently scaled overlay. */
+html.codex-theme-studio #cts-stage::before,
+html.codex-theme-studio #cts-stage::after{content:none!important;display:none!important;}
+html.codex-theme-studio #cts-stage .cts-halo,
+html.codex-theme-studio #cts-stage .cts-atmosphere{display:none!important;}
+html.codex-theme-studio .cts-ambient-media{
+ position:absolute;left:0;top:0;width:100%;height:100%;max-width:none;
+ aspect-ratio:auto;background-size:cover;background-position:center top;
+ background-repeat:no-repeat;mask-image:none!important;-webkit-mask-image:none!important;
+}
+html.codex-theme-studio .cts-ambient-media :is(video,img){
+ width:100%;height:100%;object-fit:cover;object-position:center top;display:block;
+}
+html.codex-theme-studio .cts-ambient-media [hidden]{display:none!important;}
+html.codex-theme-studio .app-shell-left-panel{--side-top:#10213b;--side-bottom:#080f21;--side-edge:#263d60;--side-hover:#193354;--side-selected:#233c61;--side-mark:#9fcaff;}
+html.codex-theme-studio .composer-surface-chrome{background:linear-gradient(115deg,#101e35f5,#0b152bf5)!important;border-color:#415b83!important;}
+html.codex-theme-studio .composer-surface-chrome:focus-within{border-color:#91b9f1!important;}
+html.codex-theme-studio .main-surface [data-markdown-text-style]{text-shadow:0 1px 3px #0009;}
+
+html.codex-theme-studio .app-shell-left-panel{background:linear-gradient(155deg,#10213b,#080f21)!important;}
+html.codex-theme-studio [data-local-conversation-final-assistant] [data-markdown-text-style]{background:#08142bcc!important;color:#edf3ff;}
+html.codex-theme-studio .main-surface:not(.main-surface .main-surface)>:not(#cts-stage){z-index:1;}
+
+/* Palette specific to this original animated scene. */
+html.codex-theme-studio{--accent:#f4a8be;--light:#ffe2ed;--night:#122b40;--surface:#1c4259;--ink:#f8f3ff;--line:color-mix(in srgb,var(--accent) 35%,var(--surface));}
+html.codex-theme-studio .app-shell-left-panel{--side-top:#1c4259;--side-bottom:#122b40;--side-edge:var(--line);--side-hover:#1c4259;--side-selected:color-mix(in srgb,var(--accent) 22%,var(--night));--side-mark:var(--accent);background:linear-gradient(155deg,var(--surface),var(--night))!important;}
+html.codex-theme-studio #cts-stage{background:#122b40;}
+html.codex-theme-studio .composer-surface-chrome{background:color-mix(in srgb,var(--night) 95%,transparent)!important;border-color:var(--line)!important;}
+html.codex-theme-studio .composer-surface-chrome:focus-within{border-color:var(--accent)!important;}
+html.codex-theme-studio [data-local-conversation-final-assistant] [data-markdown-text-style]{background:color-mix(in srgb,var(--night) 84%,transparent)!important;color:var(--ink);}
+html.codex-theme-studio .cts-ambient-media{background-position:center;}
+html.codex-theme-studio .cts-ambient-media :is(video,img){object-position:center;}

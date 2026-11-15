@@ -1,0 +1,12 @@
+{
+  "id": "zlhrs-reze-night-bloom",
+  "name": "Резе · Night Bloom",
+  "tagline": "ZLHRS · № 03 · Цветок на чеке-кольце.",
+  "bg": "#23212b",
+  "text": "#f3f1f5",
+  "accent": "#c89cb4",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px"
+  }
+}

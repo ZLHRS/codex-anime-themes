@@ -1,0 +1,12 @@
+{
+  "id": "zlhrs-jade-tempest",
+  "name": "Татсумаки · Jade Tempest",
+  "tagline": "ZLHRS · Нефритовый ветер и манга-портрет справа.",
+  "bg": "#1c282c",
+  "text": "#f3f1f5",
+  "accent": "#90d5c2",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "id": "zlhrs-emerald-psychic",
+  "name": "Татсумаки · Emerald Psychic",
+  "tagline": "ZLHRS · Изумрудная энергия и вихрь на всём фоне.",
+  "bg": "#1c282a",
+  "text": "#f3f1f5",
+  "accent": "#8ed8ae",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px"
+  }
+}

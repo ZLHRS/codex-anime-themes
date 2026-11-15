@@ -1,0 +1,12 @@
+{
+  "id": "zlhrs-stone-soft-smile",
+  "name": "Stone Soft Smile",
+  "tagline": "ZLHRS · Мягкая улыбка на каменном фоне во всю тему.",
+  "bg": "#20242d",
+  "text": "#f3f1f5",
+  "accent": "#b5b3cb",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px"
+  }
+}

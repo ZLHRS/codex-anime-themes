@@ -4,6 +4,13 @@ try {
  if($ReadyFile){[IO.File]::WriteAllText($ReadyFile,'ready')}
  for($i=0;$i -lt 60 -and (Get-Process -Id $StudioPid -ErrorAction SilentlyContinue);$i++){Start-Sleep -Milliseconds 500}
  if(Get-Process -Id $StudioPid -ErrorAction SilentlyContinue){throw 'Theme Studio не завершилось. Обновление отменено.'}
+ # Renderer/utility processes may outlive the main process briefly. Never replace
+ # an ASAR while any process from this exact installation still has it open.
+ for($i=0;$i -lt 60;$i++){
+  $remaining=@(Get-Process | Where-Object {$_.Path -and [string]::Equals($_.Path,$Target,[StringComparison]::OrdinalIgnoreCase)})
+  if($remaining.Count -eq 0){break};Start-Sleep -Milliseconds 500
+ }
+ if($remaining.Count -ne 0){throw 'Theme Studio is still running. Update cancelled; personal themes are safe.'}
  if($Portable){
   if([IO.Path]::GetFileName($Target) -ne 'ZLHRS Theme Studio.exe'){throw 'Неверная папка приложения'}
   Add-Type -AssemblyName System.IO.Compression.FileSystem
@@ -21,6 +28,9 @@ try {
   $backup=Join-Path $stage 'backup';$replaced=@()
   try{foreach($file in Get-ChildItem -LiteralPath $source -Recurse -File){
    $relative=$file.FullName.Substring($source.Length).TrimStart('\')
+   # A release must never replace an installation-specific source setting or
+   # loose user artwork. Built-in themes are delivered inside app.asar.
+   if($relative -match '^(themes|previews|personal-themes)(\\|/)' -or $relative -match '(^|[\\/])theme-source\.json$'){continue}
    $to=[IO.Path]::GetFullPath((Join-Path $destination $relative))
    if(-not $to.StartsWith($destination+[IO.Path]::DirectorySeparatorChar,[StringComparison]::OrdinalIgnoreCase)){throw 'Неверный путь назначения'}
    if(Test-Path -LiteralPath $to){

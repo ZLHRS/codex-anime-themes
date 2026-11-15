@@ -303,5 +303,195 @@
     "id": "emerald-stern-gaze",
     "name": "Строгий взгляд · Тёмный изумруд",
     "path": "themes/emerald-stern-gaze"
+  },
+  {
+    "id": "zero-two-night-rays",
+    "name": "Zero Two · Night Rays",
+    "path": "themes/zero-two-night-rays"
+  },
+  {
+    "id": "crimson-gaze",
+    "name": "Crimson Gaze",
+    "path": "themes/crimson-gaze"
+  },
+  {
+    "id": "makima-amber-blush",
+    "name": "Макима · Amber Blush",
+    "path": "themes/makima-amber-blush"
+  },
+  {
+    "id": "coral-thunder",
+    "name": "Coral Thunder",
+    "path": "themes/coral-thunder"
+  },
+  {
+    "id": "scarlet-rain",
+    "name": "Scarlet Rain",
+    "path": "themes/scarlet-rain"
+  },
+  {
+    "id": "mitsuri-dango-bloom",
+    "name": "Мицури · Dango Bloom",
+    "path": "themes/mitsuri-dango-bloom"
+  },
+  {
+    "id": "mitsuri-sakura-sage",
+    "name": "Мицури · Sakura Sage",
+    "path": "themes/mitsuri-sakura-sage"
+  },
+  {
+    "id": "asuka-hangar-light",
+    "name": "Аска · Hangar Light",
+    "path": "themes/asuka-hangar-light"
+  },
+  {
+    "id": "asuka-peach-morning",
+    "name": "Аска · Peach Morning",
+    "path": "themes/asuka-peach-morning"
+  },
+  {
+    "id": "garnet-portrait",
+    "name": "Garnet Portrait",
+    "path": "themes/garnet-portrait"
+  },
+  {
+    "id": "crimson-stained-glass",
+    "name": "Crimson Stained Glass",
+    "path": "themes/crimson-stained-glass"
+  },
+  {
+    "id": "slate-alley",
+    "name": "Slate Alley",
+    "path": "themes/slate-alley"
+  },
+  {
+    "id": "stone-soft-smile",
+    "name": "Stone Soft Smile",
+    "path": "themes/stone-soft-smile"
+  },
+  {
+    "id": "rose-ice-frame",
+    "name": "Rose Ice Frame",
+    "path": "themes/rose-ice-frame"
+  },
+  {
+    "id": "emerald-psychic",
+    "name": "Татсумаки · Emerald Psychic",
+    "path": "themes/emerald-psychic"
+  },
+  {
+    "id": "emerald-focus",
+    "name": "Татсумаки · Emerald Focus",
+    "path": "themes/emerald-focus"
+  },
+  {
+    "id": "jade-tempest",
+    "name": "Татсумаки · Jade Tempest",
+    "path": "themes/jade-tempest"
+  },
+  {
+    "id": "sage-morning-cup",
+    "name": "Sage Morning Cup",
+    "path": "themes/sage-morning-cup"
+  },
+  {
+    "id": "crimson-laughter",
+    "name": "Crimson Laughter",
+    "path": "themes/crimson-laughter"
+  },
+  {
+    "id": "graphite-silence",
+    "name": "L · Graphite Silence",
+    "path": "themes/graphite-silence"
+  },
+  {
+    "id": "ivory-deduction",
+    "name": "L · Ivory Deduction",
+    "path": "themes/ivory-deduction"
+  },
+  {
+    "id": "violet-royal-duo",
+    "name": "Violet Royal Duo",
+    "path": "themes/violet-royal-duo"
+  },
+  {
+    "id": "turquoise-mountain-springs",
+    "name": "Turquoise Mountain Springs",
+    "path": "themes/turquoise-mountain-springs"
+  },
+  {
+    "id": "copper-reverie",
+    "name": "Copper Reverie",
+    "path": "themes/copper-reverie"
+  },
+  {
+    "id": "ascii-moonlit",
+    "name": "ASCII · Moonlit",
+    "path": "themes/ascii-moonlit"
+  },
+  {
+    "id": "ascii-clawd",
+    "name": "ASCII · Clawd",
+    "path": "themes/ascii-clawd"
+  },
+  {
+    "id": "ascii-cloud-drift",
+    "name": "ASCII · Cloud Drift",
+    "path": "themes/ascii-cloud-drift"
+  },
+  {
+    "id": "ascii-honu-lagoon",
+    "name": "ASCII · Honu Lagoon",
+    "path": "themes/ascii-honu-lagoon"
+  },
+  {
+    "id": "ascii-koi-pond",
+    "name": "ASCII · Koi Pond",
+    "path": "themes/ascii-koi-pond"
+  },
+  {
+    "id": "ascii-jellyfish",
+    "name": "ASCII · Jellyfish",
+    "path": "themes/ascii-jellyfish"
+  },
+  {
+    "id": "ascii-lantern-night",
+    "name": "ASCII · Lantern Night",
+    "path": "themes/ascii-lantern-night"
+  },
+  {
+    "id": "ascii-fireflies",
+    "name": "ASCII · Fireflies",
+    "path": "themes/ascii-fireflies"
+  },
+  {
+    "id": "ascii-neon-rain",
+    "name": "ASCII · Neon Rain",
+    "path": "themes/ascii-neon-rain"
+  },
+  {
+    "id": "ascii-sakura-dusk",
+    "name": "ASCII · Sakura Dusk",
+    "path": "themes/ascii-sakura-dusk"
+  },
+  {
+    "id": "ascii-snow-cabin",
+    "name": "ASCII · Snow Cabin",
+    "path": "themes/ascii-snow-cabin"
+  },
+  {
+    "id": "ascii-star-voyage",
+    "name": "ASCII · Star Voyage",
+    "path": "themes/ascii-star-voyage"
+  },
+  {
+    "id": "ai-violet-starlight",
+    "name": "Ай Хосино · Violet Starlight",
+    "path": "themes/ai-violet-starlight"
+  },
+  {
+    "id": "zero-two-azure-bounce",
+    "name": "Zero Two · Azure Bounce",
+    "path": "themes/zero-two-azure-bounce"
   }
 ]

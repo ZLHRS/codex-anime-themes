@@ -1,0 +1,12 @@
+{
+  "id": "zlhrs-slate-cat-glasses",
+  "name": "Кошачьи ушки · Дымчатый графит",
+  "tagline": "ZLHRS · Улучшенный портрет справа, тёмный цветной фон и свободное место для чтения.",
+  "bg": "#1f232d",
+  "text": "#f3f1f5",
+  "accent": "#a7afca",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px"
+  }
+}

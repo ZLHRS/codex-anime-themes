@@ -1,0 +1,12 @@
+{
+  "id": "zlhrs-teal-peony",
+  "name": "Teal Peony · Бирюзовый пион",
+  "tagline": "ZLHRS · Портрет в цветочном кимоно справа, дорисованная макушка и спокойный однотонный графитово-бирюзовый фон.",
+  "bg": "#1b232a",
+  "text": "#f3f1f5",
+  "accent": "#85adb1",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px"
+  }
+}

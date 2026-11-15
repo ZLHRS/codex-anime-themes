@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 2,
+  "id": "coral-thunder",
+  "name": "Coral Thunder",
+  "description": "Коралловая энергия справа и свободный бирюзовый фон для переписки.",
+  "version": "1.0.0",
+  "author": "ZLHRS",
+  "appearance": "dark",
+  "license": "personal-use",
+  "category": "anime",
+  "tags": [
+    "anime",
+    "teal",
+    "coral",
+    "action"
+  ],
+  "colors": {
+    "accent": "#ffb49e",
+    "light": "#ffe9bc"
+  },
+  "strings": {},
+  "assets": {
+    "artwork": "assets/artwork.png"
+  },
+  "css": "theme.css"
+}

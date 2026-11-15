@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 2,
+  "id": "ascii-lantern-night",
+  "name": "ASCII · Lantern Night",
+  "description": "Paper lanterns drifting down a river at night",
+  "version": "1.0.0",
+  "author": "0toshigami / ZLHRS",
+  "appearance": "dark",
+  "license": "MIT",
+  "category": "landscape",
+  "tags": [
+    "ascii",
+    "animated",
+    "landscape",
+    "lantern-night"
+  ],
+  "colors": {
+    "accent": "#f2a541",
+    "light": "#efe6d2"
+  },
+  "assets": {},
+  "strings": {},
+  "ascii": {
+    "scene": "lantern-night",
+    "bg": "#0b1424",
+    "sky": "linear-gradient(#070c1c, #24305e 29%, #0e1a30 30%, #08111f 60%, #050a14)"
+  },
+  "css": "theme.css",
+  "source": "https://github.com/0toshigami/claude-desktop-themes"
+}

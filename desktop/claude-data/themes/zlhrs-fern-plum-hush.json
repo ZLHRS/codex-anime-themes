@@ -1,0 +1,12 @@
+{
+  "id": "zlhrs-fern-plum-hush",
+  "name": "Ферн · Plum Hush",
+  "tagline": "ZLHRS · Ферн справа на однотонном тёмно-сливовом фоне с приглушённой яркостью.",
+  "bg": "#1e1f29",
+  "text": "#f3f1f5",
+  "accent": "#a18ba5",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px"
+  }
+}

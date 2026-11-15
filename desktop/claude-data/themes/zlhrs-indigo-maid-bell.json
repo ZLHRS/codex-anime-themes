@@ -1,0 +1,12 @@
+{
+  "id": "zlhrs-indigo-maid-bell",
+  "name": "Колокольчик · Ночной индиго",
+  "tagline": "ZLHRS · Улучшенный портрет справа, тёмный цветной фон и свободное место для чтения.",
+  "bg": "#1e222f",
+  "text": "#f3f1f5",
+  "accent": "#a1a9d4",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px"
+  }
+}

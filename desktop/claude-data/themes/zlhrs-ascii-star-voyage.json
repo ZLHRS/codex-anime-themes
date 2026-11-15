@@ -1,0 +1,18 @@
+{
+  "id": "zlhrs-ascii-star-voyage",
+  "name": "ASCII · Star Voyage",
+  "tagline": "ZLHRS · A little rocket passing a ringed planet, shooting stars overhead",
+  "bg": "#0d0a1f",
+  "text": "#e6ecff",
+  "accent": "#ff6fb5",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px",
+    "wall-sky": "radial-gradient(110% 90% at 85% 20%, #2a1a52, #120d2e 50%, #08061a)",
+    "wall-halo": "#0d0a1f",
+    "wall-rim": "#ff6fb555",
+    "wall-glass": "#0d0a1fe6",
+    "wall-greet": "\"\""
+  },
+  "wallpaper": "zlhrs-ascii-star-voyage"
+}

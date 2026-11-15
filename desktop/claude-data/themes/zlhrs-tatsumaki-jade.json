@@ -1,0 +1,12 @@
+{
+  "id": "zlhrs-tatsumaki-jade",
+  "name": "Татсумаки · Jade Orbit",
+  "tagline": "ZLHRS · № 08 · Орбита из парящих осколков.",
+  "bg": "#1b2528",
+  "text": "#f3f1f5",
+  "accent": "#87bb9b",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "id": "zlhrs-sage-reverie",
+  "name": "Sage Reverie · Тихий шалфей",
+  "tagline": "ZLHRS · Серо-зелёный фон, шалфей и спокойные холодные блики.",
+  "bg": "#1d242a",
+  "text": "#f3f1f5",
+  "accent": "#99b8ac",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px"
+  }
+}

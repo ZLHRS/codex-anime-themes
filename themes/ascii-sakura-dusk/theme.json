@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 2,
+  "id": "ascii-sakura-dusk",
+  "name": "ASCII · Sakura Dusk",
+  "description": "Cherry branches at the corners, petals drifting through a violet evening",
+  "version": "1.0.0",
+  "author": "0toshigami / ZLHRS",
+  "appearance": "dark",
+  "license": "MIT",
+  "category": "landscape",
+  "tags": [
+    "ascii",
+    "animated",
+    "landscape",
+    "sakura-dusk"
+  ],
+  "colors": {
+    "accent": "#f29bb8",
+    "light": "#f6e9f0"
+  },
+  "assets": {},
+  "strings": {},
+  "ascii": {
+    "scene": "sakura-dusk",
+    "bg": "#231a2e",
+    "sky": "linear-gradient(#17112b, #2a1c44 40%, #523058 72%, #8c4a5e)"
+  },
+  "css": "theme.css",
+  "source": "https://github.com/0toshigami/claude-desktop-themes"
+}

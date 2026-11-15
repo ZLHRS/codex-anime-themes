@@ -1,0 +1,12 @@
+{
+  "id": "zlhrs-garnet-soft-gaze",
+  "name": "Взгляд · Сливовый гранат",
+  "tagline": "ZLHRS · Портрет справа без белого фона, исходная поза и одежда сохранены.",
+  "bg": "#21202b",
+  "text": "#f3f1f5",
+  "accent": "#be97b7",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "id": "zlhrs-graphite-silence",
+  "name": "L · Graphite Silence",
+  "tagline": "ZLHRS · Портрет L справа на графитовом фоне.",
+  "bg": "#21252e",
+  "text": "#f3f1f5",
+  "accent": "#bdc3ce",
+  "vars": {
+    "cds-radius": "10px",
+    "cds-radius-composer": "18px"
+  }
+}
