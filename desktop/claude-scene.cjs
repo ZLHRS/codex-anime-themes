@@ -9,8 +9,10 @@ async function scene(root,slot,entry,value){
  async function copy(key,file){
   if(!/^[\w-]+$/.test(key))throw Error('Invalid asset name');
   const source=path.resolve(dir,file);if(!source.startsWith(dir+path.sep))throw Error('Invalid artwork path');
-  const dest='zlhrs-assets/'+t.id+'/'+key+path.extname(file);
-  await fs.mkdir(path.dirname(path.join(slot,dest)),{recursive:true});await fs.copyFile(source,path.join(slot,dest));files[key]=dest;return key;
+  const bytes=await fs.readFile(source);
+  const digest=require('node:crypto').createHash('sha256').update(bytes).digest('hex').slice(0,16);
+  const dest='zlhrs-assets/'+t.id+'/'+key+'-'+digest+path.extname(file);
+  await fs.mkdir(path.dirname(path.join(slot,dest)),{recursive:true});await fs.writeFile(path.join(slot,dest),bytes);files[key]=dest;return key;
  }
  for(const [key,file] of Object.entries(t.assets||{}))await copy(key,file);
  const enhancement=require('./appearance.cjs').compose(t.id,value);
